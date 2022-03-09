@@ -82,9 +82,9 @@ public class DataBaseUtility {
     public static void main(String[] args) throws SQLException{
     	
     	openConnection();
-    	executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme.sendstatus where JobID=774;");
+    	//executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme.sendstatus where JobID=774;");
     	executeSQLQuery("SELECT JobID,Pages ,FaxNumber,Error FROM acme.sendstatus where JobStatus='send Failed'");
-    	executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme.sendstatus where JobID=776;");
+    	
     	closeConnection();
     }
     
