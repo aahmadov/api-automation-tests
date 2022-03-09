@@ -1,0 +1,50 @@
+{
+    "FaxInfo": [
+        {
+            "FaxId": 283,
+            "GroupId": 0,
+            "FaxUserId": "admin",
+            "FaxNumber": "34_666-777",
+            "FaxStatus": "sent",
+            "CompleteTime": "2022-01-14T16:23:35Z",
+            "CreateTime": "2022-01-14T16:23:01Z",
+            "SendAfter": "2022-01-14T16:23:01Z",
+            "TSI": "Acme",
+            "CSI": "new test 2",
+            "Duration": 15,
+            "ErrorCode": 0,
+            "ErrorText": "",
+            "PagesTotal": 1,
+            "PagesSent": 1,
+            "FaxQuality": "high",
+            "RetryCount": 3,
+            "RetryCountLeft": 2,
+            "RetryInterval": 15,
+            "CoverPageName": "",
+            "RcptInfo": "::::",
+            "Priority": 2,
+            "FaxDescription": "",
+            "DeleteAfterSend": false,
+            "NotifyEmailAddress": "test@softlinx.com",
+            "NotifySuccess": false,
+            "NotifyFailed": true,
+            "NotifyFailedAttachFax": false,
+            "FaxHeaderEnabled": true,
+            "PrintAfterSend": false,
+            "ProjectCode": "",
+            "ProjectCode2": "",
+            "ImgHost": "10.250.1.99",
+            "ImgDevice": "1",
+            "ImgCountry": "1",
+            "ProxyFaxUserId": "",
+            "Mark": false,
+            "BatchName": "",
+            "BatchUniqueId": "",
+            "FaxHeader": "        %d %t    %i  Page  %P of %p"
+        }
+    ],
+    "RequestStatus": {
+        "StatusCode": 0,
+        "StatusText": ""
+    }
+}
