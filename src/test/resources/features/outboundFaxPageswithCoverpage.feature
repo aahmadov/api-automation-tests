@@ -10,6 +10,7 @@ Feature: This feature file validates the number of inbound Fax with CoverPage an
     Then User submits getRequest credentialNewOutbound retrieve data from inbound faxes
     When The random TSI is generated 
     And User validates getStatusCode 200
-    And User validates the FaxStatus and total PagesReceived
+    And User validates before the last FaxStatus and total PagesReceived
+    Then User validates latest FaxStatus and total pages recieved
 
 
