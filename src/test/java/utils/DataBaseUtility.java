@@ -88,6 +88,8 @@ public class DataBaseUtility {
     	//executeSQLQuery("select JobStatus,FaxuserID,Pages,TransmiStationID from acme.recvstatus where JobID = 71 ;");
     	//executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme.sendstatus where JobID=774;");
     	executeSQLQuery("select * from acme.recvstatus where TransmiStationID = 'Test45';");
+    	//write new query
+    	executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme.sendstatus where JobID=774;");
     	closeConnection();
     }
     
