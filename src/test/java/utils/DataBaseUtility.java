@@ -91,7 +91,6 @@ public class DataBaseUtility {
     	//write new query
     	executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme.sendstatus where JobID=774;");
     	
-    	//write new query
     	closeConnection();
     }
 
