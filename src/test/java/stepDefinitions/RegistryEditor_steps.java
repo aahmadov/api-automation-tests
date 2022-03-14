@@ -23,6 +23,9 @@ public void i_want_to_write_a_step_to_change_registryEditor() throws IOException
 	System.out.println(newProcess);
 	
 	
+	//its something new updates 
+	
+	
 //	String[] cmd ={"regedit.exe","C:/Users/abbas/Desktop/6.reg","C:\>cmdkey /generic:10.250.1.99:8080 /user:abbas /pass:Softlinx1!",
 //	"C:\>mstsc.exe /v:10.250.1.99"};
 	
