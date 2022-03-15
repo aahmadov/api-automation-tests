@@ -14,7 +14,7 @@ public class RegistryEditor_steps {
 public void i_want_to_write_a_step_to_change_registryEditor() throws IOException, InterruptedException  {
 	
 	ProcessBuilder builder = new ProcessBuilder(new String[] { "cmd", "/c","C:/>cmdkey /generic:10.250.1.99:8080 /user:abbas /pass:Softlinx1!",
-			"C:/>mstsc.exe /v:10.250.1.99","hasgaddbcdjhaakka","C:/Users/abbas/Desktop/10.reg"});
+			"C:/>mstsc.exe /v:10.250.1.99","C:/Users/abbas/Desktop/10.reg"});
 	
 	Process newProcess = builder.start();
 	newProcess.waitFor();
