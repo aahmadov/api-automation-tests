@@ -1,5 +1,4 @@
-@regressionP
-
+@regression
 Feature: Validation of "sent" Fax status and Ids 
 
 
