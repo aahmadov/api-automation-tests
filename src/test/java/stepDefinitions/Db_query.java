@@ -8,7 +8,7 @@ import utils.DataBaseUtility;
 public class Db_query {
 	
 	
-	
+	//abbas
 	@Given("user excutes SQL query get JobId of sendFailed outbound faxs")
 	public void user_excutes_SQL_query_get_JobId_of_sendFailed_outbound_faxs() throws SQLException {
 		
