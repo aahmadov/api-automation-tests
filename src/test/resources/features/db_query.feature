@@ -1,4 +1,3 @@
-
 @regression
 Feature: This feature is to excute inbound fax query 
 

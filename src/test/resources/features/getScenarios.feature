@@ -1,4 +1,4 @@
-@regression
+@regression @smoke
 
 Feature: Validation of GetCalls with Fax Number And FaxStatus
 
