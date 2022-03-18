@@ -23,18 +23,15 @@ public void i_want_to_write_a_step_to_change_registryEditor() throws IOException
 	Process process = new ProcessBuilder(new String[] {"cmd", "/c","regedit", "/s","c:/Users/Administrator/Desktop/blank.reg"}).start();
     
 
-      process.getInputStream();
+     process.getInputStream();
      int exitCode=process.waitFor();
+     System.out.println(exitCode);
+     
+     
 	//Process newProcess = builder.start();
-	
-	System.out.println(exitCode);
 	
 	//"cmd", "/c", "C:\Windows\regedit.exe", "-r:http://ipaddress:port", "-u:username", "-p:password", "dir"
 
-	
-
-			
-	
 //	String[] cmd ={"regedit.exe","C:/Users/abbas/Desktop/6.reg","C:\>cmdkey /generic:10.250.1.99:8080 /user:abbas /pass:Softlinx1!",
 //	"C:\>mstsc.exe /v:10.250.1.99"};
 	
