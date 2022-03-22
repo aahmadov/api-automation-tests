@@ -7,10 +7,10 @@ Feature: This feature file validates the number of inbound Fax with CoverPage an
   Scenario:  Dynamic scenario for fax status and page number validation 
     Given User submits request with credentialNewOutbound
     And User validates the send status code is 201
-    Then User submits getRequest credentialNewOutbound retrieve data from inbound faxes
-    When The random TSI is generated 
+ 
+    Then User submits getRequest credentialNewInbound retrieve data from inbound faxes 
     And User validates getStatusCode 200
-    And User validates before the last FaxStatus and total PagesReceived
-    Then User validates latest FaxStatus and total pages recieved
-
+    Then User validates inbound FaxStatus after a first attempt and total PagesReceived
+    And User validates inbound FaxStatus after a second attempt and total pages recieved
+    Then  User validates inbound FaxStatus after a third attempt and total pages recieved
 

@@ -20,13 +20,13 @@ public class ReusableMethods_steps {
 	public void user_submits_request_with_credentialNewOutbound() {
 		
 	
-	response=Second_RestRequestUtils.inbound_FaxwithCoverPage(ConfigReader.getProperty("post_call_Url")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("Pages22"),
+	response=Second_RestRequestUtils.inbound_FaxwithCoverPage(ConfigReader.getProperty("post_call_Url")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("Pages3"),
 	ConfigReader.getProperty("FaxN"));
 		response.asPrettyString();
    
 	System.out.println("******** "+(ConfigReader.getProperty("post_call_Url")));
 	System.out.println("********** "+ConfigReader.getProperty("FaxN"));
-	System.out.println("********** "+FileReader.readfile("20pages "+ "and"+" with CoverPager"));
+	System.out.println("********** "+FileReader.readfile("pages "+ "and"+" included CoverPage"));
     
 	}
 	
@@ -38,20 +38,12 @@ public class ReusableMethods_steps {
 		
 	}
 
-	@When("The random TSI is generated")
-	public void the_random_TSI_is_generated() {
-	 response.asPrettyString();
-	 
-	 
-	 String actualsTSI_ID=JsonPath.read( response.asPrettyString(),"$.FaxInfo[0].TSI").toString();
-	 
-	 int FaxId=JsonPath.read( response.asPrettyString(),"$.FaxInfo[0].FaxId");
-	 System.out.println("**** new generated TSI Id is "+actualsTSI_ID);
-	 System.out.println("**** new generated Fax Id is "+FaxId);
-	}
-	@Then("User submits getRequest credentialNewOutbound retrieve data from inbound faxes")
-	public void user_submits_getRequest_credentialNewOutbound_retrieve_data_from_inbound_faxes() throws InterruptedException  {
-		Thread.sleep(1000*300);
+
+	
+	
+	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")
+	public void user_submits_getRequest_credentialNewInbound_retrieve_data_from_inbound_faxes() throws InterruptedException  {
+		Thread.sleep(1000*180);
 		
 	    response=Second_RestRequestUtils.getInboundWithCoverPage(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    
@@ -65,47 +57,59 @@ public class ReusableMethods_steps {
 	    assertEquals(response.getStatusCode(),getStatus);
 	    }
 
-	    @When("User validates before the last FaxStatus and total PagesReceived")
-	    
-	    public void user_validates_before_the_last_FaxStatus_and_total_PagesReceived() throws InterruptedException {
-	    	Thread.sleep(1000*180);
-	    	response.asPrettyString();
+	    @Then("User validates inbound FaxStatus after a first attempt and total PagesReceived")
+	    public void user_validates_inbound_FaxStatus_after_a_first_attempt_and_total_PagesReceived() throws InterruptedException {
 	    	
+	    	
+	    	Thread.sleep(1000*180);
 	    	String before_the_lastFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-	    	System.out.println("***** fax Status after a first attempt is -  "+before_the_lastFaxStatus);
 	    	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
 	    	String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
+	    	int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
 	    	assertNotNull(PageRecieved);
-	    	
-	    	System.out.println("***** total pageRecieved after the first attempt is "+PageRecieved+" and TSI id "+Tsi);
+	    
+	    	System.out.println(" Fax id after first attempt "+firstFaxId+ " and "+"***** total pageRecieved after the first attempt is "+PageRecieved+" and TSI id "+Tsi);
+	    	System.out.println("***** fax Status after a first attempt is -  "+before_the_lastFaxStatus);
 	    }
 	   
 
-@Then("User validates latest FaxStatus and total pages recieved")
-public void user_validates_latest_FaxStatus_and_total_pages_recieved() throws InterruptedException   {
-	String FaxStatus;
-	
-		Thread.sleep(1000*300);
-		response.asPrettyString();
+	    @And("User validates inbound FaxStatus after a second attempt and total pages recieved")
+	    public void user_validates_inbound_FaxStatus_after_a_second_attempt_and_total_pages_recieved() throws InterruptedException   {
+	     String FaxStatus;
 		
-//		 for(int i=0; i<10000; i++){
+		Thread.sleep(1000*600);
+		
+//		        for(int i=0; i<10000; i++){
 //		    	Thread.sleep(1000*5);
 //		    	FaxStatus =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 //		    	 
 //		    	 if(FaxStatus=="recvOk") break;
 //	    }
 		
-	 FaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-	 
-	System.out.println("***** fax status after a second attempt  "+FaxStatus);
-	
-	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
-	String tsioflastFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
-	
-	assertNotNull(PageRecieved);
-	
-	System.out.println("***** pageRecieved after a second attmept is "+PageRecieved+" and TSI id after a second attempt "+tsioflastFax);
-
+		    FaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+			int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
+			String tsioflastFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
+			int secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+			assertNotNull(PageRecieved);
+			
+			System.out.println(" Fax id after second attempt "+secondFaxId+ " and "+"***** pageRecieved after a second attempt is "+PageRecieved+" and TSI id after a second attempt "+tsioflastFax);
+            System.out.println("***** fax status after a second attempt  "+FaxStatus);
 	
 }
+	    @Then("User validates inbound FaxStatus after a third attempt and total pages recieved")
+	    public void user_validates_inbound_FaxStatus_after_a_third_attempt_and_total_pages_recieved() throws InterruptedException {
+	    	String faxStatus;
+	    	
+			
+			Thread.sleep(1000*900);
+			faxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+
+				int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
+				String tsiofThirdFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
+				int thirdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+				assertNotNull(PageRecieved);
+				
+				System.out.println(" Fax id after third attempt "+ thirdFaxId + " and "+"***** pageRecieved after a third attmept is "+PageRecieved+" and TSI id after a third attempt "+tsiofThirdFax);
+				System.out.println("***** fax status after a third attempt  "+faxStatus);
+	    }
 }
