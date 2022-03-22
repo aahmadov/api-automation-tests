@@ -163,7 +163,9 @@ public class Get_calls_steps {
 	}
 
 	@When("user validates random TSI id and FaxStatus")
-	public void user_validates_random_TSI_id_and_FaxStatus() {
+	public void user_validates_random_TSI_id_and_FaxStatus() throws InterruptedException {
+		Thread.sleep(1000*120);
+		
 		String resp = response.asPrettyString();
 		
 		System.out.println("**************************************");
