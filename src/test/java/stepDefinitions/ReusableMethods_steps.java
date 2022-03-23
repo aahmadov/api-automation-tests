@@ -40,7 +40,7 @@ public class ReusableMethods_steps {
 
 	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")
 	public void user_submits_getRequest_credentialNewInbound_retrieve_data_from_inbound_faxes() throws InterruptedException  {
-		Thread.sleep(1000*180);
+		//Thread.sleep(1000*110);
 		
 	    response=Second_RestRequestUtils.getInboundWithCoverPage(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    
@@ -58,7 +58,7 @@ public class ReusableMethods_steps {
 	    public void user_validates_inbound_FaxStatus_after_a_first_attempt_and_total_PagesReceived() throws InterruptedException {
 	    	
 	    	
-	    	Thread.sleep(1000*180);
+	    	//Thread.sleep(1000*600);
 	    	String before_the_lastFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 	    	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
 	    	String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
@@ -74,7 +74,7 @@ public class ReusableMethods_steps {
 	    public void user_validates_inbound_FaxStatus_after_a_second_attempt_and_total_pages_recieved() throws InterruptedException   {
 	     String FaxStatus;
 		
-		Thread.sleep(1000*600);
+		//Thread.sleep(1000*180);
 		
 //		        for(int i=0; i<10000; i++){
 //		    	Thread.sleep(1000*5);
@@ -83,10 +83,10 @@ public class ReusableMethods_steps {
 //		    	 if(FaxStatus=="recvOk") break;
 //	    }
 		
-		    FaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-			int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
-			String tsioflastFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
-			int secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+		    FaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
+			int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].PagesReceived");
+			String tsioflastFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].TSI");
+			int secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId");
 			assertNotNull(PageRecieved);
 			
 			System.out.println(" Fax id after second attempt "+secondFaxId+ " and "+"***** pageRecieved after a second attempt is "+PageRecieved+" and TSI id after a second attempt "+tsioflastFax);
@@ -98,12 +98,12 @@ public class ReusableMethods_steps {
 	    	String faxStatus;
 	    	
 			
-			Thread.sleep(1000*900);
-			faxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+			//Thread.sleep(1000*300);
+			faxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
 
-				int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
-				String tsiofThirdFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
-				int thirdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+				int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
+				String tsiofThirdFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].TSI");
+				int thirdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId");
 				assertNotNull(PageRecieved);
 				
 				System.out.println(" Fax id after third attempt "+ thirdFaxId + " and "+"***** pageRecieved after a third attmept is "+PageRecieved+" and TSI id after a third attempt "+tsiofThirdFax);
