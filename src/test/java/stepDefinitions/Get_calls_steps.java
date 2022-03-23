@@ -157,14 +157,14 @@ public class Get_calls_steps {
 	@Given("user submits getRequest retrieve data from inbound faxes")
 	public void user_submits_getRequest_retrieve_data_from_inbound_faxes() throws InterruptedException {
 
-		Thread.sleep(1000*300);
+		Thread.sleep(1000*900);
 		response = RestRequestUtils.getFaxsTSINewRestApi(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
 	}
 
 	@When("user validates random TSI id and FaxStatus")
 	public void user_validates_random_TSI_id_and_FaxStatus() throws InterruptedException {
-		Thread.sleep(1000*120);
+		
 		
 		String resp = response.asPrettyString();
 		
@@ -211,7 +211,7 @@ public class Get_calls_steps {
 	@Given("i submit getCall to by FaxUserID")
 	public void i_submit_getCall_to_by_FaxUserID() throws InterruptedException {
 		
-		Thread.sleep(1000*300);
+		Thread.sleep(1000*900);
 		response = RestRequestUtils.getFaxWithRegistryBlankSetting(ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam")));
 			System.out.println("************ "+ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam")));
 	}
@@ -261,7 +261,7 @@ public class Get_calls_steps {
 	@Given("i submit getCall  by FaxUserId")
 	public void i_submit_getCall_by_FaxUserId() throws InterruptedException {
 		
-		Thread.sleep(1000*300);
+		Thread.sleep(1000*900);
 		
 		response = RestRequestUtils.getFaxsTSINewRestApi(
 				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam"))); 

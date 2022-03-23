@@ -40,7 +40,7 @@ public class ReusableMethods_steps {
 
 	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")
 	public void user_submits_getRequest_credentialNewInbound_retrieve_data_from_inbound_faxes() throws InterruptedException  {
-		//Thread.sleep(1000*110);
+		Thread.sleep(1000*900);
 		
 	    response=Second_RestRequestUtils.getInboundWithCoverPage(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    
@@ -58,7 +58,7 @@ public class ReusableMethods_steps {
 	    public void user_validates_inbound_FaxStatus_after_a_first_attempt_and_total_PagesReceived() throws InterruptedException {
 	    	
 	    	
-	    	//Thread.sleep(1000*600);
+	    	;
 	    	String before_the_lastFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 	    	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
 	    	String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
@@ -74,7 +74,6 @@ public class ReusableMethods_steps {
 	    public void user_validates_inbound_FaxStatus_after_a_second_attempt_and_total_pages_recieved() throws InterruptedException   {
 	     String FaxStatus;
 		
-		//Thread.sleep(1000*180);
 		
 //		        for(int i=0; i<10000; i++){
 //		    	Thread.sleep(1000*5);
@@ -98,7 +97,7 @@ public class ReusableMethods_steps {
 	    	String faxStatus;
 	    	
 			
-			//Thread.sleep(1000*300);
+		
 			faxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
 
 				int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");

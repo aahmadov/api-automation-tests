@@ -12,7 +12,8 @@ public class Db_query {
 	public void user_excutes_SQL_query_get_JobId_of_sendFailed_outbound_faxs() throws SQLException {
 		
 		DataBaseUtility.openConnection();
-		String query = "SELECT JobID,Pages ,FaxNumber,Error FROM acme.sendstatus where JobStatus='send Failed'"; 
+		//String query = "SELECT JobID,Pages ,FaxNumber,Error FROM acme.sendstatus where JobStatus='send Failed'"; 
+		String query ="select * from acme.sendstatus where JobID=73";
 		DataBaseUtility.executeSQLQuery(query);
 		
 	}
@@ -21,7 +22,8 @@ public class Db_query {
 	public void user_excutes_SQL_query_get_JobId_of_receiveFailed_inbound_faxs() throws SQLException {
 		DataBaseUtility.openConnection();
 		
-		String query2 = "SELECT JobID,Pages,TransmiStationID,Error FROM acme.recvstatus where JobStatus='Recv Fail'"; 
+		//String query2 = "SELECT JobID,Pages,TransmiStationID,Error FROM acme.recvstatus where JobStatus='Recv Fail'";
+		String query2 ="select * from acme.recvstatus where JobID=300";
 		DataBaseUtility.executeSQLQuery(query2);
 		
 	}
