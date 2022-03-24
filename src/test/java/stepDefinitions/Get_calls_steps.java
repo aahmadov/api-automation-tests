@@ -228,22 +228,18 @@ public class Get_calls_steps {
 	@Then("user validates FaxStatus and Total pages sent")
 	public void user_validates_FaxStatus_and_Total_pages_sent() throws InterruptedException {
 	    response.asPrettyString();
+	    
+	    
 	   String faxId= JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId").toString();
 	    System.out.println("The new generated fax Id is "+"** "+faxId+" **");
-	    String errorText=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].ErrorText").toString();
-	    if(errorText!="") { 
-	    	System.out.println("There is error accured since it stack in scheduled "+"***"+errorText+"***");
-	    }
+	    
 	    
 	    String actualsTSI_ID=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].TSI").toString();
 	    System.out.println("TSI ID is "+"***** "+actualsTSI_ID+" *****");
 	    System.out.println("Loading page.......................... ");
 	    //String result;
 	   
-//	    do {
-//	    	 result =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-//	    	 Thread.sleep(1000*5);
-//	    }while(!result.equals("sent") );
+//	    
 //	    
 //	    for(int i=0; i<100; i++){
 //	    	Thread.sleep(1000*5);
@@ -251,12 +247,34 @@ public class Get_calls_steps {
 //	    	 
 //	    	 if(result=="sent") break;
 //	    }
-	    if(actualsTSI_ID!=null) {
-	    	int totalSentPages=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent");
-	    	String FaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+	   
+	    	//String FaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+	    String FaxStatus;
+	    	do {
+	    		 FaxStatus =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+	    		 
+	    	 Thread.sleep(1000*5);
+	    	 System.out.println("its still iterates while finds fax status sent");
+	    	 int totalSentPages=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent");
 	    	System.out.println("FaxStatus is like ****"+FaxStatus+"**** and "+" total pages sent is **"+totalSentPages +"**");
 	    }
+	    	while(FaxStatus!="sent");
+	    	
 	    
+	}
+	
+	    	@Then("user validates Inbound FaxStatus after all attemps")
+	    	public void user_validates_Inbound_FaxStatus_after_all_attemps() {
+	    		response= RestRequestUtils.getFaxsafterAllattempts(ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
+	    		response.asPrettyString();
+	    		String firstAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+	    		String secondAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
+	    		String thirdAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
+	    		String firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+	    		String secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
+	    		String thirdrdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
+	    		System.out.print("the first attempt is "+firstAttemptFaxStatus+ "and "+"FaxId"+firstFaxId+ "second is "+secondAttemptFaxStatus+" and "+ "secondFaxId "+ secondFaxId  +" third is "+thirdAttemptFaxStatus+" and "+thirdrdFaxId);
+	    		
 	}
 	@Given("i submit getCall  by FaxUserId")
 	public void i_submit_getCall_by_FaxUserId() throws InterruptedException {

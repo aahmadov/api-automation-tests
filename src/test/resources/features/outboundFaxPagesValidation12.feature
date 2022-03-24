@@ -11,3 +11,4 @@ Feature: This feature file validates the number of outbound pages with registry 
     Given i submit getCall to by FaxUserID
     And  validate status code is 200
     Then user validates FaxStatus and Total pages sent
+    Then user validates Inbound FaxStatus after all attemps

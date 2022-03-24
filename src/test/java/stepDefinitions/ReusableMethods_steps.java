@@ -23,8 +23,11 @@ public class ReusableMethods_steps {
 	response=Second_RestRequestUtils.inbound_FaxwithCoverPage(ConfigReader.getProperty("post_call_Url")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("Pages3"),
 	ConfigReader.getProperty("FaxN"));
 		response.asPrettyString();
-   
+		int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+	System.out.println("FaxId of post call  "+firstFaxId);
 	System.out.println("******** "+(ConfigReader.getProperty("post_call_Url")));
+	
+	
 	System.out.println("********** "+ConfigReader.getProperty("FaxN"));
 	System.out.println("********** "+FileReader.readfile("pages "+ "and"+" included CoverPage"));
     
@@ -58,7 +61,7 @@ public class ReusableMethods_steps {
 	    public void user_validates_inbound_FaxStatus_after_a_first_attempt_and_total_PagesReceived() throws InterruptedException {
 	    	
 	    	
-	    	;
+	    	
 	    	String before_the_lastFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 	    	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
 	    	String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");

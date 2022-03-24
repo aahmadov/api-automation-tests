@@ -159,7 +159,7 @@ public class Post_calls_steps {
 	   String faxId=JsonPath.read(response.prettyPrint(),"$.FaxInfo[0].FaxNumber");
 	
 	   
-	  System.out.println("***************This is new genearated  Faxs number "+faxId);
+	  System.out.println("***************this is new genearated  Faxs number "+faxId);
 	  
 	}
 	
@@ -183,7 +183,7 @@ public class Post_calls_steps {
 	public void i_verify_number_which_i_created_is(String expectedFaxNumber) {
 	    response.prettyPrint();
 	    String actualfaxNumber=JsonPath.read( response.prettyPrint(),"$.FaxInfo[0].FaxNumber").toString();
-	    System.out.println("The new submited Fax Number is " +actualfaxNumber);
+	    System.out.println("the new submited Fax Number is " +actualfaxNumber);
 	    assertEquals(actualfaxNumber,expectedFaxNumber);
 	}
 	
