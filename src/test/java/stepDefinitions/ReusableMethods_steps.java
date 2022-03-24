@@ -24,12 +24,14 @@ public class ReusableMethods_steps {
 	ConfigReader.getProperty("FaxN"));
 		response.asPrettyString();
 		int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
-	System.out.println("FaxId of post call  "+firstFaxId);
+	System.out.println("********faxId of post call  "+"**"+firstFaxId+"**");
 	System.out.println("******** "+(ConfigReader.getProperty("post_call_Url")));
 	
 	
 	System.out.println("********** "+ConfigReader.getProperty("FaxN"));
 	System.out.println("********** "+FileReader.readfile("pages "+ "and"+" included CoverPage"));
+	
+	
     
 	}
 	
@@ -39,6 +41,14 @@ public class ReusableMethods_steps {
 		System.out.println("***** the expected " +"***"+sendStatusCode+"***"+ " send Fax statusCode lineUp with actual "+"***"+Code+"***");
 		assertEquals(Code,sendStatusCode);
 		
+	}
+	@Then("USer validates outbound Fax TSI id")
+	public void user_validates_outbound_Fax_TSI_id() {
+	  
+		response=Second_RestRequestUtils.getOutboundWithCoverPage(ConfigReader.getProperty("getFaxByID_url")+ConfigReader.getProperty("newOutboundParam"));
+		response.asPrettyString();
+		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
+		System.out.println("******the post call TSI id "+Tsi);
 	}
 
 	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")

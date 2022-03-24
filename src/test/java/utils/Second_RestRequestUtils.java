@@ -43,4 +43,17 @@ public class Second_RestRequestUtils {
 						.when()
 						.get(url);
 	}
+	public static Response getOutboundWithCoverPage(String url) {
+
+		RequestSpecification request = RestAssured.given();	
+		String inboundCredantials = ConfigReader.getProperty("credentialNewOutbound");
+		byte[] encodedCredentials =Base64.encodeBase64(inboundCredantials.getBytes());
+	    String encodedCreadentialForAcme =new String (encodedCredentials);
+		
+		 request.header("Authorization ", "Basic "+encodedCreadentialForAcme);
+				return response=request.contentType("multipart/form-data")
+						.when()
+						.get(url);
+	
+}
 }
