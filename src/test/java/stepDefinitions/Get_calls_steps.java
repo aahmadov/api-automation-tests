@@ -211,7 +211,7 @@ public class Get_calls_steps {
 	@Given("i submit getCall to by FaxUserID")
 	public void i_submit_getCall_to_by_FaxUserID() throws InterruptedException {
 		
-		Thread.sleep(1000*360);
+		Thread.sleep(1000*420);
 		response = RestRequestUtils.getFaxWithRegistryBlankSetting(ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam")));
 			System.out.println("************ "+ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam")));
 	}
@@ -220,15 +220,12 @@ public class Get_calls_steps {
 	   int actualsStatCode=response.getStatusCode();
 	   
 	   assertEquals("it is not expected status Code",getExpectStatCode,actualsStatCode);
-	   
-	   
+
 	}
 
-	
 	@Then("user validates FaxStatus and Total pages sent")
 	public void user_validates_FaxStatus_and_Total_pages_sent() throws InterruptedException {
 	    response.asPrettyString();
-	    
 	    
 	   String faxId= JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId").toString();
 	    System.out.println("The new generated fax Id is "+"** "+faxId+" **");
@@ -237,10 +234,9 @@ public class Get_calls_steps {
 	    String actualsTSI_ID=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].TSI").toString();
 	    System.out.println("TSI ID is "+"***** "+actualsTSI_ID+" *****");
 	    System.out.println("Loading page.......................... ");
+
 	    //String result;
-	   
-//	    
-//	    
+
 //	    for(int i=0; i<100; i++){
 //	    	Thread.sleep(1000*5);
 //	    	result =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
@@ -279,7 +275,7 @@ public class Get_calls_steps {
 	@Given("i submit getCall  by FaxUserId")
 	public void i_submit_getCall_by_FaxUserId() throws InterruptedException {
 		
-		Thread.sleep(1000*360);
+		Thread.sleep(1000*420);
 		
 		response = RestRequestUtils.getFaxsTSINewRestApi(
 				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam"))); 
