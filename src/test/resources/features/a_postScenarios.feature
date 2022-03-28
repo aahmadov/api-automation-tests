@@ -1,4 +1,4 @@
-@regression @smoke
+@smoke
 Feature: Validation of "sent" Fax status and Ids 
 
 
