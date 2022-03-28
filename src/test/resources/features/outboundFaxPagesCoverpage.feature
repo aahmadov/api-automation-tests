@@ -3,7 +3,7 @@
 @outbound_FaxwithfCoverPage_Validation
 Feature: This feature file validates the number of inbound Fax with CoverPage and registry setting ("12")
 
-  @a_tag2
+  @a_outboundFax
   Scenario:  Dynamic scenario for fax status and page number validation 
     Given User submits request with credentialNewOutbound
     And User validates the send status code is 201

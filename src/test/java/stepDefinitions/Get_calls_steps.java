@@ -156,7 +156,7 @@ public class Get_calls_steps {
 
 	@Given("user submits getRequest retrieve data from inbound faxes")
 	public void user_submits_getRequest_retrieve_data_from_inbound_faxes() throws InterruptedException {
-     Thread.sleep(420);
+     Thread.sleep(1000*420);
 		
 		response = RestRequestUtils.getFaxsTSINewRestApi(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
