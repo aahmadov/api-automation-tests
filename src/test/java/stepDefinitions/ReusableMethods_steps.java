@@ -47,7 +47,7 @@ public class ReusableMethods_steps {
 		response.asPrettyString();
 		int totalPagesend=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal");
 		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
-		System.out.println("******the post call TSI id "+Tsi+" and "+" total page is "+totalPagesend);
+		System.out.println("****** the post call TSI id "+"**"+Tsi+"**"+" and "+" total page is "+"**"+totalPagesend+"**");
 	}
 
 	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")

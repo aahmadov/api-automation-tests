@@ -128,10 +128,10 @@ public class Post_calls_steps {
 	}
 	@Given("User submits requests with TSI ID")
 	public void user_submits_requests_with_TSI_ID() {
-	  response=RestRequestUtils.sendFaxWithTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("20pages")
+	  response=RestRequestUtils.sendFaxWithTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("16pages")
 			  ,ConfigReader.getProperty("FaxN"));
 			System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
-			System.out.println("******* "+FileReader.readfile("20pages"));
+			System.out.println("******* "+FileReader.readfile("16pages"));
 			System.out.println("******* "+ConfigReader.getProperty("FaxN")); 
 	}
 
@@ -159,17 +159,17 @@ public class Post_calls_steps {
 	   String faxId=JsonPath.read(response.prettyPrint(),"$.FaxInfo[0].FaxNumber");
 	
 	   
-	  System.out.println("***************this is new genearated  Faxs number "+faxId);
+	  System.out.println("***** this is new genearated  Faxs number "+faxId);
 	  
 	}
 	
 
 	@Given("i submit new Fax regarding registry setting")
 	public void i_submit_new_Fax_regarding_registry_setting() {
-		response=RestRequestUtils.submitFaxwithBlankRegistry(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("20pages"),
+		response=RestRequestUtils.submitFaxwithBlankRegistry(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("30pages"),
 				  ConfigReader.getProperty("FaxN"));
-		System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
-		System.out.println("******* "+FileReader.readfile("20pages"));
+		System.out.println("****** "+ConfigReader.getProperty("post_call_Url"));
+		System.out.println("****** "+FileReader.readfile("30pages"));
 		System.out.println("****** "+ConfigReader.getProperty("FaxN"));
 	}
 
