@@ -1,6 +1,6 @@
 @regression
 
-@inbound_FaxwithCoverPage_Validation
+@outbound_FaxwithfCoverPage_Validation
 Feature: This feature file validates the number of inbound Fax with CoverPage and registry setting ("12")
 
   @a_tag2

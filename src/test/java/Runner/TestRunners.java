@@ -10,7 +10,7 @@ import io.cucumber.junit.*;
 	        glue={"stepDefinitions"},
 	        dryRun =false,
 	        monochrome = true,
-	        tags = {"@inbound_FaxwithCoverPage_Validation,@inboundpageNumberValidation"},
+	        tags = {"@outbound_FaxwithfCoverPage_Validation,@outbound_FaxwithoutgCoverPage_Validation"},
 	        plugin = { "pretty", "html:target/cucumber-html-report", "json:target/cucumber/cucumber.json" ,"junit:target/cucxml/cucumber.xml"}
 	)
 	public class TestRunners {

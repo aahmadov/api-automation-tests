@@ -1,5 +1,5 @@
 @regression
-@inboundpageNumberValidation
+@outbound_FaxwithoutgCoverPage_Validation
 
 Feature: This feature file validates the number of inbound Fax pages with registry setting ("12or20")
 

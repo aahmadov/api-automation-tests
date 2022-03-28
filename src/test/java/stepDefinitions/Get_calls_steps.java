@@ -156,8 +156,8 @@ public class Get_calls_steps {
 
 	@Given("user submits getRequest retrieve data from inbound faxes")
 	public void user_submits_getRequest_retrieve_data_from_inbound_faxes() throws InterruptedException {
-
-		Thread.sleep(1000*420);
+     Thread.sleep(420);
+		
 		response = RestRequestUtils.getFaxsTSINewRestApi(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
 	}
@@ -173,13 +173,11 @@ public class Get_calls_steps {
 			System.out.println(i);
 			String num = Integer.toString(i);
 			String actualTSId = JsonPath.read(resp,"$.FaxInfo["+num +"].TSI").toString();
-			String pageTotalsend = JsonPath.read(resp,"$.FaxInfo["+num +"].PagesTotal").toString();
-			System.out.println("The random generated TSI id is "+"***"+actualTSId+"***"+" and "+" total page  is "+pageTotalsend);
-			
-			if (actualTSId!=null) {
+			System.out.println("The random generated TSI id is "+"***"+actualTSId+"***");
+			if (actualTSId!= null) {
 				int FaxId= JsonPath.read(resp, "$.FaxInfo["+num +"].FaxId");
 				System.out.println("The new generated FaxID is*** " +"***"+FaxId+"***");
-				String FaxStatus = JsonPath.read(resp, "$.FaxInfo["+num +"].FaxStatus").toString();
+				String FaxStatus = (JsonPath.read(resp, "$.FaxInfo["+num +"].FaxStatus"));
 				int pageRecieved=JsonPath.read(resp, "$.FaxInfo["+num +"].PagesReceived");
 				System.out.println("Expected Fax Status is  **"+ FaxStatus +"**"+ "and pages received  "+"**" +pageRecieved+ "**");
 				break;
