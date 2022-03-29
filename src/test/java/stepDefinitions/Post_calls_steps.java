@@ -64,7 +64,7 @@ public class Post_calls_steps {
 	public void user_validates_Statustext_is(String expectedError) {
 		System.out.println(response.asPrettyString());
 		String actual = JsonPath.read(response.asPrettyString(), "$.RequestStatus.StatusText");
-		System.out.println(actual);
+		System.out.println("*** the status text is "+actual);
 		assertEquals(actual, expectedError);
 	}
 	@Given("User sends requests with a single attachment to recipient")
@@ -157,10 +157,17 @@ public class Post_calls_steps {
 	@Then("User validates new FaxNumber is generated")
 	public void user_validates_new_FaxNumber_is_generated() {
 	   String faxId=JsonPath.read(response.prettyPrint(),"$.FaxInfo[0].FaxNumber");
-	
-	   
-	  System.out.println("***** this is new genearated  Faxs number "+faxId);
+	  System.out.println("***** this is new genearated  Fax number "+faxId);
+	}
 	  
+	  @Then("User validates TSI id which is setup in post call")
+	  public void user_validates_TSI_id_which_is_setup_in_post_call() throws InterruptedException {
+		  Thread.sleep(1000*420);
+	  response = RestRequestUtils.getFaxsTSINewRestApi2(
+		ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
+	  String tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
+	  
+	  System.out.println("***The random generated TSI on post acll is  "+"***"+tsi+"***");
 	}
 	
 

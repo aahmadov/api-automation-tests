@@ -2,7 +2,7 @@
 Feature: Validation of "sent" Fax status and Ids 
 
 
-@smokeP
+@smoke.
  Scenario: Send Fax with valid Number and Attachment
     Given User sends requests with valid number and attachment
     And User validate if status code is 201

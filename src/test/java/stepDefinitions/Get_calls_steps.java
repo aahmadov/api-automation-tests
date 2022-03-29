@@ -156,7 +156,7 @@ public class Get_calls_steps {
 
 	@Given("user submits getRequest retrieve data from inbound faxes")
 	public void user_submits_getRequest_retrieve_data_from_inbound_faxes() throws InterruptedException {
-     Thread.sleep(1000*420);
+     //Thread.sleep(1000*420);
 		
 		response = RestRequestUtils.getFaxsTSINewRestApi(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
@@ -252,7 +252,7 @@ public class Get_calls_steps {
 	    	 //Thread.sleep(1000*5);
 	    
 	    	 int totalSentPages=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent");
-	    	System.out.println("FaxStatus is like ****"+FaxStatus+"**** and "+" total pages sent is **"+totalSentPages +"**");
+	    	System.out.println("FaxStatus is like **** "+FaxStatus+"**** and "+" total pages sent is **"+totalSentPages +"**");
 	   
 	    	//while(FaxStatus!="sent");
 	    	
@@ -269,7 +269,7 @@ public class Get_calls_steps {
 	    		String firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 	    		String secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
 	    		String thirdrdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
-	    		System.out.print("the first attempt is "+firstAttemptFaxStatus+ "and "+"FaxId"+firstFaxId+ "second is "+secondAttemptFaxStatus+" and "+ "secondFaxId "+ secondFaxId  +" third is "+thirdAttemptFaxStatus+" and "+thirdrdFaxId);
+	    		System.out.print("***the first attempt is "+firstAttemptFaxStatus+ " and FaxId is "+firstFaxId+ " second is "+secondAttemptFaxStatus+" and "+ "secondFaxId "+ secondFaxId  +" third is "+thirdAttemptFaxStatus+" and "+thirdrdFaxId);
 	    		
 	}
 	@Given("i submit getCall  by FaxUserId")
