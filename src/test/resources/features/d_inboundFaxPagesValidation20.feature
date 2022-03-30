@@ -1,7 +1,7 @@
 @regression
 @outbound_FaxwithoutgCoverPage_Validation
 
-Feature: This feature file validates the number of inbound Fax pages with registry setting ("20pages")
+Feature: This feature file validates the number of inbound Fax pages with registry setting ("20 pages")
 
  @send2
   Scenario: Send new Fax with attachment 

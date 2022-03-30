@@ -189,11 +189,11 @@ public class Get_calls_steps {
 	public void user_validates_current_FaxStatus() {
 		
 		String actualFaxStatus=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxStatus");
-		System.out.println("****the actual Fax status "+"****"+actualFaxStatus+"*****");
+		System.out.println("****the actual Fax status "+"**"+actualFaxStatus+"**");
 		if(actualFaxStatus!=null) {
 			String FaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId").toString();
 			int pagesSent=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesSent");
-			System.out.println(" fax Id is "+ "****"+FaxId+"****"+ " and total pages sent is "+"***"+pagesSent+"****");
+			System.out.println("****fax Id is "+ "**"+FaxId+"**"+ " and total pages sent is "+"**"+pagesSent+"**");
 		}
 	     
 		}
@@ -213,7 +213,7 @@ public class Get_calls_steps {
 		
 		Thread.sleep(1000*420);
 		response = RestRequestUtils.getFaxWithRegistryBlankSetting(ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam")));
-			System.out.println("************ "+ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam")));
+			System.out.println("* "+ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("newOutboundParam")));
 	}
 	@And("validate status code is {int}")
 	public void validate_status_code_is(int getExpectStatCode) {
@@ -228,13 +228,16 @@ public class Get_calls_steps {
 	    response.asPrettyString();
 	    
 	   String faxId= JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId").toString();
-	    System.out.println("The new generated fax Id is "+"** "+faxId+" **");
+	    System.out.println("**the new generated fax Id is "+"** "+faxId+" **");
 	    
 	    
 	    String actualsTSI_ID=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].TSI").toString();
-	    System.out.println("TSI ID is "+"***** "+actualsTSI_ID+" *****");
-	    System.out.println("Loading page.......................... ");
-
+	    System.out.println("**Tsi id is "+"***** "+actualsTSI_ID+" *****");
+	    System.out.println("**loading page.......................... ");
+        String FaxStatus;
+        FaxStatus =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+        int totalSentPages=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent");
+    	System.out.println("**faxStatus is like **** "+FaxStatus+"**** and "+" total pages sent is **"+totalSentPages +"**");
 	    //String result;
 
 //	    for(int i=0; i<100; i++){
@@ -245,14 +248,13 @@ public class Get_calls_steps {
 //	    }
 	   
 	    	//String FaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-	    String FaxStatus;
+	    
 	    	//do {
-	    		 FaxStatus =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+	    		 
 	    		 
 	    	 //Thread.sleep(1000*5);
 	    
-	    	 int totalSentPages=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent");
-	    	System.out.println("FaxStatus is like **** "+FaxStatus+"**** and "+" total pages sent is **"+totalSentPages +"**");
+	    	
 	   
 	    	//while(FaxStatus!="sent");
 	    	
@@ -266,9 +268,9 @@ public class Get_calls_steps {
 	    		String firstAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 	    		String secondAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
 	    		String thirdAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
-	    		String firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-	    		String secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
-	    		String thirdrdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
+	    		String firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId").toString();
+	    		String secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId").toString();
+	    		String thirdrdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId").toString();
 	    		System.out.print("***the first attempt is "+firstAttemptFaxStatus+ " and FaxId is "+firstFaxId+ " second is "+secondAttemptFaxStatus+" and "+ "secondFaxId "+ secondFaxId  +" third is "+thirdAttemptFaxStatus+" and "+thirdrdFaxId);
 	    		
 	}
