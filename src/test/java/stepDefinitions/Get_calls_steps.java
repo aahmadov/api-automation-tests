@@ -193,7 +193,7 @@ public class Get_calls_steps {
 		if(actualFaxStatus!=null) {
 			String FaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId").toString();
 			int pagesSent=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesSent");
-			System.out.println("****fax Id is "+ "**"+FaxId+"**"+ " and total pages sent is "+"**"+pagesSent+"**");
+			System.out.println("****fax Id is "+ "**"+FaxId+"**"+ " and total pages sent is "+"**"+pagesSent+"**" +" out of total 16 pages");
 		}
 	     
 		}
