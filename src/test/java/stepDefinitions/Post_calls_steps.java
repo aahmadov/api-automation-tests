@@ -157,7 +157,7 @@ public class Post_calls_steps {
 	@Then("User validates new FaxNumber is generated")
 	public void user_validates_new_FaxNumber_is_generated() {
 	   String faxId=JsonPath.read(response.prettyPrint(),"$.FaxInfo[0].FaxNumber");
-	  System.out.println("***** this is new genearated  Fax number "+faxId);
+	  System.out.println("***** this is new genearated  Fax number "+"**"+faxId+"**");
 	}
 	  
 	  @Then("User validates TSI id which is setup in post call")
@@ -167,7 +167,7 @@ public class Post_calls_steps {
 		ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
 	  String tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
 	  
-	  System.out.println("***The random generated TSI on post acll is  "+"***"+tsi+"***");
+	  System.out.println("***the random generated TSI on post call is  "+"***"+tsi+"***");
 	}
 	
 
