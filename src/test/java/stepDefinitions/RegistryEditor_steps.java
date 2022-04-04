@@ -20,7 +20,7 @@ public class RegistryEditor_steps {
 @Given("I want to write a step to change registryEditor")
 public void i_want_to_write_a_step_to_change_registryEditor() throws IOException, InterruptedException  {
 
-	Process process = new ProcessBuilder(new String[] {"cmd.exe", "/c","start","regedit", "c:/Users/abbas/Desktop/20.reg"}).start();
+	Process process = new ProcessBuilder(new String[] {"cmd.exe", "/c","start","regedit","-r:http://10.250.1.99:8080", "-u:abbas", "-p:Softlinx1!", "/s","c:/Users/abbas/Desktop/20.reg"}).start();
     
 
      process.getInputStream();
