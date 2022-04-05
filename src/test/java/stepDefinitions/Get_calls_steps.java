@@ -233,11 +233,10 @@ public class Get_calls_steps {
 	    
 	    String actualsTSI_ID=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].TSI").toString();
 	    System.out.println("**Tsi id is "+"***** "+actualsTSI_ID+" *****");
-	    System.out.println("**loading page.......................... ");
         String FaxStatus;
         FaxStatus =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
         int totalSentPages=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent");
-    	System.out.println("**faxStatus is like **** "+FaxStatus+"**** and "+" total pages sent is **"+totalSentPages +"**");
+    	System.out.println("**faxStatus of postcall is **** "+FaxStatus+"**** and "+" total pages sent is **"+totalSentPages +"**");
 	    //String result;
 
 //	    for(int i=0; i<100; i++){

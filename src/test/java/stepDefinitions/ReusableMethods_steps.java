@@ -42,7 +42,7 @@ public class ReusableMethods_steps {
 	}
 	@Then("USer validates outbound Fax TSI id")
 	public void user_validates_outbound_Fax_TSI_id() throws InterruptedException {
-	  Thread.sleep(1000*30);
+	  Thread.sleep(1000*40);
 		response=Second_RestRequestUtils.getOutboundWithCoverPage(ConfigReader.getProperty("getFaxByID_url")+ConfigReader.getProperty("newOutboundParam"));
 		response.asPrettyString();
 		int totalPagesend=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal");
