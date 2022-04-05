@@ -272,9 +272,9 @@ public class Get_calls_steps {
 	    		String secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId").toString();
 	    		String thirdrdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId").toString();
 	    		
-	    		System.out.printf("*** faxstatus after a first attempt is "+"**"+firstAttemptFaxStatus+"**"+" and FaxId is "+"**"+firstFaxId+"**");
-	    		System.out.printf("*** faxstatus after a second attempt is"+"**"+secondAttemptFaxStatus+"**"+" and FaxId is "+ "**"+secondFaxId+"**");
-	    		System.out.printf("*** faxstatus after a third attempt is "+"**"+thirdAttemptFaxStatus+"**"+ " and FaxId is "+"**"+thirdrdFaxId+"**");
+	    		System.out.println("*** faxstatus after a first attempt is "+"**"+firstAttemptFaxStatus+"**"+" and FaxId is "+"**"+firstFaxId+"**");
+	    		System.out.println("*** faxstatus after a second attempt is"+"**"+secondAttemptFaxStatus+"**"+" and FaxId is "+ "**"+secondFaxId+"**");
+	    		System.out.println("*** faxstatus after a third attempt is "+"**"+thirdAttemptFaxStatus+"**"+ " and FaxId is "+"**"+thirdrdFaxId+"**");
 	}
 	@Given("i submit getCall  by FaxUserId")
 	public void i_submit_getCall_by_FaxUserId() throws InterruptedException {
