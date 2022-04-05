@@ -272,7 +272,7 @@ public class Get_calls_steps {
 	    		String secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId").toString();
 	    		String thirdrdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId").toString();
 	    		
-	    		System.out.printf("*** faxstatus after a first atempt is "+"**"+firstAttemptFaxStatus+"**"+" and FaxId is "+"**"+firstFaxId+"**");
+	    		System.out.printf("*** faxstatus after a first attempt is "+"**"+firstAttemptFaxStatus+"**"+" and FaxId is "+"**"+firstFaxId+"**");
 	    		System.out.printf("*** faxstatus after a second attempt is"+"**"+secondAttemptFaxStatus+"**"+" and FaxId is "+ "**"+secondFaxId+"**");
 	    		System.out.printf("*** faxstatus after a third attempt is "+"**"+thirdAttemptFaxStatus+"**"+ " and FaxId is "+"**"+thirdrdFaxId+"**");
 	}
