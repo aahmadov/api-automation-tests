@@ -1,5 +1,5 @@
 @regression
-@outboundPageValidation
+@outboundPageValidation16
 
 Feature: This feature file validates the number of outbound pages with registry setting ("16 pages" )
 
