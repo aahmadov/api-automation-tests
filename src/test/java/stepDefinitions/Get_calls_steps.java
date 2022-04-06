@@ -147,24 +147,24 @@ public class Get_calls_steps {
 		
 		Thread.sleep(1000*20);
 		response = RestRequestUtils.getRecentCreatedFax(
-				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("FaxUserId")));
+				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("recentlyCreatedFaxID")));
 
 	}
 
 	@Then("user validates FaxNUmber is {string}")
 	public void user_validates_FaxNUmber_is(String expectedNumber) {
-
 		String resp = response.asPrettyString();
+	    String number = JsonPath.read(resp, "$.FaxInfo[0].FaxNumber").toString();
+	    int FaxId = JsonPath.read(resp, "$.FaxInfo[0].FaxId");
+	    String Faxstatus = JsonPath.read(resp, "$.FaxInfo[0].FaxStatus").toString();
+	    String pagesTotalsent = JsonPath.read(resp, "$.FaxInfo[0].PagesTotal").toString();
+	    System.out.println("***faxId of this getCall is"+"**"+FaxId+"**");
+	    System.out.println("***faxStatus of this getCall is"+"**"+Faxstatus+"**");
+	    System.out.println("***total pages of this getCall is"+"**"+pagesTotalsent+"**");
+	    System.out.println("***faxNumber of this getCall is"+"**"+number+"**");
+		assertEquals(expectedNumber, number);
 		
-		List<String> numbers=JsonPath.read(resp,"$.FaxInfo[*].FaxNumber");
-		System.out.print("***** the list of fax numbers "+""+numbers+"");
-		 for (String faxnum : numbers) {
-			 
-			 //assertEquals(expectedNumber,faxnum);
-			 assertTrue(expectedNumber.equals(faxnum));
-		}
-//		String number = JsonPath.read(resp, "$.FaxInfo[0].FaxNumber");
-//		assertEquals(expectedNumber, number);
+		
 	}
 
 	@Given("user submits getRequest retrieve data from inbound faxes")

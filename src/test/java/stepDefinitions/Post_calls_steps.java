@@ -26,7 +26,7 @@ public class Post_calls_steps {
 				FileReader.readfile("Pages_1"), "(781)-885-4198");
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
-		System.out.println("******* "+(FileReader.readfile("Pages_1")+ " (781)-885-4197"));
+		System.out.println("******* "+(FileReader.readfile("Pages_1")+ " (781)-885-4198"));
 		System.out.println("------------------------------------------------------------------------");
 		
 	}

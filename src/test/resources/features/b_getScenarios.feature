@@ -1,9 +1,9 @@
 @smoke
 
-Feature: Validation of GetCalls with Fax Number And FaxStatus
+Feature: ^^^ Validation of GetCalls with Fax Number And FaxStatus ^^^
 
 @TC-1getFax_aftersent
- Scenario: Retrieve recently created fax 
+ Scenario: ^^ Retrieve recently created fax ^^
  Given user sends request to retrieve valid FaxID
  And user validates status code is 200
  Then user validates FaxNUmber is "(781)-885-4198"
