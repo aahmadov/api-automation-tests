@@ -3,6 +3,8 @@ package stepDefinitions;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.List;
+
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import com.jayway.jsonpath.JsonPath;
@@ -141,18 +143,28 @@ public class Get_calls_steps {
 	}
 
 	@Given("user sends request to retrieve valid FaxID")
-	public void user_sends_request_to_retrieve_valid_FaxID() {
+	public void user_sends_request_to_retrieve_valid_FaxID() throws InterruptedException {
+		
+		Thread.sleep(1000*20);
 		response = RestRequestUtils.getRecentCreatedFax(
-				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("recentlyCreatedFaxID")));
+				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("FaxUserId")));
 
 	}
 
 	@Then("user validates FaxNUmber is {string}")
 	public void user_validates_FaxNUmber_is(String expectedNumber) {
 
-		String resp = response.prettyPrint();
-		String number = JsonPath.read(resp, "$.FaxInfo[0].FaxNumber");
-		assertEquals(expectedNumber, number);
+		String resp = response.asPrettyString();
+		
+		List<String> numbers=JsonPath.read(resp,"$.FaxInfo[*].FaxNumber");
+		System.out.print("***** the list of fax numbers "+""+numbers+"");
+		 for (String faxnum : numbers) {
+			 
+			 //assertEquals(expectedNumber,faxnum);
+			 assertTrue(expectedNumber.equals(faxnum));
+		}
+//		String number = JsonPath.read(resp, "$.FaxInfo[0].FaxNumber");
+//		assertEquals(expectedNumber, number);
 	}
 
 	@Given("user submits getRequest retrieve data from inbound faxes")

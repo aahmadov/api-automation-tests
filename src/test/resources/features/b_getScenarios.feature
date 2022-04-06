@@ -6,7 +6,7 @@ Feature: Validation of GetCalls with Fax Number And FaxStatus
  Scenario: Retrieve recently created fax 
  Given user sends request to retrieve valid FaxID
  And user validates status code is 200
- Then user validates FaxNUmber is "78907867"
+ Then user validates FaxNUmber is "(781)-885-4198"
 
 @TC-2FaxByID @smokeG
 Scenario: Retrieve Fax and Fax Data by Id

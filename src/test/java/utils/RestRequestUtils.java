@@ -306,7 +306,11 @@ public class RestRequestUtils {
 		byte[] encodedCredentials =Base64.encodeBase64(credentilas.getBytes());
 	    String encodedCreadentialForAdmin = new String (encodedCredentials);
 	    request.header("Authorization ", "Basic "+encodedCreadentialForAdmin);
-	    return response=request.contentType("multipart/form-data").multiPart("filename", file).queryParam("FaxNumber", faxNumber).when().post(url);
+	    return response=request.contentType("multipart/form-data")
+	    		.multiPart("filename", file)
+	    		.queryParam("FaxNumber", faxNumber)
+	    		.when()
+	    		.post(url);
 	    
 
 	}
@@ -317,8 +321,9 @@ public class RestRequestUtils {
 		byte[] encodedCredentials =Base64.encodeBase64(credentilas.getBytes());
 	    String encodedCreadentialForAdmin = new String (encodedCredentials);
 	    request.header("Authorization ", "Basic "+encodedCreadentialForAdmin);
-	    return response=request.contentType("multipart/form-data").multiPart("filename", file).queryParam("FaxNumber",number)
-
+	    return response=request.contentType("multipart/form-data")
+	    		.multiPart("filename", file)
+	    		.queryParam("FaxNumber",number)
 				.when().post(url);
 	    
 }

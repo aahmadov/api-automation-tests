@@ -23,20 +23,19 @@ public class Post_calls_steps {
 	@Given("User sends requests with valid number and attachment")
 	public void user_sends_requests_with_valid_number_and_attachment() {
 		response = RestRequestUtils.createFaxSingleNum(ConfigReader.getProperty("post_call_Url"),
-				FileReader.readfile("Pages_1"), "(781)-885-4197");
-		
+				FileReader.readfile("Pages_1"), "(781)-885-4198");
+		System.out.println("------------------------------------------------------------------------");
 		System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
 		System.out.println("******* "+(FileReader.readfile("Pages_1")+ " (781)-885-4197"));
-		
+		System.out.println("------------------------------------------------------------------------");
 		
 	}
 
 	@And("User validate if status code is {int}")
 	public void user_validate_if_status_code_is(int expectedCode) {
 		int realCode = response.getStatusCode();
-		System.out.println(realCode);
 		assertEquals(expectedCode,realCode);
-
+      System.out.println("** this status code after a validation "+"**"+realCode+"**");
 	}
 
 	@Then("User validates FaxNumber is {string}")
@@ -52,7 +51,10 @@ public class Post_calls_steps {
 	public void user_sends_requests_with_no_number() {
 		response = RestRequestUtils.faxWithNoNumber(ConfigReader.getProperty("post_call_Url"),
 				FileReader.readfile("Pages"), "");
-
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("**"+(ConfigReader.getProperty("post_call_Url")));
+		System.out.printf("**"+FileReader.readfile("Pages"), "");
+		
 	}
 
 	@And("User wants validate the status code is {int}")
@@ -65,7 +67,7 @@ public class Post_calls_steps {
 	public void user_validates_Statustext_is(String expectedError) {
 		System.out.println(response.asPrettyString());
 		String actual = JsonPath.read(response.asPrettyString(), "$.RequestStatus.StatusText");
-		System.out.println("*** the status text is "+actual);
+		
 		assertEquals(actual, expectedError);
 	}
 	@Given("User sends requests with a single attachment to recipient")
@@ -73,6 +75,12 @@ public class Post_calls_steps {
 	    response=RestRequestUtils
 	    		.sendFaxWithRecipent_details(ConfigReader.getProperty("post_call_Url")
 	    				,FileReader.readfile("Pages"),ConfigReader.getProperty("Recipent_data1"));
+	    System.out.println("------------------------------------------------------------------------");
+	    System.out.println("**"+(ConfigReader.getProperty("post_call_Url")));
+	    System.out.println("**"+(ConfigReader.getProperty("Recipent_data1")));
+	    System.out.println("**"+FileReader.readfile("Pages"));
+	    System.out.println("------------------------------------------------------------------------");
+	    
 	}
 
 	@And("User validate the status code is {int}")
@@ -95,11 +103,22 @@ public class Post_calls_steps {
 				.createFaxmultipRecip(ConfigReader.getProperty("post_call_Url"),
 				   FileReader.readfile("Pages"), FileReader.readfile("Pages_1"), 
 				   ConfigReader.getProperty("Recipent_data1"), ConfigReader.getProperty("Recipent_data2"));
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("**"+(ConfigReader.getProperty("post_call_Url")));
+		System.out.println("**"+FileReader.readfile("Pages"));
+		System.out.println("**"+FileReader.readfile("Pages"));		
+		System.out.println("**"+ConfigReader.getProperty("Recipent_data1"));
+		System.out.println("**"+ConfigReader.getProperty("Recipent_data2"));
+		System.out.println("------------------------------------------------------------------------");
 	}
 	@Given("User resends requests with failed faxID")
 	public void user_resends_requests_with_failed_faxID() {
 		response = RestRequestUtils.recendaFax(ConfigReader.getProperty("post_call_Url")+ConfigReader.getProperty("querParamforResent")
 				,FileReader.readfile("Pages"),"9980080");
+		System.out.println("------------------------------------------------------------------------");
+		System.out.println("**"+(ConfigReader.getProperty("post_call_Url")+ConfigReader.getProperty("querParamforResent")));
+		System.out.printf("**"+FileReader.readfile("Pages"),"9980080");
+		
 	}
 
 	@Then("User validated new statusFax is {string}")
@@ -108,32 +127,40 @@ public class Post_calls_steps {
 	   String actualStatCode=JsonPath.read(resp, "$.RequestStatus.StatusText").toString();
 	   
 	  assertEquals(faxStatus,actualStatCode);
+	  
 	}
 	
 	@Given("User sends requests with FaxNumber & attachment")
 	public void user_sends_requests_with_FaxNumber_attachment() {
 	    response= RestRequestUtils.sendSimpleFax(ConfigReader.getProperty("post_call_Url"),FileReader.readfile("Pages"),"78907867");
+	    System.out.println("------------------------------------------------------------------------");
+	    System.out.println("**"+(ConfigReader.getProperty("post_call_Url")));
+		System.out.printf("**"+FileReader.readfile("Pages"),"78907867");
+		
 	}
 
 	@Given("User validates the status code is {int}")
 	public void user_validates_the_status_code_is(int expectedStCode) {
 	
 	assertEquals(response.statusCode(),expectedStCode);
+	
 	}
 
 	@Then("User gets new generated unique Id")
 	public void user_gets_new_generated_unique_Id() {
 		
 	  int expectedFaxId=JsonPath.read(response.prettyPrint(),"$.FaxInfo[0].FaxId");
-	  System.out.println(expectedFaxId);
+	
 	}
 	@Given("User submits requests with TSI ID")
 	public void user_submits_requests_with_TSI_ID() {
 	  response=RestRequestUtils.sendFaxWithTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("16pages")
 			  ,ConfigReader.getProperty("FaxN"));
+	  System.out.println("------------------------------------------------------------------------");
 			System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
 			System.out.println("******* "+FileReader.readfile("16pages"));
 			System.out.println("******* "+ConfigReader.getProperty("FaxN")); 
+			System.out.println("------------------------------------------------------------------------");
 	}
 
 	@Then("User validates is FaxNumber is same Like {string}")
@@ -149,10 +176,11 @@ public class Post_calls_steps {
 	public void user_submits_requests_with_creadentialInbound() {
 		response=RestRequestUtils.sendFaxWithNewTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("20pages"),
 				  ConfigReader.getProperty("FaxN"));
+		System.out.println("------------------------------------------------------------------------");
 		System.out.println("************ "+ConfigReader.getProperty("post_call_Url"));
 		System.out.println("********** "+FileReader.readfile("20pages"));
 		System.out.println("********* "+ConfigReader.getProperty("FaxN"));
-		
+		System.out.println("------------------------------------------------------------------------");
 	}
 	
 	@Then("User validates new FaxNumber is generated")
@@ -176,9 +204,11 @@ public class Post_calls_steps {
 	public void i_submit_new_Fax_regarding_registry_setting() {
 		response=RestRequestUtils.submitFaxwithBlankRegistry(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("30pages"),
 				  ConfigReader.getProperty("FaxN"));
+		System.out.println("------------------------------------------------------------------------");
 		System.out.println("****** "+ConfigReader.getProperty("post_call_Url"));
 		System.out.println("****** "+FileReader.readfile("30pages"));
 		System.out.println("****** "+ConfigReader.getProperty("FaxN"));
+		System.out.println("------------------------------------------------------------------------");
 	}
 
 	@And("first i validate status code is {int}")
@@ -199,11 +229,11 @@ public class Post_calls_steps {
 	public void i_submit_new_Post_call_with_special_TSI() {
 	   
 		response=Second_RestRequestUtils.faxWith50Pages(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(), FileReader.readfile("50page"), ConfigReader.getProperty("FaxN"));
-		
+		System.out.println("------------------------------------------------------------------------");
 		System.out.println("****** "+ConfigReader.getProperty("post_call_Url"));
 		System.out.println("****** "+FileReader.readfile("50page"));
 		System.out.println("****** "+ConfigReader.getProperty("FaxN"));
-
+		System.out.println("------------------------------------------------------------------------");
 	}
 
 	@Then("i validate outbound FaxId ,TSI and PagesSent")

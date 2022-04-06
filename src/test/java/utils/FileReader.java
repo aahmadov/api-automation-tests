@@ -39,10 +39,7 @@ public class FileReader {
 				String TSI = "?TSI=Test"+random_Num;
 				
 				return TSI;
-				
-				
-				
-				
+
 			}
 	}
 
