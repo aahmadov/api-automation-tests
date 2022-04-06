@@ -14,6 +14,7 @@ import io.restassured.response.Response;
 import utils.ConfigReader;
 import utils.FileReader;
 import utils.RestRequestUtils;
+import utils.Second_RestRequestUtils;
 
 public class Post_calls_steps {
 
@@ -194,4 +195,29 @@ public class Post_calls_steps {
 	    assertEquals(actualfaxNumber,expectedFaxNumber);
 	}
 	
+	@Given("i submit new Post call with special TSI")
+	public void i_submit_new_Post_call_with_special_TSI() {
+	   
+		response=Second_RestRequestUtils.faxWith50Pages(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(), FileReader.readfile("50page"), ConfigReader.getProperty("FaxN"));
+		
+		System.out.println("****** "+ConfigReader.getProperty("post_call_Url"));
+		System.out.println("****** "+FileReader.readfile("50page"));
+		System.out.println("****** "+ConfigReader.getProperty("FaxN"));
+
+	}
+
+	@Then("i validate outbound FaxId ,TSI and PagesSent")
+	public void i_validate_outbound_FaxId_TSI_and_PagesSent() throws InterruptedException {
+		Thread.sleep(1000*40);
+	    response=Second_RestRequestUtils.Outbound_getCall50Page(ConfigReader.getProperty("getFaxByID_url"));
+	    
+		int faxid=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+		System.out.println("***outbound faxId  generated "+"**"+faxid+"**");
+		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
+		System.out.println("***outbound Fax TSI  generated "+"**"+Tsi+"**");
+		String totalPagesSent=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal").toString();
+		System.out.println("***outbound Fax total page send count"+"**"+totalPagesSent+"**");
+	}
+
+
 }
