@@ -46,7 +46,7 @@ public class Get_calls_steps {
 
 	@Given("User sends requests with valid URL")
 	public void user_sends_requests_with_valid_URL() throws InterruptedException {
-		Thread.sleep(1000*120);
+		//Thread.sleep(1000*60);
 		response = RestRequestUtils.getFax(ConfigReader.getProperty("getFaxByID_url"));
        System.out.println("** "+ConfigReader.getProperty("getFaxByID_url"));
 	}
@@ -60,9 +60,11 @@ public class Get_calls_steps {
 	public void user_validates_FaxUserID_as(String admin) {
 
 		String strResponse = response.asPrettyString();
-		String userID = JsonPath.read(strResponse, "$.FaxInfo[0].FaxUserId").toString();
+		List<String> userID = JsonPath.read(strResponse, "$.FaxInfo[*].FaxUserId");
 		System.out.println("*** faxUserId after validation is "+"**"+userID+"**");
-		assertEquals(userID, admin);
+		System.out.println("*** total count of userid by name Admin "+"**"+userID.size()+"**");
+		
+		assertTrue(userID.contains(admin));
 
 	}
 
@@ -239,11 +241,15 @@ public class Get_calls_steps {
 	@Given("user submits new getCalls by this {string}")
 	public void user_submits_new_getCalls_by_this(String creadS) {
 		response = RestRequestUtils.getFax(ConfigReader.getProperty("getFaxByID_url"));
+		System.out.println("**"+ConfigReader.getProperty("getFaxByID_url"));
 	}
 
 	@Given("user submits new getCalls by this {string} and {string}")
 	public void user_submits_new_getCalls_by_this_and(String creadS, String FaxIDs) {
 		response = RestRequestUtils.getFax(ConfigReader.getProperty("getFaxByID_url") + FaxIDs, creadS);
+		System.out.println("**"+ConfigReader.getProperty("getFaxByID_url"));
+		System.out.println("**"+"**"+FaxIDs+"**");
+		System.out.println("**"+"**"+creadS+"**");
 	}
 
 	@Given("i submit getCall to by FaxUserID")

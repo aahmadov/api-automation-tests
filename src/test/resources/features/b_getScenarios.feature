@@ -1,4 +1,4 @@
-@smoke
+ @regression @smoke
 
 Feature: ^^^ Validation of GetCalls with Fax Number And FaxStatus ^^^
 
@@ -48,7 +48,7 @@ Scenario: ^^ Retrieve all sendFailed fax (Negative scenario) ^^
 
 
 @TC-8getFax_after
- Scenario Outline: getFaxs with different FaxIDs
+ Scenario Outline: ^^ GetFaxs with different FaxIDs ^^
  Given user submits new getCalls by this "<credentialInbound>"
  And user validates status code is 200
  Examples:
@@ -58,7 +58,7 @@ Scenario: ^^ Retrieve all sendFailed fax (Negative scenario) ^^
  
  
  @TC-9getFax_afterByRandomFaxId
- Scenario Outline: getFaxs with diffirent FaxIDs
+ Scenario Outline: ^^ GetFaxs with diffirent FaxIDs ^^
  Given user submits new getCalls by this "<credentialInbound>" and "<FaxIds>"
  And user validates status code is 200
  Examples:
