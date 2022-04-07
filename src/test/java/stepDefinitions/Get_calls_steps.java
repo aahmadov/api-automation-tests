@@ -20,71 +20,93 @@ public class Get_calls_steps {
 	Response response;
 
 	@Given("User sends requests with valid Fax id")
-	public void user_sends_requests_with_valid_Fax_id() {
+	public void user_sends_requests_with_valid_Fax_id() throws InterruptedException {
+		Thread.sleep(1000*120);
 		response = RestRequestUtils
 				.getFax(ConfigReader.getProperty("getFaxByID_url") + ConfigReader.getProperty("valid_ID"));
+		System.out.println("**"+ConfigReader.getProperty("getFaxByID_url"));
+		System.out.println("**"+ConfigReader.getProperty("valid_ID"));
 	}
 
 	@And("User validate  status code is {int}")
 	public void user_validate_status_code_is(int statusCode) {
-		Assert.assertEquals(statusCode, response.statusCode());
+		assertEquals(response.statusCode(),statusCode );
 	}
 
 	@Then("User validates FaxStatus as expected")
 	public void user_validates_FaxStatus_as_expected() {
-		String dc = response.then().extract().path("FaxInfo[0].FaxStatus");
-		assertEquals(dc, "sent");
+		String faxStatus = response.then().extract().path("FaxInfo[0].FaxStatus");
+		int faxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+		String pagesTotal=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal").toString();
+		System.out.println("** fax id is"+"**"+faxId+"**");
+		System.out.println("** totalPages sent "+"**"+pagesTotal+"**");
+		System.out.println("** faxStatus is "+"**"+faxStatus+"**");
+		assertEquals(faxStatus, "sent");
 	}
 
 	@Given("User sends requests with valid URL")
-	public void user_sends_requests_with_valid_URL() {
+	public void user_sends_requests_with_valid_URL() throws InterruptedException {
+		Thread.sleep(1000*120);
 		response = RestRequestUtils.getFax(ConfigReader.getProperty("getFaxByID_url"));
-
+       System.out.println("** "+ConfigReader.getProperty("getFaxByID_url"));
 	}
 
 	@And("User validate status code is {int}")
 	public void user_validate_status_code_is1(int code) {
-		Assert.assertEquals(response.statusCode(), code);
+		assertEquals(response.statusCode(), code);
 	}
 
 	@Then("User validates FaxUserID as {string}")
 	public void user_validates_FaxUserID_as(String admin) {
 
-		String strResponse = response.prettyPrint();
+		String strResponse = response.asPrettyString();
 		String userID = JsonPath.read(strResponse, "$.FaxInfo[0].FaxUserId").toString();
-		System.out.println(userID);
+		System.out.println("*** faxUserId after validation is "+"**"+userID+"**");
 		assertEquals(userID, admin);
 
 	}
 
 	@Given("User sends request to retrieve sendFailed fax")
-	public void user_sends_request_to_retrieve_sendFailed_fax() {
+	public void user_sends_request_to_retrieve_sendFailed_fax() throws InterruptedException {
+		Thread.sleep(1000*120);
+		
 		response = RestRequestUtils.getSendFailed_fax(
 				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("queryParam")));
+		System.out.println("** "+ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("queryParam")));
 	}
 
 	@And("User validates status codes is {int}")
 	public void user_validates_status_codes_is1(int scode) {
-		Assert.assertEquals(response.statusCode(), scode);
+		assertEquals(response.statusCode(), scode);
 	}
 
 	@When("User validates FaxStatus is {string}")
 	public void user_validates_FaxStatus_is(String sendFailed) {
-		String respo = JsonPath.read(response.prettyPrint(), "$.FaxInfo[0].FaxStatus").toString();
+		int FaxId=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxId");
+		String respo = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+		String error = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].ErrorText").toString();
+		
+		System.out.println("** Fax id is generated"+"**"+FaxId+"**");
+		System.out.println("** the fax status after a validation is "+"**"+respo+"**");
+		System.out.println("** the error text after a validation is "+"**"+error+"**");
 		assertEquals(respo, sendFailed);
 	}
 
 	@Then("User validates Errorcode is {int}")
 	public void user_validates_Errorcode_is(int ErrorCode) {
-		int respo = JsonPath.read(response.prettyPrint(), "$.FaxInfo[0].ErrorCode");
-
+		int respo = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].ErrorCode");
+		System.out.println("** the fax Error code after a validation is "+"**"+respo+"**");
 		assertEquals(ErrorCode, respo);
 	}
 
 	@Given("user sends request with valid FaxID")
-	public void user_sends_request_with_valid_FaxID() {
+	public void user_sends_request_with_valid_FaxID() throws InterruptedException {
+		Thread.sleep(1000*120);
 		response = RestRequestUtils
 				.getImage(ConfigReader.getProperty("getFaxByID_url") + ConfigReader.getProperty("param"), "pdf");
+		System.out.println("** "+(ConfigReader.getProperty("getFaxByID_url")));
+		System.out.printf("** "+ConfigReader.getProperty("param"), "pdf");
+		
 	}
 
 	@Then("user validates status code is {int}")
@@ -100,10 +122,11 @@ public class Get_calls_steps {
 	}
 
 	@Given("user send request with valid URL")
-	public void user_send_request_with_valid_URL() {
+	public void user_send_request_with_valid_URL() throws InterruptedException {
+		Thread.sleep(1000*30);
 		response = RestRequestUtils.get_fax_WithEMail(
 				ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("queryParamForEmail")));
-
+         System.out.println("** "+ConfigReader.getProperty("getFaxByID_url") + (ConfigReader.getProperty("queryParamForEmail")));
 	}
 
 	@Given("user validate status code is {int}")
@@ -115,9 +138,11 @@ public class Get_calls_steps {
 
 	@Then("user validates email is {string}")
 	public void user_validates_email_is(String expectedEmail) {
-		response.prettyPrint();
-		String actualEmail = JsonPath.read(response.prettyPrint(), "$.FaxInfo[0].NotifyEmailAddress");
-
+		
+		int FaxId= JsonPath.read(response.prettyPrint(), "$.FaxInfo[0].FaxId");
+		String actualEmail = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].NotifyEmailAddress");
+		System.out.println("**Fax Id is "+"**"+FaxId+"**");
+        System.out.println("** email of fax is"+"** "+actualEmail+"**");
 		assertEquals(actualEmail, expectedEmail);
 	}
 
@@ -137,8 +162,8 @@ public class Get_calls_steps {
 	@Then("user validates status message is {string}")
 	public void user_validates_status_message_is(String expectedStatus) {
 
-		String actualStatus = JsonPath.read(response.prettyPrint(), "$.RequestStatus.StatusText");
-
+		String actualStatus = JsonPath.read(response.asPrettyString(), "$.RequestStatus.StatusText");
+        System.out.println("** status text is "+"**"+actualStatus+"**");
 		assertEquals(actualStatus, expectedStatus);
 	}
 
@@ -158,10 +183,10 @@ public class Get_calls_steps {
 	    int FaxId = JsonPath.read(resp, "$.FaxInfo[0].FaxId");
 	    String Faxstatus = JsonPath.read(resp, "$.FaxInfo[0].FaxStatus").toString();
 	    String pagesTotalsent = JsonPath.read(resp, "$.FaxInfo[0].PagesTotal").toString();
-	    System.out.println("***faxId of this getCall is"+"**"+FaxId+"**");
-	    System.out.println("***faxStatus of this getCall is"+"**"+Faxstatus+"**");
-	    System.out.println("***total pages of this getCall is"+"**"+pagesTotalsent+"**");
-	    System.out.println("***faxNumber of this getCall is"+"**"+number+"**");
+	    System.out.println("***faxId  is"+"**"+FaxId+"**");
+	    System.out.println("***faxStatus  is"+"**"+Faxstatus+"**");
+	    System.out.println("***total pages sent "+"**"+pagesTotalsent+"**");
+	    System.out.println("***faxNumber is"+"**"+number+"**");
 		assertEquals(expectedNumber, number);
 		
 		
