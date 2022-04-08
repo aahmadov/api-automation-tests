@@ -53,7 +53,7 @@ public class ReusableMethods_steps {
 
 	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")
 	public void user_submits_getRequest_credentialNewInbound_retrieve_data_from_inbound_faxes() throws InterruptedException  {
-		Thread.sleep(1000*420);
+		Thread.sleep(1000*430);
 		
 	    response=Second_RestRequestUtils.getInboundWithCoverPage(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    
