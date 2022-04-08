@@ -46,7 +46,7 @@ public class Get_calls_steps {
 
 	@Given("User sends requests with valid URL")
 	public void user_sends_requests_with_valid_URL() throws InterruptedException {
-		//Thread.sleep(1000*60);
+		Thread.sleep(1000*60);
 		response = RestRequestUtils.getFax(ConfigReader.getProperty("getFaxByID_url"));
        System.out.println("** "+ConfigReader.getProperty("getFaxByID_url"));
 	}

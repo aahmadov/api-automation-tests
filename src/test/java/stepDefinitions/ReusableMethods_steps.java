@@ -15,7 +15,7 @@ import utils.Second_RestRequestUtils;
 public class ReusableMethods_steps {
 	
 	Response  response;
-	
+	 String Tsi;
 	@Given("User submits request with credentialNewOutbound")
 	public void user_submits_request_with_credentialNewOutbound() throws InterruptedException {
 		
@@ -42,11 +42,12 @@ public class ReusableMethods_steps {
 	}
 	@Then("USer validates outbound Fax TSI id")
 	public void user_validates_outbound_Fax_TSI_id() throws InterruptedException {
+		
 	  Thread.sleep(1000*40);
 		response=Second_RestRequestUtils.getOutboundWithCoverPage(ConfigReader.getProperty("getFaxByID_url")+ConfigReader.getProperty("newOutboundParam"));
 		response.asPrettyString();
 		int totalPagesend=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal");
-		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
+		Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
 		System.out.println("****** the post call TSI id "+"**"+Tsi+"**"+" and "+" total page is "+"**"+totalPagesend+"**");
 	}
 
@@ -77,10 +78,14 @@ public class ReusableMethods_steps {
 	    	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
 	    	String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
 	    	int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
-	    	assertNotNull(PageRecieved);
+	    	//assertNotNull(PageRecieved);
+	    	if(Tsi.equals(Tsi)) {
 	    	System.out.println("-------------------------------------------------------------");
 	    	System.out.println("***** after third attempt fax id "+"*"+firstFaxId+"*"+ " and "+" total pageRecieved after the third attempt is "+"*"+PageRecieved+"*"+" and TSI id "+"*"+Tsi+"*");
 	    	System.out.println("***** fax Status after a third attempt is -  "+"*"+thirdAttemtpFaxStatus+"*");
+	    }else {
+	    	System.out.println("***** there is only one attempt per page count");
+	    }
 	    }
 	   
 
@@ -93,12 +98,15 @@ public class ReusableMethods_steps {
 			int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].PagesReceived");
 			String tsioflastFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].TSI");
 			int secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId");
-			assertNotNull(PageRecieved);
+			//assertNotNull(PageRecieved);
+			
+			if(tsioflastFax.equals(Tsi)) {
 			System.out.println("-------------------------------------------------------------");
 			System.out.println("***** after second attempt fax id "+"*"+secondFaxId+"*"+ " and "+" pageRecieved after a second attempt is "+"*"+PageRecieved+"*"+" and TSI id after a second attempt "+"*"+tsioflastFax+"*");
             System.out.println("***** fax status after a second attempt  "+"*"+FaxStatus+"*");
-	    	 
-	    	
+	    }else {
+	    	System.out.println("******* there is only one attempt per page count");
+	    }
 }
 	    @Then("User validates inbound FaxStatus after a first attempt and total pages recieved")
 	    public void user_validates_inbound_FaxStatus_after_a_first_attempt_and_total_pages_recieved() throws InterruptedException {
@@ -109,11 +117,13 @@ public class ReusableMethods_steps {
 				int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
 				String tsiofThirdFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].TSI");
 				int thirdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId");
-				assertNotNull(PageRecieved);
+				//assertNotNull(PageRecieved);
+				if(tsiofThirdFax.equals(Tsi)) {
 				System.out.println("-------------------------------------------------------------");
 				System.out.println("***** after first attempt fax id "+ "*"+thirdFaxId+"*" + " and "+" pageRecieved after a first attmept is "+"*"+PageRecieved+"*"+" and TSI id after a first attempt "+"*"+tsiofThirdFax+"*");
 				System.out.println("***** fax status after a first attempt  "+"*"+faxStatus+"*");
-	    	
-	    	
+				}else {
+			    	System.out.println("***** there is only two attempts per page count");
+				}
 	    }
 }
