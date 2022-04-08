@@ -15,7 +15,7 @@ import utils.Second_RestRequestUtils;
 public class ReusableMethods_steps {
 	
 	Response  response;
-	 String Tsi;
+	
 	@Given("User submits request with credentialNewOutbound")
 	public void user_submits_request_with_credentialNewOutbound() throws InterruptedException {
 		
@@ -24,31 +24,31 @@ public class ReusableMethods_steps {
 	ConfigReader.getProperty("FaxN"));
 		response.asPrettyString();
 		int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
-	System.out.println("********faxId of post call  "+"**"+firstFaxId+"**");
+	System.out.println("******** faxId of post call  "+"**"+firstFaxId+"**");
 	System.out.println("******** "+(ConfigReader.getProperty("post_call_Url")));
 	
 	
-	System.out.println("********** "+ConfigReader.getProperty("FaxN"));
-	System.out.println("********** "+FileReader.readfile("pages "+ "and"+" included CoverPage"));
+	System.out.println("******** "+ConfigReader.getProperty("FaxN"));
+	System.out.println("******** "+FileReader.readfile("pages "+ "and"+" included CoverPage"));
 
 	}
 	
 	@Given("User validates the send status code is {int}")
 	public void user_validates_the_send_status_code_is(int sendStatusCode) {
 		int Code = response.getStatusCode();
-		System.out.println("***** the expected " +"***"+sendStatusCode+"***"+ " send Fax statusCode lineUp with actual "+"***"+Code+"***");
+		System.out.println("***** the expected status code " +"***"+sendStatusCode+"***"+ " send Fax statusCode lineUp with actual "+"***"+Code+"***");
 		assertEquals(Code,sendStatusCode);
 		
 	}
-	@Then("USer validates outbound Fax TSI id")
+	@Then("User validates outbound Fax TSI id")
 	public void user_validates_outbound_Fax_TSI_id() throws InterruptedException {
 		
 	  Thread.sleep(1000*40);
 		response=Second_RestRequestUtils.getOutboundWithCoverPage(ConfigReader.getProperty("getFaxByID_url")+ConfigReader.getProperty("newOutboundParam"));
 		response.asPrettyString();
 		int totalPagesend=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal");
-		Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
-		System.out.println("****** the post call TSI id "+"**"+Tsi+"**"+" and "+" total page is "+"**"+totalPagesend+"**");
+		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
+		System.out.println("****** the post call TSI id "+"**"+Tsi+"**"+" and "+" total page in attachment is "+"**"+totalPagesend+"**");
 	}
 
 	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")
@@ -78,16 +78,11 @@ public class ReusableMethods_steps {
 	    	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
 	    	String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
 	    	int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
-	    	//assertNotNull(PageRecieved);
-	    	if(Tsi.equals(Tsi)) {
+	    	assertNotNull(PageRecieved);
 	    	System.out.println("-------------------------------------------------------------");
-	    	System.out.println("***** after third attempt fax id "+"*"+firstFaxId+"*"+ " and "+" total pageRecieved after the third attempt is "+"*"+PageRecieved+"*"+" and TSI id "+"*"+Tsi+"*");
+	    	System.out.println("***** after last attempt fax id "+"*"+firstFaxId+"*"+ " and "+" total pageRecieved after the third attempt is "+"*"+PageRecieved+"*"+" and TSI id "+"*"+Tsi+"*");
 	    	System.out.println("***** fax Status after a third attempt is -  "+"*"+thirdAttemtpFaxStatus+"*");
-	    }else {
-	    	System.out.println("***** there is only one attempt per page count");
 	    }
-	    }
-	   
 
 	    @And("User validates inbound FaxStatus after a second attempt and total pages recieved")
 	    public void user_validates_inbound_FaxStatus_after_a_second_attempt_and_total_pages_recieved() throws InterruptedException   {
@@ -98,32 +93,29 @@ public class ReusableMethods_steps {
 			int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].PagesReceived");
 			String tsioflastFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].TSI");
 			int secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId");
-			//assertNotNull(PageRecieved);
-			
-			if(tsioflastFax.equals(Tsi)) {
+			assertNotNull(PageRecieved);
+
 			System.out.println("-------------------------------------------------------------");
 			System.out.println("***** after second attempt fax id "+"*"+secondFaxId+"*"+ " and "+" pageRecieved after a second attempt is "+"*"+PageRecieved+"*"+" and TSI id after a second attempt "+"*"+tsioflastFax+"*");
             System.out.println("***** fax status after a second attempt  "+"*"+FaxStatus+"*");
-	    }else {
-	    	System.out.println("******* there is only one attempt per page count");
-	    }
+
 }
 	    @Then("User validates inbound FaxStatus after a first attempt and total pages recieved")
 	    public void user_validates_inbound_FaxStatus_after_a_first_attempt_and_total_pages_recieved() throws InterruptedException {
           String faxStatus;
-	    	
+           String faxStatus2=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 			faxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
 
 				int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
 				String tsiofThirdFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].TSI");
 				int thirdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId");
 				//assertNotNull(PageRecieved);
-				if(tsiofThirdFax.equals(Tsi)) {
+				if(tsiofThirdFax.equals(faxStatus2)) {
 				System.out.println("-------------------------------------------------------------");
 				System.out.println("***** after first attempt fax id "+ "*"+thirdFaxId+"*" + " and "+" pageRecieved after a first attmept is "+"*"+PageRecieved+"*"+" and TSI id after a first attempt "+"*"+tsiofThirdFax+"*");
 				System.out.println("***** fax status after a first attempt  "+"*"+faxStatus+"*");
 				}else {
-			    	System.out.println("***** there is only two attempts per page count");
+			    	System.out.println("***** there is only two attempts , per current registry settings");
 				}
 	    }
 }

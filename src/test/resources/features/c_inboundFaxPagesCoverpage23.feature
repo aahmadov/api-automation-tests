@@ -7,7 +7,7 @@ Feature: This feature file validates the number of inbound Fax with CoverPage an
   Scenario:  Dynamic scenario for fax status and page number validation 
     Given User submits request with credentialNewOutbound
     And User validates the send status code is 201
-    Then USer validates outbound Fax TSI id
+    Then User validates outbound Fax TSI id
     
     @b_queryInboundAfterAttempts
   Scenario:  Dynamic scenario get fax status and page number validation from inbound
