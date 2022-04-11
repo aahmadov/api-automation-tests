@@ -1,15 +1,16 @@
+@regression
+@inboundPageValidation100
+Feature: This feature file validates the number of outbound&inbound pages with registry setting ("100 pages" )
 
-Feature: Title of your feature
-  I want to use this template for my feature file
 
-  @tag1
+  @send_receive
   Scenario: Title of your scenario
-    Given I want to write a step with precondition
-    And some other precondition
-    When I complete action
-    And some other action
-    And yet another action
-    Then I validate the outcomes
-    And check more outcomes
+    Given I submit post call for more than hundred page 
+    And first i validate status code is 201
+    Then i validate outbound FaxId ,TSI 
+    Given i submit Get call by FaxUserID retrieve date 
+    And validate status code is 200
+  
+    
 
 

@@ -95,4 +95,45 @@ public class Second_RestRequestUtils {
 						.when()
 						.get(url);
 }
+	
+	public static Response faxWith100Pages(String url,File file,String number) {
+
+		RequestSpecification request = RestAssured.given();	
+		String credentilas = ConfigReader.getProperty("credentialNewOutbound");
+		byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
+	    String encodedCreadentialForAcme =new String (encodedCredentials);
+		
+		 request.header("Authorization ", "Basic "+encodedCreadentialForAcme);
+				return response=request.contentType("multipart/form-data")
+						.multiPart("filename", file)
+						.queryParam("FaxNumber",number)		
+						.when()
+						.post(url);
+	
+	}
+	
+	public static Response outbound100PageValidation(String url) {
+
+		RequestSpecification request = RestAssured.given();	
+		String inboundCredantials = ConfigReader.getProperty("credentialNewOutbound");
+		byte[] encodedCredentials =Base64.encodeBase64(inboundCredantials.getBytes());
+	    String encodedCreadentialForAcme =new String (encodedCredentials);
+		
+		 request.header("Authorization ", "Basic "+encodedCreadentialForAcme);
+				return response=request.contentType("multipart/form-data")
+						.when()
+						.get(url);
+}
+	public static Response Inbound100PageValidation(String url) {
+
+		RequestSpecification request = RestAssured.given();	
+		String inboundCredantials = ConfigReader.getProperty("credentialNewInbound");
+		byte[] encodedCredentials =Base64.encodeBase64(inboundCredantials.getBytes());
+	    String encodedCreadentialForAcme =new String (encodedCredentials);
+		
+		 request.header("Authorization ", "Basic "+encodedCreadentialForAcme);
+				return response=request.contentType("multipart/form-data")
+						.when()
+						.get(url);
+}
 }

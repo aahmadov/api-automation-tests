@@ -150,7 +150,7 @@ public class Post_calls_steps {
 	public void user_gets_new_generated_unique_Id() {
 		
 	  int expectedFaxId=JsonPath.read(response.prettyPrint(),"$.FaxInfo[0].FaxId");
-	
+	System.out.println("** unique fax Id is "+"**"+expectedFaxId+"**" );
 	}
 	@Given("User submits requests with TSI ID")
 	public void user_submits_requests_with_TSI_ID() {
@@ -249,5 +249,11 @@ public class Post_calls_steps {
 		System.out.println("***outbound Fax total page send count"+"**"+totalPagesSent+"**");
 	}
 
+	@Given("I submit post call for more than hundred page")
+	public void i_submit_post_call_for_more_than_hundred_page() {
+		response=Second_RestRequestUtils.faxWith100Pages(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("100page")
+				  ,ConfigReader.getProperty("FaxN"));
+		
+	}
 
 }
