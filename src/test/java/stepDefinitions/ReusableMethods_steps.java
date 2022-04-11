@@ -15,7 +15,7 @@ import utils.Second_RestRequestUtils;
 public class ReusableMethods_steps {
 	
 	Response  response;
-	
+	String Tsi;
 	@Given("User submits request with credentialNewOutbound")
 	public void user_submits_request_with_credentialNewOutbound() throws InterruptedException {
 		
@@ -47,13 +47,15 @@ public class ReusableMethods_steps {
 		response=Second_RestRequestUtils.getOutboundWithCoverPage(ConfigReader.getProperty("getFaxByID_url")+ConfigReader.getProperty("newOutboundParam"));
 		response.asPrettyString();
 		int totalPagesend=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal");
-		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
+		Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
 		System.out.println("****** the post call TSI id "+"**"+Tsi+"**"+" and "+" total page in attachment is "+"**"+totalPagesend+"**");
 	}
 
 	@Then("User submits getRequest credentialNewInbound retrieve data from inbound faxes")
-	public void user_submits_getRequest_credentialNewInbound_retrieve_data_from_inbound_faxes() throws InterruptedException  {
-		Thread.sleep(1000*430);
+	public void user_submits_getRequest_credentialNewInbound_retrieve_data_from_inbound_faxes(int pag) throws InterruptedException  {
+		
+	
+		Thread.sleep(1000*480);
 		
 	    response=Second_RestRequestUtils.getInboundWithCoverPage(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    
@@ -80,8 +82,8 @@ public class ReusableMethods_steps {
 	    	int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
 	    	assertNotNull(PageRecieved);
 	    	System.out.println("-------------------------------------------------------------");
-	    	System.out.println("***** after last attempt fax id "+"*"+firstFaxId+"*"+ " and "+" total pageRecieved after the third attempt is "+"*"+PageRecieved+"*"+" and TSI id "+"*"+Tsi+"*");
-	    	System.out.println("***** fax Status after a third attempt is -  "+"*"+thirdAttemtpFaxStatus+"*");
+	    	System.out.println("***** after last attempt fax id "+"*"+firstFaxId+"*"+ " and "+" total pageRecieved after the last attempt is "+"*"+PageRecieved+"*"+" and TSI id "+"*"+Tsi+"*");
+	    	System.out.println("***** fax Status after a last attempt is -  "+"*"+thirdAttemtpFaxStatus+"*");
 	    }
 
 	    @And("User validates inbound FaxStatus after a second attempt and total pages recieved")
@@ -110,7 +112,12 @@ public class ReusableMethods_steps {
 				String tsiofThirdFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].TSI");
 				int thirdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId");
 				//assertNotNull(PageRecieved);
-				if(tsiofThirdFax.equals(faxStatus2)) {
+				
+				System.out.println("***** TSI of first post call"+"---------"+Tsi);
+				System.out.println("***** TSI of first post call"+"---------"+tsiofThirdFax);
+				if(tsiofThirdFax.equals(Tsi)) {
+					
+					
 				System.out.println("-------------------------------------------------------------");
 				System.out.println("***** after first attempt fax id "+ "*"+thirdFaxId+"*" + " and "+" pageRecieved after a first attmept is "+"*"+PageRecieved+"*"+" and TSI id after a first attempt "+"*"+tsiofThirdFax+"*");
 				System.out.println("***** fax status after a first attempt  "+"*"+faxStatus+"*");
