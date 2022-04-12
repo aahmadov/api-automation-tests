@@ -31,7 +31,7 @@ public class Second_RestRequestUtils {
 						.post(url);
 
 	}
-	public static Response getInboundWithCoverPage(String url) {
+	public static Response getInboundWithCoverPage1(String url) {
 
 		RequestSpecification request = RestAssured.given();	
 		String inboundCredantials = ConfigReader.getProperty("credentialNewInbound");

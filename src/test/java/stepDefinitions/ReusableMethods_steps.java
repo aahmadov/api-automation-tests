@@ -55,9 +55,9 @@ public class ReusableMethods_steps {
 	public void user_submits_getRequest_credentialNewInbound_retrieve_data_from_inbound_faxes(int pag) throws InterruptedException  {
 		
 	
-		//Thread.sleep(1000*480);
+		Thread.sleep(1000*480);
 		
-	    response=Second_RestRequestUtils.getInboundWithCoverPage(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
+	    response=Second_RestRequestUtils.getInboundWithCoverPage1(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    
 	    System.out.println("****** "+(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam")));
 	   
