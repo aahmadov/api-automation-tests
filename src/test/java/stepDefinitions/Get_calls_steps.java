@@ -355,7 +355,7 @@ public class Get_calls_steps {
     public void i_validate_inbound_FaxStatus_and_Total_pages_sent() {
     	String firstAttemptTSI=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].TSI").toString();
   String PagesReceived=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesReceived").toString();
-  System.out.println("****inbound latest total page recieved "+"**"+PagesReceived+"**");
+ 
   System.out.println("****inbound TSI id is same with outbound TSI id "+"**"+firstAttemptTSI+"**");
   
     
@@ -372,7 +372,7 @@ public class Get_calls_steps {
 	
 	System.out.println("*** faxstatus after a first attempt  is "+"**"+thirdAttemptFaxStatus+"**"+ " and FaxId is "+"**"+thirdrdFaxId+"**"+"and TSI id is "+"**"+thirdAttemptTSI+"**");
 	System.out.println("*** faxstatus after a second attempt is "+"**"+secondAttemptFaxStatus+"**"+" and FaxId is "+ "**"+secondFaxId+"**"+"and TSI id is "+"**"+secondAttemptTSI+"**");
-	System.out.println("*** faxstatus after a last attempt   is "+"**"+firstAttemptFaxStatus+"**"+"   and FaxId is "+"**"+firstFaxId+"**"+ "and TSI id is "+"**"+firstAttemptTSI+"**");
+	System.out.println("*** faxstatus after a last attempt   is "+"**"+firstAttemptFaxStatus+"**"+"   and FaxId is "+"**"+firstFaxId+"**"+ "and TSI id is "+"**"+firstAttemptTSI+"**"+"and total page received in inbound from out of 50 page was sent "+"**"+PagesReceived+"**");
 }
     @Then("i validate outbound FaxId ,TSI")
     public void i_validate_outbound_FaxId_TSI() {
@@ -390,23 +390,23 @@ public class Get_calls_steps {
     @Given("i submit Get call by FaxUserID retrieve date")
     public void i_submit_Get_call_by_FaxUserID_retrieve_date() throws InterruptedException {
     	
-    	Thread.sleep(1000*1620);
+    	Thread.sleep(1000*200);
     	response = Second_RestRequestUtils.Inbound100PageValidation(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam"))); 
     	int inboundfaxid=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
         String inboundTsi =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
-    		System.out.println("*** inbound Fax Tsi "+"**"+inboundTsi+"**");	
+    			
 
     	    String  thirdAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
     		String secondAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
     		String firstAttemptFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
-    		
+    		int inboundPageReceived=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
     		int secondFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId");
     		int thirdrdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId");
     		
     		System.out.println("*** faxstatus after a first attempt  is "+"**"+thirdAttemptFaxStatus+"**"+ " and FaxId is "+"**"+thirdrdFaxId+"**"+"and TSI id is "+"**"+inboundTsi+"**");
     		System.out.println("*** faxstatus after a second attempt is "+"**"+secondAttemptFaxStatus+"**"+" and FaxId is "+ "**"+secondFaxId+"**"+"and TSI id is "+"**"+inboundTsi+"**");
-    		System.out.println("*** faxstatus after a last attempt   is "+"**"+firstAttemptFaxStatus+"**"+"   and FaxId is "+"**"+inboundfaxid+"**"+ "and TSI id is "+"**"+inboundTsi+"**");
+    		System.out.println("*** faxstatus after a last attempt   is "+"**"+firstAttemptFaxStatus+"**"+"   and FaxId is "+"**"+inboundfaxid+"**"+ "and TSI id is "+"**"+inboundTsi+"**"+"and total pages received in inbound "+"**"+inboundPageReceived+"**");
     		
     }
 }
