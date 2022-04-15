@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jayway.jsonpath.JsonPath;
 
 import io.cucumber.java.en.And;
@@ -17,14 +20,16 @@ import utils.RestRequestUtils;
 import utils.Second_RestRequestUtils;
 
 public class Post_calls_steps {
-
+	private static final Logger logger = LogManager.getLogger(Post_calls_steps.class);
 	Response response;
 
 	@Given("User sends requests with valid number and attachment")
 	public void user_sends_requests_with_valid_number_and_attachment() {
 		response = RestRequestUtils.createFaxSingleNum(ConfigReader.getProperty("post_call_Url"),
 				FileReader.readfile("Pages_1"), "(781)-885-4198");
+		
 		System.out.println("------------------------------------------------------------------------");
+	
 		System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
 		System.out.println("******* "+(FileReader.readfile("Pages_1")+ " (781)-885-4198"));
 		System.out.println("------------------------------------------------------------------------");
@@ -35,7 +40,9 @@ public class Post_calls_steps {
 	public void user_validate_if_status_code_is(int expectedCode) {
 		int realCode = response.getStatusCode();
 		assertEquals(expectedCode,realCode);
+		logger.info("** this status code after a validation "+"**"+realCode+"**");
       System.out.println("** this status code after a validation "+"**"+realCode+"**");
+      
 	}
 
 	@Then("User validates FaxNumber is {string}")
