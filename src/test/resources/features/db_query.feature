@@ -1,5 +1,5 @@
 @regression
-@dadaBasequery_test
+@dataBasequery_test
 Feature: This feature is to excute inbound fax query from DB
 
   @db_test

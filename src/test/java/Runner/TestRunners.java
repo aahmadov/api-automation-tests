@@ -11,7 +11,7 @@ import io.cucumber.junit.*;
         glue={"stepDefinitions"},
         dryRun =false,
         monochrome = true,
-        tags = {"@TC-1SentFaxwithValidNumber"},
+        tags = {"@dataBasequery_test"},
         plugin = { "pretty", "html:target/cucumber-html-report", "json:target/cucumber/cucumber.json" ,"junit:target/cucxml/cucumber.xml"}
 )
 public class TestRunners {
