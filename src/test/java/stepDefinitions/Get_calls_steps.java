@@ -383,7 +383,7 @@ public class Get_calls_steps {
     	int outpagessent=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent");
         String outbountTsi =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
         
-            System.out.println("*** outbound faxes pages sent after last attempt "+"**"+outpagessent+"**");
+        System.out.println("*** outbound faxes pages sent after last attempt "+"**"+outpagessent+"**");
     		System.out.println("*** outbound FaxId is "+"**"+outboundfaxid+"**");	
     		System.out.println("*** outbount Fax Tsi "+"**"+outbountTsi+"**");	
 
@@ -396,6 +396,7 @@ public class Get_calls_steps {
     	response = Second_RestRequestUtils.Inbound100PageValidation(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam"))); 
     	int inboundfaxid=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+    	
         String inboundTsilast =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].TSI").toString();
         String inboundTsisecond =JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].TSI").toString();	
         String inboundTsifirst =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();

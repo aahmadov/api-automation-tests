@@ -1,10 +1,10 @@
 @regression
 @outboundPageValidation30
 
-Feature: This feature file validates the number of outbound pages with registry setting ("30 pages")
+Feature: ^^ This feature file validates the number of outbound pages with registry setting ("30 pages")^^
 
  @send1
-  Scenario: Submit Fax to manipulate outbound Data
+  Scenario: ^^ Submit Fax to manipulate outbound Data ^^
     Given i submit new Fax regarding registry setting 
     And first i validate status code is 201
     Then i verify number which i created is "1-222-222-2222"

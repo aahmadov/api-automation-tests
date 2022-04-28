@@ -1,10 +1,10 @@
 @regression
 @inboundPageValidation100
-Feature: This feature file validates the number of outbound&inbound pages with registry setting ("100 pages" )
+Feature: ^^This feature file validates the number of outbound&inbound pages with registry setting ("100 pages" )^^
 
 
   @send_receive
-  Scenario: Title of your scenario
+  Scenario: ^^ Title of your scenario ^^
     Given I submit post call for more than hundred page 
     And first i validate status code is 201
     Then i validate outbound FaxId ,TSI 

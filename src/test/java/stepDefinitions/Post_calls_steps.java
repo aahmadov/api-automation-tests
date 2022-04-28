@@ -20,9 +20,9 @@ import utils.RestRequestUtils;
 import utils.Second_RestRequestUtils;
 
 public class Post_calls_steps {
-	private static final Logger logger = LogManager.getLogger(Post_calls_steps.class);
+	public static final Logger logger = LogManager.getLogger(Post_calls_steps.class);
 	Response response;
-
+    
 	@Given("User sends requests with valid number and attachment")
 	public void user_sends_requests_with_valid_number_and_attachment() {
 		response = RestRequestUtils.createFaxSingleNum(ConfigReader.getProperty("post_call_Url"),
@@ -39,8 +39,9 @@ public class Post_calls_steps {
 	@And("User validate if status code is {int}")
 	public void user_validate_if_status_code_is(int expectedCode) {
 		int realCode = response.getStatusCode();
+		
 		assertEquals(expectedCode,realCode);
-		logger.info("** this status code after a validation "+"**"+realCode+"**");
+		logger.error("** this status code after a validation "+"**"+realCode+"**");
       System.out.println("** this status code after a validation "+"**"+realCode+"**");
       
 	}
@@ -56,8 +57,11 @@ public class Post_calls_steps {
 
 	@Given("User sends requests with no number")
 	public void user_sends_requests_with_no_number() {
+		
+		
 		response = RestRequestUtils.faxWithNoNumber(ConfigReader.getProperty("post_call_Url"),
 				FileReader.readfile("Pages"), "");
+		logger.error("this message will replace sysoutprint");
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("**"+(ConfigReader.getProperty("post_call_Url")));
 		System.out.printf("**"+FileReader.readfile("Pages"), "");
@@ -253,7 +257,7 @@ public class Post_calls_steps {
 		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
 		System.out.println("***outbound Fax TSI  generated "+"**"+Tsi+"**");
 		String totalPagesSent=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal").toString();
-		System.out.println("***outbound Fax total page send count"+"**"+totalPagesSent+"**");
+		System.out.println("***outbound Fax total page on attachment "+"**"+totalPagesSent+"**");
 	}
 
 	@Given("I submit post call for more than hundred page")

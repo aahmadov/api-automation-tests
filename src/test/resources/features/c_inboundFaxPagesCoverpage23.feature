@@ -1,16 +1,16 @@
 @regression
 
 @outbound_FaxwithfCoverPage_Validation
-Feature: This feature file validates the number of inbound Fax with CoverPage and registry setting ("23 pages")
+Feature: ^^This feature file validates the number of inbound Fax with CoverPage and registry setting ("23 pages")^^
 
   @a_outboundFax
-  Scenario:  Dynamic scenario for fax status and page number validation 
+  Scenario:  ^^ Dynamic scenario for fax status and page number validation ^^
     Given User submits request with credentialNewOutbound
     And User validates the send status code is 201
     Then User validates outbound Fax TSI id
     
     @b_queryInboundAfterAttempts
-  Scenario:  Dynamic scenario get fax status and page number validation from inbound
+  Scenario: ^^ Dynamic scenario get fax status and page number validation from inbound ^^
     Then User submits getRequest by credentialNewInbound to retrieve data from inbound faxes 
     And User validates getStatusCode 200
     Then User validates inbound FaxStatus after a third attempt and total PagesReceived

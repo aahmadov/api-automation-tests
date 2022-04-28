@@ -72,9 +72,7 @@ public class ReusableMethods_steps {
 	    @Then("User validates inbound FaxStatus after a third attempt and total PagesReceived")
 	    
 	    public void user_validates_inbound_FaxStatus_after_a_third_attempt_and_total_PagesReceived() throws InterruptedException {
-	    	
-	    
-
+	
 	    	String thirdAttemtpFaxStatus=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
            
 	    	int PageRecieved =JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
@@ -112,8 +110,8 @@ public class ReusableMethods_steps {
 				int thirdFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId");
 				//assertNotNull(PageRecieved);
 				
-				
-				System.out.println("***** TSI of first post call"+"---------"+tsiofThirdFax);
+				String tsiofLastFax=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
+				System.out.println("***** TSI of first post call"+"---------"+tsiofLastFax);
 				if(tsiofThirdFax.equals(tsiofFirstattempt)) {
 					
 					
