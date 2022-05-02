@@ -2,11 +2,11 @@ package utils;
 
 import java.sql.SQLException;
 
-public class newTest {
+public class newTest extends ExcelUtility { 
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws Exception {
 		
-		
+		ExcelUtility.setExcelFile("rowNumber", "heri");
 		
 	
 //		int i = 0;
@@ -26,5 +26,9 @@ public class newTest {
 			  System.out.println(j);
 			}
 }
+	
+	
+
+	
 	
 }

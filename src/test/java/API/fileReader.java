@@ -10,7 +10,7 @@ public class fileReader {
 	@Test
 	public void fileRead() throws IOException {
 	
-	String filePath = "src/test/resources/responseBody/writeData";
+	String filePath = "/src/test/resources/responseBody/writeData";
 
 	File file=new File(filePath);
 	
