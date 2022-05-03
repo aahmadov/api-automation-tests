@@ -28,8 +28,7 @@ public class FileReader {
 				
 				return "Randomly selected file: " + listOfFiles[(int)(Math.random()*listOfFiles.length)].getName();
 			}
-			
-		
+
 			public static String randomNumberFor_TSI() {
 				
 				Random TSINumber = new Random();
@@ -42,8 +41,3 @@ public class FileReader {
 
 			}
 	}
-
-
-
-
-

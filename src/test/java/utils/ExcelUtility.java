@@ -23,15 +23,15 @@ public class ExcelUtility {
     public static String setExcelFile(String Path, String SheetName) throws Exception {
         try {
         	//String path =System.getProperty("user.dir")+"/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx";
-            FileInputStream ExcelFile = new FileInputStream("/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx");
+            FileInputStream ExcelFile = new FileInputStream("./Replix/src/test/resources/excel/testData.xlsx");
             workBook = new XSSFWorkbook(ExcelFile);
             workSheet = workBook.getSheet("Sheet1");
             row=workSheet.getRow(1);
             
             XSSFCell bp = row.getCell(1);
             String rowNumber =bp.getStringCellValue();
-           System.out.println(rowNumber);
-           return rowNumber;
+            System.out.println(rowNumber);
+            return rowNumber;
            
         } catch (Exception e) {
 

@@ -6,7 +6,7 @@ public class newTest extends ExcelUtility {
 
 	public static void main(String[] args) throws Exception {
 		
-		ExcelUtility.setExcelFile("rowNumber", "heri");
+		ExcelUtility.setExcelFile("rowNumber","heri");
 		
 	
 //		int i = 0;
@@ -19,16 +19,12 @@ public class newTest extends ExcelUtility {
 //			  i++;
 //			}
 
-		for (int j = 0; j < 10; j++) {
-			  if (j == 4) {
-			    break;
-			  }
-			  System.out.println(j);
-			}
+//		for (int j = 0; j < 10; j++) {
+//			  if (j == 4) {
+//			    break;
+//			  }
+//			  System.out.println(j);
+//			}
 }
-	
-	
 
-	
-	
 }
