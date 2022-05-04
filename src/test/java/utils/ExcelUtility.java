@@ -18,12 +18,13 @@ public class ExcelUtility {
     private static XSSFCell cell;
     private static XSSFRow row;
     private static MissingCellPolicy xRow;
-
+    private static final String NAME ="./Replix/dataFile/testData.xlsx";
 
     public static String setExcelFile(String Path, String SheetName) throws Exception {
         try {
+        
         	//String path =System.getProperty("user.dir")+"/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx";
-            FileInputStream ExcelFile = new FileInputStream("./Replix/src/test/resources/excel/testData.xlsx");
+            FileInputStream ExcelFile = new FileInputStream(NAME);
             workBook = new XSSFWorkbook(ExcelFile);
             workSheet = workBook.getSheet("Sheet1");
             row=workSheet.getRow(1);
