@@ -39,7 +39,7 @@ public class Post_calls_steps {
 	@And("User validate if status code is {int}")
 	public void user_validate_if_status_code_is(int expectedCode) {
 		int realCode = response.getStatusCode();
-		
+		logger.info("** this status code after a validation "+"**"+realCode+"**");
 		assertEquals(expectedCode,realCode);
 		logger.error("** this status code after a validation "+"**"+realCode+"**");
       System.out.println("** this status code after a validation "+"**"+realCode+"**");

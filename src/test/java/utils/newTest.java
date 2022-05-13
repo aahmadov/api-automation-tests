@@ -5,8 +5,7 @@ import java.sql.SQLException;
 public class newTest extends ExcelUtility { 
 
 	public static void main(String[] args) throws Exception {
-		
-		ExcelUtility.setExcelFile("rowNumber","heri");
+	
 		
 	
 //		int i = 0;
