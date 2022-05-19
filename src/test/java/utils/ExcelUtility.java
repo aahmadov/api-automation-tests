@@ -9,43 +9,39 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtility {
 
-	//private static XSSFSheet workSheet;
-    //private static XSSFRow row;
-    // public static String setExcelFile(String Path, String SheetName) throws Exception {
-    	public static void main (String[] args) throws Exception {
-    		
-    	
-        try {
-        
-        	//String path =System.getProperty("user.dir")+"/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx";
-        	
-            FileInputStream ExcelFile = new FileInputStream("C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx");
-           
-          
-            XSSFWorkbook  workBook = new XSSFWorkbook(ExcelFile);
-            workBook.getSheetAt(0);
-            XSSFSheet workSheet = workBook.getSheet("Sheet1");
-            
-         XSSFRow row=workSheet.getRow(0);
-            XSSFCell cell ;
-            
-            	
-            
-            System.out.println(workSheet.getRow(1).getPhysicalNumberOfCells());
-            
-//            XSSFCell bp = row.getCell(2);
-//            String rowNumber =bp.getStringCellValue();
-//            System.out.println(rowNumber);
-           // return rowNumber;
-           
-        } catch (Exception e) {
+	private static XSSFSheet sheet;
+	private static XSSFRow row;
+	private static XSSFCell cell;
 
-            throw (e);
+	public static void main(String[] args) throws Exception {
 
-        }
-        
-      
-    }
+		try {
+
+			// String path
+			// =System.getProperty("user.dir")+"/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx";
+
+			FileInputStream ExcelFile = new FileInputStream(
+					"C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx");
+
+			XSSFWorkbook workBook = new XSSFWorkbook(ExcelFile);
+
+			sheet = workBook.getSheet("Sheet1");
+
+			row = sheet.getRow(0);
+
+			cell = row.getCell(0);
+			
+			String rowNumber = cell.getStringCellValue();
+			System.out.println(sheet.getRow(1).getPhysicalNumberOfCells());
+			System.out.println(rowNumber);
+
+		} catch (Exception e) {
+
+			throw (e);
+
+		}
+
+	}
 }
 
 //    public static String getCellData(int RowNum, int ColNum) throws Exception{
