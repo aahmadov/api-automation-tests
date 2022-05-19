@@ -32,6 +32,7 @@ public class ExcelUtility {
 			cell = row.getCell(0);
 			
 			String rowNumber = cell.getStringCellValue();
+			
 			System.out.println(sheet.getRow(1).getPhysicalNumberOfCells());
 			System.out.println(rowNumber);
 
