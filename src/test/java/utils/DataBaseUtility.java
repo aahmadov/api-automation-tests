@@ -93,6 +93,8 @@ public class DataBaseUtility {
     	
     	//write new query
     	closeConnection();
+  
+    	
     }
 
 }

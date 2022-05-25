@@ -3,6 +3,9 @@ package stepDefinitions;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.jayway.jsonpath.JsonPath;
 
 import io.cucumber.java.en.*;
@@ -13,7 +16,7 @@ import utils.RestRequestUtils;
 import utils.Second_RestRequestUtils;
 
 public class ReusableMethods_steps {
-	
+	public static final Logger logger = LogManager.getLogger(Post_calls_steps.class);
 	Response  response;
 	
 	@Given("User submits request with credentialNewOutbound")
@@ -122,4 +125,102 @@ public class ReusableMethods_steps {
 			    	System.out.println("***** there is only two attempts , per current registry settings");
 				}
 	    }
+	    
+	    @Given("I submit post call")
+	    public void i_submit_post_call() {
+	    	response=Second_RestRequestUtils.clumsyOutbound_Fax(ConfigReader.getProperty("outbound_URl_65")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("23page"),
+	    			ConfigReader.getProperty("FaxN"));
+	    				response.asPrettyString();
+	    				int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+	    			System.out.println("******** faxId of post call  "+"**"+firstFaxId+"**");
+	    			System.out.println("******** "+(ConfigReader.getProperty("outbound_URl_65")));
+	    			
+	    			
+	    			System.out.println("******** "+ConfigReader.getProperty("FaxN"));
+	    			System.out.println("******** "+FileReader.readfile("23page "));
+
+	    		
+	    	
+	    }
+
+	    @Given("I validate new regords been created with status code {int}")
+	    public void i_validate_new_regords_been_created_with_status_code(int statusCode) {
+	        response.getStatusCode();
+	    	assertEquals(response.getStatusCode(),statusCode);
+	    }
+
+	    @When("I validate outbound  FaxId and TSI")
+	    public void i_validate_outbound_FaxId_and_TSI() throws InterruptedException {
+	    	Thread.sleep(1000*360);
+	    	response=Second_RestRequestUtils.getCall_clumsy_65Validation(ConfigReader.getProperty("outbound_URl_65")+ConfigReader.getProperty("OutboundParam_65"));
+	    	
+	     
+	      String faxStatus=JsonPath.read(response.asPrettyString(),  "$.FaxInfo[0].FaxStatus").toString();
+	      String error=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].ErrorText").toString();
+	      if(faxStatus=="sendFailed"||faxStatus=="scheduled"){
+	    	  
+	    	  logger.error("this message confirms error occurred due the connection  " +error);
+
+	    		  
+	    	  }else if(faxStatus=="sending") {
+	    		  
+	    		  logger.error("this message confirms error occurred due the connection  " +error); 
+	    	  }else {
+
+
+	     int faxId= JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxId");
+	     
+	     String TSI= JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
+	     
+	     String Faxstatus= JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+	     
+	String totalPagesOnAttachmenets = JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesTotal").toString();
+	String totalPagesSent= JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesSent").toString();
+	     
+	     System.out.println("***"+"the outbound faxId is "+faxId);
+	     System.out.println("***"+"the outbound faxTSI is "+TSI);
+	     System.out.println("***"+"the outbound faxStatus is like "  +  "** " +"**"+Faxstatus+"**");
+	     
+	     System.out.println("total page on attachment  " + totalPagesOnAttachmenets);
+	     System.out.println("count of pages been sent  " + totalPagesSent);
+	     
+	     
+	    }
+	    }
+	    @Then("I submit Get call in inbound FaxUserId")
+	    public void i_submit_Get_call_in_inbound_FaxUserId() throws InterruptedException {
+	    	
+	    	Thread.sleep(1000*120);
+	    	
+	       response=Second_RestRequestUtils.Inbound_getCall_clumsy_65Validation(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
+	    	
+	       int FaxId= JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxId");
+	       
+	       String TSI =JsonPath.read(response.asPrettyString(),"$.FaxInfo.[0].TSI").toString();
+	       
+	       String secondAttemptFaxStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxStatus").toString();
+	       
+	       String firstAttemptFaxsStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].FaxStatus").toString();
+	       int lastAttemptPageReceived = JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesReceived");
+	       int firstAttemptpageReceived =JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].PagesReceived");
+	       System.out.println("** "+"FaxId of inbound fax is" +FaxId);
+	       System.out.println("** "+ "TSI of inbound fax is " +TSI);
+	       System.out.println("** "+ "FaxStatus of 1st Attempt " +firstAttemptFaxsStatus);
+	       System.out.println("** "+ "FaxStatus of 2nd Attempt " +secondAttemptFaxStatus);
+	       
+	       System.out.println("** "+ "TotalPages received is at first attempt " +"**"+firstAttemptpageReceived+"**");
+	       System.out.println("** "+ "TotalPages received is at last attempt " +"**"+lastAttemptPageReceived+"**");
+	       
+	       
+	    }
+
+	    @Then("I check and validate status code is {int}")
+	    public void i_check_and_validate_status_code_is(int statusCode2) {
+	        response.statusCode();
+	        
+	        assertEquals(response.statusCode(),statusCode2);
+	    	
+	    }
+
+		
 }

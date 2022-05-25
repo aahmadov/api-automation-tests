@@ -4,7 +4,7 @@ Feature: ^^This feature file validates the number of outbound&inbound pages with
 
 
   @send_receive
-  Scenario: ^^ Title of your scenario ^^
+  Scenario: ^^ Title of my scenario ^^
     Given I submit post call for more than hundred page 
     And first i validate status code is 201
     Then i validate outbound FaxId ,TSI 

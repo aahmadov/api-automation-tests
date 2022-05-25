@@ -345,7 +345,7 @@ public class Get_calls_steps {
     @Given("i submit Get call by FaxUserID")
     public void i_submit_Get_call_by_FaxUserID() throws InterruptedException {
     	
-    	Thread.sleep(1000*360);
+    	Thread.sleep(1000*420);
     	response = Second_RestRequestUtils.getInbound50Page(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
     	
@@ -392,7 +392,7 @@ public class Get_calls_steps {
     @Given("i submit Get call by FaxUserID retrieve date")
     public void i_submit_Get_call_by_FaxUserID_retrieve_date() throws InterruptedException {
     	
-    	Thread.sleep(1000*480);
+    	Thread.sleep(1000*600);
     	response = Second_RestRequestUtils.Inbound100PageValidation(
 				ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam"))); 
     	int inboundfaxid=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
