@@ -128,10 +128,10 @@ public class ReusableMethods_steps {
 	    
 	    @Given("I submit post call")
 	    public void i_submit_post_call() {
-	    	response=Second_RestRequestUtils.clumsyOutbound_Fax(ConfigReader.getProperty("outbound_URl_65")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("23page"),
+	    	response=Second_RestRequestUtils.clumsyOutbound_Fax(ConfigReader.getProperty("outbound_URl_65")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("Pages"),
 	    			ConfigReader.getProperty("FaxN"));
 	    				response.asPrettyString();
-	    				int firstFaxId=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+	    				int firstFaxId=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxId");
 	    			System.out.println("******** faxId of post call  "+"**"+firstFaxId+"**");
 	    			System.out.println("******** "+(ConfigReader.getProperty("outbound_URl_65")));
 	    			
@@ -144,14 +144,14 @@ public class ReusableMethods_steps {
 	    }
 
 	    @Given("I validate new regords been created with status code {int}")
-	    public void i_validate_new_regords_been_created_with_status_code(int statusCode) {
+	    public void i_validate_new_records_been_created_with_status_code(int statusCode) {
 	        response.getStatusCode();
 	    	assertEquals(response.getStatusCode(),statusCode);
 	    }
 
 	    @When("I validate outbound  FaxId and TSI")
 	    public void i_validate_outbound_FaxId_and_TSI() throws InterruptedException {
-	    	Thread.sleep(1000*360);
+	    	Thread.sleep(1000*480);
 	    	response=Second_RestRequestUtils.getCall_clumsy_65Validation(ConfigReader.getProperty("outbound_URl_65")+ConfigReader.getProperty("OutboundParam_65"));
 	    	
 	     
@@ -159,12 +159,12 @@ public class ReusableMethods_steps {
 	      String error=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].ErrorText").toString();
 	      if(faxStatus=="sendFailed"||faxStatus=="scheduled"){
 	    	  
-	    	  logger.error("this message confirms error occurred due the connection  " +error);
-
+	    	  logger.error("this message confirms, error occurred due the connection  " +error);
+	    	  
 	    		  
-	    	  }else if(faxStatus=="sending") {
+	    	  }else if(faxStatus.equals("sending")) {
 	    		  
-	    		  logger.error("this message confirms error occurred due the connection  " +error); 
+	    		  logger.error("this message confirms, error occurred due the connection  " +error); 
 	    	  }else {
 
 
@@ -190,28 +190,48 @@ public class ReusableMethods_steps {
 	    @Then("I submit Get call in inbound FaxUserId")
 	    public void i_submit_Get_call_in_inbound_FaxUserId() throws InterruptedException {
 	    	
-	    	Thread.sleep(1000*120);
+	    	Thread.sleep(1000*180);
 	    	
 	       response=Second_RestRequestUtils.Inbound_getCall_clumsy_65Validation(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    	
 	       int FaxId= JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxId");
-	       
+	       int faxId_first= JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].FaxId");
+	       int faxId_last= JsonPath.read(response.asPrettyString(),"$.FaxInfo[2].FaxId");
 	       String TSI =JsonPath.read(response.asPrettyString(),"$.FaxInfo.[0].TSI").toString();
 	       
 	       String secondAttemptFaxStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxStatus").toString();
-	       
 	       String firstAttemptFaxsStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].FaxStatus").toString();
+	       String lastAttemptFaxsStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[2].FaxStatus").toString();
+	       
 	       int lastAttemptPageReceived = JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesReceived");
 	       int firstAttemptpageReceived =JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].PagesReceived");
-	       System.out.println("** "+"FaxId of inbound fax is" +FaxId);
+	       int secondAttemptpageReceived =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
+	       
+	       String TSI_2 =JsonPath.read(response.asPrettyString(),"$.FaxInfo.[2].TSI").toString();
+	       if(TSI.equals(TSI_2)){
+	       
 	       System.out.println("** "+ "TSI of inbound fax is " +TSI);
-	       System.out.println("** "+ "FaxStatus of 1st Attempt " +firstAttemptFaxsStatus);
-	       System.out.println("** "+ "FaxStatus of 2nd Attempt " +secondAttemptFaxStatus);
 	       
-	       System.out.println("** "+ "TotalPages received is at first attempt " +"**"+firstAttemptpageReceived+"**");
-	       System.out.println("** "+ "TotalPages received is at last attempt " +"**"+lastAttemptPageReceived+"**");
+	       System.out.println("** "+"last attempt FaxId of inbound fax is " +"** "+FaxId+"");
+	       System.out.println("** "+"second attempt FaxId of inbound fax is " +"** "+faxId_first+"**");
+	       System.out.println("** "+"first attempt FaxId of inbound fax is " +"** "+faxId_last+"**");
 	       
+	       System.out.println("** "+ "FaxStatus of last Attempt " +"** "+secondAttemptFaxStatus+"**");
+	       System.out.println("** "+ "FaxStatus of second Attempt " +"** "+firstAttemptFaxsStatus+"**");
+	       System.out.println("** "+ "FaxStatus of first Attempt " +"** "+lastAttemptFaxsStatus+"**");
 	       
+	       System.out.println("** "+ "TotalPages received is at last attempt " +"** "+lastAttemptPageReceived+"**");
+	       System.out.println("** "+ "TotalPages received is at second attempt " +"** "+secondAttemptpageReceived+"**");
+	       System.out.println("** "+ "TotalPages received is at first attempt " +"** "+firstAttemptpageReceived+"**");
+	       }else {
+	    	   System.out.println("** "+ "TSI of inbound fax is " +TSI);
+		       System.out.println("** "+"first attempt FaxId of inbound  fax is" +faxId_first);
+		       System.out.println("** "+"second attempt FaxId of inbound fax is" +FaxId);
+		       System.out.println("** "+ "FaxStatus of 1st Attempt " +firstAttemptFaxsStatus);
+		       System.out.println("** "+ "FaxStatus of 2nd Attempt " +secondAttemptFaxStatus);
+		       System.out.println("** "+ "TotalPages received is at first attempt " +"**"+firstAttemptpageReceived+"**");
+		       System.out.println("** "+ "TotalPages received is at last attempt " +"**"+lastAttemptPageReceived+"**");
+	       }
 	    }
 
 	    @Then("I check and validate status code is {int}")
