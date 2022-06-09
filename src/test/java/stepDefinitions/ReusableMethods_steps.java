@@ -18,7 +18,7 @@ import utils.Second_RestRequestUtils;
 public class ReusableMethods_steps {
 	public static final Logger logger = LogManager.getLogger(Post_calls_steps.class);
 	Response  response;
-	
+	String TSIofClumsy;
 	@Given("User submits request with credentialNewOutbound")
 	public void user_submits_request_with_credentialNewOutbound() throws InterruptedException {
 		
@@ -128,7 +128,7 @@ public class ReusableMethods_steps {
 	    
 	    @Given("I submit post call")
 	    public void i_submit_post_call() {
-	    	response=Second_RestRequestUtils.clumsyOutbound_Fax(ConfigReader.getProperty("outbound_URl_65")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("Pages"),
+	    	response=Second_RestRequestUtils.clumsyOutbound_Fax(ConfigReader.getProperty("outbound_URl_65")+ FileReader.randomNumberFor_TSI(),FileReader.readfile("23page"),
 	    			ConfigReader.getProperty("FaxN"));
 	    				response.asPrettyString();
 	    				int firstFaxId=JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxId");
@@ -143,7 +143,7 @@ public class ReusableMethods_steps {
 	    	
 	    }
 
-	    @Given("I validate new regords been created with status code {int}")
+	    @Given("I validate new records been created with status code {int}")
 	    public void i_validate_new_records_been_created_with_status_code(int statusCode) {
 	        response.getStatusCode();
 	    	assertEquals(response.getStatusCode(),statusCode);
@@ -154,18 +154,24 @@ public class ReusableMethods_steps {
 	    	Thread.sleep(1000*480);
 	    	response=Second_RestRequestUtils.getCall_clumsy_65Validation(ConfigReader.getProperty("outbound_URl_65")+ConfigReader.getProperty("OutboundParam_65"));
 	    	
-	     
+	      TSIofClumsy=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
 	      String faxStatus=JsonPath.read(response.asPrettyString(),  "$.FaxInfo[0].FaxStatus").toString();
 	      String error=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].ErrorText").toString();
-	      if(faxStatus=="sendFailed"||faxStatus=="scheduled"){
+	      System.out.println("**"+"TSI of outbound fax is "+TSIofClumsy);
+	      if(faxStatus.equals("scheduled")){
 	    	  
-	    	  logger.error("this message confirms, error occurred due the connection  " +error);
+	    	
+	    	  logger.error("this message confirms, error occurred due the connection  " +"---------..... "+error);
 	    	  
+	      
+	    	  }else if(faxStatus.equals("sendFailed")) {
 	    		  
-	    	  }else if(faxStatus.equals("sending")) {
-	    		  
-	    		  logger.error("this message confirms, error occurred due the connection  " +error); 
-	    	  }else {
+    		  logger.error("this message confirms, error occurred due the connection  " +"-- "+error); 
+	    		  System.out.println("this message confirms, error occurred due the connection  " +"-- "+error);
+	    	  }
+	    	  
+	    	  else 
+	    	  {
 
 
 	     int faxId= JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxId");
@@ -177,12 +183,11 @@ public class ReusableMethods_steps {
 	String totalPagesOnAttachmenets = JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesTotal").toString();
 	String totalPagesSent= JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].PagesSent").toString();
 	     
-	     System.out.println("***"+"the outbound faxId is "+faxId);
-	     System.out.println("***"+"the outbound faxTSI is "+TSI);
-	     System.out.println("***"+"the outbound faxStatus is like "  +  "** " +"**"+Faxstatus+"**");
+	     System.out.println("***"+"the outbound faxId is "+"** "+faxId+"**");
+	     System.out.println("***"+"the outbound faxStatus is like " +"** "+Faxstatus+"**");
 	     
-	     System.out.println("total page on attachment  " + totalPagesOnAttachmenets);
-	     System.out.println("count of pages been sent  " + totalPagesSent);
+	     System.out.println("**"+"total page on attachment  " + totalPagesOnAttachmenets);
+	     System.out.println("**"+"count of pages been sent  " + totalPagesSent);
 	     
 	     
 	    }
@@ -190,7 +195,7 @@ public class ReusableMethods_steps {
 	    @Then("I submit Get call in inbound FaxUserId")
 	    public void i_submit_Get_call_in_inbound_FaxUserId() throws InterruptedException {
 	    	
-	    	Thread.sleep(1000*180);
+	    	Thread.sleep(1000*420);
 	    	
 	       response=Second_RestRequestUtils.Inbound_getCall_clumsy_65Validation(ConfigReader.getProperty("inboundFax_url")+ConfigReader.getProperty("newInboundParam"));
 	    	
@@ -207,10 +212,12 @@ public class ReusableMethods_steps {
 	       int firstAttemptpageReceived =JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].PagesReceived");
 	       int secondAttemptpageReceived =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
 	       
-	       String TSI_2 =JsonPath.read(response.asPrettyString(),"$.FaxInfo.[2].TSI").toString();
-	       if(TSI.equals(TSI_2)){
-	       
+	       //String TSI_2 =JsonPath.read(response.asPrettyString(),"$.FaxInfo.[2].TSI").toString();
 	       System.out.println("** "+ "TSI of inbound fax is " +TSI);
+	       
+	       if(TSI.equals(TSIofClumsy)){
+	       
+	      
 	       
 	       System.out.println("** "+"last attempt FaxId of inbound fax is " +"** "+FaxId+"");
 	       System.out.println("** "+"second attempt FaxId of inbound fax is " +"** "+faxId_first+"**");
@@ -223,10 +230,14 @@ public class ReusableMethods_steps {
 	       System.out.println("** "+ "TotalPages received is at last attempt " +"** "+lastAttemptPageReceived+"**");
 	       System.out.println("** "+ "TotalPages received is at second attempt " +"** "+secondAttemptpageReceived+"**");
 	       System.out.println("** "+ "TotalPages received is at first attempt " +"** "+firstAttemptpageReceived+"**");
+	       }else if (!TSI.equals(TSIofClumsy)){
+	    	   
+	    	   logger.error("---------.....this message about an error ,inbound faxes not generated");
 	       }else {
+	    	   
 	    	   System.out.println("** "+ "TSI of inbound fax is " +TSI);
-		       System.out.println("** "+"first attempt FaxId of inbound  fax is" +faxId_first);
-		       System.out.println("** "+"second attempt FaxId of inbound fax is" +FaxId);
+		       System.out.println("** "+" first attempt FaxId of inbound  fax is" +faxId_first);
+		       System.out.println("** "+" second attempt FaxId of inbound fax is" +FaxId);
 		       System.out.println("** "+ "FaxStatus of 1st Attempt " +firstAttemptFaxsStatus);
 		       System.out.println("** "+ "FaxStatus of 2nd Attempt " +secondAttemptFaxStatus);
 		       System.out.println("** "+ "TotalPages received is at first attempt " +"**"+firstAttemptpageReceived+"**");
