@@ -1,9 +1,15 @@
 package Runner;
 
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
+import org.junit.AfterClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.cucumber.junit.*;
+import utils.sendEmail;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -11,9 +17,26 @@ import io.cucumber.junit.*;
         glue={"stepDefinitions"},
         dryRun =false,
         monochrome = true,
-        tags = {"@send#receive"},
+        tags = {" @tag1"},
         plugin = { "pretty", "html:target/cucumber-html-report", "json:target/cucumber/cucumber.json" ,"junit:target/cucxml/cucumber.xml"}
 )
 public class TestRunners {
+	
+	@AfterClass
+	public static void sendingMail() { 
+	Runtime run=Runtime.getRuntime();
+	run.addShutdownHook(new Thread());
+	}
+	public  void run() {
+		
+		sendEmail sm = new sendEmail();
+		try {
+		sm.sendFromGMail();
+		System.out.println("Report has been sent");
+		
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 } 

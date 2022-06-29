@@ -203,7 +203,8 @@ public class ReusableMethods_steps {
 	       int faxId_first= JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].FaxId");
 	       int faxId_last= JsonPath.read(response.asPrettyString(),"$.FaxInfo[2].FaxId");
 	       String TSI =JsonPath.read(response.asPrettyString(),"$.FaxInfo.[0].TSI").toString();
-	       
+	       String TSIofsecondAttempt= JsonPath.read(response.asPrettyString(), "$.FaxInfo.[1].TSI").toString();
+	       String TSIofthirdAttempt= JsonPath.read(response.asPrettyString(), "$.FaxInfo.[2].TSI").toString();
 	       String secondAttemptFaxStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[0].FaxStatus").toString();
 	       String firstAttemptFaxsStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].FaxStatus").toString();
 	       String lastAttemptFaxsStatus = JsonPath.read(response.asPrettyString(),"$.FaxInfo[2].FaxStatus").toString();
@@ -212,13 +213,11 @@ public class ReusableMethods_steps {
 	       int firstAttemptpageReceived =JsonPath.read(response.asPrettyString(),"$.FaxInfo[1].PagesReceived");
 	       int secondAttemptpageReceived =JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
 	       
-	       //String TSI_2 =JsonPath.read(response.asPrettyString(),"$.FaxInfo.[2].TSI").toString();
+	    
 	       System.out.println("** "+ "TSI of inbound fax is " +TSI);
 	       
-	       if(TSI.equals(TSIofClumsy)){
-	       
-	      
-	       
+	       if(TSI.equals(TSIofClumsy)&&TSIofsecondAttempt.equals(TSIofClumsy)&&TSIofthirdAttempt.equals(TSIofClumsy)){
+
 	       System.out.println("** "+"last attempt FaxId of inbound fax is " +"** "+FaxId+"");
 	       System.out.println("** "+"second attempt FaxId of inbound fax is " +"** "+faxId_first+"**");
 	       System.out.println("** "+"first attempt FaxId of inbound fax is " +"** "+faxId_last+"**");
@@ -230,19 +229,39 @@ public class ReusableMethods_steps {
 	       System.out.println("** "+ "TotalPages received is at last attempt " +"** "+lastAttemptPageReceived+"**");
 	       System.out.println("** "+ "TotalPages received is at second attempt " +"** "+secondAttemptpageReceived+"**");
 	       System.out.println("** "+ "TotalPages received is at first attempt " +"** "+firstAttemptpageReceived+"**");
-	       }else if (!TSI.equals(TSIofClumsy)){
+
+	       }
+	       else if (TSI.equals(TSIofClumsy)&&TSIofsecondAttempt.equals(TSIofClumsy)) {
+	    	   
+	    	   System.out.println("** "+"last attempt FaxId of inbound fax is " +"** "+FaxId+"");
+		       System.out.println("** "+"first attempt FaxId of inbound fax is " +"** "+faxId_first+"**");
+		       System.out.println("** "+ "FaxStatus of last Attempt " +"** "+secondAttemptFaxStatus+"**");
+		       System.out.println("** "+ "FaxStatus of first Attempt " +"** "+firstAttemptFaxsStatus+"**");
+		       System.out.println("** "+ "TotalPages received is at last attempt " +"** "+lastAttemptPageReceived+"**"+"** "+TSI);
+		       System.out.println("** "+ "TotalPages received is at first attempt " +"** "+firstAttemptpageReceived+"**"+"** "+ TSIofsecondAttempt);
+	       }
+	       
+	       
+	       
+	       
+	       else if(TSI.equals(TSIofClumsy)&&!TSIofsecondAttempt.equals(TSIofClumsy)) {
+	    	 
+		       System.out.println("** "+ "TotalPages received is at first attempt " +"** "+firstAttemptpageReceived+"**"+"and "+"Tsi id is "+"* "+TSI+"*");
+	    	   System.out.println("________DebugAbortSendAtPage set-up probably more then total page count");
+	       }
+	      
+	       else if (!TSI.equals(TSIofClumsy)){
 	    	   
 	    	   logger.error("---------.....this message about an error ,inbound faxes not generated");
 	       }else {
-	    	   
-	    	   System.out.println("** "+ "TSI of inbound fax is " +TSI);
+	  
 		       System.out.println("** "+" first attempt FaxId of inbound  fax is" +faxId_first);
 		       System.out.println("** "+" second attempt FaxId of inbound fax is" +FaxId);
 		       System.out.println("** "+ "FaxStatus of 1st Attempt " +firstAttemptFaxsStatus);
 		       System.out.println("** "+ "FaxStatus of 2nd Attempt " +secondAttemptFaxStatus);
 		       System.out.println("** "+ "TotalPages received is at first attempt " +"**"+firstAttemptpageReceived+"**");
 		       System.out.println("** "+ "TotalPages received is at last attempt " +"**"+lastAttemptPageReceived+"**");
-	       }
+	       } 
 	    }
 
 	    @Then("I check and validate status code is {int}")
