@@ -262,7 +262,9 @@ public class Post_calls_steps {
 
 	@Given("I submit post call for more than hundred page")
 	public void i_submit_post_call_for_more_than_hundred_page() {
-		response=Second_RestRequestUtils.faxWith100Pages(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("100page")
+			String Tsi1= FileReader.randomNumberFor_TSI();
+		
+		response=Second_RestRequestUtils.faxWith100Pages(ConfigReader.getProperty("post_call_Url")+Tsi1,FileReader.readfile("100page")
 				  ,ConfigReader.getProperty("FaxN"));
 		
 	}

@@ -11,6 +11,6 @@ Feature: ^^This feature file validates the number of outbound&inbound pages with
     Given i submit Get call by FaxUserID retrieve date 
     And validate status code is 200
   
-    
+   
 
 
