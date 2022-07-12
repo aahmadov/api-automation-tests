@@ -343,7 +343,7 @@ public class ReusableMethods_steps {
 			String totalPagesSent = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesSent").toString();
 
 			System.out.println("***" + "the outbound faxId is " + "** " + faxId + "**");
-			System.out.println("***" + "the outbound faxStatus is like " + "** " + Faxstatus + "**");
+			System.out.println("***" + "the outbound faxStatus is like " + "** " + Faxstatus + "**"+"and FaxId"+faxId);
 
 			System.out.println("**" + "total page on attachment  " + totalPagesOnAttachmenets);
 			System.out.println("**" + "count of pages been sent  " + totalPagesSent);
@@ -355,25 +355,25 @@ public class ReusableMethods_steps {
 		response = Second_RestRequestUtils.secondClumsy100InboundPageGet(
 				ConfigReader.getProperty("inboundFax_url") + ConfigReader.getProperty("newInboundParam"));
 
-		int FaxId = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
-		int faxId_first = JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId");
+		int FaxId_first = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+		int faxId_second = JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxId");
 		int faxId_last = JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxId");
 		String TSI = JsonPath.read(response.asPrettyString(), "$.FaxInfo.[0].TSI").toString();
 		String TSIofsecondAttempt = JsonPath.read(response.asPrettyString(), "$.FaxInfo.[1].TSI").toString();
 		String TSIofthirdAttempt = JsonPath.read(response.asPrettyString(), "$.FaxInfo.[2].TSI").toString();
-		String secondAttemptFaxStatus = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-		String firstAttemptFaxsStatus = JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
+		String firstAttemptFaxsStatus = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
+		String secondAttemptFaxStatus = JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
 		String lastAttemptFaxsStatus = JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
 
-		int lastAttemptPageReceived = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
-		int firstAttemptpageReceived = JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].PagesReceived");
-		int secondAttemptpageReceived = JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
+		int  firstAttemptpageReceived= JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
+		int secondAttemptpageReceived = JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].PagesReceived");
+		int lastAttemptPageReceived = JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
 
 		if (TSI.equals(TSIofOutboundFax) && TSIofsecondAttempt.equals(TSIofOutboundFax)
 				&& TSIofthirdAttempt.equals(TSIofOutboundFax)) {
 			System.out.println("** " + "TSI of inbound fax is " + TSI);
-			System.out.println("** " + "last attempt FaxId of inbound fax is " + "** " + FaxId + "");
-			System.out.println("** " + "second attempt FaxId of inbound fax is " + "** " + faxId_first + "**");
+			System.out.println("** " + "last attempt FaxId of inbound fax is " + "** " + FaxId_first + "");
+			System.out.println("** " + "second attempt FaxId of inbound fax is " + "** " + faxId_second + "**");
 			System.out.println("** " + "first attempt FaxId of inbound fax is " + "** " + faxId_last + "**");
 
 			System.out.println("** " + "FaxStatus of last Attempt " + "** " + secondAttemptFaxStatus + "**");
@@ -389,8 +389,8 @@ public class ReusableMethods_steps {
 
 		} else if (TSI.equals(TSIofOutboundFax) && TSIofsecondAttempt.equals(TSIofOutboundFax)) {
 
-			System.out.println("** " + "last attempt FaxId of inbound fax is " + "** " + FaxId + "");
-			System.out.println("** " + "first attempt FaxId of inbound fax is " + "** " + faxId_first + "**");
+			System.out.println("** " + "last attempt FaxId of inbound fax is " + "** " + faxId_last + "");
+			System.out.println("** " + "first attempt FaxId of inbound fax is " + "** " + FaxId_first + "**");
 			System.out.println("** " + "FaxStatus of last Attempt " + "** " + secondAttemptFaxStatus + "**");
 			System.out.println("** " + "FaxStatus of first Attempt " + "** " + firstAttemptFaxsStatus + "**");
 			System.out.println("** " + "TotalPages received is at last attempt " + "** " + lastAttemptPageReceived
@@ -411,8 +411,8 @@ public class ReusableMethods_steps {
 			logger.error("---------.....this message about an error ,inbound faxes not generated");
 		} else {
 
-			System.out.println("** " + " first attempt FaxId of inbound  fax is" + faxId_first);
-			System.out.println("** " + " second attempt FaxId of inbound fax is" + FaxId);
+			System.out.println("** " + " first attempt FaxId of inbound  fax is" + FaxId_first);
+			System.out.println("** " + " second attempt FaxId of inbound fax is" + faxId_second);
 			System.out.println("** " + "FaxStatus of 1st Attempt " + firstAttemptFaxsStatus);
 			System.out.println("** " + "FaxStatus of 2nd Attempt " + secondAttemptFaxStatus);
 			System.out.println(
