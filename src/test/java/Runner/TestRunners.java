@@ -17,7 +17,7 @@ import utils.sendEmail;
         glue={"stepDefinitions"},
         dryRun =false,
         monochrome = true,
-        tags = {"@clumsy_send&recieve"},
+        tags = {"@regression,@smoke"},
         plugin = { "pretty", "html:target/cucumber-html-report", "json:target/cucumber/cucumber.json" ,"junit:target/cucxml/cucumber.xml"}
 )
 public class TestRunners {

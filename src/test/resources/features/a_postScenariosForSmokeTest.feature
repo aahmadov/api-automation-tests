@@ -40,10 +40,7 @@ Scenario: ^^ Send Fax Data with multiple recipient Details ^^
     
  
     
-    @TC-7loadtestscenario
-    Scenario: send new fax with new set-up
-    Given send simple fax
-    And user validates the status code is 201
+    
    
       
     
