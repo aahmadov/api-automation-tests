@@ -71,7 +71,6 @@ public class ExcelUtility {
 	  public static void createExcelAndWrite4(String fileName, String value,int RowNum,int ColNum){
 	        workBook = new XSSFWorkbook();
 	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
 	        row = workSheet.createRow(RowNum);
 	        cell = row.createCell(ColNum);
 	       
