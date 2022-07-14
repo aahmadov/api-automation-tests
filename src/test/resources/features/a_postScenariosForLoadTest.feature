@@ -1,29 +1,30 @@
+#Author: abbas@softlinx.com
 @Loadtest
 Feature: Validate post call for load test
   
 
-## @TC1-sendFax_load
+ @TC1-sendFax_load
   Scenario: Validation of Post call for Load test
     Given I want submit new post call with one page 
     And I validate of status code is 201
     
-## @TC2-sendFax_load
+ @TC2-sendFax_load
   Scenario: Post call for Load test
     Given I want submit new post call with multiple pages 
     And I validate of status code is 201
     
-## @TC3-sendFax_load
+ @TC3-sendFax_load
   Scenario: Post call for Load test
     Given submit new request with new page 
     And I validate of status code is 201
     
        
-## @TC4-sendFax_load
+ @TC4-sendFax_load
   Scenario: Post call for Load test
     Given submit new request with five page 
     And I validate of status code is 201
     
-  ## @TC5-sendFax_load
+   @TC5-sendFax_load
   Scenario: Post call for Load test
     Given submit new request with six page 
     And I validate of status code is 201  

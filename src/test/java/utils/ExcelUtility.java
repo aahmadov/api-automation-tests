@@ -1,195 +1,41 @@
 package utils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 public class ExcelUtility {
 
-	private static XSSFSheet workSheet;
-	private static XSSFRow row;
-	private static XSSFCell cell;
-	private static XSSFWorkbook workBook = new XSSFWorkbook();
-	
-	
-	  public static void createExcelAndWrite(String fileName, String value,int RowNum,int ColNum){
+    private static XSSFSheet workSheet;
+    private static XSSFWorkbook workBook;
+    private static int rowNumber = 0;
+
+    private static final String FIRST_SHEET = "FIRST SHEET";
+
+    public static void createExcelAndSheet() {
         workBook = new XSSFWorkbook();
-        workSheet = workBook.createSheet("FIRST SHEET");
-   
-        row = workSheet.createRow(RowNum);
-        cell = row.createCell(ColNum);
-       
-        
+        workSheet = workBook.createSheet(FIRST_SHEET);
+    }
+
+    public static void createExcelAndWrite(String fileName, String value) {
+        XSSFRow row = workSheet.createRow(rowNumber);
+        XSSFCell cell = row.createCell(0);
         cell.setCellValue(value);
-        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-        {
+        rowNumber++;
+        try (FileOutputStream fos = new FileOutputStream(fileName)) {
             workBook.write(fos);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-	  
-	  
-	  public static void createExcelAndWrite2(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite3(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite4(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite5(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite6(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite7(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite8(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite9(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  public static void createExcelAndWrite10(String fileName, String value,int RowNum,int ColNum){
-	        workBook = new XSSFWorkbook();
-	        workSheet = workBook.createSheet("FIRST SHEET");
-	   
-	        row = workSheet.createRow(RowNum);
-	        cell = row.createCell(ColNum);
-	       
-	        
-	        cell.setCellValue(value);
-	        try (FileOutputStream fos = new FileOutputStream(new File(fileName)))
-	        {
-	            workBook.write(fos);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	  }
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+}
+
+
 //	public static void main(String[] args) throws Exception {
 //
 //		try {
@@ -255,7 +101,7 @@ public class ExcelUtility {
 //    }
 //
 //
-  
+
 
 //
 //}
