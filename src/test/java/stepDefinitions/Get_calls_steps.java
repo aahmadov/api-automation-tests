@@ -107,6 +107,7 @@ public class Get_calls_steps {
 		Thread.sleep(1000*120);
 		response = RestRequestUtils
 				.getImage(ConfigReader.getProperty("getFaxByID_url") + ConfigReader.getProperty("param"), "pdf");
+		
 		System.out.println("** "+(ConfigReader.getProperty("getFaxByID_url")));
 		System.out.printf("** "+ConfigReader.getProperty("param"), "pdf");
 		

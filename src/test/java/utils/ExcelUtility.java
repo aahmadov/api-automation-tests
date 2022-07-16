@@ -6,8 +6,10 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 
 public class ExcelUtility {
 
@@ -33,40 +35,41 @@ public class ExcelUtility {
             e.printStackTrace();
         }
     }
+
+
+
+	public static void main(String[] args) throws Exception {
+
+		try {
+
+			// String path
+			// =System.getProperty("user.dir")+"/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx";
+
+			FileInputStream ExcelFile = new FileInputStream(
+					"C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx");
+
+			XSSFWorkbook workBook = new XSSFWorkbook(ExcelFile);
+
+			workSheet = workBook.getSheet(FIRST_SHEET);
+
+			XSSFRow row = workSheet.getRow(0);
+
+			XSSFCell cell = row.getCell(0);
+			
+			String rowNumber = cell.getStringCellValue();
+			
+			
+			System.out.println(workSheet.getRow(1).getPhysicalNumberOfCells()+")"+rowNumber);
+			
+
+		} catch (Exception e) {
+
+			throw (e);
+
+		}
+
+	}
 }
-
-
-//	public static void main(String[] args) throws Exception {
-//
-//		try {
-//
-//			// String path
-//			// =System.getProperty("user.dir")+"/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx";
-//
-//			FileInputStream ExcelFile = new FileInputStream(
-//					"C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx");
-//
-//			XSSFWorkbook workBook = new XSSFWorkbook(ExcelFile);
-//
-//			sheet = workBook.getSheet("Sheet1");
-//
-//			row = sheet.getRow(0);
-//
-//			cell = row.getCell(0);
-//			
-//			String rowNumber = cell.getStringCellValue();
-//			
-//			System.out.println(sheet.getRow(1).getPhysicalNumberOfCells());
-//			System.out.println(rowNumber);
-//
-//		} catch (Exception e) {
-//
-//			throw (e);
-//
-//		}
-//
-//	}
-//}
 
 //    public static String getCellData(int RowNum, int ColNum) throws Exception{
 //        try{
