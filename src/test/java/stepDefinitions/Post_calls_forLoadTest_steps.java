@@ -629,4 +629,26 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");  
     }
+    
+    @Given("I will submit new post call with TSI id32")
+    public void i_will_submit_new_post_call_with_TSI_id32() {
+   
+	String thirtytwoLoadTest_TSI = FileReader.randomNumberFor_TSI();
+    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+
+    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtytwoLoadTest_TSI, FileReader.readfile("Pages_10")
+            , ConfigReader.getProperty("FaxN"));
+
+    ExcelUtility.createExcelAndWrite(ExcelPath, thirtytwoLoadTest_TSI);
+
+    System.out.println(thirtytwoLoadTest_TSI);
+    System.out.println(ExcelPath);
+    System.out.println("------------------------------------------------------------------------");
+
+    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
+    System.out.println("******* " + (FileReader.readfile("Pages_1")));
+    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
+    System.out.println("------------------------------------------------------------------------");
+}
+    
 }

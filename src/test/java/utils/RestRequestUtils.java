@@ -63,9 +63,26 @@ public class RestRequestUtils {
 		
 		 request.header("Authorization ", "Basic "+encodedCreadentialForAdmin);
 			return response=request.contentType("multipart/form-data").when().get(url);
-		
-	}
 	
+			
+			/*
+			 *@This getWithValidTSI is for Load test 
+			 * */	
+			
+	}
+	public static Response getFaxsTSINewRestLoadtest(String url) {
+		
+		RequestSpecification request = RestAssured.given();
+		String credentilas= ConfigReader.getProperty("credentialNewInbound");
+		byte[] encodedCredentials =Base64.encodeBase64(credentilas.getBytes());
+	    String encodedCreadentialForAdmin =new String (encodedCredentials);
+		
+		 request.header("Authorization ", "Basic "+encodedCreadentialForAdmin);
+			return response=request.contentType("multipart/form-data").when().get(url);
+		
+
+			
+	}
 	
    public static Response getFaxsTSINewRestApi2(String url) {
 		

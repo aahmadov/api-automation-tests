@@ -17,7 +17,7 @@ import utils.sendEmail;
         glue={"stepDefinitions"},
         dryRun =false,
         monochrome = true,
-        tags = {" @TC-1getFax"},
+        tags = {"@smoke1"},
         plugin = { "pretty", "html:target/cucumber-html-report", "json:target/cucumber/cucumber.json" ,"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks"}
 )
 public class TestRunners {

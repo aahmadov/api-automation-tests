@@ -33,7 +33,7 @@ public class FileReader {
 				
 				Random TSINumber = new Random();
 				
-				int random_Num=TSINumber.nextInt(100);
+				int random_Num=TSINumber.nextInt(1000);
 				
 				String TSI = "?TSI=Test"+random_Num;
 				
