@@ -1,5 +1,4 @@
-
-@regression
+@Regression
 Feature: This feature is to crash scheduler with different clumsy set_up 
   
 

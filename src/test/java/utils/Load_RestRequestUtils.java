@@ -60,6 +60,17 @@ public class Load_RestRequestUtils {
 						.post(url);
 }
 	
+	public static Response getCreatedFaxForLoad1(String url) {
+
+		RequestSpecification request = RestAssured.given();
+		String credentilas= ConfigReader.getProperty("credentialNewInbound");
+		byte[] encodedCredentials =Base64.encodeBase64(credentilas.getBytes());
+	    String encodedCreadentialForAdmin = new String (encodedCredentials);
+		
+		 request.header("Authorization ","Basic "+encodedCreadentialForAdmin);
+			return response=request.contentType("multipart/form-data").when().get(url);
+	
+}
 
 }
 

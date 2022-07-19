@@ -17,35 +17,13 @@ import utils.sendEmail;
         glue={"stepDefinitions"},
         dryRun =false,
         monochrome = true,
-        tags = {"@smoke1"},
+        tags = {" @TC-2getFax, @TC-3getFax"},
         plugin = { "pretty", "html:target/cucumber-html-report", "json:target/cucumber/cucumber.json" ,"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks"}
 )
 public class TestRunners {
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	@AfterClass
 	public static void sendingMail() { 

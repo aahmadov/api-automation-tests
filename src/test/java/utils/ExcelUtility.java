@@ -1,15 +1,17 @@
 package utils;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExcelUtility {
 
@@ -36,39 +38,35 @@ public class ExcelUtility {
         }
     }
 
+    public static List<String> getColumnData(String fileLocation, int columnNumber) {
+        List<String> values = new ArrayList<>();
+        try {
+            try (XSSFWorkbook workBook = new XSSFWorkbook(fileLocation)) {
+				XSSFSheet workSheet = workBook.getSheet(FIRST_SHEET);
+				for (Row row : workSheet) {
+				    Cell cell = row.getCell(columnNumber);
+				    if (cell != null) {
+				        values.add(cell.getStringCellValue());
+				    }
+				}
+			}
+        } catch (IOException exception) {
+            exception.printStackTrace();
+        }
+        return values;
+    }
 
-
-	public static void main(String[] args) throws Exception {
-
-		try {
-
-			// String path
-			// =System.getProperty("user.dir")+"/Replix/src/test/resources/config/FAX_SOFTLINX.xlsx";
-
-			FileInputStream ExcelFile = new FileInputStream(
-					"C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx");
-
-			XSSFWorkbook workBook = new XSSFWorkbook(ExcelFile);
-
-			workSheet = workBook.getSheet(FIRST_SHEET);
-
-			XSSFRow row = workSheet.getRow(0);
-
-			XSSFCell cell = row.getCell(0);
-			
-			String rowNumber = cell.getStringCellValue();
-			
-			
-			System.out.println(workSheet.getRow(1).getPhysicalNumberOfCells()+")"+rowNumber);
-			
-
-		} catch (Exception e) {
-
-			throw (e);
-
-		}
-
-	}
+    public static String getCellData(String fileLocation, int rowNumber, int columnNumber) {
+        try {
+            try (XSSFWorkbook workBook = new XSSFWorkbook(fileLocation)) {
+				XSSFSheet workSheet = workBook.getSheet(FIRST_SHEET);
+				return workSheet.getRow(rowNumber).getCell(columnNumber).getStringCellValue();
+			}
+        } catch (IOException exception) {
+            exception.printStackTrace();
+            return null;
+        }
+    }
 }
 
 //    public static String getCellData(int RowNum, int ColNum) throws Exception{
