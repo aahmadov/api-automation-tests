@@ -1,4 +1,4 @@
-#Author: your.email@your.domain.com
+#Author: abbas@softlinx.com
 
 @GetCallforLoad
 Feature: ^^^ Validation of post call TSI id for Load test

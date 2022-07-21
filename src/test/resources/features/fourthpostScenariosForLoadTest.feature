@@ -1,4 +1,4 @@
-#Author: your.email@your.domain.com
+#Author: abbas@softlinx.com
 
 @Loadtest
 Feature: Validate post call for load test

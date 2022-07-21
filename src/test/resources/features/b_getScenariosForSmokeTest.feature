@@ -1,5 +1,4 @@
-  @Smoke
-
+ @smoke
 Feature: ^^^ Validation of GetCalls with Fax Number And FaxStatus ^^^
 
 @TC-1getFax_aftersent

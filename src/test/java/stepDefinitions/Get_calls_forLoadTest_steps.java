@@ -1,6 +1,6 @@
 package stepDefinitions;
 
-import com.jayway.jsonpath.JsonPath;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.jayway.jsonpath.JsonPath;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
