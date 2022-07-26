@@ -38,9 +38,12 @@ public class Get_calls_forLoadTest_steps {
 
     @Then("user validates Tsi id of Fax")
     public void user_validates_Tsi_id_of_Fax() {
-        response.prettyPrint();
-        String Tsi = JsonPath.read(response.asPrettyString(), "$.FaxInfo[1].TSI");
+        response.asPrettyString();
+        List<Integer> faxId = JsonPath.read(response.asString(), "$..FaxId");
+        
+        String Tsi = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
         System.out.println("**" + "--" + Tsi + "--");
+        System.out.println("*** All jobIds from response "+"**"+faxId);
     }
 
     @Given("user validates {int} is right getCall status code")

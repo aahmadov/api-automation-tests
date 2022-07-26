@@ -1,31 +1,56 @@
 package stepDefinitions;
 
 import com.jayway.jsonpath.JsonPath;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
-import utils.ConfigReader;
-import utils.ExcelUtility;
-import utils.FileReader;
-import utils.Load_RestRequestUtils;
+import utils.*;
+
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.assertEquals;
 
 public class Post_calls_forLoadTest_steps {
 
     Response response;
+    int maxIterationNumber = 10;
 
-    @Given("I want submit new post call with one page")
-    public void i_want_submit_new_post_call_with_one_page() {
+//@Given("I want submit group of post calls with this URL {string} with {string} id {string} and {string}")
+//public void i_want_submit_group_of_post_calls_with_this_URL_with_id_and(String URL, String firstLoadTest_TSI, String FileReader, String string4) {
+//    	
+////        String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();
+////        String fileatt
+//        String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+////iterate this 100 times and validate and checking status code if its 201 then write a TSI to file, during the iteration use different parameter as different TSI and Pages and numbers 
+//        for(int i=0;i<maxIterationNumber;i++) {
+//        	System.out.println("it is in loop");
+//        response = Load_RestRequestUtils.sendFax_loadTest(ConfigReader.getProperty(URL) + FileReader.randomNumberFor_TSI(), FileReader.randomFileFromFolder()
+//                , FileReader.randomFaxNumber());
+//        i++;
+//       ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI); 
+//       
+//    }
 
-        String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();
+
+    @Given("I want to submit group of post calls with (.*) for (.*)")
+    public void i_want_submit_group_of_post_calls_with_URL_for_times(String URL, int noOfTimes) {
+
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+        
+        for (int i = 0; i < noOfTimes; i++) {
+            System.out.println("it is iteration time in the loop :" + i);
+            String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();
+            response = Load_RestRequestUtils.sendFax_loadTest(ConfigReader.getProperty(URL) + firstLoadTest_TSI,
+                    FileReader.randomFileFromFolder(), FileReader.randomFaxNumber());
 
-        response = Load_RestRequestUtils.sendFax_loadTest(ConfigReader.getProperty("outbound_URl_65") + firstLoadTest_TSI, FileReader.readfile("Pages_1")
-                , ConfigReader.getProperty("FaxN"));
+            ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI);
+            System.out.println(firstLoadTest_TSI);
+        }
 
-        ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI);
-
-        System.out.println(firstLoadTest_TSI);
         System.out.println(ExcelPath);
         System.out.println("------------------------------------------------------------------------");
 
@@ -34,6 +59,46 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
 
+    }
+
+    @Given("^I want to submit group of post calls with data$")
+    public void i_want_to_submit_group_of_post_calls_with_data(DataTable dataTable) throws Exception {
+        Map<String, String> data = dataTable.transpose().asMaps().get(0);
+
+        String ExcelPath = ConfigReader.getProperty("testDataFile");
+        List<String> faxNumbers = FileReader.convertToList(
+                CsvUtils.readAllLines(
+                        ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
+
+        for (int i = 0; i < Integer.parseInt(data.get("times")); i++) {
+            System.out.println("it is iteration time in the loop :" + i);
+            String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();
+
+            Map<String, Object> requestData = new ConcurrentHashMap<>();
+            requestData.put("filename", FileReader.getFileUsingPageSize(data.get("pageSize")));
+            requestData.put("FaxNumber", faxNumbers.get(ThreadLocalRandom.current().nextInt(faxNumbers.size())));
+            requestData.put("url", ConfigReader.getProperty(data.get("url")) + firstLoadTest_TSI);
+            requestData.put("coverPageEnabled", data.get("coverPageEnabled"));
+
+            response = Load_RestRequestUtils.sendFax_loadTest(requestData);
+            
+            System.out.println(response.asString());
+
+            if (!Boolean.parseBoolean(data.get("ignoreFail"))) {
+                assertEquals(201, response.statusCode());
+            }
+
+            if (response.statusCode() == 201) {
+                ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI);
+                System.out.println(firstLoadTest_TSI);
+            }
+        }
+    }
+
+    @Then("^I validate the status (.*) as expected$")
+    public void statusCodeAsExpected(int statusCode) {
+        System.out.println("******* Status code:" + response.statusCode());
+        assertEquals(statusCode, response.statusCode());
     }
 
     @Given("I validate of status code is {int}")
@@ -50,8 +115,9 @@ public class Post_calls_forLoadTest_steps {
     public void i_want_submit_new_post_call_with_multiple_pages() {
         String second_LoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
-        response = Load_RestRequestUtils.send_more_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + second_LoadTest_TSI, FileReader.readfile("Pages")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.send_more_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + second_LoadTest_TSI, FileReader.readfile("Pages"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, second_LoadTest_TSI);
 
@@ -69,8 +135,9 @@ public class Post_calls_forLoadTest_steps {
     public void submit_new_request_with_new_page() {
         String thirdLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirdLoadTest_TSI, FileReader.readfile("Pages3")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirdLoadTest_TSI, FileReader.readfile("Pages3"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, thirdLoadTest_TSI);
 
@@ -90,8 +157,9 @@ public class Post_calls_forLoadTest_steps {
         String fourthLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + fourthLoadTest_TSI, FileReader.readfile("Pages")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + fourthLoadTest_TSI, FileReader.readfile("Pages"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, fourthLoadTest_TSI);
 
@@ -110,8 +178,9 @@ public class Post_calls_forLoadTest_steps {
         String fifthLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + fifthLoadTest_TSI, FileReader.readfile("Pages_5")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + fifthLoadTest_TSI, FileReader.readfile("Pages_5"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, fifthLoadTest_TSI);
 
@@ -130,8 +199,9 @@ public class Post_calls_forLoadTest_steps {
         String sixthLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + sixthLoadTest_TSI, FileReader.readfile("Pages_6")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + sixthLoadTest_TSI, FileReader.readfile("Pages_6"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, sixthLoadTest_TSI);
 
@@ -150,8 +220,9 @@ public class Post_calls_forLoadTest_steps {
         String seventhLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + seventhLoadTest_TSI, FileReader.readfile("Pages_7")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + seventhLoadTest_TSI, FileReader.readfile("Pages_7"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, seventhLoadTest_TSI);
 
@@ -170,8 +241,9 @@ public class Post_calls_forLoadTest_steps {
         String ninethLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + ninethLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + ninethLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, ninethLoadTest_TSI);
 
@@ -184,16 +256,18 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
+
     /*
-  	 *@submittenthPostCall
-  	 * */
+     * @submittenthPostCall
+     */
     @Given("submit new request with ten page")
     public void submit_new_request_with_ten_page() {
         String tenthLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + tenthLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + tenthLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, tenthLoadTest_TSI);
 
@@ -212,8 +286,9 @@ public class Post_calls_forLoadTest_steps {
         String elevenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + elevenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + elevenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, elevenLoadTest_TSI);
 
@@ -226,14 +301,15 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
-    
+
     @Given("I will submit new post call")
     public void i_will_submit_new_post_call() {
-    	String twelveLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twelveLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twelveLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twelveLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twelveLoadTest_TSI);
 
@@ -246,14 +322,15 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
-    
+
     @Given("I will submit new post call with new attachment")
     public void i_will_submit_new_post_call_with_new_attachment() {
-    	String thirteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String thirteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirteenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirteenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, thirteenLoadTest_TSI);
 
@@ -266,17 +343,18 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
-    
+
     /*
-	 *@submitfourteenPostCall
-	 * */
+     * @submitfourteenPostCall
+     */
     @Given("I will submit new post call with new attachment3")
     public void i_will_submit_new_post_call_with_new_attachment3() {
-    	String fourteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String fourteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + fourteenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + fourteenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, fourteenLoadTest_TSI);
 
@@ -289,13 +367,15 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
+
     @Given("I will submit new post call with new attachment4")
     public void i_will_submit_new_post_call_with_new_attachment4() {
-    	String fifteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String fifteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + fifteenteenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + fifteenteenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, fifteenteenLoadTest_TSI);
 
@@ -308,14 +388,16 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
 
-}
+    }
+
     @Given("I will submit new post call with new attachment5")
     public void i_will_submit_new_post_call_with_new_attachment5() {
-    	String fifteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String fifteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + fifteenteenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + fifteenteenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, fifteenteenLoadTest_TSI);
 
@@ -326,17 +408,18 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------"); 
-    
-}
-    
+        System.out.println("------------------------------------------------------------------------");
+
+    }
+
     @Given("I will submit new post call with new attachment6")
     public void i_will_submit_new_post_call_with_new_attachment6() {
-    	String sixteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String sixteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + sixteenteenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + sixteenteenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, sixteenteenLoadTest_TSI);
 
@@ -347,16 +430,18 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------"); 
-    
-}
+        System.out.println("------------------------------------------------------------------------");
+
+    }
+
     @Given("I will submit new post call with new attachment7")
     public void i_will_submit_new_post_call_with_new_attachment7() {
-    	String seventeenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String seventeenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + seventeenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + seventeenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, seventeenLoadTest_TSI);
 
@@ -367,16 +452,18 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------"); 
-    
-} 
+        System.out.println("------------------------------------------------------------------------");
+
+    }
+
     @Given("I will submit new post call with new attachment8")
     public void i_will_submit_new_post_call_with_new_attachment8() {
-    	String eighteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String eighteenteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + eighteenteenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + eighteenteenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, eighteenteenLoadTest_TSI);
 
@@ -387,16 +474,18 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------"); 
-    
-}
+        System.out.println("------------------------------------------------------------------------");
+
+    }
+
     @Given("I will submit new post call with new attachment9")
     public void i_will_submit_new_post_call_with_new_attachment9() {
-    	String nineteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String nineteenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + nineteenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + nineteenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, nineteenLoadTest_TSI);
 
@@ -408,18 +497,20 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
-    
-}
+
+    }
+
     /*
-   	 *@submittwentyPostCall
-   	 * */
+     * @submittwentyPostCall
+     */
     @Given("I will submit new post call with new attachment10")
     public void i_will_submit_new_post_call_with_new_attachment10() {
-    	String twentyLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentyLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentyLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentyLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentyLoadTest_TSI);
 
@@ -431,17 +522,17 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
-    
-} 
-   
-    
+
+    }
+
     @Given("I will submit post call with new parameters1")
     public void i_will_submit_post_call_with_new_parameters1() {
-    	String twentyoneLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentyoneLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentyoneLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentyoneLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentyoneLoadTest_TSI);
 
@@ -454,13 +545,15 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
+
     @Given("I will submit post call with new parameters2")
     public void i_will_submit_post_call_with_new_parameters2() {
-    	String twentytwoLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentytwoLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentytwoLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentytwoLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentytwoLoadTest_TSI);
 
@@ -472,14 +565,16 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
-}
+    }
+
     @Given("I will submit post call with new parameters3")
     public void i_will_submit_post_call_with_new_parameters3() {
-    	String twentythreeLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentythreeLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentythreeLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentythreeLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentythreeLoadTest_TSI);
 
@@ -490,15 +585,17 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------");  
-}
+        System.out.println("------------------------------------------------------------------------");
+    }
+
     @Given("I will submit post call with new parameters4")
     public void i_will_submit_post_call_with_new_parameters4() {
-    	String twentyfourLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentyfourLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentyfourLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentyfourLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentyfourLoadTest_TSI);
 
@@ -509,15 +606,17 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------");  
-}
+        System.out.println("------------------------------------------------------------------------");
+    }
+
     @Given("I will submit post call with new parameters5")
     public void i_will_submit_post_call_with_new_parameters5() {
-    	String twentyfiveLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentyfiveLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentyfiveLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentyfiveLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentyfiveLoadTest_TSI);
 
@@ -530,13 +629,15 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
+
     @Given("I will submit post call with new parameters6")
     public void i_will_submit_post_call_with_new_parameters6() {
-    	String twentysixLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentysixLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentysixLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentysixLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentysixLoadTest_TSI);
 
@@ -548,15 +649,17 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
-        
-}
+
+    }
+
     @Given("I will submit post call with new parameters7")
     public void i_will_submit_post_call_with_new_parameters7() {
-    	String twentysevenLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentysevenLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentysevenLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentysevenLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentysevenLoadTest_TSI);
 
@@ -569,13 +672,15 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
     }
+
     @Given("I will submit post call with new parameters8")
     public void i_will_submit_post_call_with_new_parameters8() {
-    	String twentyeightLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentyeightLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentyeightLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentyeightLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentyeightLoadTest_TSI);
 
@@ -587,14 +692,16 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
-}
+    }
+
     @Given("I will submit post call with new parameters9")
     public void i_will_submit_post_call_with_new_parameters9() {
-    	String twentynineLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String twentynineLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + twentynineLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + twentynineLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, twentynineLoadTest_TSI);
 
@@ -606,17 +713,19 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
         System.out.println("------------------------------------------------------------------------");
-}
+    }
+
     /*
-  	 *@submitthirtyPostCall
-  	 * */
+     * @submitthirtyPostCall
+     */
     @Given("I will submit post call with new parameters10")
     public void i_will_submit_post_call_with_new_parameters10() {
-    	String thirtyLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String thirtyLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtyLoadTest_TSI, FileReader.readfile("Pages_8")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirtyLoadTest_TSI, FileReader.readfile("Pages_8"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, thirtyLoadTest_TSI);
 
@@ -627,16 +736,17 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------");  
+        System.out.println("------------------------------------------------------------------------");
     }
-    
+
     @Given("I will submit new post call with TSI id31")
     public void i_will_submit_new_post_call_with_TSI_id31() {
-    	String thirtyoneLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String thirtyoneLoadTest_TSI = FileReader.randomNumberFor_TSI();
         String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-        response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtyoneLoadTest_TSI, FileReader.readfile("Pages_10")
-                , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirtyoneLoadTest_TSI, FileReader.readfile("Pages_10"),
+                ConfigReader.getProperty("FaxN"));
 
         ExcelUtility.createExcelAndWrite(ExcelPath, thirtyoneLoadTest_TSI);
 
@@ -647,178 +757,97 @@ public class Post_calls_forLoadTest_steps {
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
         System.out.println("******* " + (FileReader.readfile("Pages_1")));
         System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-        System.out.println("------------------------------------------------------------------------"); 
+        System.out.println("------------------------------------------------------------------------");
     }
+
     @Given("I will submit new post call with TSI id32")
     public void i_will_submit_new_post_call_with_TSI_id32() {
-	String thirtytwoLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+        String thirtytwoLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtytwoLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirtytwoLoadTest_TSI, FileReader.readfile("Pages_10"),
+                ConfigReader.getProperty("FaxN"));
 
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtytwoLoadTest_TSI);
+        ExcelUtility.createExcelAndWrite(ExcelPath, thirtytwoLoadTest_TSI);
 
-    System.out.println(thirtytwoLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
+        System.out.println(thirtytwoLoadTest_TSI);
+        System.out.println(ExcelPath);
+        System.out.println("------------------------------------------------------------------------");
 
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");
-}
+        System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
+        System.out.println("******* " + (FileReader.readfile("Pages_1")));
+        System.out.println("******* " + ConfigReader.getProperty("FaxN"));
+        System.out.println("------------------------------------------------------------------------");
+    }
+
     @Given("I will submit new post call with TSI id33")
     public void i_will_submit_new_post_call_with_TSI_id33() {
-	String thirtythreeLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+        String thirtythreeLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtythreeLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirtythreeLoadTest_TSI, FileReader.readfile("Pages_10"),
+                ConfigReader.getProperty("FaxN"));
 
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtythreeLoadTest_TSI);
+        ExcelUtility.createExcelAndWrite(ExcelPath, thirtythreeLoadTest_TSI);
 
-    System.out.println(thirtythreeLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
+        System.out.println(thirtythreeLoadTest_TSI);
+        System.out.println(ExcelPath);
+        System.out.println("------------------------------------------------------------------------");
 
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");   
-}
+        System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
+        System.out.println("******* " + (FileReader.readfile("Pages_1")));
+        System.out.println("******* " + ConfigReader.getProperty("FaxN"));
+        System.out.println("------------------------------------------------------------------------");
+    }
+
     @Given("I will submit new post call with TSI id34")
     public void i_will_submit_new_post_call_with_TSI_id34() {
-	String thirtyfourLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+        String thirtyfourLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtyfourLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirtyfourLoadTest_TSI, FileReader.readfile("Pages_10"),
+                ConfigReader.getProperty("FaxN"));
 
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtyfourLoadTest_TSI);
+        ExcelUtility.createExcelAndWrite(ExcelPath, thirtyfourLoadTest_TSI);
 
-    System.out.println(thirtyfourLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
+        System.out.println(thirtyfourLoadTest_TSI);
+        System.out.println(ExcelPath);
+        System.out.println("------------------------------------------------------------------------");
 
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");  
+        System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
+        System.out.println("******* " + (FileReader.readfile("Pages_1")));
+        System.out.println("******* " + ConfigReader.getProperty("FaxN"));
+        System.out.println("------------------------------------------------------------------------");
     }
+
     @Given("I will submit new post call with TSI id35")
     public void i_will_submit_new_post_call_with_TSI_id35() {
-	String thirtyfiveLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+        String thirtyfiveLoadTest_TSI = FileReader.randomNumberFor_TSI();
+        String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtyfiveLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
+        response = Load_RestRequestUtils.sendthree_Fax_loadTest(
+                ConfigReader.getProperty("outbound_URl_65") + thirtyfiveLoadTest_TSI, FileReader.readfile("Pages_10"),
+                ConfigReader.getProperty("FaxN"));
 
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtyfiveLoadTest_TSI);
+        ExcelUtility.createExcelAndWrite(ExcelPath, thirtyfiveLoadTest_TSI);
 
-    System.out.println(thirtyfiveLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
+        System.out.println(thirtyfiveLoadTest_TSI);
+        System.out.println(ExcelPath);
+        System.out.println("------------------------------------------------------------------------");
 
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");  
+        System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
+        System.out.println("******* " + (FileReader.readfile("Pages_1")));
+        System.out.println("******* " + ConfigReader.getProperty("FaxN"));
+        System.out.println("------------------------------------------------------------------------");
     }
-    @Given("I will submit new post call with TSI id36")
-    public void i_will_submit_new_post_call_with_TSI_id36() {
-	String thirtysixLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
-
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtysixLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
-
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtysixLoadTest_TSI);
-
-    System.out.println(thirtysixLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
-
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");
 }
-    
-    @Given("I will submit new post call with TSI id37")
-    public void i_will_submit_new_post_call_with_TSI_id37() {
-	String thirtysevenLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtysevenLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
 
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtysevenLoadTest_TSI);
 
-    System.out.println(thirtysevenLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
 
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");
-    }
-    @Given("I will submit new post call with TSI id38")
-    public void i_will_submit_new_post_call_with_TSI_id38() {
-	String thirtyeightLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
 
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtyeightLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
 
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtyeightLoadTest_TSI);
-
-    System.out.println(thirtyeightLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
-
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");
-}
-    @Given("I will submit new post call with TSI id39")
-    public void i_will_submit_new_post_call_with_TSI_id39() {
-	String thirtynineLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
-
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + thirtynineLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
-
-    ExcelUtility.createExcelAndWrite(ExcelPath, thirtynineLoadTest_TSI);
-
-    System.out.println(thirtynineLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
-
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");  
-}
-    @Given("I will submit new post call with TSI id40")
-    public void i_will_submit_new_post_call_with_TSI_id40() {
-	String fortyLoadTest_TSI = FileReader.randomNumberFor_TSI();
-    String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
-
-    response = Load_RestRequestUtils.sendthree_Fax_loadTest(ConfigReader.getProperty("outbound_URl_65") + fortyLoadTest_TSI, FileReader.readfile("Pages_10")
-            , ConfigReader.getProperty("FaxN"));
-
-    ExcelUtility.createExcelAndWrite(ExcelPath, fortyLoadTest_TSI);
-
-    System.out.println(fortyLoadTest_TSI);
-    System.out.println(ExcelPath);
-    System.out.println("------------------------------------------------------------------------");
-
-    System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
-    System.out.println("******* " + (FileReader.readfile("Pages_1")));
-    System.out.println("******* " + ConfigReader.getProperty("FaxN"));
-    System.out.println("------------------------------------------------------------------------");    
-}
-}
+   

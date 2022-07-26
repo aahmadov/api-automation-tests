@@ -1,8 +1,11 @@
 package utils;
 
 import java.io.File;
-import java.util.Random;
-import java.util.UUID;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class FileReader {
 
@@ -15,15 +18,24 @@ public class FileReader {
 
     public static String randomFileFromFolder() {
         File folder = new File("C:\\Users\\faxes");
-        File[] listOfFiles = folder.listFiles();
-        for (int i = 3; i < listOfFiles.length; i++) {
-            if (listOfFiles[i].isFile()) {
-                System.out.println(listOfFiles[i].getName());
-            } else if (listOfFiles[i].isDirectory()) {
-                System.out.println("Directory " + listOfFiles[i].getName());
-            }
+        File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
+        return Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath();
+    }
+
+    public static String getFileUsingPageSize(final String pageSize) {
+        try {
+            File folder = Paths.get(ClassLoader.getSystemResource("requestBody").toURI()).toFile();
+            File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
+            Optional<File> fileOptional = Arrays.stream(Objects.requireNonNull(listOfFiles))
+                    .filter(file -> file.getName().contains(pageSize))
+                    .findAny();
+            return fileOptional
+                    .map(File::getAbsolutePath)
+                    .orElseGet(() -> Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath());
+        } catch (URISyntaxException exception) {
+            System.out.println(exception.getMessage());
+            return "";
         }
-        return "Randomly selected file: " + listOfFiles[(int) (Math.random() * listOfFiles.length)].getName();
     }
 
     public static String randomNumberFor_TSI() {
@@ -32,7 +44,22 @@ public class FileReader {
 //        Random TSINumber = new Random();
 //        int random_Num = TSINumber.nextInt(100);
 //        uuid.substring(0, Math.min(uuid.length(), 15))
-        String TSI = "?TSI=Test" + uuid.substring(0, Math.min(uuid.length(), 15));
-        return TSI;
+        return "?TSI=Test" + uuid.substring(0, Math.min(uuid.length(), 10));
+    }
+
+    public static String randomFaxNumber() {
+
+        Random rand = new Random();
+        int num1 = (rand.nextInt(7) + 1) * 100 + (rand.nextInt(8) * 10) + rand.nextInt(8);
+        int num2 = rand.nextInt(743);
+        int num3 = rand.nextInt(10000);
+        DecimalFormat df = new DecimalFormat("000");
+        DecimalFormat df1 = new DecimalFormat("0000");
+
+        return String.format("%1$s-%2$s-%3$s", df.format(num1), df.format(num2), df1.format(num3));
+    }
+
+    public static List<String> convertToList(final List<String[]> values) {
+        return values.stream().map(value -> value[0]).collect(Collectors.toList());
     }
 }
