@@ -39,7 +39,7 @@ public class Post_calls_forLoadTest_steps {
     @Given("I want to submit group of post calls with (.*) for (.*)")
     public void i_want_submit_group_of_post_calls_with_URL_for_times(String URL, int noOfTimes) {
 
-        String ExcelPath = "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx";
+        String ExcelPath = ConfigReader.getProperty("testDataFile");
         
         for (int i = 0; i < noOfTimes; i++) {
             System.out.println("it is iteration time in the loop :" + i);
@@ -69,7 +69,7 @@ public class Post_calls_forLoadTest_steps {
         List<String> faxNumbers = FileReader.convertToList(
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
-
+        //String firstLoadTest_TSI2 = "TSI=test20";
         for (int i = 0; i < Integer.parseInt(data.get("times")); i++) {
             System.out.println("it is iteration time in the loop :" + i);
             String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();                                                                                                                                                                                                                                                   
@@ -90,7 +90,7 @@ public class Post_calls_forLoadTest_steps {
 
             if (response.statusCode() == 201) {
                 ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI);
-                System.out.println(firstLoadTest_TSI);
+                System.out.println("**"+"after successfully post call, generated TSI is "+firstLoadTest_TSI);
             }
         }
     }

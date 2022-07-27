@@ -26,7 +26,7 @@ public class Load_RestRequestUtils {
                 .multiPart("filename", (File)data.get("filename"))
                 .queryParam("FaxNumber", data.get("FaxNumber").toString())
                 .queryParam("CoverPageEnabled", Boolean.parseBoolean(data.get("coverPageEnabled").toString()))
-                .when().log().all()
+                .when()
                 .post(data.get("url").toString());
     }
 
