@@ -373,7 +373,7 @@ public class RestRequestUtils {
                 .contentType("multipart/form-data")
                 .multiPart("filename", randomFile)
                 .queryParam("FaxNumber", faxnumb)
-                .when()
+                .when().log().all()
                 .post(url);
     }
 

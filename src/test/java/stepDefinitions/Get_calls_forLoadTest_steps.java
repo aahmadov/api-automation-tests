@@ -57,7 +57,7 @@ public class Get_calls_forLoadTest_steps {
     @Then("user validates recent TSI present in response")
     public void user_validate_recent_TSI_present_in_response() throws InterruptedException {
     	
-    	Thread.sleep(1000*180);
+//    	Thread.sleep(1000*180);
         List<String> tsiIdsFromResponse = JsonPath.read(response.asString(), "$..TSI");
         List<String> newTsiIdsFromResponse = tsiIdsFromResponse.stream().distinct().collect(Collectors.toList());
 
@@ -80,7 +80,7 @@ public class Get_calls_forLoadTest_steps {
     @Then("user validates TSI has max attempts or recvok status")
     public void user_validates_TSI_has_max_attempts_or_recvok_status() throws InterruptedException {
 //        String response = scenarioContext.response.asString();
-    	Thread.sleep(1000*180);
+//    	Thread.sleep(1000*180);
     	
         List<String> tsiIdsFromExcel = ExcelUtility.getColumnData(
                 "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx", 0);
@@ -91,18 +91,31 @@ public class Get_calls_forLoadTest_steps {
                 .map(tsi -> tsi.split("=")[1])
                 .collect(Collectors.toList());
         System.out.println(newTsiIdsFromExcel);
-        
+
         List<String> missingTsiValues = new ArrayList<>();
         for (String tsi : newTsiIdsFromExcel) {
+        	System.out.println("checking for TSI: " + tsi);
+        	//Get all metadata of the TSI from the response
             JSONArray tsiArray = JsonPath.read(response.asString(), "$..FaxInfo[?(@.TSI =~/" + tsi + "/)]");
+            //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts
             if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
                 missingTsiValues.add(tsi);
             }
+
+            //Get the Fax status values of all the metadata elements
+            List<String> statuses = tsiArray.stream().map(tsiJson -> ((LinkedHashMap) tsiJson).get("FaxStatus").toString()).collect(Collectors.toList());
+            //Assert all the metadata contains only either recvIncomplete or recvOk Fax status
+            assertTrue(statuses.stream().allMatch(status -> status.equals("recvIncomplete") || status.equals("recvOk")));
+            
+            //checking if the last status is recvOk then previous status should be recvIncomplete
+            if (statuses.size() > 0 && statuses.get(0).equals("recvOk")) {
+                assertTrue(statuses.stream().skip(1).allMatch(status -> status.equals("recvIncomplete")));
+            }
         }
+        
+      //Check TSI metadata contains either recvOk status or max of 3 attempts
         if (missingTsiValues.size() > 0) {
-            fail(missingTsiValues + " doesn't have neither recvOk status or 3 attempts");
+            fail(missingTsiValues + " doesn't have neither recvOk status nor 3 attempts");
         }
-        System.out.println(missingTsiValues);
-       
     }
 }

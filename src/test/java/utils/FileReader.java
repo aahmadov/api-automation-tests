@@ -16,25 +16,27 @@ public class FileReader {
         return new File(pdfFile);
     }
 
-    public static String randomFileFromFolder() {
+    public static File randomFileFromFolder() {
         File folder = new File("C:\\Users\\faxes");
         File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
-        return Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath();
+        String filePath = Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath();
+        return new File(filePath);
     }
 
-    public static String getFileUsingPageSize(final String pageSize) {
+    public static File getFileUsingPageSize(final String pageSize) {
         try {
             File folder = Paths.get(ClassLoader.getSystemResource("requestBody").toURI()).toFile();
             File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
             Optional<File> fileOptional = Arrays.stream(Objects.requireNonNull(listOfFiles))
                     .filter(file -> file.getName().contains(pageSize))
                     .findAny();
-            return fileOptional
+            String filePath = fileOptional
                     .map(File::getAbsolutePath)
                     .orElseGet(() -> Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath());
+            return new File(filePath);
         } catch (URISyntaxException exception) {
             System.out.println(exception.getMessage());
-            return "";
+            return null;
         }
     }
 

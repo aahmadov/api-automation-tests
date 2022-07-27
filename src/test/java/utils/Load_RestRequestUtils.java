@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Load_RestRequestUtils {
 
-    public static Response sendFax_loadTest(String url, String file, String number) {
+    public static Response sendFax_loadTest(String url, File file, String number) {
         return createRequest(ConfigReader.getProperty("credentialOutbound"))
         		.contentType("multipart/form-data")
                 .multiPart("filename", file)
@@ -23,10 +23,10 @@ public class Load_RestRequestUtils {
     public static Response sendFax_loadTest(Map<String, Object> data) {
         return createRequest(ConfigReader.getProperty("credentialOutbound"))
         		.contentType("multipart/form-data")
-                .multiPart("filename", data.get("filename").toString())
+                .multiPart("filename", (File)data.get("filename"))
                 .queryParam("FaxNumber", data.get("FaxNumber").toString())
                 .queryParam("CoverPageEnabled", Boolean.parseBoolean(data.get("coverPageEnabled").toString()))
-                .when()
+                .when().log().all()
                 .post(data.get("url").toString());
     }
 
