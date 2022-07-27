@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 import com.jayway.jsonpath.JsonPath;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -41,17 +42,17 @@ public class Get_calls_forLoadTest_steps {
         response.asPrettyString();
         List<Integer> faxId = JsonPath.read(response.asString(), "$..FaxId");
         
-        String Tsi = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI");
-        System.out.println("**" + "--" + Tsi + "--");
-        System.out.println("*** All jobIds from response "+"**"+faxId);
+        List<String> Tsi = JsonPath.read(response.asPrettyString(), "$..TSI");
+        System.out.println("**All TSI Ids from response" + "**" + Tsi + "**");
+        System.out.println("*** All job Ids from response "+"**"+faxId+"**");
     }
 
     @Given("user validates {int} is right getCall status code")
     public void user_validates_is_right_getCall_status_code(int expectedStatus) {
         int actualStatus = response.getStatusCode();
-        System.out.println(actualStatus);
-        System.out.println(expectedStatus);
-        //assertEquals(expectedStatus,actualStatus);
+        System.out.println("**"+"The actual status code is "+"**"+actualStatus);
+        System.out.println("**"+"The expected status code is "+"**"+expectedStatus);
+        assertEquals(expectedStatus,actualStatus);
     }
 
     @Then("user validates recent TSI present in response")
@@ -61,18 +62,17 @@ public class Get_calls_forLoadTest_steps {
         List<String> tsiIdsFromResponse = JsonPath.read(response.asString(), "$..TSI");
         List<String> newTsiIdsFromResponse = tsiIdsFromResponse.stream().distinct().collect(Collectors.toList());
 
-        System.out.println(tsiIdsFromResponse);
+        System.out.println("**TSI ids from response"+tsiIdsFromResponse);
         
-        System.out.println(newTsiIdsFromResponse);
+        System.out.println("** TSI ids which collected in excel "+newTsiIdsFromResponse);
         
-        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData(
-                "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx", 0);
+        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData(ConfigReader.getProperty("testDataFile"), 0);
         System.out.println(tsiIdsFromExcel);
         
         List<String> newTsiIdsFromExcel = tsiIdsFromExcel.stream()
                 .map(tsi -> tsi.split("=")[1])
                 .collect(Collectors.toList());
-        System.out.println(newTsiIdsFromExcel);
+      
         
         assertTrue("TSI values from excel file are not present in the response", newTsiIdsFromResponse.containsAll(newTsiIdsFromExcel));
     }
@@ -82,8 +82,8 @@ public class Get_calls_forLoadTest_steps {
 //        String response = scenarioContext.response.asString();
 //    	Thread.sleep(1000*180);
     	
-        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData(
-                "C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\dataFile\\testData.xlsx", 0);
+        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData((ConfigReader.getProperty("testDataFile")), 0);
+                
         System.out.println(tsiIdsFromExcel);
         
         

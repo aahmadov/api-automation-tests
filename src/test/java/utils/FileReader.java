@@ -28,7 +28,7 @@ public class FileReader {
             File folder = Paths.get(ClassLoader.getSystemResource("requestBody").toURI()).toFile();
             File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
             Optional<File> fileOptional = Arrays.stream(Objects.requireNonNull(listOfFiles))
-                    .filter(file -> file.getName().contains(pageSize))
+                    .filter(file -> file.getName().matches("[^0-9]*"+pageSize+"[^0-9]*"))
                     .findAny();
             String filePath = fileOptional
                     .map(File::getAbsolutePath)
