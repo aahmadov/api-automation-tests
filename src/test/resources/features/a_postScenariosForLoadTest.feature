@@ -15,7 +15,7 @@ Feature: Validate post call for load test
 
     Examples:
       | url             | times | ignoreFail | coverPageEnabled | faxNumFileLoc        | pageSize |
-      | outbound_URl_65 | 5     | true       | false             | input/Faxnumber.txt  | 2        |
+      | outbound_URl_65 | 1     | true       | false            | input/Faxnumber.txt  | 2        |
 
 
 

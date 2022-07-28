@@ -23,8 +23,6 @@ import static org.junit.Assert.fail;
 
 public class Get_calls_forLoadTest_steps {
 
-
-	
 	Response response;
 
     @Given("user sends request to retrieve valid FaxID for Load")
@@ -115,7 +113,7 @@ public class Get_calls_forLoadTest_steps {
         
       //Check TSI metadata contains either recvOk status or max of 3 attempts
         if (missingTsiValues.size() > 0) {
-            fail(missingTsiValues + " doesn't have neither recvOk status nor 3 attempts");
+            fail(missingTsiValues + "****"+" doesn't have neither recvOk status nor 3 attempts"+"**");
         }
     }
 }

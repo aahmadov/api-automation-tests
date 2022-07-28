@@ -39,10 +39,10 @@ public class Post_calls_steps {
 	@And("User validate if status code is {int}")
 	public void user_validate_if_status_code_is(int expectedCode) {
 		int realCode = response.getStatusCode();
-		logger.info("** this status code after a validation "+"**"+realCode+"**");
+	
 		assertEquals(expectedCode,realCode);
-		logger.error("** this status code after a validation "+"**"+realCode+"**");
-      System.out.println("** this status code after a validation "+"**"+realCode+"**");
+	
+      System.out.println("****** this status code after a validation "+"**"+realCode+"**");
       
 	}
 
@@ -62,6 +62,7 @@ public class Post_calls_steps {
 		response = RestRequestUtils.faxWithNoNumber(ConfigReader.getProperty("post_call_Url"),
 				FileReader.readfile("Pages"), "");
 		logger.error("this message will replace sysoutprint");
+		
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("**"+(ConfigReader.getProperty("post_call_Url")));
 		System.out.printf("**"+FileReader.readfile("Pages"), "");
@@ -165,7 +166,7 @@ public class Post_calls_steps {
 	}
 	@Given("User submits requests with TSI ID")
 	public void user_submits_requests_with_TSI_ID() {
-	  response=RestRequestUtils.sendFaxWithTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("16pages")
+	  response=RestRequestUtils.sendFaxWithTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("16page")
 			  ,ConfigReader.getProperty("FaxN"));
 	  System.out.println("------------------------------------------------------------------------");
 			System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
@@ -185,7 +186,7 @@ public class Post_calls_steps {
 	
 	@Given("User submits requests with creadentialInbound")
 	public void user_submits_requests_with_creadentialInbound() {
-		response=RestRequestUtils.sendFaxWithNewTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("20pages"),
+		response=RestRequestUtils.sendFaxWithNewTSI(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("20page"),
 				  ConfigReader.getProperty("FaxN"));
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("************ "+ConfigReader.getProperty("post_call_Url"));
@@ -213,7 +214,7 @@ public class Post_calls_steps {
 
 	@Given("i submit new Fax regarding registry setting")
 	public void i_submit_new_Fax_regarding_registry_setting() {
-		response=RestRequestUtils.submitFaxwithBlankRegistry(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("30pages"),
+		response=RestRequestUtils.submitFaxwithBlankRegistry(ConfigReader.getProperty("post_call_Url")+FileReader.randomNumberFor_TSI(),FileReader.readfile("30page"),
 				  ConfigReader.getProperty("FaxN"));
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("****** "+ConfigReader.getProperty("post_call_Url"));
