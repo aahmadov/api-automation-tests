@@ -16,18 +16,26 @@ Feature: Validate post call for load test
     Examples:
       | url             | times | ignoreFail | coverPageEnabled | faxNumFileLoc        | pageSize |
       | outbound_URl_65 | 1     | true       | false            | input/Faxnumber.txt  | 2        |
+      | post_call_Url   | 2     | true       | false            | input/Faxnumber.txt  | 3        |
 
 
 
-#  @TC2-sendFax_load
-#  Scenario Outline: Validation of Post call for Load test
-#    Given I want to submit gropu of post calls with <url> for <times> and <coverPage>
-#    Then I validate the status <code> as expected
-#
-#    Examples:
-#      | url             | times | code | coverPage |
-#      | outbound_URl_65 | 20    | 201  | true      |
-#      | post_call_Url   | 10    | 201  | false     |
+
+
+
+
+
+
+
+ # @TC2-sendFax_load
+  Scenario Outline: Validation of Post call for Load test
+    Given I want to submit group of post calls with <url> for <times> and <coverPageEnabled>
+    Then I validate the status <code> as expected
+
+    Examples:
+      | url             | times | code | coverPageEnabled |
+      | outbound_URl_65 | 1    | 201   | true             |
+      
   
   
   

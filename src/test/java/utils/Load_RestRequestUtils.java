@@ -15,6 +15,7 @@ public class Load_RestRequestUtils {
         		.contentType("multipart/form-data")
                 .multiPart("filename", file)
                 .queryParam("FaxNumber", number)
+                .queryParam("coverPageEnabled", true)
                 .when()
                 .post(url);
 
