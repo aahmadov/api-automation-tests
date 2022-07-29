@@ -77,32 +77,29 @@ public class Get_calls_forLoadTest_steps {
 
     @Then("user validates TSI has max attempts or recvok status")
     public void user_validates_TSI_has_max_attempts_or_recvok_status() throws InterruptedException {
-//        String response = scenarioContext.response.asString();
-//    	Thread.sleep(1000*180);
-    	
+	
         List<String> tsiIdsFromExcel = ExcelUtility.getColumnData((ConfigReader.getProperty("testDataFile")), 0);
-                
-        System.out.println(tsiIdsFromExcel);
-        
-        
+
         List<String> newTsiIdsFromExcel = tsiIdsFromExcel.stream()
                 .map(tsi -> tsi.split("=")[1])
                 .collect(Collectors.toList());
-        System.out.println(newTsiIdsFromExcel);
+        System.out.println("reading new TSI's from excel "+newTsiIdsFromExcel);
 
         List<String> missingTsiValues = new ArrayList<>();
         for (String tsi : newTsiIdsFromExcel) {
-        	System.out.println("checking for TSI: " + tsi);
-        	//Get all metadata of the TSI from the response
+        	System.out.println("checking for this TSI  in entire response "+ "**"+tsi);
+        	//Get all metadata of the TSI from the excel
             JSONArray tsiArray = JsonPath.read(response.asString(), "$..FaxInfo[?(@.TSI =~/" + tsi + "/)]");
-            //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts
+           
+            //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
             if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
                 missingTsiValues.add(tsi);
             }
 
-            //Get the Fax status values of all the metadata elements
+            //Get the Fax status values of all the TSi from excel
             List<String> statuses = tsiArray.stream().map(tsiJson -> ((LinkedHashMap) tsiJson).get("FaxStatus").toString()).collect(Collectors.toList());
-            //Assert all the metadata contains only either recvIncomplete or recvOk Fax status
+            System.out.println(statuses);
+            //Assertion all the metadata contains only either recvIncomplete or recvOk Fax status
             assertTrue(statuses.stream().allMatch(status -> status.equals("recvIncomplete") || status.equals("recvOk")));
             
             //checking if the last status is recvOk then previous status should be recvIncomplete

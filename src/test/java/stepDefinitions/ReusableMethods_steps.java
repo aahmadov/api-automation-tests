@@ -87,10 +87,10 @@ public class ReusableMethods_steps {
 
 		int PageRecieved = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesReceived");
 		String Tsi = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
-		int firstFaxId = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
+		int FaxId = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
 		assertNotNull(PageRecieved);
 		System.out.println("-------------------------------------------------------------");
-		System.out.println("***** after last attempt fax id " + "*" + firstFaxId + "*" + " and "
+		System.out.println("***** after last attempt fax id " + "*" + FaxId + "*" + " and "
 				+ " total pageRecieved after the last attempt is " + "*" + PageRecieved + "*" + " and TSI id " + "*"
 				+ Tsi + "*");
 		System.out.println("***** fax Status after a last attempt is -  " + "*" + thirdAttemtpFaxStatus + "*");
@@ -119,7 +119,7 @@ public class ReusableMethods_steps {
 	public void user_validates_inbound_FaxStatus_after_a_first_attempt_and_total_pages_recieved()
 			throws InterruptedException {
 
-		String tsiofFirstattempt = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
+		
 		String faxStatus = JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
 		int PageRecieved = JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].PagesReceived");
 		String tsiofThirdFax = JsonPath.read(response.asPrettyString(), "$.FaxInfo[2].TSI").toString();
@@ -128,7 +128,7 @@ public class ReusableMethods_steps {
 
 		String tsiofLastFax = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
 		System.out.println("***** TSI of first post call" + "---------" + tsiofLastFax);
-		if (tsiofThirdFax.equals(tsiofFirstattempt)) {
+		if (tsiofThirdFax.equals(tsiofLastFax)) {
 
 			System.out.println("-------------------------------------------------------------");
 			System.out.println("***** after first attempt fax id " + "*" + thirdFaxId + "*" + " and "

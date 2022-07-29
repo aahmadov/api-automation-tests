@@ -1,7 +1,7 @@
 @Regression
 
 @outbound_FaxwithfCoverPage_Validation
-Feature: ^^This feature file validates the number of inbound Fax with CoverPage and registry setting ("23 pages")^^
+Feature: ^^This feature file validates the number of inbound Fax with CoverPage  ("23 pages")^^
 
   @a_outboundFax
   Scenario:  ^^ Dynamic scenario for fax status and page number validation ^^

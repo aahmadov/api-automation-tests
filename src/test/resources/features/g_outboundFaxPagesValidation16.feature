@@ -1,7 +1,7 @@
 @Regression
 @outboundPageValidation16
 
-Feature: ^^ This feature file validates the number of outbound pages with registry setting ("16 pages" ) ^^
+Feature: ^^ This feature file validates the number of outbound pages ("16 pages" ) ^^
 
  
   Scenario: ^^ Send new Fax with single attachment ^^

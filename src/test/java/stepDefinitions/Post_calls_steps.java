@@ -170,7 +170,7 @@ public class Post_calls_steps {
 			  ,ConfigReader.getProperty("FaxN"));
 	  System.out.println("------------------------------------------------------------------------");
 			System.out.println("******* "+ConfigReader.getProperty("post_call_Url"));
-			System.out.println("******* "+FileReader.readfile("16pages"));
+			System.out.println("******* "+FileReader.readfile("16page"));
 			System.out.println("******* "+ConfigReader.getProperty("FaxN")); 
 			System.out.println("------------------------------------------------------------------------");
 	}
@@ -190,7 +190,7 @@ public class Post_calls_steps {
 				  ConfigReader.getProperty("FaxN"));
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("************ "+ConfigReader.getProperty("post_call_Url"));
-		System.out.println("********** "+FileReader.readfile("20pages"));
+		System.out.println("********** "+FileReader.readfile("20page"));
 		System.out.println("********* "+ConfigReader.getProperty("FaxN"));
 		System.out.println("------------------------------------------------------------------------");
 	}
@@ -218,7 +218,7 @@ public class Post_calls_steps {
 				  ConfigReader.getProperty("FaxN"));
 		System.out.println("------------------------------------------------------------------------");
 		System.out.println("****** "+ConfigReader.getProperty("post_call_Url"));
-		System.out.println("****** "+FileReader.readfile("30pages"));
+		System.out.println("****** "+FileReader.readfile("30page"));
 		System.out.println("****** "+ConfigReader.getProperty("FaxN"));
 		System.out.println("------------------------------------------------------------------------");
 	}
@@ -254,9 +254,9 @@ public class Post_calls_steps {
 	    response=Second_RestRequestUtils.Outbound_getCall50Page(ConfigReader.getProperty("getFaxByID_url"));
 	    
 		int faxid=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
-		System.out.println("***outbound faxId  generated "+"**"+faxid+"**");
+		System.out.println("***outbound FaxId  is "+"**"+faxid+"**");
 		String Tsi=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].TSI").toString();
-		System.out.println("***outbound Fax TSI  generated "+"**"+Tsi+"**");
+		System.out.println("***outbound Fax TSI is "+"**"+Tsi+"**");
 		String totalPagesSent=JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal").toString();
 		System.out.println("***outbound Fax total page on attachment "+"**"+totalPagesSent+"**");
 	}
