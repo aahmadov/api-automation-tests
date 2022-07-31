@@ -1,6 +1,10 @@
  @smoke
 Feature: ^^^ Validation of "sent" Fax status and Ids ^^^
-
+@TC-1SentFaxwithRecipient
+  Scenario: ^^ Send Fax Data with recipient Details ^^ 
+    Given User sends requests with a single attachment to recipient  
+    And User validate the status code is 201
+    Then User validates FaxId is generated 
 
 @TC-1SentFaxwithValidNumber
  Scenario: ^^ Send Fax with valid Number and Attachment ^^
@@ -14,11 +18,7 @@ Feature: ^^^ Validation of "sent" Fax status and Ids ^^^
     And User wants validate the status code is 400
     Then User validates Statustext is "Empty fax number"
     
-@TC-3SentFaxwithRecipient
-  Scenario: ^^ Send Fax Data with recipient Details ^^ 
-    Given User sends requests with a single attachment to recipient  
-    And User validate the status code is 201
-    Then User validates FaxId is generated 
+
     
 @TC-4SentFaxwithMultipRecipient
 Scenario: ^^ Send Fax Data with multiple recipient Details ^^ 
