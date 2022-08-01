@@ -1,7 +1,7 @@
 @Regression
 @outboundPageValidation30
 
-Feature: ^^ This feature file validates the number of outbound pages with registry setting ("30 pages")^^
+Feature: ^^ This feature file validates the number of outbound pages with some registry setting ("30 pages")^^
 
  @send1
   Scenario: ^^ Submit Fax to manipulate outbound Data ^^
