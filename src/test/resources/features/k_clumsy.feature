@@ -2,7 +2,7 @@
 Feature: This feature is to crash scheduler with different clumsy set_up 
   
 
-  @clumsy_send&recieve
+  @send#receive_with_clumsySetUp2
   Scenario: Post new Fax with different page counts
     Given I want to submit new records to outbound Fax
     And I validate new status code 201 was succesfully generated 
