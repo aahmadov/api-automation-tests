@@ -369,7 +369,7 @@ public class RestRequestUtils {
     }
 
     public static Response submitFaxwithBlankRegistry(String url, File randomFile, String faxnumb) {
-        return response = createRequest(ConfigReader.getProperty("credentialOutbound"))
+        return response = createRequest(ConfigReader.getProperty("credentialNewOutbound"))
                 .contentType("multipart/form-data")
                 .multiPart("filename", randomFile)
                 .queryParam("FaxNumber", faxnumb)

@@ -105,6 +105,8 @@ public class Get_calls_forLoadTest_steps {
             //checking if the last status is recvOk then previous status should be recvIncomplete
             if (statuses.size() > 0 && statuses.get(0).equals("recvOk")) {
                 assertTrue(statuses.stream().skip(1).allMatch(status -> status.equals("recvIncomplete")));
+                
+                System.out.println(statuses);
             }
         }
         
