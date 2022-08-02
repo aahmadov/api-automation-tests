@@ -106,13 +106,16 @@ public class Get_calls_forLoadTest_steps {
             if (statuses.size() > 0 && statuses.get(0).equals("recvOk")) {
                 assertTrue(statuses.stream().skip(1).allMatch(status -> status.equals("recvIncomplete")));
                 
-                System.out.println(statuses);
+                
             }
         }
         
       //Check TSI metadata contains either recvOk status or max of 3 attempts
         if (missingTsiValues.size() > 0) {
-            fail(missingTsiValues + "****"+" doesn't have neither recvOk status nor 3 attempts"+"**");
+            fail(missingTsiValues + "****"+" doesn't have neither recvOk status or 3 attempts"+"**");
+        }else {
+        	
+        	System.out.println("***** "+"each recently generated TSI id's  has valid status and correct RetryCount");
         }
     }
 }

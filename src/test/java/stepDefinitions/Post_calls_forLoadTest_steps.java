@@ -70,8 +70,8 @@ public class Post_calls_forLoadTest_steps {
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
         //String firstLoadTest_TSI2 = "TSI=test20";
-        for (int i = 0; i < Integer.parseInt(data.get("times")); i++) {
-            System.out.println("it is iteration time in the loop :" + i);
+        for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
+            System.out.println("**"+"it is iteration time in the loop :" + i);
             String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();                                                                                                                                                                                                                                                   
                                                                                                                                                                                                     
             Map<String, Object> requestData = new ConcurrentHashMap<>();
@@ -90,7 +90,7 @@ public class Post_calls_forLoadTest_steps {
 
             if (response.statusCode() == 201) {
                 ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI);
-                System.out.println("**"+"after successfully post call, generated TSI is "+firstLoadTest_TSI);
+                System.out.println("**"+"after successful post call, generated TSI is "+firstLoadTest_TSI);
             }
         }
     }
