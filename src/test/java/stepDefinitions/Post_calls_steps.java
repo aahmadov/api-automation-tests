@@ -270,4 +270,26 @@ public class Post_calls_steps {
 		
 	}
 
+@Given("I want submit new post call with multiple pages")
+public void i_want_submit_new_post_call_with_multiple_pages() {
+  
+}
+
+@Given("submit new request with new page")
+public void submit_new_request_with_new_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new cucumber.api.PendingException();
+}
+
+@Given("submit new request with five page")
+public void submit_new_request_with_five_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new cucumber.api.PendingException();
+}
+
+@Given("submit new request with six page")
+public void submit_new_request_with_six_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new cucumber.api.PendingException();
+}
 }

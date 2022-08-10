@@ -26,6 +26,7 @@ public void i_want_to_write_a_step_to_change_registryEditor() throws IOException
      process.getInputStream();
      int exitCode=process.waitFor();
      System.out.println(exitCode);
+     
     // "cmd.exe", "/c","start","regedit","/s","C:/Users/Administrator/Desktop/18.reg"
      
 	//Process newProcess = builder.start();

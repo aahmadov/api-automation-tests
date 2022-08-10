@@ -1,73 +1,68 @@
 package utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class Mailing {
 
-	
+	private static String USER_NAME = "abbasaydinoglu7@gmail.com"; // GMail user name (just the part before// "@gmail.com")
+	private static String PASSWORD = "oezjekkypifsyfvs"; // GMail password
+//	private static String RECIPIENT = "15551234567@acme.rpxfax.com";
+	private static String SUBJECT = "Java send mail example";
+//	private static String body = "Welcome to JavaMail!";
 
-		    private static String USER_NAME = "************";  // GMail user name (just the part before "@gmail.com")
-		    private static String PASSWORD = "*************"; // GMail password
-		    private static String RECIPIENT = "abbas@softlinx.com";
+	public static void sendFromGMail(String to, String body, String attachmentLocation) {
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.port", "465");
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.socketFactory.port", "465");
+		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
-		    public static void main(String[] args) {
-		        String from = USER_NAME;
-		        String pass = PASSWORD;
-		        String[] to = { RECIPIENT }; // list of recipient email addresses
-		        String subject = "Java send mail example";
-		        String body = "Welcome to JavaMail!";
+		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(USER_NAME, PASSWORD);
+			}
+		});
 
-		        sendFromGMail(from, pass, to, subject, body);
-		    }
+		try {
 
-		    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
-		        Properties props = System.getProperties();
-		        String host = "smtp.gmail.com";
-		        props.put("mail.smtp.starttls.enable", "true");
-		        props.put("mail.smtp.host", host);
-		        props.put("mail.smtp.user", from);
-		        props.put("mail.smtp.password", pass);
-		        props.put("mail.smtp.port", "587");
-		        props.put("mail.smtp.auth", "true");
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(USER_NAME));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			message.setSubject(SUBJECT);
+			
+			MimeBodyPart bodyPart = new MimeBodyPart();
+			bodyPart.setText(body);
+            
+            MimeBodyPart attachmentPart = new MimeBodyPart();
+            attachmentPart.attachFile(new File(attachmentLocation));
+            
+            Multipart multipart = new MimeMultipart();
+            multipart.addBodyPart(attachmentPart);
+            multipart.addBodyPart(bodyPart);
 
-		        Session session = Session.getDefaultInstance(props);
-		        MimeMessage message = new MimeMessage(session);
+            message.setContent(multipart);
 
-		        try {
-		            message.setFrom(new InternetAddress(from));
-		            InternetAddress[] toAddress = new InternetAddress[to.length];
+			Transport.send(message);
 
-		            // To get the array of addresses
-		            for( int i = 0; i < to.length; i++ ) {
-		                toAddress[i] = new InternetAddress(to[i]);
-		            }
+			System.out.println("Done!");
 
-		            for( int i = 0; i < toAddress.length; i++) {
-		                message.addRecipient(Message.RecipientType.TO, toAddress[i]);
-		            }
-
-		            message.setSubject(subject);
-		            message.setText(body);
-		            Transport transport = session.getTransport("smtp");
-		            transport.connect(host, from, pass);
-		            transport.sendMessage(message, message.getAllRecipients());
-		            transport.close();
-		        }
-		        catch (AddressException ae) {
-		            ae.printStackTrace();
-		        }
-		        catch (MessagingException me) {
-		            me.printStackTrace();
-		        }
-		    }
-
+		} catch (MessagingException | IOException e) {
+			e.printStackTrace();
+		}
 	}
-
+}
