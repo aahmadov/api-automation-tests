@@ -9,7 +9,6 @@ Feature: ^^^ Validation of post call TSI ids for Load test
   And user validates 200 is right getCall status code
   Then user validates TSI has max attempts or recvok status
 
-
 #@TC-2getFax
  #Scenario: ^^ Retrieve recently created fax ^^
  #Given user sends request to retrieve valid FaxID for Load

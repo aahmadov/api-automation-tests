@@ -24,7 +24,7 @@ public class Mailing {
 	private static String SUBJECT = "Java send mail example";
 //	private static String body = "Welcome to JavaMail!";
 
-	public static void sendFromGMail(String to, String body, String attachmentLocation) {
+	public static void sendFromGMail(String to, String body, File fileLocation) {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", "465");
@@ -49,7 +49,7 @@ public class Mailing {
 			bodyPart.setText(body);
             
             MimeBodyPart attachmentPart = new MimeBodyPart();
-            attachmentPart.attachFile(new File(attachmentLocation));
+            attachmentPart.attachFile(fileLocation);
             
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(attachmentPart);

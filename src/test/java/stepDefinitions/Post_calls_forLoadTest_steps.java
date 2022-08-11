@@ -69,7 +69,7 @@ public class Post_calls_forLoadTest_steps {
         List<String> faxNumbers = FileReader.convertToList(
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
-        //String firstLoadTest_TSI2 = "TSI=test20";
+     
         for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
             System.out.println("**"+"it is iteration time in the loop :" + i);
             String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();                                                                                                                                                                                                                                                   
