@@ -18,7 +18,7 @@ Feature: Validate post call for load test
       | outbound_URl_65 | 10     | true       | true            | input/Faxnumber.txt  | 1       |
      #| post_call_Url   | 1      | true       | false           | input/Faxnumber.txt  | 3        |
 
-
+        #to ,Username ,Password ,subject ,body ,attachment,coverPage
 
 
 

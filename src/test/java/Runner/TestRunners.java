@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.cucumber.junit.*;
-import utils.sendEmail;
+import utils.sendMailing;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -29,7 +29,7 @@ public class TestRunners {
 	}
 	public  void run() {
 		
-		sendEmail sm = new sendEmail();
+		sendMailing sm = new sendMailing();
 		try {
 		sm.sendFromGMail();
 		System.out.println("Report has been sent");

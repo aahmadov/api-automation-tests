@@ -24,7 +24,7 @@ import javax.mail.internet.MimeMultipart;
 
 import cucumber.api.java.it.Date;
 
-public class sendEmail {
+public class sendMailing {
 
 //      private static String USER_NAME = "abbasaydinoglu7";  // GMail user name (just the part before "@gmail.com")
 //	    private static String PASSWORD = "devcxtbghskekjkc"; // GMail password

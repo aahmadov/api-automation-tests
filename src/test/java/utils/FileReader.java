@@ -17,7 +17,7 @@ public class FileReader {
     }
 
     public static File randomFileFromFolder() {
-        File folder = new File("C:\\Users\\Administrator\\git\\fs_test2\\src\\test\\resources\\requestBody");
+        File folder = new File("C:\\Users\\faxes");
         File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
         String filePath = Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath();
         return new File(filePath);

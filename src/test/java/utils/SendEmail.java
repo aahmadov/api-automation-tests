@@ -16,15 +16,15 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-public class Mailing {
+public class SendEmail {
 
 	private static String USER_NAME = "abbasaydinoglu7@gmail.com"; // GMail user name (just the part before// "@gmail.com")
 	private static String PASSWORD = "oezjekkypifsyfvs"; // GMail password
 //	private static String RECIPIENT = "15551234567@acme.rpxfax.com";
 	private static String SUBJECT = "Java send mail example";
-//	private static String body = "Welcome to JavaMail!";
 
-	public static void sendFromGMail(String to, String body, File fileLocation) {
+
+	public static void sendFromGMail(String to, String body, File attachment ) {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "smtp.gmail.com");
 		prop.put("mail.smtp.port", "465");
@@ -49,7 +49,7 @@ public class Mailing {
 			bodyPart.setText(body);
             
             MimeBodyPart attachmentPart = new MimeBodyPart();
-            attachmentPart.attachFile(fileLocation);
+            attachmentPart.attachFile(attachment);
             
             Multipart multipart = new MimeMultipart();
             multipart.addBodyPart(attachmentPart);
@@ -59,7 +59,7 @@ public class Mailing {
 
 			Transport.send(message);
 
-			System.out.println("Done!");
+			System.out.println("message sent successfully!");
 
 		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
