@@ -18,18 +18,18 @@ import javax.mail.internet.MimeMultipart;
 
 public class SendEmail {
 
-	private static String USER_NAME = "abbasaydinoglu7@gmail.com"; // GMail user name (just the part before// "@gmail.com")
-	private static String PASSWORD = "oezjekkypifsyfvs"; // GMail password
-//	private static String RECIPIENT = "15551234567@acme.rpxfax.com";
+	private static String USER_NAME = System.getenv("mail.username"); // GMail user name (just the part before// "@gmail.com")
+	private static String PASSWORD = System.getenv("mail.password"); // GMail password
+//	private static String RECIPIENT = "15551234567@auto1.rpxfax.com";
 	private static String SUBJECT = "Java send mail example";
 
 
 	public static void sendFromGMail(String to, String body, File attachment ) {
 		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "smtp.gmail.com");
-		prop.put("mail.smtp.port", "465");
+		prop.put("mail.smtp.host", "10.250.1.175");
+		prop.put("mail.smtp.port", "25");
 		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.socketFactory.port", "465");
+		prop.put("mail.smtp.socketFactory.port", "25");
 		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
 		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
@@ -59,7 +59,7 @@ public class SendEmail {
 
 			Transport.send(message);
 
-			System.out.println("message sent successfully!");
+			System.out.println("***message sent successfully!");
 
 		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
