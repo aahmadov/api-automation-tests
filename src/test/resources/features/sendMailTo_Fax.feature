@@ -20,5 +20,5 @@ Feature: I want simply send an email to a rpxfax.com
       | subject       | <subject>       |
 
     Examples: 
-      | to                | times | faxNumFileLoc               | pageSize  | subject              |
-      | auto1.rpxqa.com   |    2  | input/FaxNumberMail2fax.txt |        1 | receivedSuccesSubject |
+      | to                | times | faxNumFileLoc               | pageSize | subject               |
+      | auto1.rpxqa.com   |    1  | input/FaxNumberMail2fax.txt |        1 | receivedSuccesSubject |
