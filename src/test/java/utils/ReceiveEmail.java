@@ -24,7 +24,7 @@ public class ReceiveEmail {
 	private static String username = System.getenv("mail.username");
 	private static String password = System.getenv("mail.password");
 
-	public static Boolean receiveEmail(String mailFrom, String receivedSuccesSubject) throws InterruptedException {
+	public static Boolean receiveEmail(String mailFrom, String subjectFilter) throws InterruptedException {
 
 		Boolean result = false;
 		try {
@@ -46,10 +46,10 @@ public class ReceiveEmail {
 			SearchTerm from = new FromTerm(new InternetAddress(mailFrom)); // from email filter (no-reply@rpxqa.com)
 			
 			SearchTerm unreadEmails = new FlagTerm(new Flags(Flags.Flag.SEEN), false); // only unread emails filter
-			SearchTerm subject = new SubjectTerm(receivedSuccesSubject); //filter by subject string
+			SearchTerm subject = new SubjectTerm(subjectFilter); //filter by subject string
 			SearchTerm todayDate = new ReceivedDateTerm(ComparisonTerm.EQ,
 					DateUtils.truncate(new java.util.Date(), java.util.Calendar.DATE)); // filter the email received email
-			SearchTerm condition = new AndTerm(new SearchTerm[] { from,unreadEmails,todayDate});
+			SearchTerm condition = new AndTerm(new SearchTerm[] { from,unreadEmails,subject});
 
 			Message[] messages = emailFolder.search(condition);
 			int noOfTimes = 0;
