@@ -33,18 +33,18 @@ public class EmailToFaxSteps {
             
             String faxNumber;
             String to;
-            //Checkin whether to contains faxnumber in scenario,,,,,,,,,,,
+            //Checking whether to contains FaxNumber in scenario,,,,,,,,,,,
             if (data.get("to").contains("@")) {
-                //Get faxnumber if already exist in the 'to' field
+                //Get FaxNumber if already exist in the 'to' field
                 faxNumber = data.get("to").split("@")[0];
                 to = data.get("to");
             } else {
-                //If faxnumber is blank, get the fax number from file randomly and generate 'to' address
+                //If FaxNumber is blank, get the Fax number from file randomly and generate 'to' address
             	faxNumber = faxNumbers.get(ThreadLocalRandom.current().nextInt(faxNumbers.size()));
             	to = faxNumber + "@" + data.get("to"); // result: 1234567891@auto1.rpxqa.com
             }
 
-            //Read the subject string and add the faxnumber into the string
+            //Read the subject string and add the FaxNumber into the string
             String subject = String.format(ConfigReader.getProperty(data.get("subject")), faxNumber); // result: Inbound Fax to 11111111111, Unassigned Faxes (Received)
             File file =  FileReader.getFileUsingPageSize(data.get("pageSize"));
             System.out.println("to: " + to);
