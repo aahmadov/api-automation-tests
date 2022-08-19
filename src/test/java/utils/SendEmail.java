@@ -18,8 +18,8 @@ import javax.mail.internet.MimeMultipart;
 
 public class SendEmail {
 
-	private static String USER_NAME = System.getenv("mail.username"); // GMail user name (just the part before// "@gmail.com")
-	private static String PASSWORD = System.getenv("mail.password"); // GMail password
+	private static String USER_NAME =System.getenv("mail.username");//"Auto@softlinx.com";  
+	private static String PASSWORD = System.getenv("mail.password");//"softlinx";
 //	private static String RECIPIENT = "15551234567@auto1.rpxfax.com";
 	private static String SUBJECT = "Java send mail example";
 
@@ -59,7 +59,7 @@ public class SendEmail {
 
 			Transport.send(message);
 
-			System.out.println("***message sent successfully!");
+			System.out.println("message:  message sent successfully!");
 
 		} catch (MessagingException | IOException e) {
 			e.printStackTrace();
