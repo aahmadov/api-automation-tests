@@ -34,7 +34,7 @@ public class ReceiveEmail {
 			props.setProperty("mail.imap.ssl.enable", "true");
 			Session session = Session.getDefaultInstance(props, null);
 
-			// connect to the email
+			// connect to the email//
 			Store emailStore = session.getStore(mailStoreType);
 			emailStore.connect(host, username, password);
 
