@@ -43,12 +43,13 @@ public class ReceiveEmail {
 			emailFolder.open(Folder.READ_WRITE);
 
 			// 4) Search conditions
-			SearchTerm from = new FromTerm(new InternetAddress(mailFrom)); // from email filter
+			SearchTerm from = new FromTerm(new InternetAddress(mailFrom)); // from email filter (no-reply@rpxqa.com)
+
 			SearchTerm unreadEmails = new FlagTerm(new Flags(Flags.Flag.SEEN), false); // only unread emails filter
-			SearchTerm subject = new SubjectTerm(successfulSubject); //matching the subject string filter
+			SearchTerm subject = new SubjectTerm(successfulSubject); //filter by subject string
 			SearchTerm todayDate = new ReceivedDateTerm(ComparisonTerm.EQ,
 					DateUtils.truncate(new java.util.Date(), java.util.Calendar.DATE)); // filter the email received email
-			SearchTerm condition = new AndTerm(new SearchTerm[] { from, unreadEmails, todayDate, subject });
+			SearchTerm condition = new AndTerm(new SearchTerm[] { from, unreadEmails});
 
 			Message[] messages = emailFolder.search(condition);
 			int noOfTimes = 0;
@@ -98,6 +99,8 @@ public class ReceiveEmail {
 			String dateTime = StringUtils.substringBetween(body, "Time received: ", "\r\nNumber of pages");
 			SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEE, MMMM dd, yyyy hh:mm aaa");
 			Date date = dateFormat.parse(dateTime);
+			
+			System.out.println("-----------"+date);
 			long diffInMillies = Math.abs(Calendar.getInstance().getTime().getTime() - date.getTime());
 			return TimeUnit.MILLISECONDS.toMinutes(diffInMillies);
 		} catch (Exception e) {
