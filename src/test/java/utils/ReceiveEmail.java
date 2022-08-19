@@ -24,7 +24,7 @@ public class ReceiveEmail {
 	private static String username = System.getenv("mail.username");
 	private static String password = System.getenv("mail.password");
 
-	public static Boolean receiveEmail(String mailFrom, String successfulSubject) throws InterruptedException {
+	public static Boolean receiveEmail(String mailFrom, String receivedSuccesSubject) throws InterruptedException {
 
 		Boolean result = false;
 		try {
@@ -44,12 +44,12 @@ public class ReceiveEmail {
 
 			// 4) Search conditions
 			SearchTerm from = new FromTerm(new InternetAddress(mailFrom)); // from email filter (no-reply@rpxqa.com)
-
+			
 			SearchTerm unreadEmails = new FlagTerm(new Flags(Flags.Flag.SEEN), false); // only unread emails filter
-			SearchTerm subject = new SubjectTerm(successfulSubject); //filter by subject string
+			SearchTerm subject = new SubjectTerm(receivedSuccesSubject); //filter by subject string
 			SearchTerm todayDate = new ReceivedDateTerm(ComparisonTerm.EQ,
 					DateUtils.truncate(new java.util.Date(), java.util.Calendar.DATE)); // filter the email received email
-			SearchTerm condition = new AndTerm(new SearchTerm[] { from, unreadEmails});
+			SearchTerm condition = new AndTerm(new SearchTerm[] { from,unreadEmails,todayDate});
 
 			Message[] messages = emailFolder.search(condition);
 			int noOfTimes = 0;
@@ -71,10 +71,10 @@ public class ReceiveEmail {
 				message.setFlag(Flags.Flag.SEEN, true); // opening the email - marking it as read
 
 				long diff = getMessageTimeDiff(message);
-				int noOfPages = getNumberOfPages(message);
-
 				System.out.println("Difference between mailNotif received and local time by minutes: " + diff);
-				System.out.println("Total pages in a attachment: " + noOfPages);
+				int numOfPages = getNumberOfPages(message);
+				System.out.println("Total pages in a attachment: " + numOfPages);
+				
 				if (diff < 5 && result == false) {
 					result = true;
 				}
@@ -100,7 +100,8 @@ public class ReceiveEmail {
 			SimpleDateFormat dateFormat = new SimpleDateFormat("EEEEE, MMMM dd, yyyy hh:mm aaa");
 			Date date = dateFormat.parse(dateTime);
 			
-			System.out.println("-----------"+date);
+			//System.out.println("-----------"+date);
+			
 			long diffInMillies = Math.abs(Calendar.getInstance().getTime().getTime() - date.getTime());
 			return TimeUnit.MILLISECONDS.toMinutes(diffInMillies);
 		} catch (Exception e) {

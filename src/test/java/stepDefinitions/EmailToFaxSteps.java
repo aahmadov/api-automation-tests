@@ -62,9 +62,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class EmailToFax {
+public class EmailToFaxSteps {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
+    
     //String to2 = "John Smith:Acme:Manager:15554569876:15556789900"+""+"15554569876@demo.rpxfax.com";
 
 
@@ -75,13 +76,13 @@ public class EmailToFax {
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
 
-        // loop to send email based on no of times provided in the scenario
+        // loop to send email based on of times provided in the scenario
         for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
-            System.out.println("**" + "it is iteration time in the loop :" + i);
+            System.out.println("Iteration time of sendmail in the loop :" + i);
             
             String faxNumber;
             String to;
-            //Check whether to contains faxnumber
+            //Checkin whether to contains faxnumber in scenario
             if (data.get("to").contains("@")) {
                 //Get faxnumber if already exist in the 'to' field
                 faxNumber = data.get("to").split("@")[0];
