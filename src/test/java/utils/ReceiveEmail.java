@@ -49,7 +49,7 @@ public class ReceiveEmail {
 			SearchTerm subject = new SubjectTerm(subjectFilter); //filter by subject string
 			SearchTerm todayDate = new ReceivedDateTerm(ComparisonTerm.EQ,
 					DateUtils.truncate(new java.util.Date(), java.util.Calendar.DATE)); // filter the email received email
-			SearchTerm condition = new AndTerm(new SearchTerm[] { from,todayDate,unreadEmails,subject});
+			SearchTerm condition = new AndTerm(new SearchTerm[] { from,todayDate,unreadEmails});
 
 			Message[] messages = emailFolder.search(condition);
 			int noOfTimes = 0;
