@@ -6,9 +6,14 @@ import io.cucumber.java.en.Given;
 import org.apache.commons.lang3.StringUtils;
 import utils.*;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
@@ -17,7 +22,7 @@ public class EmailToFaxSteps {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
     
-    //String to2 = "John Smith:Acme:Manager:15554569876:15556789900"+""+"15554569876@demo.rpxfax.com";
+    
 
 
     @Given("I want to send an EmailToFax message and verify")
@@ -50,9 +55,30 @@ public class EmailToFaxSteps {
             System.out.println("to: " + to);
             System.out.println("file: " + file.getAbsolutePath());
 
-            SendEmail.sendFromGMail(to, bodyMessage, file);
+            Date startTime = Calendar.getInstance().getTime();
+
+            SendEmail.sendFromGMail(to, bodyMessage, file, Boolean.parseBoolean(data.get("sendBody")));
             Boolean result = ReceiveEmail.receiveEmail(from, subject);
-            assertTrue(result);
+//            Boolean result = false;
+
+            if(!result) {
+            	
+            	System.out.println("*** after 5 min iteration there is not a expected notifiation");
+            	
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String startTimeString = formatter.format(startTime);
+                Date endTime = Calendar.getInstance().getTime();
+                String endTimeString = formatter.format(endTime);
+	            
+	            String EmailToFaxQuery =String.format("select JobStatus from auto1.recvstatus where (TimeRecieved between '%s' and '%s') and ReceivingPhone='11111111111' order by jobid desc limit 1;", startTimeString, endTimeString);
+	            
+	            List<Map<String, Object>> results = DataBaseUtility.executeSQLQuery(EmailToFaxQuery);
+	            if(results.size() == 0) {
+	            	fail("No record present in the Database for the fax email sent");
+	            }
+	            System.out.println(results);
+	            assertTrue(results.get(0).get("JobStatus").equals("Recv Fail") || results.get(0).get("JobStatus").equals("Received"));
+            }
         }
     }
 }

@@ -90,6 +90,8 @@ public class ReceiveEmail {
 		}
 
 		return result;
+		
+		
 	}
 
 	public static long getMessageTimeDiff(Message message) throws MessagingException, IOException, ParseException {
@@ -120,4 +122,5 @@ public class ReceiveEmail {
 			return 11111;
 		}
 	}
+	
 }

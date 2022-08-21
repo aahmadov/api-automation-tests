@@ -28,8 +28,10 @@ public class DataBaseUtility {
     private static ResultSet resultSet;
    
     public static void openConnection() throws SQLException {
+    	if(connection != null && connection.isValid(20)) {
+    		return;
+    	}
         try {
-      
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
         	System.out.println("Ooops error!");
@@ -42,7 +44,7 @@ public class DataBaseUtility {
     }
     public static List<Map<String, Object>> executeSQLQuery(String query) throws SQLException {
     	
-   
+    	openConnection();
         statement = connection.createStatement();
         resultSet = statement.executeQuery(query);
        
@@ -63,6 +65,8 @@ public class DataBaseUtility {
         }
         return table;
     }
+    
+    
     public static void closeConnection(){
         try {
             if(resultSet!=null){

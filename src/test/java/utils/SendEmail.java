@@ -24,7 +24,7 @@ public class SendEmail {
 	private static String SUBJECT = "Java send mail example";
 
 
-	public static void sendFromGMail(String to, String body, File attachment ) {
+	public static void sendFromGMail(String to, String body, File attachment, boolean sendBody) {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "10.250.1.175");
 		prop.put("mail.smtp.port", "25");
@@ -45,15 +45,17 @@ public class SendEmail {
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
 			message.setSubject(SUBJECT);
 			
-			MimeBodyPart bodyPart = new MimeBodyPart();
-			bodyPart.setText(body);
-            
             MimeBodyPart attachmentPart = new MimeBodyPart();
             attachmentPart.attachFile(attachment);
             
-            Multipart multipart = new MimeMultipart();
-            multipart.addBodyPart(attachmentPart);
-            multipart.addBodyPart(bodyPart);
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(attachmentPart);
+			
+			if(sendBody) {
+				MimeBodyPart bodyPart = new MimeBodyPart();
+				bodyPart.setText(body);
+	            multipart.addBodyPart(bodyPart);
+			}
 
             message.setContent(multipart);
 

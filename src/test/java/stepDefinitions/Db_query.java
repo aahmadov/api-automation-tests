@@ -15,7 +15,9 @@ public class Db_query {
 		//String query = "SELECT JobID,Pages ,FaxNumber,Error FROM acme.sendstatus where JobStatus='send Failed'"; 
 		String query = "select TransmitStationID from acme.sendstatus where FaxUserID ='faxsending' and JobStatus='Send Failed'";
 		//String query ="select * from acme.sendstatus where JobID=73";
-		DataBaseUtility.executeSQLQuery(query);
+		
+		String EmailToFaxQuery ="select JobStatus from auto1.sendstatus where requestOrigin='mail2fax' and FaxNumber='11111111111' order by jobid desc";
+		DataBaseUtility.executeSQLQuery(EmailToFaxQuery);
 		
 	}
 
