@@ -59,11 +59,12 @@ public class EmailToFaxSteps {
 
             SendEmail.sendFromGMail(to, bodyMessage, file, Boolean.parseBoolean(data.get("sendBody")));
             Boolean result = ReceiveEmail.receiveEmail(from, subject);
-//            Boolean result = false;
+            //Boolean result = true;
+          
 
             if(!result) {
             	
-            	System.out.println("*** after 5 min iteration there is not a expected notifiation");
+            	System.out.println("*** after 5 min iteration, there is not a expected notification");
             	
                 SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 String startTimeString = formatter.format(startTime);

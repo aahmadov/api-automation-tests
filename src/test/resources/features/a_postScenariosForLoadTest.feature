@@ -10,7 +10,7 @@ Feature: Validate post call for load test
       | ignoreFail       | <ignoreFail>       |
       | coverPageEnabled | <coverPageEnabled> |
       | faxNumFileLoc    | <faxNumFileLoc>    |
-      | pageSize         | <pageSize>         |
+      | pageSize         | <pageSize>         | 
     Then I validate the status 201 as expected
 
     Examples:

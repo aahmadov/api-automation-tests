@@ -9,8 +9,13 @@ import io.cucumber.junit.*;
 import utils.sendMailing;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "./src/test/resources/features", glue = {
-		"stepDefinitions" }, dryRun = false, monochrome = true, tags = { "@smoke2" }, plugin = { "pretty",
+@CucumberOptions(
+		features = "./src/test/resources/features", 
+        glue = {"stepDefinitions" },		
+        dryRun = false, 
+        monochrome = true, 
+        tags = { "@smoke2" },
+        plugin = { "pretty",
 				"html:target/cucumber-html-report", "json:target/cucumber/cucumber.json",
 				"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks" })
 public class TestRunners {

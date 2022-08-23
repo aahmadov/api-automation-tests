@@ -17,7 +17,7 @@ import java.util.Map;
  * Demonstrates the use of a SQL SELECT statement against a
  * MySQL database, called from a Java program.
  * 
- * Created by Abbas Ahamdov,
+ * Created by Abbas Aydinoglu,
  */
 
 public class DataBaseUtility {

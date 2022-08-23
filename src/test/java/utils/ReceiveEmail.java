@@ -73,7 +73,7 @@ public class ReceiveEmail {
 				long diff = getMessageTimeDiff(message);
 				System.out.println("Difference between mailNotif received and local time by minutes: " + diff);
 				int numOfPages = getNumberOfPages(message);
-				System.out.println("Total pages in a attachment: " + numOfPages);
+				
 				
 				if (diff < 5 && result == false) {
 					result = true;
