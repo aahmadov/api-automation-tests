@@ -7,6 +7,7 @@
 #@receiveMailnotifications
 #Scenario: Check email notification
 #Given I validate receive email
+
 @smoke2
 Feature: I want simply send an email to a rpxfqa.com
 

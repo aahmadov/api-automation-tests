@@ -21,9 +21,6 @@ import java.util.concurrent.ThreadLocalRandom;
 public class EmailToFaxSteps {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
-    
-    
-
 
     @Given("I want to send an EmailToFax message and verify")
     public void i_want_to_send_an_EmailToFax_message(DataTable dataTable) throws Exception {
