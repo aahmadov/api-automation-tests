@@ -23,6 +23,6 @@ Feature: I want simply send an email to a rpxfqa.com
 
     Examples: 
       | to                 | times | faxNumFileLoc                | pageSize  | subject               |sendBody|
-      | auto1.rpxqa.com    |    1  | input/FaxNumberMail2fax.txt  |  1        | receivedSuccesSubject |   true |
+      | auto1.rpxqa.com    |    1  | input/FaxNumberMail2fax.txt  |  2        | receivedSuccesSubject |   true |
 #                                                                             | receivedFailedSubject |             
 #                                                                             | sendFailedSubject     |
