@@ -35,7 +35,7 @@ public class Tests {
 
             String faxNumber;
             String toEmail;
-            //Checking whether to contains FaxNumber in scenario,,,,,,,,,,,
+            //Checking whether to contains FaxNumber in scenario,
             if (to.contains("@")) {
                 //Get FaxNumber if already exist in the 'to' field+
                 faxNumber = to.split("@")[0];
