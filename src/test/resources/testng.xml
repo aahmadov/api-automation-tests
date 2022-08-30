@@ -13,18 +13,16 @@
         </classes>
     </test>
 
+
 <!--    <test name="Test-method test1">-->
 <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
 <!--        <parameter name="times" value="1" />-->
 <!--        <parameter name="faxNumFileLoc" value="input/FaxNumberMail2fax.txt" />-->
-<!--        <parameter name="pageSize" value="1" />-->
+<!--        <parameter name="pageSize" value="2" />-->
 <!--        <parameter name="subject" value="receivedSuccesSubject" />-->
 <!--        <parameter name="sendBody" value="true" />-->
 <!--        <classes>-->
 <!--            <class name="testng.Tests" />-->
 <!--        </classes>-->
 <!--    </test>-->
-
-
-
 </suite>
