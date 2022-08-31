@@ -45,7 +45,7 @@ public class FileReader {
         String uuid = UUID.randomUUID().toString();
 
 //        uuid.substring(0, Math.min(uuid.length(), 15))
-        return "?TSI=Test" + uuid.substring(0, Math.min(uuid.length(), 10));
+        return "?TSI=Test" + uuid.substring(0, Math.min(uuid.length(), 8));
     }
     
     public static String randomFaxNumberforTSI() {

@@ -26,10 +26,14 @@ public class ExcelUtility {
         workSheet = workBook.createSheet(FIRST_SHEET);
     }
 
-    public static void createExcelAndWrite(String fileName, String value) {
+    public static void createExcelAndWrite(String fileName, String... values) {
         XSSFRow row = workSheet.createRow(rowNumber);
-        XSSFCell cell = row.createCell(0);
-        cell.setCellValue(value);
+        int columnIndex = 0;
+        for (String value: values) {
+            XSSFCell cell = row.createCell(columnIndex);
+            cell.setCellValue(value);
+            columnIndex++;
+        }
         rowNumber++;
         try (FileOutputStream fos = new FileOutputStream(fileName)) {
             workBook.write(fos);
