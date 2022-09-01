@@ -8,6 +8,7 @@
         <parameter name="pageSize" value="${pageSize}" />
         <parameter name="subject" value="${subject}" />
         <parameter name="sendBody" value="${sendBody}" />
+        <parameter name="uploadedFile" value="${uploadedFile}" />
         <classes>
             <class name="testng.Tests" />
         </classes>

@@ -1,5 +1,7 @@
 package testng;
 
+import org.apache.commons.lang3.StringUtils;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utils.*;
@@ -21,13 +23,17 @@ public class Tests {
     String from = "no-reply@rpxqa.com";
 
     @Test(testName = "Send mail to Fax")
-    @Parameters({"to", "times", "faxNumFileLoc", "pageSize", "subject", "sendBody"})
-    void sendMailToFax(String to, int times, String faxNumFileLoc, String pageSize, String subject, boolean sendBody) throws Exception {
-        System.out.println("Values: " + to + ":" + times + ":" + faxNumFileLoc + ":" + pageSize + ":" + subject + ":" + sendBody);
-
+    @Parameters({"to", "times", "faxNumFileLoc", "pageSize", "subject", "sendBody", "uploadedFile"})
+    void sendMailToFax(String to, int times,
+                       @Optional String faxNumFileLoc,
+                       String pageSize, String subject,
+                       boolean sendBody,
+                       @Optional String uploadedFaxNumbersFileLoc) throws Exception {
+        System.out.println("Values: " + to + ":" + times + ":" + faxNumFileLoc + ":" + pageSize + ":" + subject + ":" + sendBody + ":" + uploadedFaxNumbersFileLoc);
+        String finalFaxNumberFileLoc = StringUtils.isBlank(faxNumFileLoc) ? uploadedFaxNumbersFileLoc : faxNumFileLoc;
         List<String> faxNumbers = FileReader.convertToList(
                 CsvUtils.readAllLines(
-                        ResourceUtils.getResourceFilePathAbsPath(faxNumFileLoc)));
+                        ResourceUtils.getResourceFilePathAbsPath(finalFaxNumberFileLoc)));
 
         // loop to send email based on of times provided in the scenario
         for (int i = 1; i <= times; i++) {
