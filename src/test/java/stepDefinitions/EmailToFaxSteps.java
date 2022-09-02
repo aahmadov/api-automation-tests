@@ -35,7 +35,7 @@ public class EmailToFaxSteps {
             
             String faxNumber;
             String to;
-            //Checking whether to contains FaxNumber in scenario,,,,,,,,,,,
+            //Checking whether to contains FaxNumber in scenario,
             if (data.get("to").contains("@")) {
                 //Get FaxNumber if already exist in the 'to' field+
                 faxNumber = data.get("to").split("@")[0];

@@ -14,7 +14,7 @@ import utils.sendMailing;
         glue = {"stepDefinitions" },		
         dryRun =false, 
         monochrome = true, 
-        tags = { "@testCase#1"},
+        tags = {"@testCase#1"},
         plugin = { "pretty",
 				"html:target/cucumber-html-report", "json:target/cucumber/cucumber.json",
 				"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks" })
