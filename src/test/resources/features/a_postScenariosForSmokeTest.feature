@@ -13,7 +13,7 @@ Feature: ^^^ Validation of "sent" Fax status and Ids ^^^
     Then User validates FaxNumber is "(781)-885-4198"
 
 @TC-2SentFax @negative
- Scenario: ^^ Send Fax Data without Number (negative sceanario) ^^ 
+ Scenario: ^^ Send Fax Data without Number (negative scenario) ^^
     Given User sends requests with no number 
     And User wants validate the status code is 400
     Then User validates Statustext is "Empty fax number"
@@ -27,7 +27,7 @@ Scenario: ^^ Send Fax Data with multiple recipient Details ^^
     Then User validates FaxId is generated
     
 @TC-5resendFax
-   Scenario: ^^ ReSend Fax Data with failed FaxId (negative sceanario) ^^
+   Scenario: ^^ ReSend Fax Data with failed FaxId (negative scenario) ^^
     Given User resends requests with failed faxID
     And User validate the status code is 500
     Then User validated new statusFax is "Job not found"

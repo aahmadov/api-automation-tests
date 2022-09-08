@@ -74,7 +74,7 @@ public class Tests {
                 Date endTime = Calendar.getInstance().getTime();
                 String endTimeString = formatter.format(endTime);
 
-                String EmailToFaxQuery = String.format("select JobStatus from auto1.sendstatus where (CreateTime between '%s' and '%s')  order by jobid desc limit 1;", startTimeString, endTimeString);
+                String EmailToFaxQuery = String.format("select JobStatus,FaxNumber from auto1.sendstatus where (CreateTime between '%s' and '%s')  order by jobid desc limit 1;", startTimeString, endTimeString);
 
                 List<Map<String, Object>> results = DataBaseUtility.executeSQLQuery(EmailToFaxQuery);
                 if (results.size() == 0) {
