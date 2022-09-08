@@ -74,14 +74,14 @@ public class Tests {
                 Date endTime = Calendar.getInstance().getTime();
                 String endTimeString = formatter.format(endTime);
 
-                String EmailToFaxQuery = String.format("select JobStatus from auto1.recvstatus where (TimeRecieved between '%s' and '%s') and ReceivingPhone='11111111111' order by jobid desc limit 1;", startTimeString, endTimeString);
+                String EmailToFaxQuery = String.format("select JobStatus from auto1.sendstatus where (CreateTime between '%s' and '%s')  order by jobid desc limit 1;", startTimeString, endTimeString);
 
                 List<Map<String, Object>> results = DataBaseUtility.executeSQLQuery(EmailToFaxQuery);
                 if (results.size() == 0) {
                     fail("No record present in the Database for the fax email sent");
                 }
                 System.out.println(results);
-                assertTrue(results.get(0).get("JobStatus").equals("Recv Fail") || results.get(0).get("JobStatus").equals("Received"));
+                assertTrue(results.get(0).get("JobStatus").equals("Sent") );
             }
         }
     }
