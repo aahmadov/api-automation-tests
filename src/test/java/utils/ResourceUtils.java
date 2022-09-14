@@ -8,8 +8,8 @@ public class ResourceUtils {
     public static String getResourceFilePathAbsPath(final String relativePath) {
         try {
             return Paths.get(ClassLoader.getSystemResource(relativePath).toURI()).toString();
-        } catch (URISyntaxException exception) {
-            System.out.println(exception.getMessage());
+        } catch (Exception exception) {
+            System.out.println("Exception while trying to find the file " + relativePath + ". " + exception.getMessage());
         }
         return "";
     }

@@ -1,0 +1,37 @@
+{
+  "sendFaxDataWithRecipientDetails": {
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "Pages": "Pages",
+    "Recipent_data1": "{ \"FaxNumber\": \"1-555-1212\", \"RcptName\": \"Alice Doherty\" }",
+    "expectedStatusCode": "201"
+  },
+  "sendFaxWithValidNumberAndAttachment": {
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "(781)-885-4198",
+    "Pages": "Pages_1",
+    "expectedStatusCode": "201"
+  },
+  "sendFaxDataWithoutNumber": {
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "",
+    "Pages": "Pages",
+    "expectedStatusCode": "400",
+    "expectedErrorMessage": "Empty fax number"
+  },
+  "retrieveRecentlyCreatedFax": {
+    "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "FaxUserId": "?FaxUserId=admin",
+    "expectedStatusCode": "200",
+    "expectedNumber": "(781)-885-4198"
+  },
+  "retrieveFaxAndFaxDataById": {
+    "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "valid_ID": "/283",
+    "expectedStatusCode": "200"
+  },
+  "retrieveAllFaxData": {
+    "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "expectedStatusCode": "200",
+    "faxUserId": "admin"
+  }
+}
