@@ -14,7 +14,7 @@
         </classes>
     </test>
 
-    <test name="PostScenariosForSmokeTest">
+    <test name="PostCallDataManipulationFromJenkins">
         <parameter name="postCallUrl" value="${postCallUrl}" />
         <parameter name="fileName1" value="${fileName1}" />
         <parameter name="fileName2" value="${fileName2}" />
@@ -22,9 +22,14 @@
         <parameter name="recipientData2" value="${recipientData2}" />
         <parameter name="expectedStatusCode" value="${expectedStatusCode}" />
         <classes>
+            <class name="testng.PostCallDataManipulationFromJenkins" />
+        </classes>
+    </test>
+
+    <test name="PostScenariosForSmokeTest">
+        <classes>
             <class name="testng.PostScenariosForSmokeTest" />
         </classes>
-
     </test>
 
     <test name="GetScenariosForSmokeTest">
