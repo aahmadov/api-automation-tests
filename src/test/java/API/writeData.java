@@ -18,7 +18,7 @@ public class writeData {
 		File file = new File(filePathtowrite);
 
 		String data = "{\"FaxNumber\": \"1-555-1212\", \r\n"
-				+ "           \"RcptName\": \"Alice Doherty\"\r\n"
+				+ "           \"RcptName\": \"Alex Jhonson\"\r\n"
 				+ "                t}";
 
 		FileUtils.writeStringToFile(file, data);
