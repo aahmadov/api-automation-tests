@@ -28,7 +28,7 @@ public class PostCallDataManipulationFromJenkins {
         System.out.println("**" + recipientData2);
         System.out.println("------------------------------------------------------------------------");
 
-        assertEquals(expectedStatusCode, response.getStatusCode());
+        assertEquals(response.getStatusCode(), expectedStatusCode);
 
         String resp = response.prettyPrint();
         String data = JsonPath.read(resp, "$.FaxInfo[0].FaxId").toString();
