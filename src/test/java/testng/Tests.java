@@ -22,7 +22,7 @@ public class Tests {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
 
-    @Test(testName = "Send mail to Fax")
+    @Test(testName = "Send mail to Fax", groups = {"emailToFax"})
     @Parameters({"to", "times", "faxNumFileLoc", "pageSize", "subject", "sendBody", "uploadedFile"})
     void sendMailToFax(String to, int times,
                        @Optional String faxNumFileLoc,
@@ -81,7 +81,7 @@ public class Tests {
                     fail("No record present in the Database for the fax email sent");
                 }
                 System.out.println(results);
-                assertTrue(results.get(0).get("JobStatus").equals("Sent") );
+                assertTrue(results.get(0).get("JobStatus").equals("Sent"));
             }
         }
     }
