@@ -37,7 +37,11 @@
             <class name="testng.GetScenariosForSmokeTest" />
         </classes>
     </test>
-
+    <test name="InboundFaxPagesCoverPage">
+        <classes>
+            <class name="testng.InboundFaxPagesCoverPage" />
+        </classes>
+    </test>
 
 <!--    <test name="Test-method test2">-->
 <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
