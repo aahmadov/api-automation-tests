@@ -22,7 +22,7 @@ public class Tests {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
 
-    @Test(testName = "Send mail to Fax", groups = {"emailToFax"})
+    @Test(testName = "Send mail to Fax", groups = {"smoke"})
     @Parameters({"to", "times", "faxNumFileLoc", "pageSize", "subject", "sendBody", "uploadedFile"})
     void sendMailToFax(String to, int times,
                        @Optional String faxNumFileLoc,

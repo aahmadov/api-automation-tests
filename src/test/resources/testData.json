@@ -45,5 +45,13 @@
     "inboundFax_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "newInboundParam": "?FaxUserId=receiver",
     "credentialNewInbound": "receiver@acme:softlinx"
+  },
+  "Email_to_Fax":{
+    "to": "auto1.rpxqa.com",
+    "times": "1",
+    "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
+    "pageSize": "2",
+    "subject": "receivedSuccessSubject",
+    "sendBody": "true"
   }
 }
