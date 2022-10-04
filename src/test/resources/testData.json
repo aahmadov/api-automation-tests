@@ -48,7 +48,7 @@
     "credentialNewInbound": "receiver@acme:softlinx"
   },
   "sendMailToFax":{
-    "to": "12223334444@auto1.rpxqa.com",
+    "to": "auto1.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "pageSize": "2",
