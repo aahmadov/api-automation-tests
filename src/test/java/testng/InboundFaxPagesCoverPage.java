@@ -21,7 +21,7 @@ public class InboundFaxPagesCoverPage extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        File file = FileReader.readfile(data.get("Pages"));
+        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Response inboundFaxwithCoverPage = Second_RestRequestUtils.inbound_FaxwithCoverPage(
                 data.get("post_call_Url") + FileReader.randomNumberFor_TSI(),
                 file, data.get("faxNumber"), data.get("credentialNewOutbound"));

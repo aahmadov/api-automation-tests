@@ -43,6 +43,12 @@
         </classes>
     </test>
 
+    <test name="SendMailToFaxTests">
+        <classes>
+            <class name="testng.SendMailToFaxTests" />
+        </classes>
+    </test>
+
 <!--    <test name="Test-method test2">-->
 <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
 <!--        <parameter name="times" value="2" />-->

@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class FileReader {
 
     public static File readfile(String filename) {
-        String filePath = "src/test/resources/requestBody/";
+        String filePath = "src/test/resources/requestBody/pdf/";
         String pdfFile = filePath + filename + ".pdf";
 
         return new File(pdfFile);
@@ -25,8 +25,25 @@ public class FileReader {
 
     public static File getFileUsingPageSize(final String pageSize) {
         try {
-            File folder = Paths.get(ClassLoader.getSystemResource("requestBody").toURI()).toFile();
+            File folder = Paths.get(ClassLoader.getSystemResource("requestBody/pdf").toURI()).toFile();
             File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
+            Optional<File> fileOptional = Arrays.stream(Objects.requireNonNull(listOfFiles))
+                    .filter(file -> file.getName().matches("[^0-9]*"+pageSize+"[^0-9]*"))
+                    .findAny();
+            String filePath = fileOptional
+                    .map(File::getAbsolutePath)
+                    .orElseGet(() -> Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath());
+            return new File(filePath);
+        } catch (URISyntaxException exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
+
+    public static File getFileUsingPageSize(final String pageSize, final String fileType) {
+        try {
+            File folder = Paths.get(ClassLoader.getSystemResource("requestBody/pdf" + fileType).toURI()).toFile();
+            File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(fileType.toLowerCase()));
             Optional<File> fileOptional = Arrays.stream(Objects.requireNonNull(listOfFiles))
                     .filter(file -> file.getName().matches("[^0-9]*"+pageSize+"[^0-9]*"))
                     .findAny();
