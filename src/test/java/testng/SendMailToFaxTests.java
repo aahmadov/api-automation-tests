@@ -16,6 +16,9 @@ import static org.junit.Assert.fail;
 
 public class SendMailToFaxTests extends TestBase {
 
+    String bodyMessage = ConfigReader.getProperty("bodyMessage");
+    String from = "no-reply@rpxqa.com";
+
     @Test(testName = "Send mail to Fax", groups = {"sendMailToFax"})
     void sendMailToFax() throws Exception {
         System.out.println("Test case name: " + testName);
@@ -51,10 +54,8 @@ public class SendMailToFaxTests extends TestBase {
 
             Date startTime = Calendar.getInstance().getTime();
 
-            SendEmail.sendFromGMail(toEmail, data.get("bodyMessage"), file, Boolean.parseBoolean(data.get("sendBody")));
-            Boolean result = ReceiveEmail.receiveEmail(data.get("from"), emailSubject);
-//            Boolean result = true;
-
+            SendEmail.sendFromGMail(toEmail, bodyMessage, file, Boolean.parseBoolean(data.get("sendBody")));
+            Boolean result = ReceiveEmail.receiveEmail(from, emailSubject);
 
             if (!result) {
 
