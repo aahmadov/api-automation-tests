@@ -202,15 +202,7 @@ From Runner class:
 	}
 
 
-the goal is to make his work easier so that he can make the 
-necessary changes without spending a lots of time
 
-Jenkins do just with no disruption to the rest of the build system.Jenkins is a remote server tool ,
-it doesnt have intelejey or Eclipse nobody goes writes code in intelejey from jenkins ,it doesnt have those IDE's.
-We are running our mvn test,it runs trhough mvn commands which we need to provide that commands.
-
-
-So far we have been doing serial execution. One test case finishes, before next one can start. 
 
 
 
