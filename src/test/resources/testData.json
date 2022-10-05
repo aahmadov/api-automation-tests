@@ -38,7 +38,7 @@
     "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "1-222-222-2222",
     "Pages": "1",
-    "fileType": "docx",
+    "fileType": "pdf",
     "credentialNewOutbound": "faxsending@acme:softlinx",
     "inboundStatusCode": 201,
     "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
