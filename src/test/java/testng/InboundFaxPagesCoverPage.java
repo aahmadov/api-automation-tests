@@ -15,7 +15,7 @@ import static org.testng.Assert.assertEquals;
 
 public class InboundFaxPagesCoverPage extends TestBase {
 
-    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smokeNew"})
+    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke"})
     public void faxStatusAndPageNumberValidationFromInbound() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

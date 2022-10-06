@@ -19,7 +19,7 @@ public class SendMailToFaxTests extends TestBase {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
 
-    @Test(testName = "Send mail to Fax", groups = {"smoke1"})
+    @Test(testName = "Send mail to Fax", groups = {"smoke"})
     void sendMailToFax() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
