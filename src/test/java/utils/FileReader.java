@@ -42,7 +42,7 @@ public class FileReader {
 
     public static File getFileUsingPageSize(final String pageSize, final String fileType) {
         try {
-            File folder = Paths.get(ClassLoader.getSystemResource("requestBody/pdf" + fileType).toURI()).toFile();
+            File folder = Paths.get(ClassLoader.getSystemResource("requestBody/" + fileType).toURI()).toFile();
             File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(fileType.toLowerCase()));
             Optional<File> fileOptional = Arrays.stream(Objects.requireNonNull(listOfFiles))
                     .filter(file -> file.getName().matches("[^0-9]*"+pageSize+"[^0-9]*"))
