@@ -42,7 +42,7 @@ public class GetScenariosForSmokeTest extends TestBase {
         System.out.println("***faxId  is" + "**" + FaxId + "**");
         System.out.println("***faxStatus  is" + "**" + faxstatus + "**");
         System.out.println("***total pages sent " + "**" + pagesTotalsent + "**");
-        System.out.println("***faxNumber is" + "**" + number + "**");
+        //System.out.println("***faxNumber is" + "**" + number + "**");
         //assertEquals(expectedNumber, number);
     }
 
