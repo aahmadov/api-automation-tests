@@ -37,11 +37,11 @@
             <class name="testng.GetScenariosForSmokeTest"/>
         </classes>
     </test>
-    <test name="InboundFaxPagesCoverPage">
-        <classes>
-            <class name="testng.InboundFaxPagesCoverPage"/>
-        </classes>
-    </test>
+<!--    <test name="InboundFaxPagesCoverPage">-->
+<!--        <classes>-->
+<!--            <class name="testng.InboundFaxPagesCoverPage"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="SendMailToFaxTests">
         <classes>
