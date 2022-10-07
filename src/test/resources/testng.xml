@@ -49,11 +49,11 @@
         </classes>
     </test>
 
-    <test name="SoapInboundFaxPagesCoverPage">
-        <classes>
-            <class name="testng.SoapInboundFaxPagesCoverPage"/>
-        </classes>
-    </test>
+<!--    <test name="SoapInboundFaxPagesCoverPage">-->
+<!--        <classes>-->
+<!--            <class name="testng.SoapInboundFaxPagesCoverPage"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TestInbound">
         <classes>

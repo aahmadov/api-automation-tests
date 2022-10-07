@@ -58,7 +58,7 @@
   "faxStatusAndPageNumberValidationFromInbound2": {
     "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "1-222-222-2222",
-    "Pages": "2",
+    "Pages": "12",
     "fileType": "pdf",
     "credentialNewOutbound": "faxsending@acme:softlinx",
     "inboundStatusCode": 201,
