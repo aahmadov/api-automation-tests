@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TestInbound extends TestBase {
 
-    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smokebest"})
+    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke"})
     public void faxStatusAndPageNumberValidationFromInbound2() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -61,7 +61,10 @@ public class TestInbound extends TestBase {
                 }
                 System.out.println("****** the post call TSI id " + "**" + onlyTsi + "**" + " and "
                         + " total page in attachment is " + "**" + ((LinkedHashMap) tsiArray.get(0)).get("PagesTotal") + "**");
-            }
+                String errorMessage= JsonPath.read(outboundWithCoverPage.asPrettyString(), "$.FaxInfo[0].ErrorText");
+
+                System.out.println("error message "+errorMessage);
+                }
             times++;
         } while (isNotCompleted && times < 16);
 
