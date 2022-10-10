@@ -63,7 +63,7 @@ public class TestInbound extends TestBase {
                         + " total page in attachment is " + "**" + ((LinkedHashMap) tsiArray.get(0)).get("PagesTotal") + "**");
                 String errorMessage= JsonPath.read(outboundWithCoverPage.asPrettyString(), "$.FaxInfo[0].ErrorText");
 
-                System.out.println("error message "+errorMessage);
+                System.out.println("Error message: "+"**"+errorMessage+"**");
                 }
             times++;
         } while (isNotCompleted && times < 16);
