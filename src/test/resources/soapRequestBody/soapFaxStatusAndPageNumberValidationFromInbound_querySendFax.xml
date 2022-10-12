@@ -1,0 +1,19 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rep="http://www.softlinx.com/ReplixFax">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <rep:QuerySendFax>
+            <QuerySendFaxInput>
+                <!--Optional:-->
+                <Authentication>
+                    <Login>{login}</Login>
+                    <Password>{password}</Password>
+                    <Realm>acme</Realm>
+                </Authentication>
+                <!--Optional:-->
+                <FaxId>{faxId}</FaxId>
+                <!--Optional:-->
+                <FaxUserId>{faxUserId}</FaxUserId>
+            </QuerySendFaxInput>
+        </rep:QuerySendFax>
+    </soapenv:Body>
+</soapenv:Envelope>

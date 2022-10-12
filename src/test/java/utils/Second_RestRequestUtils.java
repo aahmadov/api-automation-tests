@@ -39,8 +39,8 @@ public class Second_RestRequestUtils {
         return response = request.contentType("multipart/form-data")
                 .multiPart("filename", file)
                 .queryParam("FaxNumber", number)
-                .queryParam("CoverPageEnabled", true)
-                .when()
+//                .queryParam("CoverPageEnabled", true)
+                .when().log().all()
                 .post(url);
     }
 

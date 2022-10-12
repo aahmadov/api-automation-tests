@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TestInbound extends TestBase {
 
-    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke"})
+    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke33"})
     public void faxStatusAndPageNumberValidationFromInbound2() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -81,7 +81,7 @@ public class TestInbound extends TestBase {
         //Get all metadata of the TSI from the response
         JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
         System.out.println("*** RESPONSE DATA FOR TSI ***");
-        System.out.println(tsiArray.toString());
+        System.out.println("salam"+""+tsiArray.toString());
 
         //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
         if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
@@ -90,7 +90,7 @@ public class TestInbound extends TestBase {
 
         //Get the Fax status values of all the TSi from response
         List<String> statuses = tsiArray.stream().map(tsiJson -> ((LinkedHashMap) tsiJson).get("FaxStatus").toString()).collect(Collectors.toList());
-        System.out.println(statuses);
+        System.out.println("salam2"+""+statuses);
         //Assertion all the metadata contains only either recvIncomplete or recvOk Fax status
         assertTrue(statuses.stream().allMatch(status -> status.equals("recvIncomplete") || status.equals("recvOk")));
 
