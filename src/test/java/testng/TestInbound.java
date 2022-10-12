@@ -27,7 +27,7 @@ public class TestInbound extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        File file = FileReader.getFileUsingPageSize(data.get("Pages"));
+        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
         Response inboundFaxwithCoverPage = Second_RestRequestUtils.inbound_FaxwithCoverPage(
@@ -54,21 +54,22 @@ public class TestInbound extends TestBase {
                     data.get("getFaxByID_url") + data.get("newOutboundParam"), data.get("credentialNewOutbound"));
             assertEquals(200, outboundWithCoverPage.getStatusCode());
             JSONArray tsiArray = JsonPath.read(outboundWithCoverPage.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
+            System.out.println("Outbound response related TSI is: " + tsiArray.toJSONString());
             if (tsiArray.size() > 0 && Arrays.asList("sendFailed", "sent").contains(((LinkedHashMap) tsiArray.get(0)).get("FaxStatus").toString())) {
                 isNotCompleted = false;
-                if(((LinkedHashMap) tsiArray.get(0)).get("FaxStatus").toString().equals("sendFailed")) {
+                if (((LinkedHashMap) tsiArray.get(0)).get("FaxStatus").toString().equals("sendFailed")) {
                     isFailed = true;
                 }
                 System.out.println("****** the post call TSI id " + "**" + onlyTsi + "**" + " and "
                         + " total page in attachment is " + "**" + ((LinkedHashMap) tsiArray.get(0)).get("PagesTotal") + "**");
-                String errorMessage= JsonPath.read(outboundWithCoverPage.asPrettyString(), "$.FaxInfo[0].ErrorText");
+                String errorMessage = JsonPath.read(outboundWithCoverPage.asPrettyString(), "$.FaxInfo[0].ErrorText");
 
-                System.out.println("Error message: "+"**"+errorMessage+"**");
-                }
+                System.out.println("Error message: " + "**" + errorMessage + "**");
+            }
             times++;
         } while (isNotCompleted && times < 16);
 
-        if(isFailed) {
+        if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
         }
 
@@ -80,8 +81,8 @@ public class TestInbound extends TestBase {
         System.out.println(":checking for this TSI  in entire response " + "**" + onlyTsi);
         //Get all metadata of the TSI from the response
         JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
-        String EntireOutboundResponse= JsonPath.read(outboundWithCoverPage.asPrettyString(), "$.FaxInfo[0].FaxStatus");
-        System.out.println("*** OUTBOUND FAX STATUS IS *** " +EntireOutboundResponse);
+        System.out.println("Response related TSI is: " + tsiArray.toJSONString());
+
         System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
         //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
         if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
