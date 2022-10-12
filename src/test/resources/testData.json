@@ -74,7 +74,7 @@
     "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
     "querySendFaxSoapAction": "http://www.softlinx.com/wsapi/op=QuerySendFax/ver=79",
     "queryReceiveFaxSoapAction": "http://www.softlinx.com/wsapi/op=QueryReceiveFax/ver=79",
-    "Pages": "3",
+    "Pages": "2",
     "fileType": "pdf",
     "credentialNewOutboundLogin": "faxsending",
     "credentialNewOutboundPassword": "softlinx",
