@@ -77,12 +77,12 @@ public class TestInbound extends TestBase {
                 data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialNewInbound"));
         assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());
 
-        System.out.println("checking for this TSI  in entire response " + "**" + onlyTsi);
+        System.out.println(":checking for this TSI  in entire response " + "**" + onlyTsi);
         //Get all metadata of the TSI from the response
         JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
-        System.out.println("*** RESPONSE DATA FOR TSI ***");
-
-
+        String EntireOutboundResponse= JsonPath.read(outboundWithCoverPage.asPrettyString(), "$.FaxInfo[0].FaxStatus");
+        System.out.println("*** OUTBOUND FAX STATUS IS *** " +EntireOutboundResponse);
+        System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
         //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
         if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
             fail(onlyTsi + "****" + " doesn't have neither recvOk status or 3 attempts" + "**");
