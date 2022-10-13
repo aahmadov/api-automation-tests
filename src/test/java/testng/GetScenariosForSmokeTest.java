@@ -20,7 +20,7 @@ public class GetScenariosForSmokeTest extends TestBase {
         assert data != null;
 
         Thread.sleep(1000 * 120);
-        Response response = RestRequestUtils.getRecentCreatedFax(data.get("post_call_Url_Anatoly") + data.get("FaxUserIdforAnatoly"));
+        Response response = RestRequestUtils.getRecentCreatedFax(data.get("get_call_Url_Anatoly") + data.get("FaxUserIdforAnatoly"));
 
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
 
@@ -52,8 +52,8 @@ public class GetScenariosForSmokeTest extends TestBase {
         assert data != null;
 
         Thread.sleep(1000 * 120);
-        Response response = RestRequestUtils.getFax(data.get("post_call_Url_Anatoly") + data.get("valid_ID_forAnatoly"));
-        System.out.println("**" + data.get("post_call_Url_Anatoly"));
+        Response response = RestRequestUtils.getFax(data.get("get_call_Url_Anatoly") + data.get("valid_ID_forAnatoly"));
+        System.out.println("**" + data.get("get_call_Url_Anatoly"));
         System.out.println("**" + data.get("valid_ID_forAnatoly"));
 
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
@@ -73,8 +73,8 @@ public class GetScenariosForSmokeTest extends TestBase {
         assert data != null;
 
         Thread.sleep(1000 * 60);
-        Response response = RestRequestUtils.getFax(data.get("post_call_Url_Anatoly"));
-        System.out.println("** " + data.get("post_call_Url_Anatoly"));
+        Response response = RestRequestUtils.getFax(data.get("get_call_Url_Anatoly"));
+        System.out.println("** " + data.get("get_call_Url_Anatoly"));
 
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
 
