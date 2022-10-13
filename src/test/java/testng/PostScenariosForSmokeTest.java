@@ -23,11 +23,11 @@ public class PostScenariosForSmokeTest extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
         File file = FileReader.readfile(data.get("Pages"));
-        Response response = RestRequestUtils.sendFaxWithRecipent_details(data.get("post_call_Url"),
+        Response response = RestRequestUtils.sendFaxWithRecipent_details(data.get("post_call_Url_Anatoly"),
                 file, data.get("Recipent_data1"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
-        System.out.println("**" + (data.get("post_call_Url")));
+        System.out.println("**" + (data.get("post_call_Url_Anatoly")));
         System.out.println("**" + (data.get("Recipent_data1")));
         System.out.println("**" + file);
         System.out.println("------------------------------------------------------------------------");
@@ -45,11 +45,11 @@ public class PostScenariosForSmokeTest extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
         File file = FileReader.readfile(data.get("Pages"));
-        Response response = RestRequestUtils.createFaxSingleNum(data.get("post_call_Url"), file, data.get("faxNumber"));
+        Response response = RestRequestUtils.createFaxSingleNum(data.get("post_call_Url_Anatoly"), file, data.get("faxNumber"));
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
-        System.out.println("******* " + data.get("post_call_Url"));
+        System.out.println("******* " + data.get("post_call_Url_Anatoly"));
         System.out.println("******* " + file + " " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
 
@@ -66,11 +66,11 @@ public class PostScenariosForSmokeTest extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
         File file = FileReader.readfile(data.get("Pages"));
-        Response response = RestRequestUtils.faxWithNoNumber(data.get("post_call_Url"), file, data.get("faxNumber"));
+        Response response = RestRequestUtils.faxWithNoNumber(data.get("post_call_Url_Anatoly"), file, data.get("faxNumber"));
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
-        System.out.println("******* " + data.get("post_call_Url"));
+        System.out.println("******* " + data.get("post_call_Url_Anatoly"));
         System.out.println("******* " + file + " " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
 

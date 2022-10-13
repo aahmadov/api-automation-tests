@@ -20,7 +20,7 @@ public class GetScenariosForSmokeTest extends TestBase {
         assert data != null;
 
         Thread.sleep(1000 * 120);
-        Response response = RestRequestUtils.getRecentCreatedFax(data.get("getFaxByID_url") + data.get("FaxUserId"));
+        Response response = RestRequestUtils.getRecentCreatedFax(data.get("post_call_Url_Anatoly") + data.get("FaxUserIdforAnatoly"));
 
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
 
@@ -52,9 +52,9 @@ public class GetScenariosForSmokeTest extends TestBase {
         assert data != null;
 
         Thread.sleep(1000 * 120);
-        Response response = RestRequestUtils.getFax(data.get("getFaxByID_url") + data.get("valid_ID"));
-        System.out.println("**" + data.get("getFaxByID_url"));
-        System.out.println("**" + data.get("valid_ID"));
+        Response response = RestRequestUtils.getFax(data.get("post_call_Url_Anatoly") + data.get("valid_ID_forAnatoly"));
+        System.out.println("**" + data.get("post_call_Url_Anatoly"));
+        System.out.println("**" + data.get("valid_ID_forAnatoly"));
 
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
 
@@ -62,8 +62,8 @@ public class GetScenariosForSmokeTest extends TestBase {
         int faxId = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
         String pagesTotal = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal").toString();
         //System.out.println("** fax id is" + "**" + faxId + "**");
-        System.out.println("** totalPages sent " + "**" + pagesTotal + "**");
-        System.out.println("** faxStatus is " + "**" + faxStatus + "**");
+        //System.out.println("** totalPages sent " + "**" + pagesTotal + "**");
+        //System.out.println("** faxStatus is " + "**" + faxStatus + "**");
         assertEquals(faxStatus, "sent");
     }
 
@@ -73,8 +73,8 @@ public class GetScenariosForSmokeTest extends TestBase {
         assert data != null;
 
         Thread.sleep(1000 * 60);
-        Response response = RestRequestUtils.getFax(data.get("getFaxByID_url"));
-        System.out.println("** " + data.get("getFaxByID_url"));
+        Response response = RestRequestUtils.getFax(data.get("post_call_Url_Anatoly"));
+        System.out.println("** " + data.get("post_call_Url_Anatoly"));
 
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
 
