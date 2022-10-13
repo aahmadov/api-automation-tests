@@ -26,11 +26,11 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-    <test name="PostScenariosForSmokeTest">
-        <classes>
-            <class name="testng.PostScenariosForSmokeTest"/>
-        </classes>
-    </test>
+<!--    <test name="PostScenariosForSmokeTest">-->
+<!--        <classes>-->
+<!--            <class name="testng.PostScenariosForSmokeTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="GetScenariosForSmokeTest">
         <classes>
