@@ -26,11 +26,11 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-<!--    <test name="PostScenariosForSmokeTest">-->
-<!--        <classes>-->
-<!--            <class name="testng.PostScenariosForSmokeTest"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="PostScenariosForSmokeTest">
+        <classes>
+            <class name="testng.PostScenariosForSmokeTest"/>
+        </classes>
+    </test>
 
     <test name="GetScenariosForSmokeTest">
         <classes>
@@ -49,11 +49,11 @@
         </classes>
     </test>
 
-    <test name="SoapInboundFaxPagesCoverPage">
-        <classes>
-            <class name="testng.SoapInboundFaxPagesCoverPage"/>
-        </classes>
-    </test>
+<!--    <test name="SoapInboundFaxPagesCoverPage">-->
+<!--        <classes>-->
+<!--            <class name="testng.SoapInboundFaxPagesCoverPage"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="TestInbound">
         <classes>
