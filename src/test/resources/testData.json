@@ -1,18 +1,21 @@
 {
   "sendFaxDataWithRecipientDetails": {
     "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "admin@acme:softlinx",
     "Pages": "Pages",
     "Recipent_data1": "{ \"FaxNumber\": \"1-555-1212\", \"RcptName\": \"Alice Doherty\" }",
     "expectedStatusCode": "201"
   },
   "sendFaxWithValidNumberAndAttachment": {
     "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "admin@acme:softlinx",
     "faxNumber": "(781)-885-4198",
     "Pages": "Pages_1",
     "expectedStatusCode": "201"
   },
   "sendFaxDataWithoutNumber": {
     "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "admin@acme:softlinx",
     "faxNumber": "",
     "Pages": "Pages",
     "expectedStatusCode": "400",
@@ -20,17 +23,20 @@
   },
   "retrieveRecentlyCreatedFax": {
     "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "admin@acme:softlinx",
     "FaxUserId": "?FaxUserId=admin",
     "expectedStatusCode": "200",
     "expectedNumber": "(781)-885-4198"
   },
   "retrieveFaxAndFaxDataById": {
     "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "admin@acme:softlinx",
     "valid_ID": "/283",
     "expectedStatusCode": "200"
   },
   "retrieveAllFaxData": {
     "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "admin@acme:softlinx",
     "expectedStatusCode": "200",
     "faxUserId": "admin"
   },

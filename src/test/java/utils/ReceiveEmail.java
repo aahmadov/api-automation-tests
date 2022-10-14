@@ -90,8 +90,6 @@ public class ReceiveEmail {
 		}
 
 		return result;
-		
-		
 	}
 
 	public static long getMessageTimeDiff(Message message) throws MessagingException, IOException, ParseException {
@@ -107,7 +105,8 @@ public class ReceiveEmail {
 			long diffInMillies = Math.abs(Calendar.getInstance().getTime().getTime() - date.getTime());
 			return TimeUnit.MILLISECONDS.toMinutes(diffInMillies);
 		} catch (Exception e) {
-			return 11111;
+			System.out.println("Exception occurred while accessing Time from mail:" + e.getMessage());
+			return 10;
 		}
 	}
 
@@ -119,6 +118,7 @@ public class ReceiveEmail {
 					"\r\nSender fax machine ID:");
 			return Integer.parseInt(numOfPages);
 		} catch (Exception e) {
+			System.out.println("Exception occurred while accessing Time number of pages from mail:" + e.getMessage());
 			return 11111;
 		}
 	}
