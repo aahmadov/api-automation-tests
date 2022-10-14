@@ -29,18 +29,10 @@ public class RestRequestUtils {
      *@getWithValidFaxID
      * */
     public static Response getFax(String url, String creds) {
-
-        RequestSpecification request = RestAssured.given();
-        byte[] encodedCredentials = Base64.encodeBase64(creds.getBytes());
-        String encodedCreadentialForAdmin = new String(encodedCredentials);
-
-        request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
-        return request.contentType("multipart/form-data").when().get(url);
-
+        return createRequest(creds).contentType("multipart/form-data").when().get(url);
     }
 
     public static Response getFax(String url) {
-
         RequestSpecification request = RestAssured.given();
         String credentilas = ConfigReader.getProperty("credentialOutboundAnatoly");
         byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
@@ -48,7 +40,6 @@ public class RestRequestUtils {
 
         request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
         return request.contentType("multipart/form-data").when().get(url);
-
     }
 
     public static Response getFaxsTSINewRestApi(String url) {
@@ -62,17 +53,17 @@ public class RestRequestUtils {
         return response = request.contentType("multipart/form-data").when().get(url);
 
     }
-    
-	public static Response getFaxsTSINewRestLoadtest(String url) {
-		
-		RequestSpecification request = RestAssured.given();
-		String credentilas= ConfigReader.getProperty("credentialNewInbound");
-		byte[] encodedCredentials =Base64.encodeBase64(credentilas.getBytes());
-	    String encodedCreadentialForAdmin =new String (encodedCredentials);
-		
-		 request.header("Authorization ", "Basic "+encodedCreadentialForAdmin);
-			return response=request.contentType("multipart/form-data").when().get(url);
-	}
+
+    public static Response getFaxsTSINewRestLoadtest(String url) {
+
+        RequestSpecification request = RestAssured.given();
+        String credentilas = ConfigReader.getProperty("credentialNewInbound");
+        byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
+        String encodedCreadentialForAdmin = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
+        return response = request.contentType("multipart/form-data").when().get(url);
+    }
 
 
     public static Response getFaxsTSINewRestApi2(String url) {
@@ -84,7 +75,6 @@ public class RestRequestUtils {
 
         request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
         return response = request.contentType("multipart/form-data").when().get(url);
-
     }
 
     public static Response getFaxsafterAllattempts(String url) {
@@ -171,8 +161,11 @@ public class RestRequestUtils {
         String encodedCreadentialForAdmin = new String(encodedCredentials);
 
         request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
-        return response = request.contentType("multipart/form-data").when().get(url);
+        return request.contentType("multipart/form-data").when().get(url);
+    }
 
+    public static Response getRecentCreatedFax(String url, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data").when().get(url);
     }
 
     /*
@@ -186,6 +179,18 @@ public class RestRequestUtils {
 
         request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
         return response = request.contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxNumber", faxNumber)
+                .when()
+                .post(url);
+
+    }
+
+    /*
+     *@sendFaxwithNum+attach
+     * */
+    public static Response createFaxSingleNum(String url, File file, String faxNumber, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data")
                 .multiPart("filename", file)
                 .queryParam("FaxNumber", faxNumber)
                 .when()
@@ -230,9 +235,7 @@ public class RestRequestUtils {
         return response = request.contentType("multipart/form-data")
                 .queryParam("", "")
                 .queryParam("FaxNumber", faxNumber)
-
                 .post(url);
-
     }
 
     /*
@@ -250,9 +253,7 @@ public class RestRequestUtils {
                 .multiPart("filename", file)
                 .queryParam("FaxNumber", faxNumber)
                 .queryParam("FaxNumber", faxNumber2)
-
                 .when().post(url);
-
     }
 
     public static Response FaxNo_Attachment(String url, String faxNumber) {
@@ -283,7 +284,16 @@ public class RestRequestUtils {
                 .multiPart("filename", file)
                 .queryParam("FaxNumber", emptyFaxNumber)
                 .when().post(url);
+    }
 
+    /*
+     *@sendRequestWithNoNumber
+     * */
+    public static Response faxWithNoNumber(String url, File file, String emptyFaxNumber, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxNumber", emptyFaxNumber)
+                .when().post(url);
     }
 
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD) {
@@ -298,6 +308,13 @@ public class RestRequestUtils {
                 .queryParam("FaxRecipient", faxRecipientD)
                 .when().post(url);
 
+    }
+
+    public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxRecipient", faxRecipientD)
+                .when().post(url);
     }
 
     public static Response submitFaxWithMulRecip(String url, String faxD, String FaxD2, File file, File file2) {
@@ -349,7 +366,7 @@ public class RestRequestUtils {
      *@sendRequestWithNoTSI
      * */
     public static Response sendFaxWithTSI(String url, File readfile, String faxnumb) {
-        return response = createRequest(ConfigReader.getProperty("credentialNewOutbound"))
+        return createRequest(ConfigReader.getProperty("credentialNewOutbound"))
                 .contentType("multipart/form-data")
                 .multiPart("filename", readfile)
                 .queryParam("FaxNumber", faxnumb)
@@ -359,7 +376,7 @@ public class RestRequestUtils {
     }
 
     public static Response sendFaxWithNewTSI(String url, File file20Page, String faxnumb) {
-        return response = createRequest(ConfigReader.getProperty("credentialOutbound"))
+        return createRequest(ConfigReader.getProperty("credentialOutbound"))
                 .contentType("multipart/form-data")
                 .multiPart("filename", file20Page)
                 .queryParam("FaxNumber", faxnumb)
@@ -385,5 +402,4 @@ public class RestRequestUtils {
         request.header("Authorization ", "Basic " + encodedCredentialsForAdmin);
         return request;
     }
-
 }

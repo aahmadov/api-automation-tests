@@ -3,7 +3,6 @@ package testng;
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utils.FileReader;
 import utils.JsonUtils;
@@ -17,17 +16,17 @@ import static org.testng.Assert.assertTrue;
 
 public class PostScenariosForSmokeTest extends TestBase {
 
-    @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke"})
+    @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke1"})
     public void sendFaxDataWithRecipientDetails() {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
-        File file = FileReader.readfile(data.get("Pages"));
-        Response response = RestRequestUtils.sendFaxWithRecipent_details(data.get("post_call_Url_Anatoly"),
-                file, data.get("Recipent_data1"));
+        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+        Response response = RestRequestUtils.sendFaxWithRecipent_details(data.get("post_call_Url"),
+                file, data.get("Recipent_data1"), data.get("credentials"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
-        System.out.println("**" + (data.get("post_call_Url_Anatoly")));
+        System.out.println("**" + (data.get("post_call_Url")));
         System.out.println("**" + (data.get("Recipent_data1")));
         System.out.println("**" + file);
         System.out.println("------------------------------------------------------------------------");
@@ -44,12 +43,13 @@ public class PostScenariosForSmokeTest extends TestBase {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
-        File file = FileReader.readfile(data.get("Pages"));
-        Response response = RestRequestUtils.createFaxSingleNum(data.get("post_call_Url_Anatoly"), file, data.get("faxNumber"));
+        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+        Response response = RestRequestUtils.createFaxSingleNum(data.get("post_call_Url"),
+                file, data.get("faxNumber"), data.get("credentials"));
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
-        System.out.println("******* " + data.get("post_call_Url_Anatoly"));
+        System.out.println("******* " + data.get("post_call_Url"));
         System.out.println("******* " + file + " " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
 
@@ -65,12 +65,13 @@ public class PostScenariosForSmokeTest extends TestBase {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
-        File file = FileReader.readfile(data.get("Pages"));
-        Response response = RestRequestUtils.faxWithNoNumber(data.get("post_call_Url_Anatoly"), file, data.get("faxNumber"));
+        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+        Response response = RestRequestUtils.faxWithNoNumber(data.get("post_call_Url"),
+                file, data.get("faxNumber"), data.get("credentials"));
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
-        System.out.println("******* " + data.get("post_call_Url_Anatoly"));
+        System.out.println("******* " + data.get("post_call_Url"));
         System.out.println("******* " + file + " " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
 
@@ -82,3 +83,4 @@ public class PostScenariosForSmokeTest extends TestBase {
 
 
 }
+
