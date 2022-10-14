@@ -28,13 +28,13 @@ public class RestRequestUtils {
     /*
      *@getWithValidFaxID
      * */
-    public static Response getFax(String url, String creds) {
-        return createRequest(creds).contentType("multipart/form-data").when().get(url);
+    public static Response getFax(String url, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data").when().get(url);
     }
 
     public static Response getFax(String url) {
         RequestSpecification request = RestAssured.given();
-        String credentilas = ConfigReader.getProperty("credentialOutboundAnatoly");
+        String credentilas = ConfigReader.getProperty("credentialOutbound");
         byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
         String encodedCreadentialForAdmin = new String(encodedCredentials);
 

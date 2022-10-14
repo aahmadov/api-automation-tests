@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
-
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.testng.Assert.assertEquals;
@@ -32,7 +30,7 @@ import static org.testng.Assert.assertEquals;
 public class SoapInboundFaxPagesCoverPage extends TestBase {
 
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke"})
+            groups = {"smoke2"})
     public void soapFaxStatusAndPageNumberValidationFromInbound() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -40,9 +38,11 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
 
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         String tsi = FileReader.randomTsi();
+        String[] outboundCred = data.get("credentialNewOutboundLogin").split("@");
         //add more values to the data to replace the values from the xml file
-        data.put("login", data.get("credentialNewOutboundLogin"));
+        data.put("login", outboundCred[0]);
         data.put("password", data.get("credentialNewOutboundPassword"));
+        data.put("realm", outboundCred[1]);
         data.put("faxUserId", data.get("credentialNewOutboundLogin"));
         data.put("tsi", tsi);
         data.put("fileName", FileReader.getFileName(file.getAbsolutePath()));
@@ -83,11 +83,13 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                         + " total page in attachment is " + "**" + ((LinkedHashMap) tsiArray.get(0)).get("PagesTotal") + "**");
             }
             times++;
-        } while (isNotCompleted && times < 16);
+        } while (isNotCompleted && times < 10);
 
         //replacing the login credentials for inbound fax
-        data.put("login", data.get("credentialNewInboundLogin"));
+        String[] inboundCred = data.get("credentialNewInboundLogin").split("@");
+        data.put("login", inboundCred[0]);
         data.put("password", data.get("credentialNewInboundPassword"));
+        data.put("realm", inboundCred[1]);
         data.put("faxUserId", data.get("credentialNewInboundLogin"));
         String queryReceiveFaxBody = replaceValues(data, String.format("soapRequestBody/%s_queryReceiveFax.xml", testName));
 
@@ -126,6 +128,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                 .replace("{tsi}", data.get("tsi"))
                 .replace("{login}", data.get("login"))
                 .replace("{password}", data.get("password"))
+                .replace("{realm}", data.get("realm"))
                 .replace("{fileName}", data.get("fileName"))
                 .replace("{attachment}", data.get("attachment"))
                 .replace("{faxUserId}", data.get("faxUserId"))

@@ -19,11 +19,11 @@ public class GetScenariosForSmokeTest extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        Thread.sleep(1000 * 120);
+        Thread.sleep(1000 * 60);
         Response response = RestRequestUtils.getRecentCreatedFax(
                 data.get("get_call_Url") + data.get("FaxUserId"), data.get("credentials"));
 
-        assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
+        assertEquals( response.getStatusCode(),Integer.parseInt(data.get("expectedStatusCode")));
 
         String expectedNumber = data.get("expectedNumber");
         String faxstatus = "";
@@ -52,13 +52,13 @@ public class GetScenariosForSmokeTest extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        Thread.sleep(1000 * 120);
+        Thread.sleep(1000 * 60);
         Response response = RestRequestUtils.getFax(data.get("get_call_Url") + data.get("valid_ID"),
                 data.get("credentials"));
         System.out.println("**" + data.get("get_call_Url"));
         System.out.println("**" + data.get("valid_ID"));
 
-        assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
+        assertEquals(response.getStatusCode(),Integer.parseInt(data.get("expectedStatusCode")));
 
         String faxStatus = response.then().extract().path("FaxInfo[0].FaxStatus");
         int faxId = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
@@ -78,7 +78,7 @@ public class GetScenariosForSmokeTest extends TestBase {
         Response response = RestRequestUtils.getFax(data.get("get_call_Url"), data.get("credentials"));
         System.out.println("** " + data.get("get_call_Url"));
 
-        assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
+        assertEquals(response.getStatusCode(),Integer.parseInt(data.get("expectedStatusCode")));
 
         List<String> userID = JsonPath.read(response.asPrettyString(), "$.FaxInfo[*].FaxUserId");
         //System.out.println("*** faxUserId after validation is " + "**" + userID + "**");

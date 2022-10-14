@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TestInbound extends TestBase {
 
-    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke"})
+    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke1"})
     public void faxStatusAndPageNumberValidationFromInbound2() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -67,7 +67,7 @@ public class TestInbound extends TestBase {
                 System.out.println("Error message: " + "**" + errorMessage + "**");
             }
             times++;
-        } while (isNotCompleted && times < 16);
+        } while (isNotCompleted && times < 10);
 
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
@@ -78,7 +78,7 @@ public class TestInbound extends TestBase {
                 data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialNewInbound"));
         assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());
 
-        System.out.println(":checking for this TSI "+ ":" + onlyTsi+ ":"+"in entire Inbound Fax response " );
+        System.out.println(":checking for this TSI " + ":" + onlyTsi + ":" + "in entire Inbound Fax response ");
         //Get all metadata of the TSI from the response
         JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
         System.out.println("Response related TSI is: " + tsiArray.toJSONString());
@@ -86,7 +86,7 @@ public class TestInbound extends TestBase {
         System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
         //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
         if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
-            fail(":" +onlyTsi + ":"+ "****" + " doesn't have neither recvOk status or 3 attempts" + "**");
+            fail(":" + onlyTsi + ":" + "****" + " doesn't have neither recvOk status nor 3 attempts" + "**");
         }
 
         //Get the Fax status values of all the TSi from response

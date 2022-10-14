@@ -7,7 +7,7 @@
                 <Authentication>
                     <Login>{login}</Login>
                     <Password>{password}</Password>
-                    <Realm>acme</Realm>
+                    <Realm>{realm}</Realm>
                 </Authentication>
                 <!--Optional:-->
                 <FaxId>{faxId}</FaxId>
