@@ -16,7 +16,7 @@ import static org.testng.Assert.assertTrue;
 
 public class PostScenariosForSmokeTest extends TestBase {
 
-    @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke1"})
+    @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke"})
     public void sendFaxDataWithRecipientDetails() {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
