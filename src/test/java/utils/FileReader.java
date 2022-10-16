@@ -1,10 +1,10 @@
 package utils;
 
-import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -113,24 +113,45 @@ public class FileReader {
         return values.stream().map(value -> value[0]).collect(Collectors.toList());
     }
 
-    public static String fileToByteString(final String filePath) throws IOException {
-        byte[] rawData = Files.readAllBytes(Paths.get(filePath));
-        byte[] encoded = Base64.encodeBase64(rawData);
-        return new String(encoded);
+    public static String fileToByteString(final File file) throws IOException {
+        byte[] rawData = Files.readAllBytes(file.toPath());
+        String data = Base64.getEncoder().encodeToString(rawData);
+        return data;
+    }
+
+    public static String fileToByteString(final String file) throws IOException {
+        File originalFile = new File(file);
+        String encodedBase64 = null;
+        FileInputStream fileInputStream = new FileInputStream(originalFile);
+        byte[] bytes = new byte[(int) originalFile.length()];
+        fileInputStream.read(bytes);
+        encodedBase64 = new String(Base64.getEncoder().encode(bytes));
+        return encodedBase64;
     }
 
     public static String getFileName(String filePath) {
         return FilenameUtils.getName(filePath);
     }
 
-    public static String getContentTypeForFile(String fileName) {
-        String extension = FilenameUtils.getExtension(fileName);
+    public static String getContentTypeForFile(String filePath) {
+        String extension = FilenameUtils.getExtension(getFileName(filePath));
         switch (extension.toLowerCase()) {
             case "txt": {
                 return "text/plain";
             }
             case "json": {
                 return "application/json";
+            }
+            case "doc": {
+                return "application/msword";
+            }
+            case "docx": {
+//                return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                return "application/octet-stream";
+            }
+            case "tif":
+            case "tiff": {
+                return "image/tiff";
             }
             default: {
                 return "application/pdf";

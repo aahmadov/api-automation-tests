@@ -15,6 +15,7 @@
                 </FaxRecipient>
                 <!--Zero or more repetitions:-->
                 <Attachment>
+                    <ContentType>{contentType}</ContentType>
                     <FileName>{fileName}</FileName>
                     <AttachmentContent>{attachment}</AttachmentContent>
                 </Attachment>
@@ -22,6 +23,7 @@
                 <CoverPageEnabled>{coverPageEnabled}</CoverPageEnabled>
                 <!--Optional:-->
                 <TSI>{tsi}</TSI>
+                <FaxUserId>{faxUserId}</FaxUserId>
             </SendFaxInput>
         </rep:SendFax>
     </soapenv:Body>

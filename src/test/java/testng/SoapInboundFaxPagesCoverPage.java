@@ -30,7 +30,7 @@ import static org.testng.Assert.assertEquals;
 public class SoapInboundFaxPagesCoverPage extends TestBase {
 
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke2"})
+            groups = {"smokeNew"})
     public void soapFaxStatusAndPageNumberValidationFromInbound() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -43,10 +43,11 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         data.put("login", outboundCred[0]);
         data.put("password", data.get("credentialNewOutboundPassword"));
         data.put("realm", outboundCred[1]);
-        data.put("faxUserId", data.get("credentialNewOutboundLogin"));
+        data.put("faxUserId", outboundCred[0]);
         data.put("tsi", tsi);
         data.put("fileName", FileReader.getFileName(file.getAbsolutePath()));
         data.put("attachment", FileReader.fileToByteString(file.getAbsolutePath()));
+        data.put("contentType", FileReader.getContentTypeForFile(file.getAbsolutePath()));
 
         //replace the values in the xml files from the testData (data)
         String sendFaxBody = replaceValues(data, String.format("soapRequestBody/%s_sendFax.xml", testName));
@@ -83,15 +84,16 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                         + " total page in attachment is " + "**" + ((LinkedHashMap) tsiArray.get(0)).get("PagesTotal") + "**");
             }
             times++;
-        } while (isNotCompleted && times < 10);
+        } while (isNotCompleted && times < 16);
 
         //replacing the login credentials for inbound fax
         String[] inboundCred = data.get("credentialNewInboundLogin").split("@");
         data.put("login", inboundCred[0]);
         data.put("password", data.get("credentialNewInboundPassword"));
         data.put("realm", inboundCred[1]);
-        data.put("faxUserId", data.get("credentialNewInboundLogin"));
+        data.put("faxUserId", inboundCred[0]);
         String queryReceiveFaxBody = replaceValues(data, String.format("soapRequestBody/%s_queryReceiveFax.xml", testName));
+        System.out.println("just testing");
 
         Response inboundFaxwithCoverPage = SoapRequestUtils.soapInboundFaxWithCoverPage(data.get("post_call_Url"),
                 queryReceiveFaxBody, String.format("%s:%s", data.get("login"), data.get("password")), data.get(("queryReceiveFaxSoapAction")));
@@ -101,8 +103,9 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         //Get all metadata of the TSI from the response
         String inboundFaxData = XML.toJSONObject(inboundFaxwithCoverPage.asPrettyString()).toString();
         JSONArray tsiArray = JsonPath.read(inboundFaxData, "$..FaxInfo[?(@.TSI =~/" + tsi + "/)]");
+
         System.out.println("*** RESPONSE DATA FOR TSI ***");
-        System.out.println(tsiArray.toString());
+        //System.out.println(tsiArray.toString());
 
         //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
         if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
@@ -133,9 +136,8 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                 .replace("{attachment}", data.get("attachment"))
                 .replace("{faxUserId}", data.get("faxUserId"))
                 .replace("{faxId}", data.getOrDefault("faxId", ""))
-                .replace("{coverPageEnabled}", "true");
+                .replace("{coverPageEnabled}", "true")
+                .replace("{contentType}", data.get("contentType"));
     }
 
 }
-
-

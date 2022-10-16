@@ -10,8 +10,6 @@
                     <Realm>{realm}</Realm>
                 </Authentication>
                 <!--Optional:-->
-                <FaxId>{faxId}</FaxId>
-                <!--Optional:-->
                 <FaxUserId>{faxUserId}</FaxUserId>
             </QueryReceiveFaxInput>
         </rep:QueryReceiveFax>

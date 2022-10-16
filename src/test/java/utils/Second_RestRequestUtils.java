@@ -40,7 +40,7 @@ public class Second_RestRequestUtils {
                 .multiPart("filename", file)
                 .queryParam("FaxNumber", number)
 //                .queryParam("CoverPageEnabled", true)
-                .when().log().all()
+                .when()
                 .post(url);
     }
 

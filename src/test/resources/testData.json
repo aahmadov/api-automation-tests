@@ -52,31 +52,31 @@
     "sendBody": "true"
   },
   "faxStatusAndPageNumberValidationFromInbound2": {
-    "post_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "222-222-2222",
     "Pages": "2",
     "fileType": "pdf",
-    "credentialNewOutbound": "faxsending@qa3:Softlinx_123",
+    "credentialNewOutbound": "faxsending@acme:softlinx",
     "inboundStatusCode": 201,
-    "getFaxByID_url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "newOutboundParam": "?FaxUserId=faxsending",
-    "inboundFax_url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "inboundFax_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "newInboundParam": "?FaxUserId=receiver",
-    "credentialNewInbound": "receiver@qa3:Softlinx_123"
+    "credentialNewInbound": "receiver@acme:softlinx"
   },
   "soapFaxStatusAndPageNumberValidationFromInbound": {
-    "post_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/wsapi",
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/wsapi",
     "faxNumber": "1-222-222-2222",
     "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
     "querySendFaxSoapAction": "http://www.softlinx.com/wsapi/op=QuerySendFax/ver=79",
     "queryReceiveFaxSoapAction": "http://www.softlinx.com/wsapi/op=QueryReceiveFax/ver=79",
     "Pages": "2",
     "fileType": "pdf",
-    "credentialNewOutboundLogin": "faxsending@qa3",
-    "credentialNewOutboundPassword": "Softlinx_123",
+    "credentialNewOutboundLogin": "faxsending@acme",
+    "credentialNewOutboundPassword": "softlinx",
     "inboundStatusCode": 200,
-    "credentialNewInboundLogin": "receiver@qa3",
-    "credentialNewInboundPassword": "Softlinx_123"
+    "credentialNewInboundLogin": "receiver@acme",
+    "credentialNewInboundPassword": "softlinx"
   },
   "faxStatusAndPageNumberValidationFromInbound": {
     "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
