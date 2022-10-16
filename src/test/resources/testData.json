@@ -1,45 +1,45 @@
 {
   "sendFaxDataWithRecipientDetails": {
-    "post_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "credentials": "faxsending@qa3:Softlinx_123",
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "faxsending@acme:softlinx",
     "Pages": "1",
     "fileType": "pdf",
     "Recipent_data1": "{ \"FaxNumber\": \"1-555-1212\", \"RcptName\": \"Alice Doherty\" }",
     "expectedStatusCode": "201"
   },
   "sendFaxWithValidNumberAndAttachment": {
-    "post_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "credentials": "faxsending@qa3:Softlinx_123",
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "faxsending@acme:softlinx",
     "Pages": "1",
     "fileType": "pdf",
     "faxNumber": "1(781)-885-4198",
     "expectedStatusCode": "201"
   },
   "sendFaxDataWithoutNumber": {
-    "post_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "",
-    "credentials": "faxsending@qa3:Softlinx_123",
+    "credentials": "faxsending@acme:softlinx",
     "Pages": "1",
     "fileType": "pdf",
     "expectedStatusCode": "400",
     "expectedErrorMessage": "Empty fax number"
   },
   "retrieveRecentlyCreatedFax": {
-    "get_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "credentials": "faxsending@qa3:Softlinx_123",
+    "get_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "faxsending@acme:softlinx",
     "FaxUserId": "?FaxUserId=faxsending",
     "expectedStatusCode": "200",
     "expectedNumber": "(781)-885-4198"
   },
   "retrieveFaxAndFaxDataById": {
-    "get_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "credentials": "faxsending@qa3:Softlinx_123",
-    "valid_ID": "/3",
+    "get_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "faxsending@acme:softlinx",
+    "valid_ID": "/283",
     "expectedStatusCode": "200"
   },
   "retrieveAllFaxData": {
-    "get_call_Url": "http://10.250.1.161:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "credentials": "faxsending@qa3:Softlinx_123",
+    "get_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "faxsending@acme:softlinx",
     "expectedStatusCode": "200",
     "faxUserId": "faxsending"
   },
