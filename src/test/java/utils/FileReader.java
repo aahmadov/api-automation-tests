@@ -1,10 +1,9 @@
 package utils;
 
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -39,7 +38,7 @@ public class FileReader {
             String filePath = fileOptional
                     .map(File::getAbsolutePath)
                     .orElseGet(() -> Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath());
-            return new File(filePath);
+            return new File(filePath.replace("\\target\\test-classes", "\\src\\test\\resources"));
         } catch (URISyntaxException exception) {
             System.out.println(exception.getMessage());
             return null;
@@ -56,7 +55,8 @@ public class FileReader {
             String filePath = fileOptional
                     .map(File::getAbsolutePath)
                     .orElseGet(() -> Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath());
-            return new File(filePath);
+            String newFilePath = filePath.replace("\\target\\test-classes", "\\src\\test\\resources");
+            return new File(newFilePath);
         } catch (URISyntaxException exception) {
             System.out.println(exception.getMessage());
             return null;
@@ -72,7 +72,6 @@ public class FileReader {
     }
 
     public static String randomFaxNumberforTSI() {
-
 
         Random TSINumber = new Random();
         int random_Num = TSINumber.nextInt(100);
@@ -113,24 +112,15 @@ public class FileReader {
         return values.stream().map(value -> value[0]).collect(Collectors.toList());
     }
 
-    public static String fileToByteString(final File file) throws IOException {
-        byte[] rawData = Files.readAllBytes(file.toPath());
-        String data = Base64.getEncoder().encodeToString(rawData);
-        return data;
-    }
-
-    public static String fileToByteString(final String file) throws IOException {
-        File originalFile = new File(file);
-        String encodedBase64 = null;
-        FileInputStream fileInputStream = new FileInputStream(originalFile);
-        byte[] bytes = new byte[(int) originalFile.length()];
-        fileInputStream.read(bytes);
-        encodedBase64 = new String(Base64.getEncoder().encode(bytes));
-        return encodedBase64;
-    }
-
     public static String getFileName(String filePath) {
         return FilenameUtils.getName(filePath);
+    }
+
+    public static String fileToByteString(final String filePath) throws IOException {
+        String newFilePath = filePath.replace("\\target\\test-classes", "\\src\\test\\resources");
+        byte[] rawData = Files.readAllBytes(new File(newFilePath).toPath());
+
+        return new String(Base64.encodeBase64(rawData));
     }
 
     public static String getContentTypeForFile(String filePath) {
@@ -146,8 +136,8 @@ public class FileReader {
                 return "application/msword";
             }
             case "docx": {
-//                return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-                return "application/octet-stream";
+                return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+//                return "application/octet-stream";
             }
             case "tif":
             case "tiff": {

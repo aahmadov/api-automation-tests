@@ -18,6 +18,6 @@ public class SoapRequestUtils {
         return request.contentType("text/xml")
                 .body(body)
                 .when()
-                .post(url).then().log().all().extract().response();
+                .post(url).then().extract().response();
     }
 }

@@ -21,7 +21,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TestInbound extends TestBase {
 
-    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke"})
+    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke3"})
     public void faxStatusAndPageNumberValidationFromInbound2() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -80,10 +80,11 @@ public class TestInbound extends TestBase {
 
         System.out.println(":checking for this TSI " + ":" + onlyTsi + ":" + "in entire Inbound Fax response ");
         //Get all metadata of the TSI from the response
+        System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
         JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
         System.out.println("Response related TSI is: " + tsiArray.toJSONString());
 
-        System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
+
         //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
         if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
             fail(":" + onlyTsi + ":" + "****" + " doesn't have neither recvOk status nor 3 attempts" + "**");

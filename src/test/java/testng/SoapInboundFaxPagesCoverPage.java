@@ -26,11 +26,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.testng.Assert.assertEquals;
 
-
 public class SoapInboundFaxPagesCoverPage extends TestBase {
 
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke"})
+            groups = {"soap"})
     public void soapFaxStatusAndPageNumberValidationFromInbound() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -136,7 +135,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                 .replace("{attachment}", data.get("attachment"))
                 .replace("{faxUserId}", data.get("faxUserId"))
                 .replace("{faxId}", data.getOrDefault("faxId", ""))
-                .replace("{coverPageEnabled}", "true")
+                .replace("{coverPageEnabled}", data.get("coverPageEnabled"))
                 .replace("{contentType}", data.get("contentType"));
     }
 
