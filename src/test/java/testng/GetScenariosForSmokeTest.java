@@ -63,9 +63,9 @@ public class GetScenariosForSmokeTest extends TestBase {
         String faxStatus = response.then().extract().path("FaxInfo[0].FaxStatus");
         int faxId = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
         String pagesTotal = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].PagesTotal").toString();
-        //System.out.println("** fax id is" + "**" + faxId + "**");
-        //System.out.println("** totalPages sent " + "**" + pagesTotal + "**");
-        //System.out.println("** faxStatus is " + "**" + faxStatus + "**");
+        System.out.println("** fax id is" + "**" + faxId + "**");
+        System.out.println("** totalPages sent " + "**" + pagesTotal + "**");
+        System.out.println("** faxStatus is " + "**" + faxStatus + "**");
         assertEquals(faxStatus, "sent");
     }
 
