@@ -46,7 +46,7 @@ public class Post_calls_forLoadTest_steps {
         String ExcelPath = ConfigReader.getProperty("testDataFile");
 
         for (int i = 0; i < noOfTimes; i++) {
-            System.out.println("it is iteration time in the loop :" + i);
+            System.out.println(":It is iteration time in the loop :" + i);
             String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();
             response = Load_RestRequestUtils.sendFax_loadTest(ConfigReader.getProperty(URL) + firstLoadTest_TSI,
                     FileReader.randomFileFromFolder(), FileReader.randomFaxNumber());
