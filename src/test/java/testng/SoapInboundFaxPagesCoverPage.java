@@ -29,7 +29,7 @@ import static org.testng.Assert.assertEquals;
 public class SoapInboundFaxPagesCoverPage extends TestBase {
 
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke"})
+            groups = {"smoke1"})
     public void soapFaxStatusAndPageNumberValidationFromInbound() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -92,13 +92,13 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         data.put("realm", inboundCred[1]);
         data.put("faxUserId", inboundCred[0]);
         String queryReceiveFaxBody = replaceValues(data, String.format("soapRequestBody/%s_queryReceiveFax.xml", testName));
-        System.out.println("just testing");
+
 
         Response inboundFaxwithCoverPage = SoapRequestUtils.soapInboundFaxWithCoverPage(data.get("post_call_Url"),
                 queryReceiveFaxBody, String.format("%s:%s", data.get("login"), data.get("password")), data.get(("queryReceiveFaxSoapAction")));
         assertEquals(200, inboundFaxwithCoverPage.getStatusCode());
 
-        System.out.println("checking for this TSI  in entire response " + "**" + tsi);
+        System.out.println(":checking for this TSI  in entire response " + "**" + tsi);
         //Get all metadata of the TSI from the response
         String inboundFaxData = XML.toJSONObject(inboundFaxwithCoverPage.asPrettyString()).toString();
         JSONArray tsiArray = JsonPath.read(inboundFaxData, "$..FaxInfo[?(@.TSI =~/" + tsi + "/)]");
@@ -113,7 +113,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
 
         //Get the Fax status values of all the TSi from excel
         List<String> statuses = tsiArray.stream().map(tsiJson -> ((LinkedHashMap) tsiJson).get("FaxStatus").toString()).collect(Collectors.toList());
-        System.out.println(statuses);
+        System.out.println(":fax status with this tsi ID " +tsi+" is "+statuses);
         //Assertion all the metadata contains only either recvIncomplete or recvOk Fax status
         assertTrue(statuses.stream().allMatch(status -> status.equals("recvIncomplete") || status.equals("recvOk")));
 
