@@ -77,9 +77,6 @@ public class Post_calls_forLoadTest_steps {
         for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
             System.out.println("**" + "it is iteration time in the loop :" + i);
 
-
-
-
             String firstLoadTest_TSI = FileReader.randomNumberFor_TSI();
             String faxNumber = faxNumbers.get(ThreadLocalRandom.current().nextInt(faxNumbers.size()));
 

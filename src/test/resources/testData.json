@@ -44,7 +44,7 @@
     "faxUserId": "faxsending"
   },
   "sendMailToFax": {
-    "to": "auto1.qa3.com",
+    "to": "11111111111@qa3.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "pageSize": "2",
@@ -79,17 +79,13 @@
     "credentialNewInboundLogin": "receiver@acme",
     "credentialNewInboundPassword": "softlinx"
   },
-  "faxStatusAndPageNumberValidationFromInbound": {
-    "post_call_Url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "1-222-222-2222",
+  "add_1_to_the_beginning_Of_number": {
+    "url": "post_call_Url",
+    "faxNumber": "22222233",
+    "times": "1",
+    "fileType":"pdf",
     "Pages": "2",
-    "fileType": "pdf",
-    "credentialNewOutbound": "faxsending@acme:softlinx",
-    "inboundStatusCode": 201,
-    "getFaxByID_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "newOutboundParam": "?FaxUserId=faxsending",
-    "inboundFax_url": "http://10.250.1.99:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-    "newInboundParam": "?FaxUserId=receiver",
-    "credentialNewInbound": "receiver@acme:softlinx"
+    "coverPageEnabled": "true",
+    "faxNumFileLoc": "input/numberForTest.txt"
   }
 }

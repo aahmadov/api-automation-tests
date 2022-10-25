@@ -60,6 +60,11 @@
             <class name="testng.TestInbound"/>
         </classes>
     </test>
+    <test name="Prepend1toFaxNumber">
+        <classes>
+            <class name="testng.Prepend1toFaxNumber"/>
+        </classes>
+    </test>
 
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->

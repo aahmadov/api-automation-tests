@@ -14,7 +14,7 @@ Feature:  ^^This feature file validates add (1) to the beginning of each submitt
 
     Examples:
       | url             | times | coverPageEnabled | faxNumFileLoc           | pageSize |
-      | post_call_Url   | 12     | false            | input/numberForTest.txt | 2        |
+      | post_call_Url   | 1     | false            | input/numberForTest.txt | 3        |
 
  @retrieve_Fax_Number
   Scenario: ^^ Retrieve recently created fax ^^
