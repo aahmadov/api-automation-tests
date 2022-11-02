@@ -2,9 +2,13 @@ package testng;
 
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.Response;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.Test;
 import utils.*;
 
+import java.io.File;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -15,62 +19,69 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class Prepend1toFaxNumber extends TestBase {
-    Response response;
-    int maxIterationNumber = 10;
+    String excelFilePath;
 
     @Test(testName = "Prepend 1 to fax number if it starts with [2-9]", groups = {"smoke6"})
     public void add_1_to_the_beginning_Of_number() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data1 = JsonUtils.getDataBasedOnTestCaseName(testName);
-        assert data1 != null;
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
 
-        String ExcelPath = ConfigReader.getProperty("testDataFile");
+        URL url = getClass().getClassLoader().getResource("dataFile/testData.xlsx");
+        File file = Paths.get(url.toURI()).toFile();
+        excelFilePath = file.getAbsolutePath();
+        ExcelUtility.createExcelAndWrite(excelFilePath, "testTSI", "faxNumber");
+
         List<String> faxNumbers = FileReader.convertToList(
                 CsvUtils.readAllLines(
-                        ResourceUtils.getResourceFilePathAbsPath(data1.get("faxNumFileLoc"))));
+                        ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
 
-        for (int i = 1; i <= Integer.parseInt(data1.get("times")); i++) {
+        for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
             System.out.println("**" + "it is iteration time in the loop :" + i);
 
             String testTSI = FileReader.randomNumberFor_TSI();
-            String faxNumber = faxNumbers.get(ThreadLocalRandom.current().nextInt(faxNumbers.size()));
+            String faxNumber = StringUtils.isBlank(data.get("faxNumber")) ?
+                    faxNumbers.get(ThreadLocalRandom.current().nextInt(faxNumbers.size())) : data.get("faxNumber");
 
             Map<String, Object> requestData = new ConcurrentHashMap<>();
-            requestData.put("filename", FileReader.getFileUsingPageSize(data1.get("pageSize")));
+            requestData.put("filename", FileReader.getFileUsingPageSize(data.get("pageSize"), data.get("fileType")));
             requestData.put("FaxNumber", faxNumber);
-            requestData.put("url", ConfigReader.getProperty(data1.get("url")) + testTSI);
-            requestData.put("coverPageEnabled", data1.get("coverPageEnabled"));
+            requestData.put("url", data.get("url") + testTSI);
+            requestData.put("coverPageEnabled", data.get("coverPageEnabled"));
 
-            response = Load_RestRequestUtils.sendFax_loadTest(requestData);
+            Response sendFaxResponse = Load_RestRequestUtils.sendFax_loadTest(requestData, data.get("credentials"));
 
-            System.out.println(response.asString());
+            System.out.println(sendFaxResponse.asString());
 
-            if (!Boolean.parseBoolean(data1.get("ignoreFail"))) {
-                assertEquals(201, response.statusCode());
+            if (!Boolean.parseBoolean(data.get("ignoreFail"))) {
+                assertEquals(201, sendFaxResponse.statusCode());
             }
 
-            if (response.statusCode() == 201) {
-                ExcelUtility.createExcelAndWrite(ExcelPath, testTSI, faxNumber);
+            if (sendFaxResponse.statusCode() == 201) {
+                ExcelUtility.createExcelAndWrite(excelFilePath, testTSI, faxNumber);
                 //ExcelUtility.createExcelAndWrite(ExcelPath, faxNumber);
                 //System.out.println("**"+"after successful post call, generated TSI is "+firstLoadTest_TSI);
             }
         }
-        response = Load_RestRequestUtils.getRecentFax(
-                ConfigReader.getProperty("post_call_Url") + (ConfigReader.getProperty("outboundParamAdmin")));
-        int  statusCode=response.getStatusCode();
-        System.out.println("******* Status code:" + response.statusCode());
-        assertEquals(statusCode, response.statusCode());
 
-        List<LinkedHashMap<String, String>> data = JsonPath.read(response.asString(), "$.FaxInfo[*]['FaxNumber', 'TSI']");
+        Thread.sleep(1000 * 30);
+        Response recentFaxResponse = Load_RestRequestUtils
+                .getRecentFax(data.get("url") + data.get("faxUserId"), data.get("credentials"));
 
-        List<Map<String, String>> xyz = data.stream().map(map -> {
+        int statusCode = recentFaxResponse.getStatusCode();
+        System.out.println("******* Status code:" + recentFaxResponse.statusCode());
+        assertEquals(statusCode, recentFaxResponse.statusCode());
+
+        List<LinkedHashMap<String, String>> tsiAndFaxNumbers = JsonPath.read(recentFaxResponse.asString(), "$.FaxInfo[*]['FaxNumber', 'TSI']");
+
+        List<Map<String, String>> xyz = tsiAndFaxNumbers.stream().map(map -> {
             List<String> values = new ArrayList<>(map.values());
             return Map.of(values.get(1), values.get(0));
         }).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
 
-        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData((ConfigReader.getProperty("testDataFile")), 0);
+        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData(excelFilePath, 0);
         List<String> tsiIds = tsiIdsFromExcel.stream().map(item -> item.split("=")[1]).collect(Collectors.toList());
-        List<String> faxNumbersFromExcel = ExcelUtility.getColumnData((ConfigReader.getProperty("testDataFile")), 1);
+        List<String> faxNumbersFromExcel = ExcelUtility.getColumnData(excelFilePath, 1);
         //create map combing both TSI id and fax numbers from excel
         Map<String, String> dataFromExcel = IntStream.range(0, tsiIds.size()).boxed().collect(Collectors.toMap(tsiIds::get, faxNumbersFromExcel::get));
         dataFromExcel.keySet().forEach(key -> {
@@ -83,5 +94,4 @@ public class Prepend1toFaxNumber extends TestBase {
             // assertEquals(dataFromExcel.get(key), value.get(0));
         });
     }
-
 }

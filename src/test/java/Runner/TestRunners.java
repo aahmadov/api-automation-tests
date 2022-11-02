@@ -1,6 +1,5 @@
 package Runner;
 
-import java.io.IOException;
 
 import org.junit.AfterClass;
 import org.junit.runner.RunWith;
@@ -8,13 +7,15 @@ import org.junit.runner.RunWith;
 import io.cucumber.junit.*;
 import utils.sendMailing;
 
+import java.io.IOException;
+
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features = "./src/test/resources/features", 
         glue = {"stepDefinitions" },		
         dryRun =false, 
         monochrome = true, 
-        tags = {"@testCase#1"},
+        tags = {"@TC-1SentFaxwithRecipient"},
         plugin = { "pretty",
 				"html:target/cucumber-html-report", "json:target/cucumber/cucumber.json",
 				"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks" })

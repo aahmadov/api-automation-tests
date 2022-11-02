@@ -298,7 +298,7 @@ public class RestRequestUtils {
 
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD) {
         RequestSpecification request = RestAssured.given();
-        String credentilas = ConfigReader.getProperty("credentialOutboundAnatoly");
+        String credentilas = ConfigReader.getProperty("credentialOutbound");
         byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
         String encodedCreadentialForAdmin = new String(encodedCredentials);
         request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);

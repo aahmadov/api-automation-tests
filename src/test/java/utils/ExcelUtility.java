@@ -27,6 +27,9 @@ public class ExcelUtility {
     }
 
     public static void createExcelAndWrite(String fileName, String... values) {
+        if(workBook == null && workSheet == null) {
+            createExcelAndSheet();
+        }
         XSSFRow row = workSheet.createRow(rowNumber);
         int columnIndex = 0;
         for (String value: values) {
