@@ -80,7 +80,7 @@
     "credentialNewInboundPassword": "softlinx"
   },
   "add_1_to_the_beginning_Of_number": {
-    "url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "url": "http://10.250.1.67:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "admin@acme:softlinx",
     "faxUserId": "?FaxUserId=admin",
     "faxNumber": "22222233",
