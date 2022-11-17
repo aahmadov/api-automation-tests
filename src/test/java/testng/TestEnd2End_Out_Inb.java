@@ -19,9 +19,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.testng.Assert.assertEquals;
 
-public class TestInbound extends TestBase {
+public class TestEnd2End_Out_Inb extends TestBase {
 
-    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke"})
+    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke1"})
     public void faxStatusAndPageNumberValidationFromInbound2() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -81,7 +81,7 @@ public class TestInbound extends TestBase {
         System.out.println(":checking for this TSI " + ":" + onlyTsi + ":" + "in entire Inbound Fax response ");
         //Get all metadata of the TSI from the response
         System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
-        JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
+        JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1, "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
         System.out.println("Response related TSI is: " + tsiArray.toJSONString());
 
 

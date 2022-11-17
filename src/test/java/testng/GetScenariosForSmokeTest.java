@@ -35,8 +35,8 @@ public class GetScenariosForSmokeTest extends TestBase {
 
         for (String str : number) {
             if (expectedNumber.equals(str)) {
-                FaxId = JsonPath.read(resp, "$.FaxInfo[4].FaxId");
-                faxstatus = JsonPath.read(resp, "$.FaxInfo[4].FaxStatus").toString();
+                FaxId = JsonPath.read(resp, "$.FaxInfo[0].FaxId");
+                faxstatus = JsonPath.read(resp, "$.FaxInfo[0].FaxStatus").toString();
                 pagesTotalsent = JsonPath.read(resp, "$.FaxInfo[4].PagesTotal").toString();
             }
         }
@@ -82,7 +82,7 @@ public class GetScenariosForSmokeTest extends TestBase {
 
         List<String> userID = JsonPath.read(response.asPrettyString(), "$.FaxInfo[*].FaxUserId");
         //System.out.println("*** faxUserId after validation is " + "**" + userID + "**");
-        System.out.println("*** total count of userid by name Admin " + "**" + userID.size() + "**");
+        System.out.println("*** total count of userid " + "**" + userID.size() + "**");
 
         assertTrue(userID.contains(data.get("faxUserId")));
     }

@@ -55,9 +55,9 @@
         </classes>
     </test>
 
-    <test name="TestInbound">
+    <test name="TestEnd2End_Out_Inb">
         <classes>
-            <class name="testng.TestInbound"/>
+            <class name="testng.TestEnd2End_Out_Inb"/>
         </classes>
     </test>
     <test name="Prepend1toFaxNumber">
@@ -65,7 +65,11 @@
             <class name="testng.Prepend1toFaxNumber"/>
         </classes>
     </test>
-
+    <test name="ResendFax">
+        <classes>
+            <class name="testng.ResendFax"/>
+        </classes>
+    </test>
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
     <!--        <parameter name="times" value="2" />-->

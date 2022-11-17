@@ -296,6 +296,13 @@ public class RestRequestUtils {
                 .when().post(url);
     }
 
+        public static Response resendfaxWithvalidIdNumber(String url, File file, String emptyFaxNumber, String credentials) {
+            return createRequest(credentials).contentType("multipart/form-data")
+                    .multiPart("filename", file)
+                    .queryParam("FaxNumber", emptyFaxNumber)
+                    .when().post(url);
+    }
+
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD) {
         RequestSpecification request = RestAssured.given();
         String credentilas = ConfigReader.getProperty("credentialOutbound");
