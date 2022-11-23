@@ -95,7 +95,7 @@
     "post_call_Url": "http://10.250.1.97:8080/softlinx/replixfax/restapi/v1/outboundfaxes/147/resend",
     "faxNumber": "23333333333",
     "credentials": "merdal@dev101:softlinx",
-    "Pages": "1",
+    "Pages": "3",
     "fileType": "pdf",
     "expectedStatusCode": "200"
   }
