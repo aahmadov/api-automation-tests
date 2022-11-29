@@ -18,8 +18,10 @@ import javax.mail.internet.MimeMultipart;
 
 public class SendEmail {
 
-	private static String USER_NAME =System.getenv("mail.username"); 
-	private static String PASSWORD = System.getenv("mail.password");
+	private static String USER_NAME ="auto@softlinx.com";
+	//System.getenv("mail.username");
+	private static String PASSWORD ="softlinx" ;
+		// System.getenv("mail.password");
 
 	private static String SUBJECT = "Java send mail example";
 
