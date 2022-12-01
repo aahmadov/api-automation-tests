@@ -21,10 +21,10 @@ public class ReceiveEmail {
 
 	private static String host = "imap.gmail.com";
 	private static String mailStoreType = "imap";
-	private static String username ="auto@softlinx.com";
-	// System.getenv("mail.username");
-	private static String password ="softlinx";
-	// System.getenv("mail.password");
+	private static String username = System.getenv("mail.username");//"auto@softlinx.com";
+	//System.getenv("mail.username");
+	private static String password = System.getenv("mail.password");//"softlinx";
+//
 
 	public static Boolean receiveEmail(String mailFrom, String subjectFilter) throws InterruptedException {
 
@@ -35,6 +35,11 @@ public class ReceiveEmail {
 			Properties props = new Properties();
 			props.setProperty("mail.imap.ssl.enable", "true");
 			Session session = Session.getDefaultInstance(props, null);
+//			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+//				protected PasswordAuthentication getPasswordAuthentication() {
+//					return new PasswordAuthentication(username, password);
+//				}
+//			});
 
 			// connect to the email//
 			Store emailStore = session.getStore(mailStoreType);

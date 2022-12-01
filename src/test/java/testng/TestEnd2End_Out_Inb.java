@@ -81,7 +81,7 @@ public class TestEnd2End_Out_Inb extends TestBase {
         System.out.println(":checking for this TSI " + ":" + onlyTsi + ":" + "in entire Inbound Fax response ");
         //Get all metadata of the TSI from the response
         System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
-        JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1, "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
+        JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asPrettyString().toString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
         System.out.println("Response related TSI is: " + tsiArray.toJSONString());
 
 

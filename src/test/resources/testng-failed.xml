@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="1" parallel="tests" name="Failed suite [TestNgTests]" guice-stage="DEVELOPMENT">
+  <test parallel="tests" name="SendMailToFaxTests(failed)">
+    <groups>
+      <run>
+        <include name="smoke4"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="testng.SendMailToFaxTests">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="sendMailToFax"/>
+        </methods>
+      </class> <!-- testng.SendMailToFaxTests -->
+    </classes>
+  </test> <!-- SendMailToFaxTests(failed) -->
+</suite> <!-- Failed suite [TestNgTests] -->
