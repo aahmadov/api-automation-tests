@@ -22,9 +22,9 @@ public class ReceiveEmail {
 	private static String host = "imap.gmail.com";
 	private static String mailStoreType = "imap";
 	private static String username = System.getenv("mail.username");//"auto@softlinx.com";
-	//System.getenv("mail.username");
+
 	private static String password = System.getenv("mail.password");//"softlinx";
-//
+
 
 	public static Boolean receiveEmail(String mailFrom, String subjectFilter) throws InterruptedException {
 

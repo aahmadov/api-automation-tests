@@ -6,3 +6,5 @@
 .project
 /test-output/
 .settings/
+/src/test/resources/TestNgTests/.*
+/src/test/resources/old//TestNgTests/.*

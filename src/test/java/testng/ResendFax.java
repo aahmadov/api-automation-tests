@@ -21,7 +21,7 @@ public class ResendFax extends TestBase{
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
-        Response response = RestRequestUtils.resendfaxWithvalidIdNumber(data.get("post_call_Url"),
+        Response response = RestRequestUtils.resendfaxWithinvalidIdNumber(data.get("post_call_Url"),
                 file, data.get("faxNumber"), data.get("credentials"));
 
         System.out.println("------------------------------------------------------------------------");

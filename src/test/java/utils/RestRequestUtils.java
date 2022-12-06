@@ -301,6 +301,13 @@ public class RestRequestUtils {
                     .multiPart("filename", file)
                     .queryParam("FaxNumber", emptyFaxNumber)
                     .when().post(url);
+        }
+
+            public static Response resendfaxWithinvalidIdNumber(String url, File file, String FaxNumber, String credentials) {
+                return createRequest(credentials).contentType("multipart/form-data")
+//                        .multiPart("filename", file)
+                        .queryParam("FaxNumber", FaxNumber)
+                        .when().post(url);
     }
 
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD) {
