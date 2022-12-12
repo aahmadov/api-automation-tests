@@ -1,0 +1,3 @@
+
+
+mvn -Dtest=Runner.TestRunners test -Dcucumber.options="--tags @smoke"
