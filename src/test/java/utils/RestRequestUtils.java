@@ -296,19 +296,16 @@ public class RestRequestUtils {
                 .when().post(url);
     }
 
-        public static Response resendfaxWithvalidIdNumber(String url, File file, String emptyFaxNumber, String credentials) {
-            return createRequest(credentials).contentType("multipart/form-data")
-                    .multiPart("filename", file)
-                    .queryParam("FaxNumber", emptyFaxNumber)
-                    .when().post(url);
-        }
 
-            public static Response resendfaxWithinvalidIdNumber(String url, File file, String FaxNumber, String credentials) {
-                return createRequest(credentials).contentType("multipart/form-data")
-//                        .multiPart("filename", file)
-                        .queryParam("FaxNumber", FaxNumber)
-                        .when().post(url);
-    }
+public static Response createFaxSingleNum3(String url, File file, String faxNumber, String credentials) {
+    return createRequest(credentials).contentType("multipart/form-data")
+            .multiPart("filename", file)
+            .queryParam("FaxNumber", faxNumber)
+            .when()
+            .post(url);
+
+}
+
 
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD) {
         RequestSpecification request = RestAssured.given();
@@ -411,9 +408,9 @@ public class RestRequestUtils {
     private static RequestSpecification createRequest(String credentials) {
         RequestSpecification request = RestAssured.given();
         byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
-        String encodedCredentialsForAdmin = new String(encodedCredentials);
+        String encodedCredentialsFaxsending = new String(encodedCredentials);
 
-        request.header("Authorization ", "Basic " + encodedCredentialsForAdmin);
+        request.header("Authorization ", "Basic " + encodedCredentialsFaxsending);
         return request;
     }
 }

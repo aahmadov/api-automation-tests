@@ -7,6 +7,7 @@ import org.testng.annotations.Test;
 import utils.FileReader;
 import utils.JsonUtils;
 import utils.RestRequestUtils;
+import utils.Second_RestRequestUtils;
 
 import java.io.File;
 import java.util.Map;
@@ -21,8 +22,8 @@ public class ResendFax extends TestBase{
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
-        Response response = RestRequestUtils.resendfaxWithinvalidIdNumber(data.get("post_call_Url"),
-                file, data.get("faxNumber"), data.get("credentials"));
+        Response response = Second_RestRequestUtils.resendfaxWith(data.get("post_call_Url"),
+                file,data.get("credentials"),data.get("faxNumber"));
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
