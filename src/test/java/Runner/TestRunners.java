@@ -15,7 +15,7 @@ import java.io.IOException;
         glue = {"stepDefinitions" },		
         dryRun =false, 
         monochrome = true, 
-        tags = {"@TC-1SentFaxwithRecipient"},
+        tags = {"@sendMailToFax"},
         plugin = { "pretty",
 				"html:target/cucumber-html-report", "json:target/cucumber/cucumber.json",
 				"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks" })
