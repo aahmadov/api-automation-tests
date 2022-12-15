@@ -91,7 +91,7 @@ public class DataBaseUtility {
     	executeSQLQuery("SELECT JobID,Pages,TransmiStationID,Error FROM acme1.recvstatus where JobStatus='Recv Fail'");
     	//executeSQLQuery("select JobStatus,FaxuserID,Pages,TransmiStationID from acme1.recvstatus where JobID = 71 ;");
     	//executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme1.sendstatus where JobID=774;");
-    	executeSQLQuery("select * from acme1.recvstatus where TransmiStationID = 'Test45';");
+    	executeSQLQuery("select * from acme1.recvstatus where TransmiStationID = 'Test45'");
     	//write new query
     	executeSQLQuery("SELECT JobStatus,Pages,SentPages FROM acme1.sendstatus where JobID=774;");
     	
