@@ -1,0 +1,84 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="TestNgTests" parallel="tests" thread-count="1">
+    <!--    <test name="Tests">-->
+    <!--        <parameter name="to" value="${to}" />-->
+    <!--        <parameter name="times" value="${times}" />-->
+    <!--        <parameter name="faxNumFileLoc" value="${faxNumFileLoc}" />-->
+    <!--        <parameter name="pageSize" value="${pageSize}" />-->
+    <!--        <parameter name="subject" value="${subject}" />-->
+    <!--        <parameter name="sendBody" value="${sendBody}" />-->
+    <!--        <parameter name="uploadedFile" value="${uploadedFile}" />-->
+    <!--        <classes>-->
+    <!--            <class name="testng.Tests" />-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <!--    <test name="PostCallDataManipulationFromJenkins">-->
+    <!--        <parameter name="postCallUrl" value="${postCallUrl}" />-->
+    <!--        <parameter name="fileName1" value="${fileName1}" />-->
+    <!--        <parameter name="fileName2" value="${fileName2}" />-->
+    <!--        <parameter name="recipientData1" value="${recipientData1}" />-->
+    <!--        <parameter name="recipientData2" value="${recipientData2}" />-->
+    <!--        <parameter name="expectedStatusCode" value="${expectedStatusCode}" />-->
+    <!--        <classes>-->
+    <!--            <class name="testng.PostCallDataManipulationFromJenkins" />-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <test name="PostScenariosForSmokeTest">
+        <classes>
+            <class name="testng.PostScenariosForSmokeTest"/>
+        </classes>
+    </test>
+
+    <test name="GetScenariosForSmokeTest">
+        <classes>
+            <class name="testng.GetScenariosForSmokeTest"/>
+        </classes>
+    </test>
+<!--    <test name="InboundFaxPagesCoverPage">-->
+<!--        <classes>-->
+<!--            <class name="testng.InboundFaxPagesCoverPage"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+    <test name="SendMailToFaxTests">
+        <classes>
+            <class name="testng.SendMailToFaxTests"/>
+        </classes>
+    </test>
+
+    <test name="SoapInboundFaxPagesCoverPage">
+        <classes>
+            <class name="testng.SoapInboundFaxPagesCoverPage"/>
+        </classes>
+    </test>
+
+    <test name="TestEnd2End_Out_Inb">
+        <classes>
+            <class name="testng.TestEnd2End_Out_Inb"/>
+        </classes>
+    </test>
+    <test name="Prepend1toFaxNumber">
+        <classes>
+            <class name="testng.Prepend1toFaxNumber"/>
+        </classes>
+    </test>
+    <test name="ResendFax">
+        <classes>
+            <class name="testng.ResendFax"/>
+        </classes>
+    </test>
+    <!--    <test name="Test-method test2">-->
+    <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
+    <!--        <parameter name="times" value="2" />-->
+    <!--        <parameter name="faxNumFileLoc" value="input/FaxNumberMail2fax.txt" />-->
+    <!--        <parameter name="pageSize" value="2" />-->
+    <!--        <parameter name="subject" value="receivedSuccesSubject" />-->
+    <!--        <parameter name="sendBody" value="true" />-->
+    <!--        <classes>-->
+    <!--            <class name="testng.Tests" />-->
+    <!--        </classes>-->
+    <!--    </test>-->
+</suite>
