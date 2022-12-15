@@ -43,11 +43,11 @@
 <!--        </classes>-->
 <!--    </test>-->
 
-    <test name="SendMailToFaxTests">
-        <classes>
-            <class name="testng.SendMailToFaxTests"/>
-        </classes>
-    </test>
+<!--    <test name="SendMailToFaxTests">-->
+<!--        <classes>-->
+<!--            <class name="testng.SendMailToFaxTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="SoapInboundFaxPagesCoverPage">
         <classes>
@@ -65,11 +65,11 @@
             <class name="testng.Prepend1toFaxNumber"/>
         </classes>
     </test>
-    <test name="ResendFax">
-        <classes>
-            <class name="testng.ResendFax"/>
-        </classes>
-    </test>
+<!--    <test name="ResendFax">-->
+<!--        <classes>-->
+<!--            <class name="testng.ResendFax"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
     <!--        <parameter name="times" value="2" />-->
