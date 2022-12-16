@@ -92,19 +92,11 @@
     "ignoreFail": "true"
   },
   "resendFailedFaxDataWithNumber": {
-    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes/966/resend",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes/146/resend",
     "faxNumber": "1-222-222-2222",
     "credentials": "faxsending@acme1:softlinx",
     "Pages": "3",
     "fileType": "pdf",
     "expectedStatusCode": "200"
-  },
-  "sendMailToFax": {
-    "to": "13333333333@auto1.rpxqa.com",
-    "times": "1",
-    "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
-    "pageSize": "2",
-    "subject": "receivedSuccesSubject",
-    "sendBody": "true"
   }
 }
