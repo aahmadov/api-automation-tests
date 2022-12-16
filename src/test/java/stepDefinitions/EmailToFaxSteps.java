@@ -68,7 +68,7 @@ public class EmailToFaxSteps {
                 Date endTime = Calendar.getInstance().getTime();
                 String endTimeString = formatter.format(endTime);
 	            
-	            String EmailToFaxQuery =String.format("select JobStatus from auto1.recvstatus where (TimeRecieved between '%s' and '%s') and ReceivingPhone='11111111111' order by jobid desc limit 1;", startTimeString, endTimeString);
+	            String EmailToFaxQuery =String.format("select JobStatus from auto1.recvstatus where ReceivingPhone='13333333333' order by jobid desc limit 1;");
 	            
 	            List<Map<String, Object>> results = DataBaseUtility.executeSQLQuery(EmailToFaxQuery);
 	            if(results.size() == 0) {
@@ -78,5 +78,5 @@ public class EmailToFaxSteps {
 	            assertTrue(results.get(0).get("JobStatus").equals("Recv Fail") || results.get(0).get("JobStatus").equals("Received"));
             }
         }
-    }
+    }//(TimeRecieved between '%s' and '%s') and , startTimeString, endTimeString
 }

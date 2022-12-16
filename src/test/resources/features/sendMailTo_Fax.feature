@@ -22,7 +22,7 @@ Feature: I want simply send an email to a rpxfqa.com
       | sendBody      | <sendBody>      |
 
     Examples: 
-      | to                 | times | faxNumFileLoc                | pageSize  | subject               |sendBody|
-      | auto1.rpxqa.com    |    1  | input/FaxNumberMail2fax.txt  |  2        | receivedSuccesSubject |   true |
+      | to                             | times | faxNumFileLoc                | pageSize  | subject               |sendBody|
+      | 13333333333@auto1.rpxqa.com    |    1  | input/FaxNumberMail2fax.txt  |  2        | receivedSuccesSubject |   true |
 #                                                                             | receivedFailedSubject |             
 #                                                                             | sendFailedSubject     |

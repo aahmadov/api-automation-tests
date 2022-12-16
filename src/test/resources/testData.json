@@ -98,5 +98,13 @@
     "Pages": "3",
     "fileType": "pdf",
     "expectedStatusCode": "200"
+  },
+  "sendMailToFax": {
+    "to": "13333333333@auto1.rpxqa.com",
+    "times": "1",
+    "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
+    "pageSize": "2",
+    "subject": "receivedSuccesSubject",
+    "sendBody": "true"
   }
 }
