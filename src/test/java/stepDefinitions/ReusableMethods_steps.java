@@ -144,7 +144,7 @@ public class ReusableMethods_steps {
 	public void i_submit_post_call() {
 		response = Second_RestRequestUtils.clumsyOutbound_Fax(
 				ConfigReader.getProperty("outbound_URl_65") + FileReader.randomNumberFor_TSI(),
-				FileReader.readfile("23page"), ConfigReader.getProperty("FaxN"));
+				FileReader.readfile("100page"), ConfigReader.getProperty("FaxN"));
 		response.asPrettyString();
 		int firstFaxId = JsonPath.read(response.asPrettyString(), "$.FaxInfo[0].FaxId");
 		System.out.println("******** faxId of post call  " + "**" + firstFaxId + "**");

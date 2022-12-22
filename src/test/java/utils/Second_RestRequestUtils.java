@@ -240,7 +240,7 @@ public class Second_RestRequestUtils {
     }
 
     public static Response secondClumsy100PageGet(String url) throws InterruptedException {
-        Thread.sleep(1000 * 180);
+        //Thread.sleep(1000 * 180);
         RequestSpecification request = RestAssured.given();
         String inboundCredantials = ConfigReader.getProperty("credentialOutbound");
         byte[] encodedCredentials = Base64.encodeBase64(inboundCredantials.getBytes());
