@@ -1,5 +1,5 @@
 
-@Regression
+@regression1
 Feature: This feature is to crash scheduler with network manipulation  
 
 
