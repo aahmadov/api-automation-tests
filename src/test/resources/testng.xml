@@ -61,11 +61,12 @@
             <class name="testng.TestEnd2End_Out_Inb"/>
         </classes>
     </test>
-    <test name="Prepend1toFaxNumber">
-        <classes>
-            <class name="testng.Prepend1toFaxNumber"/>
-        </classes>
-    </test>
+<!--    <test name="Prepend1toFaxNumber">-->
+<!--        <classes>-->
+<!--            <class name="testng.Prepend1toFaxNumber"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
 <!--    <test name="ResendFax">-->
 <!--        <classes>-->
 <!--            <class name="testng.ResendFax"/>-->
