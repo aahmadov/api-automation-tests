@@ -15,7 +15,7 @@ import java.io.IOException;
         glue = {"stepDefinitions" },		
         dryRun =false, 
         monochrome = true, 
-        tags = {"@send#receive_with_clumsySetUp,@send#receive_with_clumsySetUp2"},
+        tags = {"@faxNumberTest"},
         plugin = { "pretty",
 				"html:target/cucumber-html-report", "json:target/cucumber/cucumber.json",
 				"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks" })
