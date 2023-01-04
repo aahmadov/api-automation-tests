@@ -49,6 +49,7 @@
         </classes>
     </test>
 
+
     <test name="SoapInboundFaxPagesCoverPage">
         <classes>
             <class name="testng.SoapInboundFaxPagesCoverPage"/>
