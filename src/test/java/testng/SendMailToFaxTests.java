@@ -70,7 +70,7 @@ public class SendMailToFaxTests extends TestBase {
 
                 List<Map<String, Object>> results = DataBaseUtility.executeSQLQuery(EmailToFaxQuery);
                 if (results.size() == 0) {
-                    fail("No record present in the Database for the fax email sent");
+                    fail("***:No record present in the Database for the fax email sent");
                 }
                 System.out.println(results);
                 assertEquals("Sent", results.get(0).get("JobStatus"));

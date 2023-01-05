@@ -35,11 +35,7 @@ public class ReceiveEmail {
 			Properties props = new Properties();
 			props.setProperty("mail.imap.ssl.enable", "true");
 			Session session = Session.getDefaultInstance(props, null);
-//			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-//				protected PasswordAuthentication getPasswordAuthentication() {
-//					return new PasswordAuthentication(username, password);
-//				}
-//			});
+
 
 			// connect to the email//
 			Store emailStore = session.getStore(mailStoreType);
@@ -60,7 +56,7 @@ public class ReceiveEmail {
 
 			Message[] messages = emailFolder.search(condition);
 			int noOfTimes = 0;
-			while (messages.length == 0 && noOfTimes < 15) {
+			while (messages.length == 0 && noOfTimes < 10) {
 				Thread.sleep(1000 * 20);
 				noOfTimes++;
 				emailFolder.close(false);
