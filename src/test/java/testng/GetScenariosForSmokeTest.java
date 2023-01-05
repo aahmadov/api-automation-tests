@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 
 public class GetScenariosForSmokeTest extends TestBase {
 
-    @Test(testName = "Retrieve recently created fax", groups = {"smoke"})
+    @Test(testName = "Retrieve recently created fax", groups = {"smoke7"})
     public void retrieveRecentlyCreatedFax() throws InterruptedException {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -40,14 +40,14 @@ public class GetScenariosForSmokeTest extends TestBase {
                 pagesTotalsent = JsonPath.read(resp, "$.FaxInfo[4].PagesTotal").toString();
             }
         }
-        System.out.println("***faxId  is" + "**" + FaxId + "**");
-        System.out.println("***faxStatus  is" + "**" + faxstatus + "**");
-        System.out.println("***total pages sent " + "**" + pagesTotalsent + "**");
+//        System.out.println("***faxId  is" + "**" + FaxId + "**");
+//        System.out.println("***faxStatus  is" + "**" + faxstatus + "**");
+//        System.out.println("***total pages sent " + "**" + pagesTotalsent + "**");
         //System.out.println("***faxNumber is" + "**" + number + "**");
         //assertEquals(expectedNumber, number);
     }
 
-    @Test(testName = "Retrieve Fax and Fax Data by Id", groups = {"smoke"})
+    @Test(testName = "Retrieve Fax and Fax Data by Id", groups = {"smoke9"})
     public void retrieveFaxAndFaxDataById() throws InterruptedException {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -69,7 +69,7 @@ public class GetScenariosForSmokeTest extends TestBase {
         assertEquals(faxStatus, "sent");
     }
 
-    @Test(testName = "Retrieve all Fax Data", groups = {"smoke"})
+    @Test(testName = "Retrieve all Fax Data", groups = {"smoke10"})
     public void retrieveAllFaxData() throws InterruptedException {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
