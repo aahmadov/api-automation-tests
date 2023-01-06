@@ -47,7 +47,7 @@ public class GetScenariosForSmokeTest extends TestBase {
         //assertEquals(expectedNumber, number);
     }
 
-    @Test(testName = "Retrieve Fax and Fax Data by Id", groups = {"smoke9"})
+    @Test(testName = "Retrieve Fax and Fax Data by Id", groups = {"smoke"})
     public void retrieveFaxAndFaxDataById() throws InterruptedException {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
