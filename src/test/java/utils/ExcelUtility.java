@@ -38,7 +38,7 @@ public class ExcelUtility {
             columnIndex++;
         }
         rowNumber++;
-        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Administrator\\git\\fs_test\\target\\test-classes\\dataFile\\testData.xlsx")) {
+        try (FileOutputStream fos = new FileOutputStream("C:\\Users\\Administrator\\git\\fs_test\\src\\test\\resources\\dataFile\\testData.xlsx")) {
             workBook.write(fos);
         } catch (IOException e) {
             e.printStackTrace();
