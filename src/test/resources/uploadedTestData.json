@@ -78,6 +78,5 @@
     "inboundStatusCode": 200,
     "credentialNewInboundLogin": "receiver@acme1",
     "credentialNewInboundPassword": "Softlinx1!"
-
   }
 }
