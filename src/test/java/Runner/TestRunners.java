@@ -17,7 +17,7 @@ import java.io.IOException;
         monochrome = true, 
         tags = {"@faxNumberTest"},
         plugin = { "pretty",
-				"html:target/cucumber", "json:target/cucumber/cucumber.json",
+				"html:target/cucumber", "json:target/cucumber.json",
 				"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks" })
 public class TestRunners {
 
