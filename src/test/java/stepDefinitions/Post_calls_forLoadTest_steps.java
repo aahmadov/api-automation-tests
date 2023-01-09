@@ -6,9 +6,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.restassured.response.Response;
-import org.apache.commons.lang3.StringUtils;
 import utils.*;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ThreadLocalRandom;
@@ -41,9 +44,12 @@ public class Post_calls_forLoadTest_steps {
 
 
     @Given("I want to submit group of post calls with (.*) for (.*)")
-    public void i_want_submit_group_of_post_calls_with_URL_for_times(String URL, int noOfTimes) {
+    public void i_want_submit_group_of_post_calls_with_URL_for_times(String URL, int noOfTimes) throws URISyntaxException {
 
-        String ExcelPath = ConfigReader.getProperty("testDataFile");
+//        String ExcelPath = ConfigReader.getProperty("testDataFile");
+        URL url = getClass().getClassLoader().getResource("dataFile/testData.xlsx");
+        File file = Paths.get(url.toURI()).toFile();
+        String excelFilePath = file.getAbsolutePath();
 
         for (int i = 0; i < noOfTimes; i++) {
             System.out.println(":It is iteration time in the loop :" + i);
@@ -51,11 +57,11 @@ public class Post_calls_forLoadTest_steps {
             response = Load_RestRequestUtils.sendFax_loadTest(ConfigReader.getProperty(URL) + firstLoadTest_TSI,
                     FileReader.randomFileFromFolder(), FileReader.randomFaxNumber());
 
-            ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI);
+            ExcelUtility.createExcelAndWrite(excelFilePath, firstLoadTest_TSI);
             System.out.println(firstLoadTest_TSI);
         }
 
-        System.out.println(ExcelPath);
+        System.out.println(excelFilePath);
         System.out.println("------------------------------------------------------------------------");
 
         System.out.println("******* " + ConfigReader.getProperty("outbound_URl_65"));
@@ -69,7 +75,10 @@ public class Post_calls_forLoadTest_steps {
     public void i_want_to_submit_group_of_post_calls_with_data(DataTable dataTable) throws Exception {
         Map<String, String> data = dataTable.transpose().asMaps().get(0);
 
-        String ExcelPath = ConfigReader.getProperty("testDataFile");
+//        String ExcelPath = ConfigReader.getProperty("testDataFile");
+        URL url = getClass().getClassLoader().getResource("dataFile/testData.xlsx");
+        File file = Paths.get(url.toURI()).toFile();
+        String excelFilePath = file.getAbsolutePath();
         List<String> faxNumbers = FileReader.convertToList(
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
@@ -95,8 +104,8 @@ public class Post_calls_forLoadTest_steps {
             }
 
             if (response.statusCode() == 201) {
-                ExcelUtility.createExcelAndWrite(ExcelPath, firstLoadTest_TSI, faxNumber);
-                //ExcelUtility.createExcelAndWrite(ExcelPath, faxNumber);
+                ExcelUtility.createExcelAndWrite(excelFilePath, firstLoadTest_TSI, faxNumber);
+                //ExcelUtility.createExcelAndWrite(excelFilePath, faxNumber);
                 //System.out.println("**"+"after successful post call, generated TSI is "+firstLoadTest_TSI);
             }
         }
@@ -150,7 +159,7 @@ public class Post_calls_forLoadTest_steps {
             assertTrue(value.size() > 0);
             //compare faxnumber from excel to faxnumber from response
             System.out.println("Fax number associated to the TSI id " + key + " from response is " + value.get(0));
-           // assertEquals(dataFromExcel.get(key), value.get(0));
+            // assertEquals(dataFromExcel.get(key), value.get(0));
         });
     }
 }
