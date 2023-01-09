@@ -8,3 +8,4 @@
 .settings/
 /src/test/resources/TestNgTests/.*
 /src/test/resources/old//TestNgTests/.*
+*.sshknown_hosts
