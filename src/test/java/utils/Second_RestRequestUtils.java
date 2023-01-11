@@ -110,6 +110,20 @@ public class Second_RestRequestUtils {
 
     }
 
+    public static Response faxWith50Pages(String url, File file, String number, String credentials) {
+
+        RequestSpecification request = RestAssured.given();
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAcme = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAcme);
+        return response = request.contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxNumber", number)
+                .when()
+                .post(url);
+    }
+
     public static Response Outbound_getCall50Page(String url) {
 
         RequestSpecification request = RestAssured.given();
@@ -123,11 +137,36 @@ public class Second_RestRequestUtils {
                 .get(url);
     }
 
+    public static Response Outbound_getCall50Page(String url, String credentials) {
+
+        RequestSpecification request = RestAssured.given();
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAcme = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAcme);
+        return response = request.contentType("multipart/form-data")
+                .when()
+                .get(url);
+    }
+
     public static Response getInbound50Page(String url) {
 
         RequestSpecification request = RestAssured.given();
         String inboundCredantials = ConfigReader.getProperty("credentialNewInbound");
         byte[] encodedCredentials = Base64.encodeBase64(inboundCredantials.getBytes());
+        String encodedCreadentialForAcme = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCreadentialForAcme);
+        return response = request.contentType("multipart/form-data")
+                .when()
+                .get(url);
+    }
+
+    public static Response getInbound50Page(String url, String credentials) {
+
+        RequestSpecification request = RestAssured.given();
+        String inboundCredantials = ConfigReader.getProperty("credentialNewInbound");
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
         String encodedCreadentialForAcme = new String(encodedCredentials);
 
         request.header("Authorization ", "Basic " + encodedCreadentialForAcme);
@@ -271,6 +310,7 @@ public class Second_RestRequestUtils {
                 .multiPart("FaxNumber", FaxNumber)
                 .when().log().all().post(url);
     }
+
     private static RequestSpecification createRequest(String credentials) {
         RequestSpecification request = RestAssured.given();
         byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());

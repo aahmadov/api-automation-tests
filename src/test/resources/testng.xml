@@ -37,11 +37,11 @@
             <class name="testng.GetScenariosForSmokeTest"/>
         </classes>
     </test>
-<!--    <test name="InboundFaxPagesCoverPage">-->
-<!--        <classes>-->
-<!--            <class name="testng.InboundFaxPagesCoverPage"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <!--    <test name="InboundFaxPagesCoverPage">-->
+    <!--        <classes>-->
+    <!--            <class name="testng.InboundFaxPagesCoverPage"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
 
     <test name="SendMailToFaxTests">
         <classes>
@@ -61,17 +61,50 @@
             <class name="testng.TestEnd2End_Out_Inb"/>
         </classes>
     </test>
-<!--    <test name="Prepend1toFaxNumber">-->
-<!--        <classes>-->
-<!--            <class name="testng.Prepend1toFaxNumber"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="InboundFaxPageValidation20Test">
+        <classes>
+            <class name="testng.InboundFaxPageValidation20Test"/>
+        </classes>
+    </test>
+    <test name="OutboundFaxPageValidation50Test">
+        <classes>
+            <class name="testng.OutboundFaxPageValidation50Test"/>
+        </classes>
+    </test>
+    <test name="OutboundInboundFaxPageValidation30Test">
+        <classes>
+            <class name="testng.OutboundInboundFaxPageValidation30Test"/>
+        </classes>
+    </test>
 
-<!--    <test name="ResendFax">-->
-<!--        <classes>-->
-<!--            <class name="testng.ResendFax"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="PostScenarioForLoadTest">
+        <classes>
+            <class name="testng.PostScenarioForLoadTest"/>
+        </classes>
+    </test>
+
+    <test name="PutScenarioTest">
+        <classes>
+            <class name="testng.PutScenarioTest"/>
+        </classes>
+    </test>
+
+    <test name="SubmitFaxToManipulateInboundOutboundPages">
+        <classes>
+            <class name="testng.SubmitFaxToManipulateInboundOutboundPages"/>
+        </classes>
+    </test>
+    <!--    <test name="Prepend1toFaxNumber">-->
+    <!--        <classes>-->
+    <!--            <class name="testng.Prepend1toFaxNumber"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
+
+    <!--    <test name="ResendFax">-->
+    <!--        <classes>-->
+    <!--            <class name="testng.ResendFax"/>-->
+    <!--        </classes>-->
+    <!--    </test>-->
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
     <!--        <parameter name="times" value="2" />-->
