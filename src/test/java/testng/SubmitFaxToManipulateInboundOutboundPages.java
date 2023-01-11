@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
 
-    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression"})
+    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression5"})
     public void submitFaxToManipulateInboundOutboundPages() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
