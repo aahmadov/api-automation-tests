@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.FileReader;
 import utils.JsonUtils;
+import utils.RestRequestUtils;
 import utils.Second_RestRequestUtils;
 
 import java.util.Arrays;
@@ -27,6 +28,7 @@ public class OutboundFaxPageValidation50Test extends TestBase {
         assert data != null;
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
+        Response response = RestRequestUtils.putScenario(data.get("put_call_Url"));
         Response responseSubmitFax = Second_RestRequestUtils.faxWith50Pages(data.get("post_call_Url") + tsi,
                 FileReader.readfile("50page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));

@@ -50,11 +50,11 @@
 <!--    </test>-->
 
 
-<!--    <test name="SoapInboundFaxPagesCoverPage">-->
-<!--        <classes>-->
-<!--            <class name="testng.SoapInboundFaxPagesCoverPage"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="SoapInboundFaxPagesCoverPage">
+        <classes>
+            <class name="testng.SoapInboundFaxPagesCoverPage"/>
+        </classes>
+    </test>
 
 <!--    <test name="TestEnd2End_Out_Inb">-->
 <!--        <classes>-->

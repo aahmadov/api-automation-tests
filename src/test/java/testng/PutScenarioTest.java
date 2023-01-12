@@ -19,8 +19,8 @@ import static org.testng.Assert.assertEquals;
 
 public class PutScenarioTest extends TestBase {
 
-    @Test(testName = "Put scenario", groups = {"smoke"})
-    public void putScenarioForSmoke() throws InterruptedException {
+    @Test(testName = "Put scenario", groups = {"Regression5"})
+    public void putScenarioForRegistrySettings() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
