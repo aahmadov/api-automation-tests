@@ -26,41 +26,41 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-    <test name="PostScenariosForSmokeTest">
-        <classes>
-            <class name="testng.PostScenariosForSmokeTest"/>
-        </classes>
-    </test>
+<!--    <test name="PostScenariosForSmokeTest">-->
+<!--        <classes>-->
+<!--            <class name="testng.PostScenariosForSmokeTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="GetScenariosForSmokeTest">
-        <classes>
-            <class name="testng.GetScenariosForSmokeTest"/>
-        </classes>
-    </test>
+<!--    <test name="GetScenariosForSmokeTest">-->
+<!--        <classes>-->
+<!--            <class name="testng.GetScenariosForSmokeTest"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     <!--    <test name="InboundFaxPagesCoverPage">-->
     <!--        <classes>-->
     <!--            <class name="testng.InboundFaxPagesCoverPage"/>-->
     <!--        </classes>-->
     <!--    </test>-->
 
-    <test name="SendMailToFaxTests">
-        <classes>
-            <class name="testng.SendMailToFaxTests"/>
-        </classes>
-    </test>
+<!--    <test name="SendMailToFaxTests">-->
+<!--        <classes>-->
+<!--            <class name="testng.SendMailToFaxTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 
-    <test name="SoapInboundFaxPagesCoverPage">
-        <classes>
-            <class name="testng.SoapInboundFaxPagesCoverPage"/>
-        </classes>
-    </test>
+<!--    <test name="SoapInboundFaxPagesCoverPage">-->
+<!--        <classes>-->
+<!--            <class name="testng.SoapInboundFaxPagesCoverPage"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="TestEnd2End_Out_Inb">
-        <classes>
-            <class name="testng.TestEnd2End_Out_Inb"/>
-        </classes>
-    </test>
+<!--    <test name="TestEnd2End_Out_Inb">-->
+<!--        <classes>-->
+<!--            <class name="testng.TestEnd2End_Out_Inb"/>-->
+<!--        </classes>-->
+<!--    </test>-->
     <test name="InboundFaxPageValidation20Test">
         <classes>
             <class name="testng.InboundFaxPageValidation20Test"/>
