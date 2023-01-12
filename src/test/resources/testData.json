@@ -78,25 +78,5 @@
     "inboundStatusCode": 200,
     "credentialNewInboundLogin": "receiver@acme1",
     "credentialNewInboundPassword": "Softlinx1!"
-  },
-  "add_1_to_the_beginning_Of_number": {
-    "url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "credentials": "faxsending@acme1:Softlinx1!",
-    "faxUserId": "?FaxUserId=faxsending",
-    "faxNumber": "22222233",
-    "times": "3",
-    "fileType":"pdf",
-    "pageSize": "2",
-    "coverPageEnabled": "false",
-    "faxNumFileLoc": "input/numberForTest.txt",
-    "ignoreFail": "true"
-  },
-  "resendFailedFaxDataWithNumber": {
-    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes/146/resend",
-    "faxNumber": "1-222-222-2222",
-    "credentials": "faxsending@acme1:softlinx",
-    "Pages": "3",
-    "fileType": "pdf",
-    "expectedStatusCode": "200"
   }
 }
