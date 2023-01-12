@@ -15,7 +15,7 @@ import java.io.IOException;
         glue = {"stepDefinitions" },		
         dryRun =false, 
         monochrome = true, 
-        tags = {"@Loadtest"},
+        tags = {"@Regression-new"},
         plugin = { "pretty",
 				"html:target/cucumber", "json:target/cucumber.json",
 				"junit:target/cucxml/cucumber.xml", "hooks.CucumberHooks" })

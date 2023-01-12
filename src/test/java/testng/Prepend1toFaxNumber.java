@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 public class Prepend1toFaxNumber extends TestBase {
     String excelFilePath;
 
-    @Test(testName = "Prepend 1 to fax number if it starts with [2-9]", groups = {"smoke3"})
+    @Test(testName = "Prepend 1 to fax number if it starts with [2-9]", groups = {"Regression3"})
     public void add_1_to_the_beginning_Of_number() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

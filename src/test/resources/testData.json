@@ -133,7 +133,11 @@
     "pageSize": 2,
     "coverPageEnabled": true,
     "ignoreFail": true,
-    "credentialOutbound": "faxsending@acme1:Softlinx1!"
+    "credentialOutbound": "faxsending@acme1:Softlinx1!",
+    "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=receiver",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "credentialInbound": "receiver@acme1:Softlinx1!"
   },
   "inboundFaxPageValidation20": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",

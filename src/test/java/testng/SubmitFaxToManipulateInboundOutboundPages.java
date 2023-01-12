@@ -2,25 +2,32 @@ package testng;
 
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.Response;
+import net.minidev.json.JSONArray;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.ConfigReader;
 import utils.FileReader;
 import utils.JsonUtils;
 import utils.Second_RestRequestUtils;
 
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
 
-    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression5"})
+    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression4"})
     public void submitFaxToManipulateInboundOutboundPages() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        Response response = Second_RestRequestUtils.faxWith50Pages(data.get("post_call_Url") + FileReader.randomNumberFor_TSI(),
+        String tsi = FileReader.randomNumberFor_TSI();
+        String onlyTsi = tsi.split("=")[1];
+        Response response = Second_RestRequestUtils.faxWith50Pages(data.get("post_call_Url") + tsi,
                 FileReader.readfile("50page"), data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("****** " + data.get("post_call_Url"));
@@ -29,42 +36,63 @@ public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
         System.out.println("------------------------------------------------------------------------");
         assertEquals(response.getStatusCode(), 201);
 
-        Thread.sleep(1000 * 40);
-        Response outboundGetCall50Page = Second_RestRequestUtils.Outbound_getCall50Page(data.get("post_call_Url"),
-                data.get("credentialOutbound"));
 
-        int faxid = JsonPath.read(outboundGetCall50Page.asPrettyString(), "$.FaxInfo[0].FaxId");
-        System.out.println("***outbound FaxId  is " + "**" + faxid + "**");
-        String Tsi = JsonPath.read(outboundGetCall50Page.asPrettyString(), "$.FaxInfo[0].TSI").toString();
-        System.out.println("***outbound Fax TSI is " + "**" + Tsi + "**");
-        String totalPagesSent = JsonPath.read(outboundGetCall50Page.asPrettyString(), "$.FaxInfo[0].PagesTotal").toString();
-        System.out.println("***outbound Fax total page on attachment " + "**" + totalPagesSent + "**");
+        Response outbound;
+        boolean isNotCompleted = true;
+        boolean isFailed = false;
+        int times = 0;
+        do {
+            System.out.println("*** waiting 30 secs to get the fax sending status ***");
+            Thread.sleep(1000 * 30);
+            outbound = Second_RestRequestUtils.getOutboundWithCoverPage(
+                    data.get("post_call_Url") + data.get("newOutboundParam"), data.get("credentialOutbound"));
+            Assert.assertEquals(200, outbound.getStatusCode());
+            JSONArray tsiArray = JsonPath.read(outbound.asString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
+            System.out.println("Outbound response related TSI is: " + tsiArray.toJSONString());
+            if (tsiArray.size() > 0 && Arrays.asList("sendFailed", "sent").contains(((LinkedHashMap) tsiArray.get(0)).get("FaxStatus").toString())) {
+                isNotCompleted = false;
+                if (((LinkedHashMap) tsiArray.get(0)).get("FaxStatus").toString().equals("sendFailed")) {
+                    isFailed = true;
+                }
+                System.out.println("****** the post call TSI id " + "**" + onlyTsi + "**" + " and "
+                        + " total page in attachment is " + "**" + ((LinkedHashMap) tsiArray.get(0)).get("PagesTotal") + "**");
+                String errorMessage = JsonPath.read(outbound.asPrettyString(), "$.FaxInfo[0].ErrorText");
+
+                System.out.println("Error message: " + "**" + errorMessage + "**");
+            }
+            times++;
+        } while (isNotCompleted && times < 15);
+
+        if (isFailed) {
+            fail("Send failed for TSI id:" + onlyTsi);
+        }
+
+        System.out.println("****** " + (data.get("inboundFax_url") + data.get("newInboundParam")));
+        Response inboundFaxwithCoverPage1 = Second_RestRequestUtils.getInboundWithCoverPage1(
+                data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialInbound"));
+        Assert.assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());
+
+        System.out.println(":checking for this TSI " + ":" + onlyTsi + ":" + "in entire Inbound Fax response ");
+        //Get all metadata of the TSI from the response
+        System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
+        JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asPrettyString().toString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
+        System.out.println("Response related TSI is: " + tsiArray.toJSONString());
 
 
-        Thread.sleep(1000 * 420);
-        Response inbound50Page = Second_RestRequestUtils.getInbound50Page(
-                ConfigReader.getProperty("inboundFax_url") + (ConfigReader.getProperty("newInboundParam")));
+        //Adding TSIs to the list if the metadata doesn't contains either recvOk status or max of 3 attempts of those TSI's
+        if (tsiArray.stream().noneMatch(op -> ((LinkedHashMap) op).get("FaxStatus").equals("recvOk")) && tsiArray.size() != 3) {
+            fail(":" + onlyTsi + ":" + "****" + " doesn't have neither recvOk status nor 3 attempts" + "**");
+        }
 
-        assertEquals("it is not expected status Code", inbound50Page.getStatusCode(), 200);
+        //Get the Fax status values of all the TSi from response
+        List<String> statuses = tsiArray.stream().map(tsiJson -> ((LinkedHashMap) tsiJson).get("FaxStatus").toString()).collect(Collectors.toList());
 
-        String lastAttemptTSIInbound = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[0].TSI").toString();
-        String PagesReceived = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[0].PagesReceived").toString();
+        //Assertion all the metadata contains only either recvIncomplete or recvOk Fax status
+        assertTrue(statuses.stream().allMatch(status -> status.equals("recvIncomplete") || status.equals("recvOk")));
 
-        System.out.println("****inbound TSI id is same with outbound TSI id " + "**" + lastAttemptTSIInbound + "**");
-
-
-        String secondAttemptTSIInbound = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[1].TSI").toString();
-        String firstAttemptTSIInbound = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[2].TSI").toString();
-
-        String lastAttemptFaxStatus = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
-        String secondAttemptFaxStatus = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[1].FaxStatus").toString();
-        String firstAttemptFaxStatus = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[2].FaxStatus").toString();
-        int lastFaxId = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[0].FaxId");
-        int secondFaxId = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[1].FaxId");
-        int firstdFaxId = JsonPath.read(inbound50Page.asPrettyString(), "$.FaxInfo[2].FaxId");
-
-        System.out.println("*** faxstatus after a first attempt  is " + "**" + firstAttemptFaxStatus + "**" + " and FaxId is " + "**" + firstdFaxId + "**" + "and TSI id is " + "**" + firstAttemptTSIInbound + "**");
-        System.out.println("*** faxstatus after a second attempt is " + "**" + secondAttemptFaxStatus + "**" + " and FaxId is " + "**" + secondFaxId + "**" + "and TSI id is " + "**" + secondAttemptTSIInbound + "**");
-        System.out.println("*** faxstatus after a last attempt   is " + "**" + lastAttemptFaxStatus + "**" + "   and FaxId is " + "**" + lastFaxId + "**" + "and TSI id is " + "**" + lastAttemptTSIInbound + "**" + "and total page received in inbound from out of 50 is" + "**" + PagesReceived + "**");
+        //checking if the last status is recvOk then previous status should be recvIncomplete
+        if (statuses.size() > 0 && statuses.get(0).equals("recvOk")) {
+            assertTrue(statuses.stream().skip(1).allMatch(status -> status.equals("recvIncomplete")));
+        }
     }
 }
