@@ -128,7 +128,7 @@ public class Post_calls_forLoadTest_steps {
     }
 
     @Given("user sends request to retrieve all FaxNumbers")
-    public void user_sends_request_to_retrieve_all_FaxNumbers() throws InterruptedException {
+    public void user_sends_request_to_retrieve_all_FaxNumbers() {
         //Thread.sleep(1000*30);
         response = Load_RestRequestUtils.getRecentFax(
                 ConfigReader.getProperty("post_call_Url") + (ConfigReader.getProperty("outboundParamAdmin")));
@@ -139,7 +139,7 @@ public class Post_calls_forLoadTest_steps {
 
 
     @And("verify fax numbers are as expected for TSI id")
-    public void verify_fax_numbers_are_as_expected_for_TSI_id() {
+    public void verify_fax_numbers_are_as_expected_for_TSI_id() throws URISyntaxException {
         List<LinkedHashMap<String, String>> data = JsonPath.read(response.asString(), "$.FaxInfo[*]['FaxNumber', 'TSI']");
 
         List<Map<String, String>> xyz = data.stream().map(map -> {
@@ -147,9 +147,13 @@ public class Post_calls_forLoadTest_steps {
             return Map.of(values.get(1), values.get(0));
         }).collect(Collectors.toList()).stream().distinct().collect(Collectors.toList());
 
-        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData((ConfigReader.getProperty("testDataFile")), 0);
+        URL url = getClass().getClassLoader().getResource("dataFile/testData.xlsx");
+        File file = Paths.get(url.toURI()).toFile();
+        String excelFilePath = file.getAbsolutePath();
+
+        List<String> tsiIdsFromExcel = ExcelUtility.getColumnData(excelFilePath, 0);
         List<String> tsiIds = tsiIdsFromExcel.stream().map(item -> item.split("=")[1]).collect(Collectors.toList());
-        List<String> faxNumbersFromExcel = ExcelUtility.getColumnData((ConfigReader.getProperty("testDataFile")), 1);
+        List<String> faxNumbersFromExcel = ExcelUtility.getColumnData(excelFilePath, 1);
         //create map combing both TSI id and fax numbers from excel
         Map<String, String> dataFromExcel = IntStream.range(0, tsiIds.size()).boxed().collect(Collectors.toMap(tsiIds::get, faxNumbersFromExcel::get));
         dataFromExcel.keySet().forEach(key -> {
