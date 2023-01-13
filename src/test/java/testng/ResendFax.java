@@ -16,7 +16,7 @@ import static org.testng.Assert.assertEquals;
 
 public class ResendFax extends TestBase{
 
-    @Test(testName = "Resend a fax to a different fax number", groups = {"smoke5"})
+    @Test(testName = "Resend a fax to a different fax number", groups = {"Regression6"})
     public void resendFailedFaxDataWithNumber() {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

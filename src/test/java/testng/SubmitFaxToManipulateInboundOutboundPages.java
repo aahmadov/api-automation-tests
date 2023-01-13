@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
 
-    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression4"})
+    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression7"})
     public void submitFaxToManipulateInboundOutboundPages() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

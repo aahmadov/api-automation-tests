@@ -21,11 +21,12 @@ import static org.junit.Assert.assertTrue;
 
 public class OutboundFaxPageValidation50Test extends TestBase {
 
-    @Test(testName = "validates the number of outbound&inbound pages  (\"50 pages\" )", groups = {"Regression1"})
+    @Test(testName = "validates the number of outbound&inbound pages  (\"50 pages\" )", groups = {"Regression2"})
     public void outboundFaxPageValidation50() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
+
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
         Response response = RestRequestUtils.putScenario(data.get("put_call_Url"));
@@ -77,7 +78,7 @@ public class OutboundFaxPageValidation50Test extends TestBase {
         System.out.println(":checking for this TSI " + ":" + onlyTsi + ":" + "in entire Inbound Fax response ");
         //Get all metadata of the TSI from the response
         System.out.println("*** INBOUND RESPONSE DATA FOR TSI ***");
-        JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asPrettyString().toString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
+        JSONArray tsiArray = JsonPath.read(inboundFaxwithCoverPage1.asPrettyString(), "$..FaxInfo[?(@.TSI =~/" + onlyTsi + "/)]");
         System.out.println("Response related TSI is: " + tsiArray.toJSONString());
 
 

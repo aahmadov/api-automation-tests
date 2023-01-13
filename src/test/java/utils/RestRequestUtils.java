@@ -87,7 +87,7 @@ public class RestRequestUtils {
         request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
         return response = request.contentType("multipart/form-data").when().get(url);
     }
-
+//new
     public static Response getFaxsTSINewRestApi2(String url, String credentials) {
 
         RequestSpecification request = RestAssured.given();
@@ -446,8 +446,7 @@ public class RestRequestUtils {
     }
 
     public static Response putScenario(String url) {
-        return response = createRequest(ConfigReader.getProperty("credentialNewOutbound"))
-                .contentType("multipart/form-data")
+        return response = createRequest()
                 .when().log().all()
                 .put(url);
     }
@@ -458,6 +457,11 @@ public class RestRequestUtils {
         String encodedCredentialsFaxsending = new String(encodedCredentials);
 
         request.header("Authorization ", "Basic " + encodedCredentialsFaxsending);
+        return request;
+    }
+
+    private static RequestSpecification createRequest() {
+        RequestSpecification request = RestAssured.given();
         return request;
     }
 }
