@@ -29,7 +29,7 @@ import static org.testng.Assert.assertEquals;
 public class SoapInboundFaxPagesCoverPage extends TestBase {
 
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke"})
+            groups = {"smoke_new"})
     public void soapFaxStatusAndPageNumberValidationFromInbound() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

@@ -66,7 +66,7 @@
   },
   "soapFaxStatusAndPageNumberValidationFromInbound": {
     "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/wsapi",
-    "faxNumber": "1-222-222-2222",
+    "faxNumber": "222-222-2222",
     "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
     "querySendFaxSoapAction": "http://www.softlinx.com/wsapi/op=QuerySendFax/ver=79",
     "queryReceiveFaxSoapAction": "http://www.softlinx.com/wsapi/op=QueryReceiveFax/ver=79",
@@ -78,5 +78,98 @@
     "inboundStatusCode": 200,
     "credentialNewInboundLogin": "receiver@acme1",
     "credentialNewInboundPassword": "Softlinx1!"
+  },
+  "add_1_to_the_beginning_Of_number": {
+    "url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "faxsending@acme1:Softlinx1!",
+    "faxUserId": "?FaxUserId=faxsending",
+    "faxNumber": "22222233",
+    "times": "3",
+    "fileType":"pdf",
+    "pageSize": "2",
+    "coverPageEnabled": "false",
+    "faxNumFileLoc": "input/numberForTest.txt",
+    "ignoreFail": "true"
+  },
+  "resendFailedFaxDataWithNumber": {
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes/146/resend",
+    "faxNumber": "222-222-2222",
+    "credentials": "faxsending@acme1:softlinx",
+    "Pages": "3",
+    "fileType": "pdf",
+    "expectedStatusCode": "200"
+  },
+  "putScenarioForRegistrySettings": {
+    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=0",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "11111111111",
+    "updatedFaxNumber": "11111111112",
+    "Pages": "3",
+    "fileType":"pdf",
+    "credentialNewOutbound": "faxsending@acme1:Softlinx1!",
+    "inboundStatusCode": 201,
+    "getFaxByID_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=receiver",
+    "credentialNewInbound": "receiver@acme1:Softlinx1!"
+  },
+  "validationOfPostCallForLoadTest": {
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "testDataFile": "dataFile/testData.xlsx",
+    "faxNumFileLoc": "input/Faxnumber.txt",
+    "times": 5,
+    "pageSize": 2,
+    "coverPageEnabled": true,
+    "ignoreFail": true,
+    "credentialOutbound": "faxsending@acme1:Softlinx1!"
+  },
+  "submitFaxToManipulateInboundOutboundPages": {
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "222-222-2222",
+    "testDataFile": "dataFile/testData.xlsx",
+    "faxNumFileLoc": "input/Faxnumber.txt",
+    "times": 5,
+    "pageSize": 2,
+    "coverPageEnabled": true,
+    "ignoreFail": true,
+    "credentialOutbound": "faxsending@acme1:Softlinx1!",
+    "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=receiver",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "credentialInbound": "receiver@acme1:Softlinx1!"
+  },
+  "inboundFaxPageValidation20": {
+    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "222-222-2222",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@acme1:Softlinx1!",
+    "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=receiver",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "credentialInbound": "receiver@acme1:Softlinx1!"
+  },
+  "outboundFaxPageValidation30": {
+    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "222-222-2222",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@acme1:Softlinx1!",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=receiver",
+    "credentialInbound": "receiver@acme1:Softlinx1!"
+  },
+  "outboundFaxPageValidation50": {
+    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "222-222-2222",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@acme1:Softlinx1!",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=receiver",
+    "credentialInbound": "receiver@acme1:Softlinx1!"
   }
 }
