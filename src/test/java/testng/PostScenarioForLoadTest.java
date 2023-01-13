@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PostScenarioForLoadTest extends TestBase {
 
-    @Test(testName = "Validation of Post call for Load test", groups = {"Regression4"})
+    @Test(testName = "Validation of Post call for Load test", groups = {"Regression"})
     public void validationOfPostCallForLoadTest() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

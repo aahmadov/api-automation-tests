@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 public class InboundFaxPageValidation20Test extends TestBase {
 
-    @Test(testName = "validates the number of inbound Fax pages with registry setting (\"20 pages\")", groups = {"Regression1"})
+    @Test(testName = "validates the number of inbound Fax pages with registry setting (\"20 pages\")", groups = {"Regression"})
     public void inboundFaxPageValidation20() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
