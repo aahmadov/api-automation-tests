@@ -69,7 +69,7 @@ public class GetScenariosForSmokeTest extends TestBase {
         assertEquals(faxStatus, "sent");
     }
 
-    @Test(testName = "Retrieve all Fax Data", groups = {"smoke10"})
+    @Test(testName = "Retrieve all Fax Data", groups = {"smoke"})
     public void retrieveAllFaxData() throws InterruptedException {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
