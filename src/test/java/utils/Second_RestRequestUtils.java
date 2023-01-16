@@ -304,11 +304,12 @@ public class Second_RestRequestUtils {
                 .get(url);
     }
 
-    public static Response resendfaxWith(String url, File file, String FaxNumber, String credentials) {
+    public static Response resendfaxWith(String url,String FaxNumber,String credentials) {
         return createRequest(credentials).contentType("multipart/form-data")
-                .multiPart("filename", file)
-                .multiPart("FaxNumber", FaxNumber)
-                .when().log().all().post(url);
+                //.multiPart("filename", file)
+                .queryParam("FaxNumber", FaxNumber)
+                .when()
+                .post(url);
     }
 
     private static RequestSpecification createRequest(String credentials) {

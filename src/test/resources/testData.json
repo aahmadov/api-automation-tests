@@ -93,10 +93,8 @@
   },
   "resendFailedFaxDataWithNumber": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes/966/resend",
-    "faxNumber": "222-222-2222",
-    "credentials": "faxsending@acme1:softlinx",
-    "Pages": "3",
-    "fileType": "pdf",
+    "faxNumber": "1-222-222-2222",
+    "credentials": "faxsending@acme1:Softlinx1!",
     "expectedStatusCode": "200"
   },
   "putScenarioForRegistrySettings": {

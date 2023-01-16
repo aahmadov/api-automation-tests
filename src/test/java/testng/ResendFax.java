@@ -21,14 +21,15 @@ public class ResendFax extends TestBase{
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
-        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+       // File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+
         Response response = Second_RestRequestUtils.resendfaxWith(data.get("post_call_Url"),
-                file,data.get("credentials"),data.get("faxNumber"));
+                data.get("credentials"),data.get("faxNumber"));
 
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
         System.out.println("******* " + data.get("post_call_Url"));
-        System.out.println("******* " + file + " " + data.get("faxNumber"));
+        System.out.println("******* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
 
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
