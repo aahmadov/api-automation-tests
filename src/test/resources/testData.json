@@ -98,7 +98,7 @@
     "expectedStatusCode": "200"
   },
   "putScenarioForRegistrySettings": {
-    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=0",
+    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=10",
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "11111111111",
     "updatedFaxNumber": "11111111112",
@@ -109,8 +109,8 @@
     "getFaxByID_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "newOutboundParam": "?FaxUserId=faxsending",
     "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-    "newInboundParam": "?FaxUserId=receiver",
-    "credentialNewInbound": "receiver@acme1:Softlinx1!"
+    "newInboundParam": "?FaxUserId=receiver3",
+    "credentialNewInbound": "receiver3@acme1:softlinx"
   },
   "validationOfPostCallForLoadTest": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
