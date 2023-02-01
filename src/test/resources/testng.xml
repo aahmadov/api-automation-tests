@@ -37,17 +37,17 @@
             <class name="testng.GetScenariosForSmokeTest"/>
         </classes>
     </test>
-<!--        <test name="InboundFaxPagesCoverPage">-->
-<!--            <classes>-->
-<!--                <class name="testng.InboundFaxPagesCoverPage"/>-->
-<!--            </classes>-->
-<!--        </test>-->
+    <!--        <test name="InboundFaxPagesCoverPage">-->
+    <!--            <classes>-->
+    <!--                <class name="testng.InboundFaxPagesCoverPage"/>-->
+    <!--            </classes>-->
+    <!--        </test>-->
 
-    <test name="SendMailToFaxTests">
-        <classes>
-            <class name="testng.SendMailToFaxTests"/>
-        </classes>
-    </test>
+<!--    <test name="SendMailToFaxTests">-->
+<!--        <classes>-->
+<!--            <class name="testng.SendMailToFaxTests"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 
     <test name="SoapInboundFaxPagesCoverPage">
@@ -94,17 +94,24 @@
             <class name="testng.SubmitFaxToManipulateInboundOutboundPages"/>
         </classes>
     </test>
-        <test name="Prepend1toFaxNumber">
-            <classes>
-                <class name="testng.Prepend1toFaxNumber"/>
-            </classes>
-        </test>
 
-        <test name="ResendFax">
-            <classes>
-                <class name="testng.ResendFax"/>
-            </classes>
-        </test>
+    <test name="Prepend1toFaxNumber">
+        <classes>
+            <class name="testng.Prepend1toFaxNumber"/>
+        </classes>
+    </test>
+
+    <test name="ResendFax">
+        <classes>
+            <class name="testng.ResendFax"/>
+        </classes>
+    </test>
+
+    <test name="SftpPushTests">
+        <classes>
+            <class name="testng.SftpPushTests"/>
+        </classes>
+    </test>
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
     <!--        <parameter name="times" value="2" />-->

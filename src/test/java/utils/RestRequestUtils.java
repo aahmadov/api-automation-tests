@@ -110,9 +110,10 @@ public class RestRequestUtils {
 
     }
 
-    public static Response getFaxsafterAllattempts(String url, String credentials) {
+    public static Response responseRecieveFax(String url,String credentials) {
 
         RequestSpecification request = RestAssured.given();
+
         byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
         String encodedCredentialForAdmin = new String(encodedCredentials);
 
