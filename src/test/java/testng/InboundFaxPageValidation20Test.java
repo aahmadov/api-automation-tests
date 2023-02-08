@@ -26,14 +26,14 @@ public class InboundFaxPageValidation20Test extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        Response response2 = RestRequestUtils.putScenario(data.get("put_call_Url"));
-        Assert.assertEquals(response2.getStatusCode(), 200);
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println(response2.asPrettyString());
-        System.out.println("**" + (data.get("put_call_Url")));
-        System.out.println("------------------------------------------------------------------------");
-
-        System.out.println(": registry settings " + "Abort page at 0");
+//        Response response2 = RestRequestUtils.putScenario(data.get("put_call_Url"));
+//        Assert.assertEquals(response2.getStatusCode(), 200);
+//        System.out.println("------------------------------------------------------------------------");
+//        System.out.println(response2.asPrettyString());
+//        System.out.println("**" + (data.get("put_call_Url")));
+//        System.out.println("------------------------------------------------------------------------");
+//
+//        System.out.println(": registry settings " + "Abort page at 0");
 
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
@@ -80,7 +80,6 @@ public class InboundFaxPageValidation20Test extends TestBase {
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
         }
-
 
         System.out.println("****** " + (data.get("inboundFax_url") + data.get("newInboundParam")));
         Response inboundFaxwithCoverPage1 = Second_RestRequestUtils.getInboundWithCoverPage1(

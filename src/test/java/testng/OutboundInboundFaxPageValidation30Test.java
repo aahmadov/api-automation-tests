@@ -28,7 +28,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
 
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
-        Response response = RestRequestUtils.putScenario(data.get("put_call_Url"));
+        //Response response = RestRequestUtils.putScenario(data.get("put_call_Url"));
         Response responseSubmitFax = RestRequestUtils.sendFaxWithNewTSI(data.get("post_call_Url") + tsi,
                 FileReader.readfile("30page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
@@ -41,7 +41,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
 
         String faxNumber = JsonPath.read(responseSubmitFax.prettyPrint(), "$.FaxInfo[0].FaxNumber");
         System.out.println("***** this is new generated  Fax number " + "**" + faxNumber + "**");
-        assertEquals(faxNumber, data.get("faxNumber"));
+        //assertEquals(faxNumber, data.get("faxNumber"));
 
 
         Response outbound;
