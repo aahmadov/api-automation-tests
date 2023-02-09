@@ -19,15 +19,15 @@ public class SftpPushTests extends TestBase {
         assert data != null;
 
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_realms"));
+        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_realms1"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_users"));
+        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_users1"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_realms"));
+        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_realms1"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_users"));
+        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_users1"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus"));
+        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus1"));
 
         //Thread.sleep(1000*30);
 
