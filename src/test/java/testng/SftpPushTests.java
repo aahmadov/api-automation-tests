@@ -70,7 +70,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*120);
+        Thread.sleep(1000*150);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
 
         int jobId = JsonPath.read(responseReceiveFax.asPrettyString(), "$.FaxInfo[0].FaxId");
