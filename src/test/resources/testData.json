@@ -34,7 +34,7 @@
   "retrieveFaxAndFaxDataById": {
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:Softlinx1!",
-    "valid_ID": "/922",
+    "valid_ID": "/30",
     "expectedStatusCode": "200"
   },
   "retrieveAllFaxData": {
@@ -44,7 +44,7 @@
     "faxUserId": "faxsending"
   },
   "sendMailToFax": {
-    "to": "13333333333@auto1.rpxqa.com",
+    "to": "auto1.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "pageSize": "3",
@@ -199,5 +199,39 @@
     "username": "AAshkinazi1 ",
     "password": "M0v32H3r3#",
     "filePath": "\\\\10.250.1.39\\c$\\Users\\aashkinazi1\\"
+  },
+  "testWithSimpleAuthenticationAbbas": {
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1(333)333-3333",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@auto1:softlinx",
+    "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "credentialInbound": "faxsending@auto1:softlinx",
+    "username": "Abbas1sftp ",
+    "password": "H3r34Tr6ns!",
+    "filePath": "\\\\10.250.1.39\\c$\\Users\\Abbas1sftp\\"
+},
+
+  "testWithCertificateWithPassphraseAbbas": {
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1(333)333-3333",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@auto1:softlinx",
+    "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "credentialInbound": "faxsending@auto1:softlinx",
+    "username": "Abbas1sftp ",
+    "password": "H3r34Tr6ns!",
+    "filePath": "\\\\10.250.1.39\\c$\\Users\\Abbas1sftp\\"
+  },
+  "testWithCertificateNoPassphraseAbbas": {
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1(333)333-3333",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@auto1:softlinx",
+    "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "credentialInbound": "faxsending@auto1:softlinx",
+    "username": "Abbas1sftp ",
+    "password": "H3r34Tr6ns!",
+    "filePath": "\\\\10.250.1.39\\c$\\Users\\Abbas1sftp\\"
   }
 }
