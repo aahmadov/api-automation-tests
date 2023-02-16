@@ -28,7 +28,7 @@ public class SendEmail {
 
 	public static void sendFromGMail(String to, String body, File attachment, boolean sendBody) {
 		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "10.250.1.175");
+		prop.put("mail.smtp.host", "10.250.1.27");
 		prop.put("mail.smtp.port", "25");
 		prop.put("mail.smtp.auth", "true");
 		prop.put("mail.smtp.socketFactory.port", "25");

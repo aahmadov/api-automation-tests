@@ -19,15 +19,13 @@ public class SendMailToFaxTests extends TestBase {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
 
-    @Test(testName = "Send mail to Fax", groups = {"smoke"})
+    @Test(testName = "Send mail to Fax", groups = {"Regression"})
     void sendMailToFax() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        List<String> faxNumbers = FileReader.convertToList(
-                CsvUtils.readAllLines(
-                        ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
+        List<String> faxNumbers = FileReader.convertToList(CsvUtils.readAllLines(ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
 
         // loop to send email based on of times provided in the scenario
         for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
@@ -55,6 +53,7 @@ public class SendMailToFaxTests extends TestBase {
             Date startTime = Calendar.getInstance().getTime();
 
             SendEmail.sendFromGMail(toEmail, bodyMessage, file, Boolean.parseBoolean(data.get("sendBody")));
+
             Boolean result = ReceiveEmail.receiveEmail(from, emailSubject);
 
             if (!result) {

@@ -44,7 +44,7 @@
     "faxUserId": "faxsending"
   },
   "sendMailToFax": {
-    "to": "auto1.rpxqa.com",
+    "to": "13333333333@auto1.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "pageSize": "3",
@@ -202,7 +202,7 @@
   },
   "testWithSimpleAuthenticationAbbas": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "1(333)333-3333",
+    "faxNumber": "1(111)111-1111",
     "statusCode": 201,
     "credentialOutbound": "faxsending@auto1:softlinx",
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
@@ -214,7 +214,7 @@
 
   "testWithCertificateWithPassphraseAbbas": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "1(333)333-3333",
+    "faxNumber": "1(111)111-1111",
     "statusCode": 201,
     "credentialOutbound": "faxsending@auto1:softlinx",
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
@@ -225,7 +225,7 @@
   },
   "testWithCertificateNoPassphraseAbbas": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "1(333)333-3333",
+    "faxNumber": "1(111)111-1111",
     "statusCode": 201,
     "credentialOutbound": "faxsending@auto1:softlinx",
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",

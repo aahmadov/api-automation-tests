@@ -43,11 +43,11 @@
     <!--            </classes>-->
     <!--        </test>-->
 
-<!--    <test name="SendMailToFaxTests">-->
-<!--        <classes>-->
-<!--            <class name="testng.SendMailToFaxTests"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="SendMailToFaxTests">
+        <classes>
+            <class name="testng.SendMailToFaxTests"/>
+        </classes>
+    </test>
 
 
     <test name="SoapInboundFaxPagesCoverPage">
