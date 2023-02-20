@@ -419,15 +419,14 @@ public class RestRequestUtils {
 
     }
 
-    public static Response sendFaxWithNewTSI(String url, File file20Page, String faxnumb) {
+    public static Response sendFaxWithNewTSI(String url, File filePage, String faxnumb) {
         return createRequest(ConfigReader.getProperty("credentialOutbound"))
                 .contentType("multipart/form-data")
-                .multiPart("filename", file20Page)
+                .multiPart("filename", filePage)
                 .queryParam("FaxNumber", faxnumb)
                 .when()
                 .post(url);
     }
-
     public static Response sendFaxWithNewTSI(String url, File file20Page, String faxnumb, String credentials) {
         return createRequest(credentials)
                 .contentType("multipart/form-data")
@@ -436,7 +435,14 @@ public class RestRequestUtils {
                 .when()
                 .post(url);
     }
-
+    public static Response sendFaxWithNewTSI2(String url, File file20Page, String faxnumb, String credentials) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", file20Page)
+                .queryParam("FaxNumber", faxnumb)
+                .when()
+                .post(url);
+    }
     public static Response submitFaxwithBlankRegistry(String url, File randomFile, String faxnumb) {
         return response = createRequest(ConfigReader.getProperty("credentialNewOutbound"))
                 .contentType("multipart/form-data")

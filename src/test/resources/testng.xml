@@ -112,6 +112,12 @@
             <class name="testng.SftpPushTests"/>
         </classes>
     </test>
+
+    <test name="IgnoreBusyFeature">
+        <classes>
+            <class name="testng.IgnoreBusyFeature"/>
+        </classes>
+    </test>
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
     <!--        <parameter name="times" value="2" />-->

@@ -19,7 +19,7 @@ public class SftpPushTests extends TestBase {
         assert data != null;
 
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_realms1"));
+       DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_realms1"));
 
         DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_users1"));
 
@@ -50,7 +50,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
+    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression1"})
     void testWithCertificateNoPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -70,7 +70,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*150);
+        Thread.sleep(1000*160);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
 
         int jobId = JsonPath.read(responseReceiveFax.asPrettyString(), "$.FaxInfo[0].FaxId");
