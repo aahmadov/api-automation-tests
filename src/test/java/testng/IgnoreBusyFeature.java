@@ -15,7 +15,7 @@ import static org.junit.Assert.fail;
 public class IgnoreBusyFeature extends TestBase {
 
 
-    @Test(testName = "IBF - IgnoreBusy feature results in wrong first send delay", groups = {"RegressionIgnore"})
+    @Test(testName = "IBF - IgnoreBusy feature results in wrong first send delay", groups = {"Regression"})
     void IgnoreBusyFeature() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

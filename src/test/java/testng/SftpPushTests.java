@@ -50,7 +50,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression1"})
+    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
     void testWithCertificateNoPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
