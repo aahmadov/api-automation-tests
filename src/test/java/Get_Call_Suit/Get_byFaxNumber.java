@@ -69,7 +69,23 @@ public class Get_byFaxNumber {
 		 assertEquals(dc,"sendFailed");
 	
 }
-	
-}
+	@Test
+	public void calculation(){
+		String name ="IlhamNamiqKamal";
+		String reverse ="";
+		            //abbasAhmadov(12-1=11)//11>=0  11=11-1
+			for (int i = name.length()-1;     i >= 0;  i--){
+             //String=String+abbasAhmadov
+			reverse = reverse+name.charAt(i);
+
+
+			}
+
+		System.out.println(reverse);
+
+		}
+
+	}
+
 
 

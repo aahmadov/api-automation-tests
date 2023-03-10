@@ -65,15 +65,15 @@ public class RestRequestUtils {
 
     }
 
-    public static Response getFaxsTSINewRestLoadtest(String url) {
+    public static Response getStateCodes(String url) {
 
         RequestSpecification request = RestAssured.given();
-        String credentilas = ConfigReader.getProperty("credentialNewInbound");
-        byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
-        String encodedCreadentialForAdmin = new String(encodedCredentials);
+        String credentilas = ConfigReader.getProperty("Token");
+       // byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
+       // String encodedCreadentialForAdmin = new String(encodedCredentials);
 
-        request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
-        return response = request.contentType("multipart/form-data").when().get(url);
+        request.header("Authorization " ,"Bearer "+ credentilas);
+        return response = request.contentType("application/json").when().get(url);
     }
 
 
@@ -353,7 +353,18 @@ public class RestRequestUtils {
                 .when().post(url);
 
     }
+    public static Response sendFaxWithSwagger(String url, File file, String data) {
+        RequestSpecification request = RestAssured.given();
+        String credentials = ConfigReader.getProperty("Token");
+        request.header("Authorization ", "Bearer " + credentials);
 
+        return response = request.contentType("multipart/form-data")
+                .multiPart("loaFile", file)
+                .multiPart("billFile", file)
+                .queryParam("data",  data)
+                .when().post(url);
+
+    }
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD, String credentials) {
         return createRequest(credentials).contentType("multipart/form-data")
                 .multiPart("filename", file)
@@ -434,6 +445,16 @@ public class RestRequestUtils {
                 .queryParam("FaxNumber", faxnumb)
                 .when()
                 .post(url);
+    }
+        public static Response PostCalltoCreateLOA(String url, String body) {
+            RequestSpecification request = RestAssured.given();
+            String credentials = ConfigReader.getProperty("Token");
+            request.header("Authorization ", "Bearer " + credentials);
+            return response = request
+                    .contentType("application/json")
+                    .body(body)
+                    .when()
+                    .post(url).andReturn();
     }
     public static Response sendFaxWithNewTSI2(String url, File file20Page, String faxnumb, String credentials) {
         return createRequest(credentials)

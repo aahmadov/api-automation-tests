@@ -118,6 +118,16 @@
             <class name="testng.IgnoreBusyFeature"/>
         </classes>
     </test>
+    <test name="List_of_area_code_of_specific_city">
+        <classes>
+            <class name="testng.List_of_area_code_of_specific_city"/>
+        </classes>
+    </test>
+    <test name="Create_LOA">
+        <classes>
+            <class name="testng.Create_LOA"/>
+        </classes>
+    </test>
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
     <!--        <parameter name="times" value="2" />-->
