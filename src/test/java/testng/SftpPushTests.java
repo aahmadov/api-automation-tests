@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SftpPushTests extends TestBase {
 
-    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression"})
+    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"RegressionAnat"})
     void testWithSimpleAuthentication() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -50,7 +50,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
+    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"RegressionAnat"})
     void testWithCertificateNoPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -78,7 +78,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression"})
+    @Test(testName = "SFTP - Test With Certificate With Passphrase", groups = {"RegressionAnat"})
     void testWithCertificateWithPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -108,7 +108,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"RegressionAbbas"})
+    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression"})
     void testWithSimpleAuthenticationAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -145,7 +145,7 @@ public class SftpPushTests extends TestBase {
 
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
-    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"RegressionAbbas2"})
+    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
     void testWithCertificateNoPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -172,7 +172,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("************ Inbound Fax Job id: " + jobId);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
-    @Test(testName = "SFTP - Test With Certificate With Passphrase", groups = {"RegressionAbbas3"})
+    @Test(testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
