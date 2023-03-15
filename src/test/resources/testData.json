@@ -293,11 +293,11 @@
   "removeNumberRequest": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/remove-number-request/release",
     "statusCode": 201,
-    "body": "{\"fax_number\": \"11111111114\",\n  \"notify_email\": \"user@acme.com\",\n  \"notify_email2\": \"admin@acme.com\",\n  \"comment\": \"Please process ASAP.\"}"
+    "body": "{\"fax_number\": \"17062218528\",\n  \"notify_email\": \"user@acme.com\",\n  \"notify_email2\": \"admin@acme.com\",\n  \"comment\": \"Please process ASAP.\"}"
   },
   "removeNumberRequestPortOut": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/remove-number-request/port-out",
     "statusCode": 201,
-    "body": "{\"fax_number\": \"448001234567\",\n\"notify_email\": \"user@acme.com\",\n\"notify_email2\": \"\",\n\"comment\":\"Please process ASAP.\",\n\"forward_to_fax_number\":\"1555782990\"}"
+    "body": "{\"fax_number\": \"17062218520\",\n\"notify_email\": \"user@acme.com\",\n\"notify_email2\": \"\",\n\"comment\":\"Please process ASAP.\",\n\"forward_to_fax_number\":\"1555782990\"}"
 }
 }
