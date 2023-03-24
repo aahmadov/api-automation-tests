@@ -202,7 +202,7 @@
   },
   "testWithSimpleAuthenticationAbbas": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "1(111)111-1111",
+    "faxNumber": "1(333)333-3333",
     "statusCode": 201,
     "credentialOutbound": "faxsending@auto1:softlinx",
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
@@ -213,7 +213,7 @@
   },
   "testWithCertificateWithPassphraseAbbas": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "1(111)111-1111",
+    "faxNumber": "1(333)333-3333",
     "statusCode": 201,
     "credentialOutbound": "faxsending@auto1:softlinx",
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
@@ -224,7 +224,7 @@
   },
   "testWithCertificateNoPassphraseAbbas": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "1(111)111-1111",
+    "faxNumber": "1(333)333-3333",
     "statusCode": 201,
     "credentialOutbound": "faxsending@auto1:softlinx",
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
@@ -281,23 +281,23 @@
   "addNewNumberTollFree": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/add-new-number-request/toll-free",
     "statusCode": 201,
-    "body": "{\n \"country_code\": \"US\",\n \"department_name\":\"Engineering\",\n \"assign_to_user\": \"JDoe\",\n \"fax_number\":\"15557829902\",\n \"notify_email\": [\n\"auto@softlinx.com\"\n],\n\"comment\": \"Process ASAP.\",\n\"forward_from\":\"44566667102\"\n}"
+    "body": "{\n \"country_code\": \"US\",\n \"department_name\":\"Engineering\",\n \"assign_to_user\": \"JDoe\",\n \"fax_number\":\"15557829913\",\n \"notify_email\": [\n\"auto@softlinx.com\"\n],\n\"comment\": \"Process ASAP.\",\n\"forward_from\":\"44566667102\"\n}"
   },
   "addPortRequest": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/add-port-request",
     "Pages": "3",
     "fileType": "pdf",
     "statusCode": 201,
-    "data": "{\"country_code\":\"US\",\n\"department_name\":\"Engineering\",\n\"assign_to_user\":\"jdoe\",\n\"notify_email\":[\n\"admin@acme.com\"\n],\n\"comment\":\"hello\",\n\"number_to_port\":\"12345678015\",\n\"toll_free\":false}"
+    "data": "{\"country_code\":\"US\",\n\"department_name\":\"Engineering\",\n\"assign_to_user\":\"jdoe\",\n\"notify_email\":[\n\"admin@acme.com\"\n],\n\"comment\":\"hello\",\n\"number_to_port\":\"12223334004\",\n\"toll_free\":false}"
   },
   "removeNumberRequest": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/remove-number-request/release",
     "statusCode": 201,
-    "body": "{\"fax_number\": \"17062218528\",\n  \"notify_email\": \"user@acme.com\",\n  \"notify_email2\": \"admin@acme.com\",\n  \"comment\": \"Please process ASAP.\"}"
+    "body": "{\"fax_number\": \"12223334003\",\n  \"notify_email\": \"user@acme.com\",\n  \"notify_email2\": \"admin@acme.com\",\n  \"comment\": \"Please process ASAP.\"}"
   },
   "removeNumberRequestPortOut": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/remove-number-request/port-out",
     "statusCode": 201,
-    "body": "{\"fax_number\": \"17062218520\",\n\"notify_email\": \"user@acme.com\",\n\"notify_email2\": \"\",\n\"comment\":\"Please process ASAP.\",\n\"forward_to_fax_number\":\"1555782990\"}"
+    "body": "{\"fax_number\": \"12223334000\",\n\"notify_email\": \"user@acme.com\",\n\"notify_email2\": \"\",\n\"comment\":\"Please process ASAP.\",\n\"forward_to_fax_number\":\"1555782990\"}"
 }
 }
