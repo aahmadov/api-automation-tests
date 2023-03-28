@@ -366,7 +366,7 @@ public class RestRequestUtils {
     }
         public static Response sendFaxWithSwagger2(String url, File file, String data) {
             RequestSpecification request = RestAssured.given();
-            String credentials = ConfigReader.getProperty("Token");
+            String credentials = ConfigReader.getProperty("Token2");
             request.header("Authorization ", "Bearer " + credentials);
 
             return response = request.contentType("multipart/form-data")

@@ -108,7 +108,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression"})
+    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"RegressionAbas"})
     void testWithSimpleAuthenticationAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -123,7 +123,7 @@ public class SftpPushTests extends TestBase {
 
         DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_users"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus"));
+        //DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus"));
 
         //Thread.sleep(1000*30);
 
@@ -137,7 +137,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*220);
+        Thread.sleep(1000*160);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
 
         int jobId = JsonPath.read(responseReceiveFax.asPrettyString(), "$.FaxInfo[0].FaxId");
