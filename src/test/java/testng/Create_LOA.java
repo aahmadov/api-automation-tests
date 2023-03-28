@@ -138,7 +138,7 @@ public class Create_LOA extends TestBase {
         int count = pdfUtil.getPageCount(PdfLocation);
         System.out.println("Page count is: "+count);
     }
-    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"RegressionNEW2"})
+    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression"})
     void addNewNumberTollFree2() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -154,7 +154,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"RegressionNEW3"})
+    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
     void addNewNumberNoneTollFree2() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
