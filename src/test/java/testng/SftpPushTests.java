@@ -123,7 +123,7 @@ public class SftpPushTests extends TestBase {
 
         DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_users"));
 
-        //DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus"));
+        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus"));
 
         //Thread.sleep(1000*30);
 
