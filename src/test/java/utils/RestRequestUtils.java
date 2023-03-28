@@ -361,8 +361,20 @@ public class RestRequestUtils {
         return response = request.contentType("multipart/form-data")
                 .multiPart("loaFile", file)
                 .multiPart("billFile", file)
-                .queryParam("data",  data)
+                .queryParam("data", data)
                 .when().post(url);
+    }
+        public static Response sendFaxWithSwagger2(String url, File file, String data) {
+            RequestSpecification request = RestAssured.given();
+            String credentials = ConfigReader.getProperty("Token");
+            request.header("Authorization ", "Bearer " + credentials);
+
+            return response = request.contentType("multipart/form-data")
+                    .multiPart("loaFile", file)
+                    .multiPart("billFile", file)
+                    .queryParam("data",  data)
+                    .when().post(url);
+
 
     }
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD, String credentials) {
@@ -455,6 +467,16 @@ public class RestRequestUtils {
                     .body(body)
                     .when()
                     .post(url).andReturn();
+        }
+            public static Response PostCalltoCreateLOA2(String url, String body) {
+                RequestSpecification request = RestAssured.given();
+                String credentials = ConfigReader.getProperty("Token2");
+                request.header("Authorization ", "Bearer " + credentials);
+                return response = request
+                        .contentType("application/json")
+                        .body(body)
+                        .when()
+                        .post(url).andReturn();
     }
     public static Response sendFaxWithNewTSI2(String url, File file20Page, String faxnumb, String credentials) {
         return createRequest(credentials)

@@ -243,7 +243,7 @@
   "GetListOfAreaCode": {
     "get_call_Url": "https://api-tmp.rpxtest.com/api/numbers/area_codes/US/MA/Boston",
     "statusCode": 200,
-     "area_code":774
+    "area_code": 774
   },
   "GetListOfAreaCodeofspecificCitywithState": {
     "get_call_Url": "https://api-tmp.rpxtest.com/api/numbers/cities/US/MA",
@@ -277,7 +277,7 @@
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/LOA/create",
     "statusCode": 200,
     "body": "{\"company\":\"Softlinx\",\r\n\"address\":\"3commonwealth\",\r\n\"city\":\"Boston\",\r\n\"region_code\":\"MA\",\r\n\"zip_code\":\"02703\",\r\n\"btn\":\"613\",\r\n\"carrier_name\":\"Testcompany\",\r\n\"carrier_account_number\":\"123456789\",\r\n\"desired_due_date\":\"2023-02-23\",\r\n\"number_to_port\":\"17818854198\",\r\n\"name\":\"MapleleafEnterprisesLLC\",\r\n\"title\":\"Business\"}"
- },
+  },
   "addNewNumberTollFree": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/add-new-number-request/toll-free",
     "statusCode": 201,
@@ -288,16 +288,40 @@
     "Pages": "3",
     "fileType": "pdf",
     "statusCode": 201,
-    "data": "{\"country_code\":\"US\",\n\"department_name\":\"Engineering\",\n\"assign_to_user\":\"jdoe\",\n\"notify_email\":[\n\"admin@acme.com\"\n],\n\"comment\":\"hello\",\n\"number_to_port\":\"12223334004\",\n\"toll_free\":false}"
+    "data": "{\"country_code\":\"US\",\n\"department_name\":\"Engineering\",\n\"assign_to_user\":\"jdoe\",\n\"notify_email\":[\n\"admin@acme.com\"\n],\n\"comment\":\"hello\",\n\"number_to_port\":\"15555555564\",\n\"toll_free\":false}"
   },
   "removeNumberRequest": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/remove-number-request/release",
     "statusCode": 201,
-    "body": "{\"fax_number\": \"12223334003\",\n  \"notify_email\": \"user@acme.com\",\n  \"notify_email2\": \"admin@acme.com\",\n  \"comment\": \"Please process ASAP.\"}"
+    "body": "{\"fax_number\": \"15551234578\",\n  \"notify_email\": \"user@acme.com\",\n  \"notify_email2\": \"admin@acme.com\",\n  \"comment\": \"Please process ASAP.\"}"
   },
   "removeNumberRequestPortOut": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/remove-number-request/port-out",
     "statusCode": 201,
-    "body": "{\"fax_number\": \"12223334000\",\n\"notify_email\": \"user@acme.com\",\n\"notify_email2\": \"\",\n\"comment\":\"Please process ASAP.\",\n\"forward_to_fax_number\":\"1555782990\"}"
-}
+    "body": "{\"fax_number\": \"15555555560\",\n\"notify_email\": \"user@acme.com\",\n\"notify_email2\": \"\",\n\"comment\":\"Please process ASAP.\",\n\"forward_to_fax_number\":\"1555782990\"}"
+  },
+  "CreateLOA2": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/LOA/create",
+    "statusCode": 200,
+    "body": "{\"company\":\"Softlinx\",\r\n\"address\":\"3commonwealth\",\r\n\"city\":\"Boston\",\r\n\"region_code\":\"MA\",\r\n\"zip_code\":\"02703\",\r\n\"btn\":\"613\",\r\n\"carrier_name\":\"Testcompany\",\r\n\"carrier_account_number\":\"123456789\",\r\n\"desired_due_date\":\"2023-02-23\",\r\n\"number_to_port\":\"17818854198\",\r\n\"name\":\"MapleleafEnterprisesLLC\",\r\n\"title\":\"Business\"}"
+  },
+  "addNewNumberTollFree2": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-new-number-request/toll-free",
+    "statusCode": 201,
+    "body": "{\n \"country_code\": \"CA\",\n \"department_name\":\"Engineering\",\n \"assign_to_user\": \"JDoe\",\n \"fax_number\":\"15557829913\",\n \"notify_email\": [\n\"auto@softlinx.com\"\n],\n\"comment\": \"Process ASAP.\",\n\"forward_from\":\"44566667102\"\n}"
+
+  },
+  "addNewNumberNoneTollFree2": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-new-number-request/non-toll-free",
+    "statusCode": 201,
+    "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberApi\",\n  \"fax_number\": \"15557829902\",\n  \"notify_email\": [\n        \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\",\n   \"city\":\"Boston\",\n  \"region\":\"MA\",\n  \"area_code\":[\"781\"]\n}"
+
+  },
+  "addPortRequest2": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-port-request",
+    "Pages": "3",
+    "fileType": "pdf",
+    "statusCode": 201,
+    "data": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberapi\",\n  \"notify_email\":[ \"joe@softlinx.com\"],\n  \"notify_email2\":[ \"joe@softlinx.com\"],\n  \"comment\": \"be quick\",\n  \"number_to_port\": \"13333333331\",\n  \"toll_free\": false\n}"
+  }
 }
