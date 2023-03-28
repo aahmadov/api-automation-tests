@@ -306,15 +306,15 @@
     "body": "{\"company\":\"Softlinx\",\r\n\"address\":\"3commonwealth\",\r\n\"city\":\"Boston\",\r\n\"region_code\":\"MA\",\r\n\"zip_code\":\"02703\",\r\n\"btn\":\"613\",\r\n\"carrier_name\":\"Testcompany\",\r\n\"carrier_account_number\":\"123456789\",\r\n\"desired_due_date\":\"2023-02-23\",\r\n\"number_to_port\":\"17818854198\",\r\n\"name\":\"MapleleafEnterprisesLLC\",\r\n\"title\":\"Business\"}"
   },
   "addNewNumberTollFree2": {
-    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-new-number-request/toll-free",
+    "post_call_Url1": "http://10.250.1.100:8082/api/numbers/add-new-number-request/toll-free",
     "statusCode": 201,
-    "body": "{\n \"country_code\": \"CA\",\n \"department_name\":\"Engineering\",\n \"assign_to_user\": \"JDoe\",\n \"fax_number\":\"15557829913\",\n \"notify_email\": [\n\"auto@softlinx.com\"\n],\n\"comment\": \"Process ASAP.\",\n\"forward_from\":\"44566667102\"\n}"
+    "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberapi\",\n  \"fax_number\": \"15557829902\",\n  \"notify_email\": [\n        \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\"\n}"
 
   },
   "addNewNumberNoneTollFree2": {
-    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-new-number-request/non-toll-free",
+    "post_call_Url2": "http://10.250.1.100:8082/api/numbers/add-new-number-request/non-toll-free",
     "statusCode": 201,
-    "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberApi\",\n  \"fax_number\": \"15557829902\",\n  \"notify_email\": [\n        \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\",\n   \"city\":\"Boston\",\n  \"region\":\"MA\",\n  \"area_code\":[\"781\"]\n}"
+    "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberApi\",\n  \"fax_number\": \"15557829902\",\n  \"notify_email\": [\n        \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\",\n   \"city\":\"Boston\",\n  \"region\":\"MA\",\n  \"area_code\":[\"781\"]\n}"
 
   },
   "addPortRequest2": {

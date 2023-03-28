@@ -144,13 +144,13 @@ public class Create_LOA extends TestBase {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
-        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url"),data.get("body"));
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url1"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println("************ " + data.get("post_call_Url1"));
         System.out.println( data.get("body"));
         System.out.println("------------------------------------------------------------------------");
 
-        assertEquals(Integer.toString(responseSubmitFaxLong.statusCode()), data.get("statusCode"));
+        assertEquals(Integer.toString(responseSubmitFaxLong.getStatusCode()), data.get("statusCode"));
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
@@ -160,9 +160,9 @@ public class Create_LOA extends TestBase {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
-        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url"),data.get("body"));
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url2"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println("************ " + data.get("post_call_Url2"));
         System.out.println( data.get("body"));
         System.out.println("------------------------------------------------------------------------");
 
