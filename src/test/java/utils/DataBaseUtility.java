@@ -16,6 +16,7 @@ import java.util.Map;
 public class DataBaseUtility {
 
     private static Connection connection;
+    private static Connection connection2;
     private static Statement statement;
     private static ResultSet resultSet;
 
@@ -33,6 +34,9 @@ public class DataBaseUtility {
                 ConfigReader.getProperty("replixdb.username"),
                 ConfigReader.getProperty("replixdb.password"));
 
+        connection2 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeature"),
+                ConfigReader.getProperty("replixdb.username"),
+                ConfigReader.getProperty("replixdb.password"));
     }
 
     public static List<Map<String, Object>> executeSQLQuery(String query) throws SQLException {
@@ -66,6 +70,14 @@ public class DataBaseUtility {
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
     }
+
+    public static void executeSQLUpdate2(final String query) throws SQLException {
+        openConnection();
+        statement = connection2.createStatement();
+        int noOfLines = statement.executeUpdate(query);
+        closeConnection();
+    }
+
 
     public static void closeConnection() {
         try {
