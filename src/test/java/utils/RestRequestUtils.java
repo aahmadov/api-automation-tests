@@ -75,7 +75,16 @@ public class RestRequestUtils {
         request.header("Authorization " ,"Bearer "+ credentilas);
         return response = request.contentType("application/json").when().get(url);
     }
+    public static Response getStateCodesNewURL8082(String url) {
 
+        RequestSpecification request = RestAssured.given();
+        String credentilas = ConfigReader.getProperty("Token2");
+        // byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
+        // String encodedCreadentialForAdmin = new String(encodedCredentials);
+
+        request.header("Authorization " ,"Bearer "+ credentilas);
+        return response = request.contentType("application/json").when().get(url);
+    }
 
     public static Response getFaxsTSINewRestApi2(String url) {
 

@@ -131,4 +131,18 @@ public class List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
+    @Test(testName = "List of city and province of specific State with new URL", groups = {"smoke"})
+    void GetListOfAreaCodeofspecificCitywithState2() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+    }
+
 }
