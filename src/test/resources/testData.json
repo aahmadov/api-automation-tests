@@ -319,13 +319,17 @@
     "post_call_Url2": "http://10.250.1.100:8082/api/numbers/add-new-number-request/non-toll-free",
     "statusCode": 201,
     "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberApi\",\n  \"fax_number\": \"15557829902\",\n  \"notify_email\": [\n        \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\",\n   \"city\":\"Boston\",\n  \"region\":\"MA\",\n  \"area_code\":[\"781\"]\n}"
-
   },
   "addPortRequest2": {
     "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-port-request",
     "Pages": "3",
     "fileType": "pdf",
     "statusCode": 201,
-    "data": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberapi\",\n  \"notify_email\":[ \"joe@softlinx.com\"],\n  \"notify_email2\":[ \"joe@softlinx.com\"],\n  \"comment\": \"be quick\",\n  \"number_to_port\": \"13333333335\",\n  \"toll_free\": false\n}"
+    "data": "{\"country_code\": \"US\",\n \"department_name\": \"\",\n\"assign_to_user\": \"numberapi\",\n \"notify_email\": [\n\"auto@softlinx.com\"\n],\n\"comment\": \"\",\n\"number_to_port\": \"13333333425\",\n\"toll_free\": false}"
+  },
+  "removeNumberRequest2": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/remove-number-request/release",
+    "statusCode": 201,
+    "body": "{\"fax_number\": \"13333333425\",\n  \"notify_email\": \"auto@softlinx.com\",\n  \"notify_email2\": \"auto@softlinx.com\",\n  \"comment\": \"Please process ASAP.\"}"
   }
 }

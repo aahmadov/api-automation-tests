@@ -1,15 +1,17 @@
 package testng;
 
+import com.jayway.jsonpath.JsonPath;
 import com.testautomationguru.utility.PDFUtil;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.*;
 import utils.FileReader;
-import utils.JsonUtils;
-import utils.RestRequestUtils;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
@@ -171,7 +173,7 @@ public class Create_LOA extends TestBase {
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
     @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"Regression"})
-    void addPortRequest2() throws InterruptedException {
+    void addPortRequest2() throws InterruptedException, SQLException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -182,10 +184,33 @@ public class Create_LOA extends TestBase {
         System.out.println(":" + (data.get("post_call_Url")));
         System.out.println(":" + file);
         System.out.println("------------------------------------------------------------------------");
+        List <Integer> JobID = JsonPath.read(response.asPrettyString(),"$..id");
+
         System.out.println(response.asPrettyString());
         Assert.assertEquals(Integer.parseInt(data.get("statusCode")), response.getStatusCode());
         Thread.sleep(1000*5);
         System.out.println(response.asPrettyString());
+        String database=String.format("update replixdb.faxnumber_requests set status = 'Complete' where (id='%s')",JobID.toString().replace("[","").replace("]",""));
+        DataBaseUtility.executeSQLUpdate2(database);
+        System.out.println(database);
     }
+    @Test(testName="remove_Number_request_release with new URL",groups = {"Regression"})
+    void removeNumberRequest2() throws InterruptedException {
 
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url"),data.get("body"));
+        System.out.println(responseSubmitFaxLong.asPrettyString());
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println( data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("Response:  "+responseSubmitFaxLong.asPrettyString());
+        assertEquals(Integer.toString(responseSubmitFaxLong.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000*5);
+        System.out.println(responseSubmitFaxLong.asPrettyString());
+
+
+    }
 }
