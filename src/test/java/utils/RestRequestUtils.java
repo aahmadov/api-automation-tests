@@ -74,6 +74,7 @@ public class RestRequestUtils {
 
         request.header("Authorization " ,"Bearer "+ credentilas);
         return response = request.contentType("application/json").when().get(url);
+
     }
     public static Response getStateCodesNewURL8082(String url) {
 
@@ -85,7 +86,6 @@ public class RestRequestUtils {
         request.header("Authorization " ,"Bearer "+ credentilas);
         return response = request.contentType("application/json").when().get(url);
     }
-
     public static Response getFaxsTSINewRestApi2(String url) {
 
         RequestSpecification request = RestAssured.given();

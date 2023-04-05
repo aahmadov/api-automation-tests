@@ -120,7 +120,7 @@
     </test>
     <test name="List_of_area_code_of_specific_city">
         <classes>
-            <class name="testng.List_of_area_code_of_specific_city"/>
+            <class name="testng.GetCall_List_of_area_code_of_specific_city"/>
         </classes>
     </test>
     <test name="Create_LOA">

@@ -249,15 +249,11 @@
     "get_call_Url": "https://api-tmp.rpxtest.com/api/numbers/cities/US/MA",
     "statusCode": 200
   },
-  "GetListOfAreaCodeofspecificCitywithState2": {
-    "get_call_Url": "http://10.250.1.100:8082/api/numbers/area_codes/US/MA/Burlington",
-    "statusCode": 200
-  },
   "GetListOfAreaCodeofspecificState": {
     "get_call_Url": "https://api-tmp.rpxtest.com/api/numbers/area_codes/US/Tx",
     "statusCode": 200
   },
-  "GetListOfUsersWithNoFaxNumber": {
+  "GetListOfUsersWithName": {
     "get_call_Url": "https://api-tmp.rpxtest.com/api/numbers/users",
     "statusCode": 200
   },
@@ -331,5 +327,38 @@
     "post_call_Url": "http://10.250.1.100:8082/api/numbers/remove-number-request/release",
     "statusCode": 201,
     "body": "{\"fax_number\": \"13333333425\",\n  \"notify_email\": \"auto@softlinx.com\",\n  \"notify_email2\": \"auto@softlinx.com\",\n  \"comment\": \"Please process ASAP.\"}"
+  },
+  "GetListOfAreaCode2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers/area_codes/US/MA/Boston",
+    "statusCode": 200,
+    "area_code": 774
+  },
+  "GetListOfAreaCodeofspecificCitywithState2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers/area_codes/US/MA/Burlington",
+    "statusCode": 200
+  },
+  "GetListOfAreaCodeofspecificState2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers/area_codes/US/Tx",
+    "statusCode": 200
+  },
+  "GetListOfUsersWithName2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers/users",
+    "statusCode": 200
+  },
+  "GetListOfDepartments2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers/departments",
+    "statusCode": 200
+  },
+  "GetListOfcityCodesOrProvinces2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers/regions/CA",
+    "statusCode": 200
+  },
+  "GetListOfAllFaxNumberOwnedOrg2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers",
+    "statusCode": 200
+  },
+  "GetDetailsAboutRequest2": {
+    "get_call_Url": "http://10.250.1.100:8082/api/numbers/requests/add/1236",
+    "statusCode": 200
   }
 }
