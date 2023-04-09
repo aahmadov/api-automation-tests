@@ -170,17 +170,15 @@ public class SftpPushTests extends TestBase {
 
         int jobId = JsonPath.read(responseReceiveFax.asPrettyString(), "$.FaxInfo[0].FaxId");
         System.out.println("************ Inbound Fax Job id: " + jobId);
-        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"),data.get("filePath"), jobId + ".pdf"));
     }
     @Test(testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
-
         //Execute first query - Delete
         DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("rsa_private_key_with_passphrase"));
-
         //Thread.sleep(60000);
 
         String tsi = FileReader.randomNumberFor_TSI();
