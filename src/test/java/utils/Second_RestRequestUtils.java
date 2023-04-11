@@ -304,14 +304,6 @@ public class Second_RestRequestUtils {
                 .get(url);
     }
 
-    public static Response resendfaxWith(String url,String FaxNumber,String credentials) {
-        return createRequest(credentials).contentType("multipart/form-data")
-                //.multiPart("filename", file)
-                .queryParam("FaxNumber", FaxNumber)
-                .when()
-                .post(url);
-    }
-
     private static RequestSpecification createRequest(String credentials) {
         RequestSpecification request = RestAssured.given();
         byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());

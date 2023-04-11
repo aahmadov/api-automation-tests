@@ -92,7 +92,7 @@
     "ignoreFail": "true"
   },
   "resendFailedFaxDataWithNumber": {
-    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes/966/resend",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes/974/resend",
     "faxNumber": "1-222-222-2222",
     "credentials": "faxsending@acme1:Softlinx1!",
     "expectedStatusCode": "200"
@@ -138,6 +138,7 @@
     "credentialInbound": "receiver@acme1:Softlinx1!"
   },
   "inboundFaxPageValidation20": {
+    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "222-222-2222",
     "statusCode": 201,

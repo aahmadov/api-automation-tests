@@ -464,7 +464,7 @@ public class RestRequestUtils {
                 .contentType("multipart/form-data")
                 .multiPart("filename", file20Page)
                 .queryParam("FaxNumber", faxnumb)
-                .when()
+                .when().log().all()
                 .post(url);
     }
         public static Response PostCalltoCreateLOA(String url, String body) {
@@ -509,7 +509,14 @@ public class RestRequestUtils {
                 .when().log().all()
                 .put(url);
     }
-
+    public static Response resendfaxWith(String url,String credentials,String faxNumber) {
+        return createRequest(credentials).contentType("multipart/form-data")
+                //.multiPart("FaxNumber", faxNumber)
+                //.queryParam("FaxNumber", FaxNumber)
+                .multiPart("FaxNumber",faxNumber)
+                .when().log().all()
+                .post(url);
+    }
     private static RequestSpecification createRequest(String credentials) {
         RequestSpecification request = RestAssured.given();
         byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
