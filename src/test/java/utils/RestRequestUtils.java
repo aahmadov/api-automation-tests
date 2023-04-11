@@ -464,7 +464,7 @@ public class RestRequestUtils {
                 .contentType("multipart/form-data")
                 .multiPart("filename", file20Page)
                 .queryParam("FaxNumber", faxnumb)
-                .when().log().all()
+                .when()
                 .post(url);
     }
         public static Response PostCalltoCreateLOA(String url, String body) {
@@ -506,7 +506,7 @@ public class RestRequestUtils {
 
     public static Response putScenario(String url) {
         return response = createRequest()
-                .when().log().all()
+                .when()
                 .put(url);
     }
     public static Response resendfaxWith(String url,String credentials,String faxNumber) {
