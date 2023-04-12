@@ -97,7 +97,7 @@ public class Create_LOA extends TestBase {
 
 
 }
-    @Test(testName="creates new requests to remove fax number",groups = {"Regression"})
+    @Test(testName="creates new requests to remove fax number",groups = {"RegressionForLocalrun"})
     void removeNumberRequestPortOut() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
