@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Create_LOA extends TestBase {
 
-    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression1"})
+    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression"})
     void CreateLOA() throws Exception  {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -45,7 +45,7 @@ public class Create_LOA extends TestBase {
         System.out.println("Page count is: "+count);
     }
 
-    @Test(testName="add_new_number_request/tollFree",groups = {"Regression1"})
+    @Test(testName="add_new_number_request/tollFree",groups = {"Regression"})
     void addNewNumberTollFree() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -61,7 +61,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="Creates a request to port-in a fax number",groups = {"Regression1"})
+    @Test(testName="Creates a request to port-in a fax number",groups = {"Regression"})
     void addPortRequest() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -78,7 +78,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*5);
         System.out.println(response.asPrettyString());
 }
-    @Test(testName="remove_Number_request_release",groups = {"Regression1"})
+    @Test(testName="remove_Number_request_release",groups = {"Regression"})
     void removeNumberRequest() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -97,7 +97,7 @@ public class Create_LOA extends TestBase {
 
 
 }
-    @Test(testName="creates new requests to remove fax number",groups = {"Regression1"})
+    @Test(testName="creates new requests to remove fax number",groups = {"Regression"})
     void removeNumberRequestPortOut() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -114,7 +114,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*5);
         System.out.println(responseSubmitFaxLong.asPrettyString());
 }
-    @Test(testName = "Creates a PDF letter of Authorization with new URL ", groups = {"Regression1"})
+    @Test(testName = "Creates a PDF letter of Authorization with new URL ", groups = {"Regression"})
     void CreateLOA2() throws Exception  {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -140,7 +140,7 @@ public class Create_LOA extends TestBase {
         int count = pdfUtil.getPageCount(PdfLocation);
         System.out.println("Page count is: "+count);
     }
-    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression1"})
+    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression"})
     void addNewNumberTollFree2() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -156,7 +156,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression1"})
+    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
     void addNewNumberNoneTollFree2() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -172,7 +172,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"Regression1"})
+    @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"Regression"})
     void addPortRequest2() throws InterruptedException, SQLException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -194,7 +194,7 @@ public class Create_LOA extends TestBase {
         DataBaseUtility.executeSQLUpdate2(database);
         System.out.println(database);
     }
-    @Test(testName="remove_Number_request_release with new URL",groups = {"Regression1"})
+    @Test(testName="remove_Number_request_release with new URL",groups = {"Regression"})
     void removeNumberRequest2() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
