@@ -114,7 +114,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*5);
         System.out.println(responseSubmitFaxLong.asPrettyString());
 }
-    @Test(testName = "Creates a PDF letter of Authorization with new URL ", groups = {"Regression"})
+    @Test(testName = "Creates a PDF letter of Authorization with new URL ", groups = {"Regression1"})
     void CreateLOA2() throws Exception  {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -140,7 +140,7 @@ public class Create_LOA extends TestBase {
         int count = pdfUtil.getPageCount(PdfLocation);
         System.out.println("Page count is: "+count);
     }
-    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression"})
+    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression1"})
     void addNewNumberTollFree2() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -172,7 +172,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"Regression"})
+    @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"Regression1"})
     void addPortRequest2() throws InterruptedException, SQLException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

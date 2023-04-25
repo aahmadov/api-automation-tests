@@ -67,7 +67,7 @@
 
   },
   "soapFaxStatusAndPageNumberValidationFromInbound": {
-    "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/wsapi",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/wsapi",
     "faxNumber": "222-222-2222",
     "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
     "querySendFaxSoapAction": "http://www.softlinx.com/wsapi/op=QuerySendFax/ver=79",
@@ -75,11 +75,11 @@
     "Pages": "2",
     "fileType": "pdf",
     "coverPageEnabled": true,
-    "credentialNewOutboundLogin": "faxsending@smoke",
-    "credentialNewOutboundPassword": "softlinx",
+    "credentialNewOutboundLogin": "faxsending@acme1",
+    "credentialNewOutboundPassword": "Softlinx1!",
     "inboundStatusCode": 200,
-    "credentialNewInboundLogin": "receiver@smoke",
-    "credentialNewInboundPassword": "softlinx"
+    "credentialNewInboundLogin": "receiver@acme1",
+    "credentialNewInboundPassword": "Softlinx1!"
   },
   "add_1_to_the_beginning_Of_number": {
     "url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
@@ -148,7 +148,7 @@
       "newOutboundParam": "?FaxUserId=faxsending",
       "inboundFax_url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
       "newInboundParam": "?FaxUserId=receiver2",
-      "credentialNewInbound": "receiver2@smoke:softlinx"
+      "credentialNewInbound": "receiver@smoke:softlinx"
   },
   "validationOfPostCallForLoadTest": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
@@ -187,7 +187,7 @@
   },
   "submitFaxToManipulateInboundOutboundPagesCopy": {
     "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "7818854198",
     "testDataFile": "dataFile/testData.xlsx",
     "faxNumFileLoc": "input/Faxnumber.txt",
     "times": 5,
@@ -198,7 +198,7 @@
     "inboundFax_url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "newInboundParam": "?FaxUserId=receiver",
     "newOutboundParam": "?FaxUserId=faxsending",
-    "credentialInbound": "receiver@smoke:softlinx"
+    "credentialInbound": "receiver@smoke:Softlinx1!"
   },
   "inboundFaxPageValidation20": {
     "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
@@ -377,7 +377,7 @@
   "CreateLOA": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/LOA/create",
     "statusCode": 200,
-    "body": "{\"company\":\"Softlinx\",\r\n\"address\":\"3commonwealth\",\r\n\"city\":\"Boston\",\r\n\"region_code\":\"MA\",\r\n\"zip_code\":\"02703\",\r\n\"btn\":\"613\",\r\n\"carrier_name\":\"Testcompany\",\r\n\"carrier_account_number\":\"123456790\",\r\n\"desired_due_date\":\"2023-02-23\",\r\n\"number_to_port\":\"17818854198\",\r\n\"name\":\"MapleleafEnterprisesLLC\",\r\n\"title\":\"Business\"}"
+    "body": "{\"company\":\"Softlinx\",\r\n\"address\":\"3commonwealth\",\r\n\"city\":\"Boston\",\r\n\"region_code\":\"MA\",\r\n\"zip_code\":\"02703\",\r\n\"btn\":\"613\",\r\n\"carrier_name\":\"Testcompany\",\r\n\"carrier_account_number\":\"123456790\",\r\n\"desired_due_date\":\"2023-02-23\",\r\n\"number_to_port\":\"17818854298\",\r\n\"name\":\"MapleleafEnterprisesLLC\",\r\n\"title\":\"Business\"}"
   },
   "addNewNumberTollFree": {
     "post_call_Url": "https://api-tmp.rpxtest.com/api/numbers/add-new-number-request/toll-free",
