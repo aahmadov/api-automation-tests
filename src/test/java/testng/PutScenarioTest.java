@@ -113,7 +113,7 @@ public class PutScenarioTest extends TestBase {
         String finalFaxNumber = ((LinkedHashMap) tsiArray1.get(0)).get("DestFaxNumber").toString();
         assertEquals(finalFaxNumber, data.get("updatedFaxNumber"));
     }
-    @Test(testName = "Put scenario", groups = {"Regression1"})
+    @Test(testName = "Put scenario", groups = {"RegressionAnatoly"})
     public void putScenarioForRegistrySettingsCopy() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

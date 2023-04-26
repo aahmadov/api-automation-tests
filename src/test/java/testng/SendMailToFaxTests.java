@@ -76,7 +76,7 @@ public class SendMailToFaxTests extends TestBase {
             }
         }
     }
-    @Test(testName = "Send mail to Fax", groups = {"Regression1"})
+    @Test(testName = "Send mail to Fax", groups = {"RegressionAnatoly"})
     void sendMailToFaxCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
