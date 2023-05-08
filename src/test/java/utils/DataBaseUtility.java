@@ -17,6 +17,7 @@ public class DataBaseUtility {
 
     private static Connection connection;
     private static Connection connection2;
+    private static Connection connection3;
     private static Statement statement;
     private static ResultSet resultSet;
 
@@ -37,12 +38,41 @@ public class DataBaseUtility {
         connection2 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeature"),
                 ConfigReader.getProperty("replixdb.username"),
                 ConfigReader.getProperty("replixdb.password"));
+
+
+        connection3 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeatureNEw"),
+                ConfigReader.getProperty("replixdb.username"),
+                ConfigReader.getProperty("replixdb.password"));
     }
 
     public static List<Map<String, Object>> executeSQLQuery(String query) throws SQLException {
 
         openConnection();
         statement = connection.createStatement();
+        resultSet = statement.executeQuery(query);
+
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        int columnCount = metaData.getColumnCount();
+        List<Map<String, Object>> table = new ArrayList<>();
+        while (resultSet.next()) {
+            Map<String, Object> map = new HashMap<>();
+            for (int column = 1; column <= columnCount; column++) {
+                System.out.print(metaData.getColumnName(column) + ":");
+                map.put(metaData.getColumnName(column), resultSet.getObject(column));
+                System.out.println(map.put(metaData.getColumnName(column), resultSet.getObject(column)));
+            }
+
+            System.out.print("\n");
+
+            table.add(map);
+        }
+        closeConnection();
+        return table;
+    }
+    public static List<Map<String, Object>> executeSQLQueryRecvD(String query) throws SQLException {
+
+        openConnection();
+        statement = connection3.createStatement();
         resultSet = statement.executeQuery(query);
 
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -77,7 +107,12 @@ public class DataBaseUtility {
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
     }
-
+    public static void executeSQLUpdateRecvD(final String query) throws SQLException {
+        openConnection();
+        statement = connection3.createStatement();
+        int noOfLines = statement.executeUpdate(query);
+        closeConnection();
+    }
 
     public static void closeConnection() {
         try {

@@ -51,9 +51,11 @@ public class SftpPushTests extends TestBase {
 
 //        //int jobId = JsonPath.read(responseReceiveFax.asPrettyString(), "$.FaxInfo[0].FaxId");
 //        List<String> TSI = JsonPath.read(responseReceiveFax.asPrettyString(),"$..TSI");
+        //int jobId = -1;
 //        for (int i=0; i<TSI.size();i++){
 //            if (TSI.get(i).contains(tsi)){
-//                System.out.println(":this "+responseElement+ " area code belongs to city of state that we have entered from json file");
+       // jobId = faxInfo.getInt("FaxId");
+//                System.out.println(":this "+ jobId+ " area code belongs to city of state that we have entered from json file");
 //            }
 //        }
 //

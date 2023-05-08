@@ -48,7 +48,11 @@
             <class name="testng.SendMailToFaxTests"/>
         </classes>
     </test>
-
+    <test name="Loadtest">
+        <classes>
+            <class name="testng.Loadtest"/>
+        </classes>
+    </test>
 
     <test name="SoapInboundFaxPagesCoverPage">
         <classes>

@@ -1,8 +1,6 @@
 package testng;
 
 import io.restassured.response.Response;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.Assert;
 import org.testng.annotations.Test;
 import utils.*;
@@ -14,10 +12,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.assertEquals;
 
-public class PostScenarioForLoadTest extends TestBase {
+public class Loadtest extends TestBase {
 
-    @Test(testName = "Validation of Post call for Load test", groups = {"RegressionTest"})
-    public void validationOfPostCallForLoadTest() throws Exception {
+    @Test(testName = "Validation of Post call for Load test", groups = {"Regression"})
+    public void PostCallForLoadTest() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -26,9 +24,6 @@ public class PostScenarioForLoadTest extends TestBase {
         List<String> faxNumbers = FileReader.convertToList(
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
-
-        DataBaseUtility.executeSQLUpdateRecvD(ConfigReader.getProperty("truncate_recvstatusAcme1"));
-        DataBaseUtility.executeSQLUpdateRecvD(ConfigReader.getProperty("truncate_billing_table"));
 
         for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
             System.out.println("**" + "it is iteration time in the loop :" + i);
@@ -58,35 +53,10 @@ public class PostScenarioForLoadTest extends TestBase {
 
             System.out.println("******* Status code:" + response.statusCode());
             assertEquals(201, response.statusCode());
-
-            Thread.sleep(1000*120);
-            Response responseReceiveFax = RestRequestUtils.responseRecieveFaxcollsionRecvD(data.get("get_call_Url"), data.get("credentialInbound"));
-            String metadata = responseReceiveFax.prettyPrint();
-            System.out.println(metadata);
-
-            // Parse the metadata string into a JSON object
-            JSONObject jsonObject = new JSONObject(metadata);
-
-            // Extract the FaxInfo array
-            JSONArray faxInfoArray = jsonObject.getJSONArray("FaxInfo");
-
-            // Search for the FaxInfo object with the desired TSI value
-            int jobId = -1;
-            for (int j = 0; j < faxInfoArray.length(); j++) {
-                JSONObject faxInfo = faxInfoArray.getJSONObject(j);
-
-                if (faxInfo.getString("TSI").equals(firstLoadTest_TSI.toString().replace("?TSI=",""))) {
-                    jobId = faxInfo.getInt("FaxId");
-                }
-            }
-            //System.out.println("************ Inbound Fax Job id: " + jobId);
-            DataBaseUtility.executeSQLUpdateRecvD(ConfigReader.getProperty("truncate_recvstatusAcme1"));
         }
-        Thread.sleep(1000*60);
-        DataBaseUtility.executeSQLQueryRecvD(ConfigReader.getProperty("checking_receiveD"));
     }
     @Test(testName = "Validation of Post call for Load test", groups = {"Regression1"})
-    public void validationOfPostCallForLoadTestCopy() throws Exception {
+    public void PostCallForLoadTestCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -95,9 +65,6 @@ public class PostScenarioForLoadTest extends TestBase {
         List<String> faxNumbers = FileReader.convertToList(
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
-
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus1"));
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_billing_table"));
 
         for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
             System.out.println("**" + "it is iteration time in the loop :" + i);
@@ -127,31 +94,6 @@ public class PostScenarioForLoadTest extends TestBase {
 
             System.out.println("******* Status code:" + response.statusCode());
             assertEquals(201, response.statusCode());
-
-            Thread.sleep(1000*120);
-            Response responseReceiveFax = RestRequestUtils.responseRecieveFaxcollsionRecvD(data.get("get_call_Url"), data.get("credentialInbound"));
-            String metadata = responseReceiveFax.prettyPrint();
-            System.out.println(metadata);
-
-            // Parse the metadata string into a JSON object
-            JSONObject jsonObject = new JSONObject(metadata);
-
-            // Extract the FaxInfo array
-            JSONArray faxInfoArray = jsonObject.getJSONArray("FaxInfo");
-
-            // Search for the FaxInfo object with the desired TSI value
-            int jobId = -1;
-            for (int j = 0; j < faxInfoArray.length(); j++) {
-                JSONObject faxInfo = faxInfoArray.getJSONObject(j);
-
-                if (faxInfo.getString("TSI").equals(firstLoadTest_TSI.toString().replace("?TSI=",""))) {
-                    jobId = faxInfo.getInt("FaxId");
-                }
-            }
-            //System.out.println("************ Inbound Fax Job id: " + jobId);
-            DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus1"));
         }
-        Thread.sleep(1000*60);
-        DataBaseUtility.executeSQLQuery(ConfigReader.getProperty("checking_receiveD"));
     }
 }

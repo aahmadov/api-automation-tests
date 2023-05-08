@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Create_LOA extends TestBase {
 
-    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression"})
+    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression3"})
     void CreateLOA() throws Exception  {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -45,7 +45,7 @@ public class Create_LOA extends TestBase {
         System.out.println("Page count is: "+count);
     }
 
-    @Test(testName="add_new_number_request/tollFree",groups = {"Regression"})
+    @Test(testName="add_new_number_request/tollFree",groups = {"Regression3"})
     void addNewNumberTollFree() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
