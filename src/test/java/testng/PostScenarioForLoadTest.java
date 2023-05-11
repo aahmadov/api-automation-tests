@@ -82,7 +82,7 @@ public class PostScenarioForLoadTest extends TestBase {
             //System.out.println("************ Inbound Fax Job id: " + jobId);
             DataBaseUtility.executeSQLUpdateRecvD(ConfigReader.getProperty("truncate_recvstatusAcme1"));
         }
-        Thread.sleep(1000*60);
+        Thread.sleep(1000*120);
         DataBaseUtility.executeSQLQueryRecvD(ConfigReader.getProperty("checking_receiveD"));
     }
     @Test(testName = "Validation of Post call for Load test", groups = {"Regression1"})
@@ -149,9 +149,10 @@ public class PostScenarioForLoadTest extends TestBase {
                 }
             }
             //System.out.println("************ Inbound Fax Job id: " + jobId);
+
             DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus1"));
         }
-        Thread.sleep(1000*60);
+        Thread.sleep(1000*180);
         DataBaseUtility.executeSQLQuery(ConfigReader.getProperty("checking_receiveD"));
     }
 }
