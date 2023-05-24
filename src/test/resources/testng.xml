@@ -54,6 +54,12 @@
         </classes>
     </test>
 
+    <test name="Lookup_Dept_DID_up_to_3_times">
+        <classes>
+            <class name="testng.Lookup_Dept_DID_up_to_3_times"/>
+        </classes>
+    </test>
+
     <test name="SoapInboundFaxPagesCoverPage">
         <classes>
             <class name="testng.SoapInboundFaxPagesCoverPage"/>

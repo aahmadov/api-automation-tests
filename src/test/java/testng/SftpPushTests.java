@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SftpPushTests extends TestBase {
 
-    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression1"})
+    @Test(priority = 1,testName = "SFTP - Setup and Test Simple Authentication", groups = {"RegressionAnat"})
     void testWithSimpleAuthentication() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -32,7 +32,7 @@ public class SftpPushTests extends TestBase {
 
         DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_users1"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus1"));
+        //DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus1"));
 
         //Thread.sleep(1000*30);
 
@@ -58,8 +58,7 @@ public class SftpPushTests extends TestBase {
 //                System.out.println(":this "+ jobId+ " area code belongs to city of state that we have entered from json file");
 //            }
 //        }
-//
-//
+
         String metadata = responseReceiveFax.prettyPrint();
         System.out.println(metadata);
 
@@ -85,7 +84,7 @@ public class SftpPushTests extends TestBase {
 
 
     }
-    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression1"})
+    @Test(priority = 3,testName = "SFTP - Test With Certificate No Passphrase", groups = {"RegressionAnat"})
     void testWithCertificateNoPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -105,7 +104,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*160);
+        Thread.sleep(1000*120);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
@@ -131,7 +130,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression1"})
+    @Test(priority = 2,testName = "SFTP - Test With Certificate With Passphrase", groups = {"RegressionAnat"})
     void testWithCertificateWithPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -178,7 +177,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression"})
+    @Test(priority = 1,testName = "SFTP - A-Test Simple Authentication", groups = {"RegressionAb"})
     void testWithSimpleAuthenticationAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -207,7 +206,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*120);
+        Thread.sleep(1000*180);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
@@ -233,7 +232,7 @@ public class SftpPushTests extends TestBase {
 
 
     }
-    @Test(testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
+    @Test(priority = 3,testName = "SFTP - C-Test With Certificate No Passphrase", groups = {"RegressionAb"})
     void testWithCertificateNoPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -253,7 +252,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*130);
+        Thread.sleep(1000*180);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
         System.out.println(metadata);
@@ -276,7 +275,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("************ Inbound Fax Job id: " + jobId);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
-    @Test(testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression"})
+    @Test(priority = 2,testName = "SFTP - B-Test With Certificate With Passphrase", groups = {"RegressionAb"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -295,7 +294,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*120);
+        Thread.sleep(1000*180);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
         System.out.println(metadata);

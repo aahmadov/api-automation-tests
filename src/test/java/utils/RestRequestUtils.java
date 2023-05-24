@@ -469,10 +469,10 @@ public class RestRequestUtils {
                 .when()
                 .post(url);
     }
-    public static Response sendFaxWithNewTSI(String url, File file20Page, String faxnumb, String credentials) {
+    public static Response sendFaxWithNewTSI(String url, File filePage, String faxnumb, String credentials) {
         return createRequest(credentials)
                 .contentType("multipart/form-data")
-                .multiPart("filename", file20Page)
+                .multiPart("filename", filePage)
                 .queryParam("FaxNumber", faxnumb)
                 .when()
                 .post(url);
