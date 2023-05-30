@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 
 public class Lookup_Dept_DID_up_to_3_times extends TestBase {
 
-    @Test(priority = 1,testName = "VerifyCallingPartyNumber", groups = {"RegressionNew1"})
+    @Test(priority = 1,testName = "VerifyCallingPartyNumber", groups = {"Regression"})
     void Verify_CallingPartyNumber_is_user_DID() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -45,7 +45,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
 
     }
 
-    @Test(priority = 2,testName = "VerifyCallingPartyNumber", groups = {"RegressionNew1"})
+    @Test(priority = 2,testName = "VerifyCallingPartyNumber", groups = {"Regression"})
     void Verify_CallingPartyNumber_is_user_DID_Regression() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -76,7 +76,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
 
     }
 
-    @Test(priority = 3,testName = "VerifyCallingPartyNumber", groups = {"RegressionNew1"})
+    @Test(priority = 3,testName = "VerifyCallingPartyNumber", groups = {"Regression"})
     void Verify_CallingPartyNumber_is_user_DID_test1() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
