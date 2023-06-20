@@ -119,7 +119,7 @@ public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
         int times = 0;
         do {
             System.out.println("*** waiting 30 secs to get the fax sending status ***");
-            Thread.sleep(1000 * 30);
+            Thread.sleep(1000 * 50);
             outbound = Second_RestRequestUtils.getOutboundWithCoverPage(
                     data.get("post_call_Url") + data.get("newOutboundParam"), data.get("credentialOutbound"));
             Assert.assertEquals(200, outbound.getStatusCode());

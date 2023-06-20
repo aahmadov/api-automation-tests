@@ -1,7 +1,12 @@
 package testng;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.jayway.jsonpath.JsonPath;
 import com.testautomationguru.utility.PDFUtil;
+import io.restassured.RestAssured;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Create_LOA extends TestBase {
 
-    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression3"})
+    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression"})
     void CreateLOA() throws Exception  {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -45,7 +50,7 @@ public class Create_LOA extends TestBase {
         System.out.println("Page count is: "+count);
     }
 
-    @Test(testName="add_new_number_request/tollFree",groups = {"Regression3"})
+    @Test(testName="add_new_number_request/tollFree",groups = {"Regression"})
     void addNewNumberTollFree() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -62,21 +67,42 @@ public class Create_LOA extends TestBase {
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
     @Test(testName="Creates a request to port-in a fax number",groups = {"Regression"})
-    void addPortRequest() throws InterruptedException {
+    void addPortRequest() throws InterruptedException, JsonProcessingException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
+
+        String number2  = FileReader.randomFaxNumberEmailToFax();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(data.get("data"));
+        ((ObjectNode) jsonNode).put("number_to_port", number2);
+        String modifiedJsonData = objectMapper.writeValueAsString(jsonNode);
+
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
-        Response response = RestRequestUtils.sendFaxWithSwagger(data.get("post_call_Url"),
-                file, data.get("data"));
+
+        String credentials = ConfigReader.getProperty("Token");
+
+        Response responseSubmitFaxLong2 = RestAssured.given()
+                .header("Authorization ", "Bearer " + credentials)
+                .contentType("multipart/form-data")
+                .multiPart("loaFile", file)
+                .multiPart("billFile", file)
+                .queryParam("data", modifiedJsonData)
+                .when().log().all()
+                .post(data.get("post_call_Url"));
+
+
+       // Response response = RestRequestUtils.sendFaxWithSwagger(data.get("post_call_Url"),
+        //        file, modifiedJsonData);
         System.out.println("------------------------------------------------------------------------");
         System.out.println(":" + (data.get("post_call_Url")));
         System.out.println(":" + file);
         System.out.println("------------------------------------------------------------------------");
-        System.out.println(response.asPrettyString());
-        Assert.assertEquals(Integer.parseInt(data.get("statusCode")), response.getStatusCode());
+        System.out.println(responseSubmitFaxLong2.asPrettyString());
+        System.out.println(modifiedJsonData);
+        Assert.assertEquals(responseSubmitFaxLong2.getStatusCode(),Integer.parseInt(data.get("statusCode")));
         Thread.sleep(1000*5);
-        System.out.println(response.asPrettyString());
+        System.out.println(responseSubmitFaxLong2.asPrettyString());
 }
     @Test(testName="remove_Number_request_release",groups = {"Regression"})
     void removeNumberRequest() throws InterruptedException {
@@ -212,6 +238,129 @@ public class Create_LOA extends TestBase {
 
         System.out.println(responseSubmitFaxLong.asPrettyString());
 
-
     }
-}
+    @Test(priority = 1,testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
+    void addNewNumberNonTollFreeWithUpdatedApp_Complete() throws InterruptedException, SQLException {
+
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario(data.get("post_call_Url"),data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println( data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+
+        assertEquals(Integer.toString(responseSubmitFaxLong.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000*10);
+
+        System.out.println(responseSubmitFaxLong.asPrettyString());
+        List <Integer> JobID = JsonPath.read(responseSubmitFaxLong.asPrettyString(),"$..id");
+
+        //Execute first query
+        String database=String.format("update replixdb.faxnumber_requests set assigned_faxnumber='' , status = 'Complete' where (id='%s')",JobID.toString().replace("[","").replace("]",""));
+        DataBaseUtility.executeSQLUpdate2(database);
+        System.out.println(database);
+
+        String URL=String.format("http://10.250.1.100:8082/api/numbers/requests/add/%s",JobID.toString().replace("[","").replace("]",""));
+        String credential = ConfigReader.getProperty("Token2");
+
+        Response responseGetCall = RestAssured.given()
+         .header("Authorization " ,"Bearer "+ credential)
+         .contentType("application/json")
+                .when()
+                .get(URL);
+
+        System.out.println(responseGetCall.asPrettyString());
+    }
+    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
+    void addNewNumberNonTollFreeWithUpdatedApp_inProgress() throws InterruptedException, SQLException, JsonProcessingException {
+
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+
+        String number2  = FileReader.randomFaxNumberEmailToFax();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree("{\n\"country_code\": \"US\",\n \"department_name\": \"\",\n  \"forward_from\":\"12345678901\",\n \"assign_to_user\":\"\",\n \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n \"region\":\"MA\",\n \"area_code\":[\"781\"\n ]\n}");
+        ((ObjectNode) jsonNode).put("forward_from", number2);
+        String modifiedJsonData = objectMapper.writeValueAsString(jsonNode);
+
+        String credentials = ConfigReader.getProperty("Token2");
+
+         Response responseSubmitFaxLong = RestAssured.given()
+                 .header("Authorization ", "Bearer " + credentials)
+                 .contentType("application/json")
+        .body(modifiedJsonData)
+        .when().log().all()
+        .post(data.get("post_call_Url"));
+        //Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA(data.get("post_call_Url"),modifiedJsonData);
+
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        //System.out.println(data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println(modifiedJsonData);
+        assertEquals(Integer.toString(responseSubmitFaxLong.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 10);
+
+        System.out.println(responseSubmitFaxLong.asPrettyString());
+        List<Integer> JobID = JsonPath.read(responseSubmitFaxLong.asPrettyString(), "$..id");
+
+        //Execute first query
+        String database = String.format("update replixdb.faxnumber_requests set assigned_faxnumber='%s' , status = 'In-process' where (id='%s')",number2, JobID.toString().replace("[", "").replace("]", ""));
+        DataBaseUtility.executeSQLUpdate2(database);
+        System.out.println(database);
+
+        String URL = String.format("http://10.250.1.100:8082/api/numbers/requests/add/%s", JobID.toString().replace("[", "").replace("]", ""));
+        String credential = ConfigReader.getProperty("Token2");
+
+        Response responseGetCall = RestAssured.given()
+                .header("Authorization ", "Bearer " + credential)
+                .contentType("application/json")
+                .when()
+                .get(URL);
+
+        System.out.println(responseGetCall.asPrettyString());
+    }
+    @Test(priority = 1,testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
+    void addNewNumberNonTollFreeWithUpdatedApp_onHold() throws InterruptedException, SQLException {
+
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario(data.get("post_call_Url"), data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println(data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+
+        assertEquals(Integer.toString(responseSubmitFaxLong.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 10);
+
+        System.out.println(responseSubmitFaxLong.asPrettyString());
+        List<Integer> JobID = JsonPath.read(responseSubmitFaxLong.asPrettyString(), "$..id");
+
+        //Execute first query
+
+        String databaseSelectquery = String.format("select status,on_hold,on_hold_reason from replixdb.faxnumber_requests where (id='%s')", JobID.toString().replace("[", "").replace("]", ""));
+        System.out.println(databaseSelectquery);
+        DataBaseUtility.executeSQLQueryRecvD(databaseSelectquery);
+
+
+        System.out.println("<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><>");
+        String database = String.format("update replixdb.faxnumber_requests set on_hold=1, on_hold_reason = 'testing' where (id='%s')", JobID.toString().replace("[", "").replace("]", ""));
+        DataBaseUtility.executeSQLUpdate2(database);
+        System.out.println(database);
+        String URL = String.format("http://10.250.1.100:8082/api/numbers/requests/add/%s", JobID.toString().replace("[", "").replace("]", ""));
+        String credential = ConfigReader.getProperty("Token2");
+
+        Response responseGetCall = RestAssured.given()
+                .header("Authorization ", "Bearer " + credential)
+                .contentType("application/json")
+                .when()
+                .get(URL);
+
+        System.out.println(responseGetCall.asPrettyString());
+    }
+    }

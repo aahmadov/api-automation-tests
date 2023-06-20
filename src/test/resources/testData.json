@@ -390,7 +390,7 @@
     "get_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes"
   },
   "GetListOfAreaCode": {
-    "get_call_Url": "https://api-tmp.rpxtest.com/api/numbers/area_codes/US/MA/Boston",
+    "get_call_Url": "https://api.rpxtest.com/api/numbers/area_codes/US/MA/Boston",
     "statusCode": 200,
     "area_code": 774
   },
@@ -415,7 +415,7 @@
     "statusCode": 200
   },
   "GetListOfAllFaxNumberOwnedOrg": {
-    "get_call_Url": "https://api-tmp.rpxtest.com/api/numbers",
+    "get_call_Url": "https://api.rpxtest.com/api/numbers",
     "statusCode": 200
   },
   "GetDetailsAboutRequest": {
@@ -437,7 +437,7 @@
     "Pages": "3",
     "fileType": "pdf",
     "statusCode": 201,
-    "data": "{\"country_code\":\"US\",\n\"department_name\":\"Engineering\",\n\"assign_to_user\":\"jdoe\",\n\"notify_email\":[\n\"admin@acme.com\"\n],\n\"comment\":\"hello\",\n\"number_to_port\":\"15555555567\",\n\"toll_free\":false}"
+    "data": "{\"country_code\":\"US\",\n\"department_name\":\"Engineering\",\n\"assign_to_user\":\"jdoe\",\n\"notify_email\":[\n\"admin@acme.com\"\n],\n\"comment\":\"hello\",\n\"number_to_port\":\"\",\n\"toll_free\":false}"
   },
   "removeNumberRequest": {
     "post_call_Url": "https://api.rpxtest.com/api/numbers/remove-number-request/release",
@@ -509,5 +509,20 @@
   "GetDetailsAboutRequest2": {
     "get_call_Url": "http://10.250.1.100:8082/api/numbers/requests/add/1236",
     "statusCode": 200
-  }
-}
+  },
+  "addNewNumberNonTollFreeWithUpdatedApp_Complete": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-new-number-request/non-toll-free",
+    "statusCode": 201,
+    "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"forward_from\":\"\",\n \"assign_to_user\":\"test1\",\n \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n  \"region\":\"MA\",\n \"area_code\":[\"\"\n  ]\n}"
+  },
+  "addNewNumberNonTollFreeWithUpdatedApp_inProgress": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-new-number-request/non-toll-free",
+    "statusCode": 201,
+    "metaData": "{\n\"country_code\": \"US\",\n \"department_name\": \"\",\n  \"forward_from\":\"\",\n \"assign_to_user\":\"\",\n \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n \"region\":\"MA\",\n \"area_code\":[\"781\"\n ]\n}"
+},
+  "addNewNumberNonTollFreeWithUpdatedApp_onHold": {
+    "post_call_Url": "http://10.250.1.100:8082/api/numbers/add-new-number-request/non-toll-free",
+    "statusCode": 201,
+    "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"forward_from\":\"\",\n \"assign_to_user\":\"\",\n  \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n  \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n \"region\":\"MA\",\n  \"area_code\":[\"781\"\n ]\n}"
+    
+  }}

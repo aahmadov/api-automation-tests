@@ -80,9 +80,6 @@ public class RestRequestUtils {
 
         RequestSpecification request = RestAssured.given();
         String credentilas = ConfigReader.getProperty("Token2");
-        // byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
-        // String encodedCreadentialForAdmin = new String(encodedCredentials);
-
         request.header("Authorization " ,"Bearer "+ credentilas);
         return response = request.contentType("application/json").when().get(url);
     }
@@ -128,6 +125,16 @@ public class RestRequestUtils {
 
         request.header("Authorization ", "Basic " + encodedCredentialForAdmin);
         return response = request.contentType("multipart/form-data").when().get(url);
+    }
+
+        public static Response responseRecieveFaxNewApp(String url) {
+            RequestSpecification request = RestAssured.given();
+            String credentials = ConfigReader.getProperty("Token2");
+            request.header("Authorization ", "Basic " + credentials);
+            return response = request
+                    .contentType("application/json")
+                    .when().log().all()
+                    .get(url);
 
     }
     public static Response responseRecieveFaxcollsionRecvD(String url,String credentials) {
@@ -381,7 +388,8 @@ public class RestRequestUtils {
                 .multiPart("loaFile", file)
                 .multiPart("billFile", file)
                 .queryParam("data", data)
-                .when().post(url);
+                .when().log().all()
+                .post(url);
     }
         public static Response sendFaxWithSwagger2(String url, File file, String data) {
             RequestSpecification request = RestAssured.given();
@@ -487,6 +495,17 @@ public class RestRequestUtils {
                     .when()
                     .post(url).andReturn();
         }
+
+    public static Response PostCalltoCreateLOAApp_complete_scenario(String url, String body) {
+        RequestSpecification request = RestAssured.given();
+        String credentials = ConfigReader.getProperty("Token2");
+        request.header("Authorization ", "Bearer " + credentials);
+        return response = request
+                .contentType("application/json")
+                .body(body)
+                .when()
+                .post(url).andReturn();
+    }
             public static Response PostCalltoCreateLOA2(String url, String body) {
                 RequestSpecification request = RestAssured.given();
                 String credentials = ConfigReader.getProperty("Token2");
