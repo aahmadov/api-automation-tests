@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 public class PostScenarioForLoadTest extends TestBase {
 
     @Test(testName = "Validation of Post call for Load test", groups = {"Regression"})
-    public void validationOfPostCallForLoadTest() throws Exception {
+    public void validationOfPostCallForLoadTestReceiveD() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -59,7 +59,7 @@ public class PostScenarioForLoadTest extends TestBase {
             System.out.println("******* Status code:" + response.statusCode());
             assertEquals(201, response.statusCode());
 
-            Thread.sleep(1000*120);
+            Thread.sleep(1000*160);
             Response responseReceiveFax = RestRequestUtils.responseRecieveFaxcollsionRecvD(data.get("get_call_Url"), data.get("credentialInbound"));
             String metadata = responseReceiveFax.prettyPrint();
             System.out.println(metadata);
