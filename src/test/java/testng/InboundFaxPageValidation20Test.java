@@ -75,13 +75,15 @@ public class InboundFaxPageValidation20Test extends TestBase {
                 System.out.println("Error message: " + "**" + errorMessage + "**");
             }
             times++;
-        } while (isNotCompleted && times < 15);
+        } while (isNotCompleted && times < 20);
 
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
         }
 
         System.out.println("****** " + (data.get("inboundFax_url") + data.get("newInboundParam")));
+
+        Thread.sleep(1000*160);
         Response inboundFaxwithCoverPage1 = Second_RestRequestUtils.getInboundWithCoverPage1(
                 data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialInbound"));
         Assert.assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());

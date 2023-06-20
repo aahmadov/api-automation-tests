@@ -240,7 +240,7 @@ public class Create_LOA extends TestBase {
 //        DataBaseUtility.executeSQLUpdate2(database);
 //        System.out.println(database);
     }
-    @Test(testName="remove_Number_request_release with new URL",groups = {"Regression"})
+    @Test(testName="remove_Number_request_release with new URL",groups = {"RegressionFailed"})
     void removeNumberRequest2() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);

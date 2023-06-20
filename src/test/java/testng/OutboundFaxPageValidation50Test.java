@@ -71,6 +71,7 @@ public class OutboundFaxPageValidation50Test extends TestBase {
         }
 
         System.out.println("****** " + (data.get("inboundFax_url") + data.get("newInboundParam")));
+        Thread.sleep(1000*240);
         Response inboundFaxwithCoverPage1 = Second_RestRequestUtils.getInboundWithCoverPage1(
                 data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialInbound"));
         Assert.assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());

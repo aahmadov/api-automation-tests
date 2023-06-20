@@ -80,6 +80,7 @@ public class PutScenarioTest extends TestBase {
         }
 
         System.out.println("****** " + (data.get("inboundFax_url") + data.get("newInboundParam")));
+        Thread.sleep(1000*320);
         Response inboundFaxwithCoverPage1 = Second_RestRequestUtils.getInboundWithCoverPage1(
                 data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialNewInbound"));
         assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());
@@ -92,7 +93,7 @@ public class PutScenarioTest extends TestBase {
 
 
         if (tsiArray.size() == 0) {
-            fail("No response found with the tsi id" + onlyTsi);
+            fail("No response found with the tsi id " + onlyTsi);
         }
         String faxNumber = ((LinkedHashMap) tsiArray.get(0)).get("DestFaxNumber").toString();
         //assertEquals(faxNumber, data.get("faxNumber"));
