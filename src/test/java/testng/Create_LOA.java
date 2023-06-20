@@ -104,7 +104,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*5);
         System.out.println(responseSubmitFaxLong2.asPrettyString());
 }
-    @Test(testName="remove_Number_request_release",groups = {"Regression"})
+    @Test(testName="remove_Number_request_release",groups = {"Regressionteze"})
     void removeNumberRequest() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
@@ -199,26 +199,46 @@ public class Create_LOA extends TestBase {
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
     @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"Regression"})
-    void addPortRequest2() throws InterruptedException, SQLException {
+    void addPortRequest2() throws InterruptedException, SQLException, JsonProcessingException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
+
+        String number2  = FileReader.randomFaxNumberEmailToFax();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(data.get("data"));
+        ((ObjectNode) jsonNode).put("number_to_port", number2);
+        String modifiedJsonData = objectMapper.writeValueAsString(jsonNode);
+
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
-        Response response = RestRequestUtils.sendFaxWithSwagger2(data.get("post_call_Url"),
-                file, data.get("data"));
+
+        String credentials = ConfigReader.getProperty("Token2");
+
+        Response responseSubmitFaxLong2 = RestAssured.given()
+                .header("Authorization ", "Bearer " + credentials)
+                .contentType("multipart/form-data")
+                .multiPart("loaFile", file)
+                .multiPart("billFile", file)
+                .queryParam("data", modifiedJsonData)
+                .when().log().all()
+                .post(data.get("post_call_Url"));
+
+//        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+//        Response response = RestRequestUtils.sendFaxWithSwagger2(data.get("post_call_Url"),
+//                file, data.get("data"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println(":" + (data.get("post_call_Url")));
         System.out.println(":" + file);
         System.out.println("------------------------------------------------------------------------");
-        List <Integer> JobID = JsonPath.read(response.asPrettyString(),"$..id");
+//        List <Integer> JobID = JsonPath.read(responseSubmitFaxLong2.asPrettyString(),"$..id");
 
-        System.out.println(response.asPrettyString());
-        Assert.assertEquals(Integer.parseInt(data.get("statusCode")), response.getStatusCode());
-        Thread.sleep(1000*5);
-        System.out.println(response.asPrettyString());
-        String database=String.format("update replixdb.faxnumber_requests set status = 'Complete' where (id='%s')",JobID.toString().replace("[","").replace("]",""));
-        DataBaseUtility.executeSQLUpdate2(database);
-        System.out.println(database);
+        System.out.println(responseSubmitFaxLong2.asPrettyString());
+        Assert.assertEquals(Integer.parseInt(data.get("statusCode")), responseSubmitFaxLong2.getStatusCode());
+//        Thread.sleep(1000*5);
+//        System.out.println(responseSubmitFaxLong2.asPrettyString());
+//        String database=String.format("update replixdb.faxnumber_requests set status = 'Complete' where (id='%s')",JobID.toString().replace("[","").replace("]",""));
+//        DataBaseUtility.executeSQLUpdate2(database);
+//        System.out.println(database);
     }
     @Test(testName="remove_Number_request_release with new URL",groups = {"Regression"})
     void removeNumberRequest2() throws InterruptedException {
