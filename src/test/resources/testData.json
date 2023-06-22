@@ -63,8 +63,6 @@
     "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "newInboundParam": "?FaxUserId=receiver",
     "credentialNewInbound": "receiver@acme1:Softlinx1!"
-
-
   },
   "soapFaxStatusAndPageNumberValidationFromInbound": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/wsapi",
@@ -525,4 +523,11 @@
     "statusCode": 201,
     "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"forward_from\":\"\",\n \"assign_to_user\":\"\",\n  \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n  \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n \"region\":\"MA\",\n  \"area_code\":[\"781\"\n ]\n}"
     
-  }}
+  },
+  "addNewNumberTollFreeReleasedStatus": {
+    "post_call_Url1": "http://10.250.1.100:8082/api/numbers/add-new-number-request/toll-free",
+    "statusCode": 201,
+    "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberapi\",\n  \"fax_number\": \"\",\n  \"notify_email\": [\n  \"auto@softlinx.com\"\n ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\"\n}"
+
+  }
+}

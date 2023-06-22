@@ -383,4 +383,57 @@ public class Create_LOA extends TestBase {
 
         System.out.println(responseGetCall.asPrettyString());
     }
+    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"RegressionIndiTest"})
+    void addNewNumberTollFreeReleasedStatus() throws InterruptedException, JsonProcessingException, SQLException {
+
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+
+        String number2  = FileReader.randomFaxNumberEmailToFax();
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonNode = objectMapper.readTree(data.get("body"));
+        ((ObjectNode) jsonNode).put("fax_number", number2);
+        String modifiedJsonData = objectMapper.writeValueAsString(jsonNode);
+
+        String credentials = ConfigReader.getProperty("Token2");
+
+        Response responseSubmitFaxLong2 = RestAssured.given()
+                .header("Authorization ", "Bearer " + credentials)
+                .contentType("application/json")
+                .body(modifiedJsonData)
+                .when().log().all()
+                .post(data.get("post_call_Url1"));
+        List<Integer> JobID = JsonPath.read(responseSubmitFaxLong2.asPrettyString(), "$..id");
+
+        //Execute first query
+        String database = String.format("update  replixdb.faxnumber_requests set released_on=NOW(), cancel_reason='testing', assigned_faxnumber=null, released_faxnumber='%s' where (id='%s')",number2, JobID.toString().replace("[", "").replace("]", ""));
+        DataBaseUtility.executeSQLUpdate2(database);
+        System.out.println(database);
+
+       // Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url1"),data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println( data.get("body"));
+        System.out.println("------------------------------------------------------------------------");
+
+        assertEquals(Integer.toString(responseSubmitFaxLong2.getStatusCode()), data.get("statusCode"));
+        Thread.sleep(1000*10);
+        System.out.println(responseSubmitFaxLong2.asPrettyString());
+
+        String URL = String.format("http://10.250.1.100:8082/api/numbers/requests/add/%s", JobID.toString().replace("[", "").replace("]", ""));
+        String credential = ConfigReader.getProperty("Token2");
+
+        Response responseGetCall = RestAssured.given()
+                .header("Authorization ", "Bearer " + credential)
+                .contentType("application/json")
+                .when()
+                .get(URL);
+
+        System.out.println(responseGetCall.asPrettyString());
+
+
+    }
+
+
     }
