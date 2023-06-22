@@ -87,22 +87,12 @@ public class FileReader {
         Random rand = new Random();
         int num1 = 1000 + rand.nextInt(800);
         //int num1 = (rand.nextInt(7) + 1) * 100 + (rand.nextInt(8) * 10) + rand.nextInt(8);
-        int num2 = rand.nextInt(1432);
+        int num2 = rand.nextInt(143);
         int num3 = rand.nextInt(10000);
         DecimalFormat df = new DecimalFormat("000");
         DecimalFormat df1 = new DecimalFormat("0000");
 
         return String.format("%1$s%2$s%3$s", df.format(num1), df.format(num2), df1.format(num3));
-    }
-    public static String randomFaxNumberEmailToFaxWithLeading_1() {
-        Random rand = new Random();
-        int num1 = 1000 + rand.nextInt(800); // Generate a number between 1000 and 1799
-        int num2 = rand.nextInt(10000);
-        int num3 = rand.nextInt(10000);
-        DecimalFormat df = new DecimalFormat("000");
-        DecimalFormat df1 = new DecimalFormat("0000");
-
-        return String.format("1%1$s%2$s%3$s",df.format(num1), df1.format(num2), df1.format(num3));
     }
 
     public static String randomFaxNumber() {

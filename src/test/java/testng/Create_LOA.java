@@ -66,7 +66,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="Creates a request to port-in a fax number",groups = {"Regression"})
+    @Test(testName="Creates a request to port-in a fax number",groups = {"RegressionIndiTest"})
     void addPortRequest() throws InterruptedException, JsonProcessingException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
