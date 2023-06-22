@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 
 public class Create_LOA extends TestBase {
 
-    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression"})
+    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"RegressionIndiTest"})
     void CreateLOA() throws Exception  {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -66,7 +66,7 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="Creates a request to port-in a fax number",groups = {"RegressionIndiTest"})
+    @Test(testName="Creates a request to port-in a fax number",groups = {"Regression"})
     void addPortRequest() throws InterruptedException, JsonProcessingException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
