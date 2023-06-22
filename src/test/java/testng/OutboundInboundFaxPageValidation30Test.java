@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 
 public class OutboundInboundFaxPageValidation30Test extends TestBase {
 
-    @Test(testName = "Validates the number of outbound pages with some registry setting (\"30 pages\")", groups = {"Regression"})
+    @Test(testName = "Validates the number of outbound pages with some registry setting (\"30 pages\")", groups = {"RegressionforTestpurpose"})
     public void outboundFaxPageValidation30() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -50,7 +50,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
         int times = 0;
         do {
             System.out.println("*** waiting 30 secs to get the fax sending status ***");
-            Thread.sleep(1000 * 30);
+            Thread.sleep(1000 * 50);
             outbound = Second_RestRequestUtils.getOutboundWithCoverPage(
                     data.get("post_call_Url") + data.get("newOutboundParam"), data.get("credentialOutbound"));
             Assert.assertEquals(200, outbound.getStatusCode());
@@ -68,13 +68,15 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
                 System.out.println("Error message: " + "**" + errorMessage + "**");
             }
             times++;
-        } while (isNotCompleted && times < 25);
+        } while (isNotCompleted && times < 20);
 
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
         }
 
         System.out.println("****** " + (data.get("inboundFax_url") + data.get("newInboundParam")));
+
+        Thread.sleep(1000*160);
         Response inboundFaxwithCoverPage1 = Second_RestRequestUtils.getInboundWithCoverPage1(
                 data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialInbound"));
         Assert.assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());

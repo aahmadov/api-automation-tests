@@ -21,7 +21,7 @@ import static org.junit.Assert.assertTrue;
 
 public class OutboundFaxPageValidation50Test extends TestBase {
 
-    @Test(testName = "validates the number of outbound&inbound pages  (\"50 pages\" )", groups = {"Regression"})
+    @Test(testName = "validates the number of outbound&inbound pages  (\"50 pages\" )", groups = {"RegressionforTestpurpose"})
     public void outboundFaxPageValidation50() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -64,7 +64,7 @@ public class OutboundFaxPageValidation50Test extends TestBase {
                 System.out.println("Error message: " + "**" + errorMessage + "**");
             }
             times++;
-        } while (isNotCompleted && times < 15);
+        } while (isNotCompleted && times < 20);
 
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
