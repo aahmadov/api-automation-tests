@@ -413,7 +413,7 @@ public class Create_LOA extends TestBase {
 
        // Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url1"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println("************ " + data.get("post_call_Url1"));
         System.out.println( data.get("body"));
         System.out.println("------------------------------------------------------------------------");
 
