@@ -50,7 +50,7 @@ public class Create_LOA extends TestBase {
         System.out.println("Page count is: "+count);
     }
 
-    @Test(testName="add_new_number_request/tollFree",groups = {"RegressionIndiTest"})
+    @Test(testName="add_new_number_request/tollFree",groups = {"Regression"})
     void addNewNumberTollFree() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
