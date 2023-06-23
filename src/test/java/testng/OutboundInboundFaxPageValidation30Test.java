@@ -50,7 +50,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
         int times = 0;
         do {
             System.out.println("*** waiting 30 secs to get the fax sending status ***");
-            Thread.sleep(1000 * 50);
+            Thread.sleep(1000 * 30);
             outbound = Second_RestRequestUtils.getOutboundWithCoverPage(
                     data.get("post_call_Url") + data.get("newOutboundParam"), data.get("credentialOutbound"));
             Assert.assertEquals(200, outbound.getStatusCode());
@@ -68,7 +68,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
                 System.out.println("Error message: " + "**" + errorMessage + "**");
             }
             times++;
-        } while (isNotCompleted && times < 20);
+        } while (isNotCompleted && times < 15);
 
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
@@ -76,7 +76,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
 
         System.out.println("****** " + (data.get("inboundFax_url") + data.get("newInboundParam")));
 
-        Thread.sleep(1000*160);
+
         Response inboundFaxwithCoverPage1 = Second_RestRequestUtils.getInboundWithCoverPage1(
                 data.get("inboundFax_url") + data.get("newInboundParam"), data.get("credentialInbound"));
         Assert.assertEquals(200, inboundFaxwithCoverPage1.getStatusCode());
