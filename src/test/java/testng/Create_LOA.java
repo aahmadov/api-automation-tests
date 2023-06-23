@@ -383,7 +383,7 @@ public class Create_LOA extends TestBase {
 
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"RegressionIndiTest"})
+    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression"})
     void addNewNumberTollFreeReleasedStatus() throws InterruptedException, JsonProcessingException, SQLException {
 
         System.out.println("Test case name: " + testName);
