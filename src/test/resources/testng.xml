@@ -43,11 +43,17 @@
     <!--            </classes>-->
     <!--        </test>-->
 
+    <test name="Conversion_archive">
+        <classes>
+            <class name="testng.Conversion_archive"/>
+        </classes>
+    </test>
     <test name="SendMailToFaxTests">
         <classes>
             <class name="testng.SendMailToFaxTests"/>
         </classes>
     </test>
+
     <test name="Loadtest">
         <classes>
             <class name="testng.Loadtest"/>

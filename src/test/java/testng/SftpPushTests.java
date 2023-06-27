@@ -50,7 +50,7 @@ public class SftpPushTests extends TestBase {
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
 
 //        //int jobId = JsonPath.read(responseReceiveFax.asPrettyString(), "$.FaxInfo[0].FaxId");
-//        List<String> TSI = JsonPath.read(responseReceiveFax.asPrettyString(),"$..TSI");
+        List<String> TSI = JsonPath.read(responseReceiveFax.asPrettyString(),"$..TSI");
         //int jobId = -1;
 //        for (int i=0; i<TSI.size();i++){
 //            if (TSI.get(i).contains(tsi)){
@@ -177,7 +177,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 1,testName = "SFTP - A-Test Simple Authentication", groups = {"RegressionAb"})
+    @Test(priority = 1,testName = "SFTP - A-Test Simple Authentication", groups = {"Regression"})
     void testWithSimpleAuthenticationAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -230,9 +230,8 @@ public class SftpPushTests extends TestBase {
         System.out.println("************ Inbound Fax Job id: " + jobId);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
 
-
     }
-    @Test(priority = 3,testName = "SFTP - C-Test With Certificate No Passphrase", groups = {"RegressionAb"})
+    @Test(priority = 3,testName = "SFTP - C-Test With Certificate No Passphrase", groups = {"Regression"})
     void testWithCertificateNoPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -275,7 +274,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("************ Inbound Fax Job id: " + jobId);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
-    @Test(priority = 2,testName = "SFTP - B-Test With Certificate With Passphrase", groups = {"RegressionAb"})
+    @Test(priority = 2,testName = "SFTP - B-Test With Certificate With Passphrase", groups = {"Regression"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

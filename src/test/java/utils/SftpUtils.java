@@ -1,9 +1,6 @@
 package utils;
 
-import org.apache.commons.vfs2.FileObject;
-import org.apache.commons.vfs2.FileSystemOptions;
-import org.apache.commons.vfs2.UserAuthenticator;
-import org.apache.commons.vfs2.VFS;
+import org.apache.commons.vfs2.*;
 import org.apache.commons.vfs2.auth.StaticUserAuthenticator;
 import org.apache.commons.vfs2.impl.DefaultFileSystemConfigBuilder;
 
@@ -28,4 +25,42 @@ public class SftpUtils {
             return false;
         }
     }
+    public static boolean checkFileExistarchive(String path, String fileName) {
+//        try {
+
+
+        String filePath = path;
+        try (FileObject dest = VFS.getManager().resolveFile(filePath)) {
+
+            if (dest.getType().equals(FileType.FOLDER)) {
+                FileObject[] children = dest.getChildren();
+                for (FileObject child : children) {
+                    if (child.getType().equals(FileType.FOLDER)) {
+                        String folderName = child.getName().getBaseName();
+                        System.out.println("Folder Name: " + folderName);
+
+
+                    }
+                }
+            }
+//                boolean fileExist = dest.exists();
+//                System.out.println("******** '" + filePath + "' exist: " + fileExist);
+            // return FileType;
+
+        } catch (IOException exception) {
+            System.out.println("Exception occurred while checking file exist on the remote server. Exception: " + exception.getMessage());
+
+              }return false;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

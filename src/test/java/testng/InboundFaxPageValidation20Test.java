@@ -33,7 +33,7 @@ public class InboundFaxPageValidation20Test extends TestBase {
         System.out.println("**" + (data.get("put_call_Url")));
         System.out.println("------------------------------------------------------------------------");
 
-        System.out.println(": registry settings " + "Abort page at 0");
+
 
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];

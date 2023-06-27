@@ -529,5 +529,16 @@
     "statusCode": 201,
     "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberapi\",\n  \"fax_number\": \"\",\n  \"notify_email\": [\n  \"auto@softlinx.com\"\n ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\"\n}"
 
+  },
+  "conversion_archive_per_realm_and_per_realm_user": {
+    "put_call_Url1": "http://10.250.1.100:8081/api/Registry?app=faxserver&path=\\convertd&key=ArchiveRealm&value=auto1",
+    "put_call_Url2": "http://10.250.1.100:8081/api/Registry?app=faxserver&path=\\convertd&key=ArchiveUser&value=faxsending",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1(333)333-3333",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@auto1:softlinx",
+    "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentialOutbound2": "faxsending@auto1:softlinx",
+    "filePath": "\\\\10.250.1.180\\qa\\100\\convertq\\archive\\"
   }
 }

@@ -535,7 +535,7 @@ public class RestRequestUtils {
 
     public static Response putScenario(String url) {
         return response = createRequest()
-                .when()
+                .when().log().all()
                 .put(url);
     }
     public static Response resendfaxWith(String url,String credentials,String faxNumber) {
