@@ -127,6 +127,18 @@ public class RestRequestUtils {
         return response = request.contentType("multipart/form-data").when().get(url);
     }
 
+    public static Response responseRecieveFaxforTiff(String url,String credentials) {
+
+        RequestSpecification request = RestAssured.given();
+
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAdmin = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAdmin);
+        return response = request.contentType("multipart/form-data").when().log().all()
+                .get(url);
+    }
+
         public static Response responseRecieveFaxNewApp(String url) {
             RequestSpecification request = RestAssured.given();
             String credentials = ConfigReader.getProperty("Token2");
@@ -408,8 +420,18 @@ public class RestRequestUtils {
         return createRequest(credentials).contentType("multipart/form-data")
                 .multiPart("filename", file)
                 .queryParam("FaxRecipient", faxRecipientD)
-                .when().post(url);
+                .when()
+                .post(url);
     }
+    public static Response sendFaxWithRecipent_withTiff(String url, File file, String faxRecipientD, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .multiPart("filename", file)
+                .queryParam("FaxNumber", faxRecipientD)
+                .when().log().all()
+                .post(url);
+    }
+
 
     public static Response submitFaxWithMulRecip(String url, String faxD, String FaxD2, File file, File file2) {
 

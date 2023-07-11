@@ -15,6 +15,7 @@
     "faxNumber": "1(781)-885-4198",
     "expectedStatusCode": "201"
   },
+
   "sendFaxDataWithoutNumber": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "",
@@ -152,7 +153,7 @@
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "testDataFile": "dataFile/testData.xlsx",
     "faxNumFileLoc": "input/Faxnumber.txt",
-    "times": 10,
+    "times": 5,
     "pageSize": 2,
     "coverPageEnabled": true,
     "ignoreFail": true,
@@ -160,11 +161,11 @@
     "credentialInbound": "receiver@acme1:Softlinx1!",
     "credentialOutbound": "faxsending@acme1:Softlinx1!"
   },
-    "validationOfPostCallForLoadTestCopy": {
+    "validationOfPostCallForLoadTestReceiveDCopy": {
       "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
       "testDataFile": "dataFile/testData.xlsx",
       "faxNumFileLoc": "input/Faxnumber.txt",
-      "times": 10,
+      "times": 5,
       "pageSize": 2,
       "coverPageEnabled": true,
       "ignoreFail": true,
@@ -176,7 +177,7 @@
         "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
         "testDataFile": "dataFile/testData.xlsx",
         "faxNumFileLoc": "input/Faxnumber.txt",
-        "times": 10,
+        "times": 5,
         "pageSize": 2,
         "coverPageEnabled": true,
         "ignoreFail": true,
@@ -187,7 +188,7 @@
        "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
        "testDataFile": "dataFile/testData.xlsx",
        "faxNumFileLoc": "input/Faxnumber.txt",
-       "times": 10,
+       "times": 5,
        "pageSize": 2,
        "coverPageEnabled": true,
        "ignoreFail": true,
@@ -540,5 +541,15 @@
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentialOutbound2": "faxsending@auto1:softlinx",
     "filePath": "\\\\10.250.1.180\\qa\\100\\convertq\\archive\\"
+  },
+  "sendFaxDataWithTiff": {
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes?FaxUserId=faxsending",
+    "credentialInbound": "faxsending@auto1:softlinx",
+    "credentials": "faxsending@auto1:softlinx",
+    "pageSize": "2",
+    "fileType": "tiff",
+    "faxNumber": "1(333)-333-3333",
+    "expectedStatusCode": "201"
   }
 }

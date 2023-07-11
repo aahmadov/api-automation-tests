@@ -86,7 +86,7 @@ public class PostScenarioForLoadTest extends TestBase {
         DataBaseUtility.executeSQLQueryRecvD(ConfigReader.getProperty("checking_receiveD"));
     }
     @Test(testName = "Validation of Post call for Load test", groups = {"Regression1"})
-    public void validationOfPostCallForLoadTestCopy() throws Exception {
+    public void validationOfPostCallForLoadTestReceiveDCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -156,3 +156,5 @@ public class PostScenarioForLoadTest extends TestBase {
         DataBaseUtility.executeSQLQuery(ConfigReader.getProperty("checking_receiveD"));
     }
 }
+//test will pass on right time and its running and running no one can stop it ,if any one dare to stop it will see me on that
+//could you please see what is wrong with it i had about 4 test cases i was working on and 3 of om is completed tiff related case and converion

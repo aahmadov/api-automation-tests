@@ -37,7 +37,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
         Response responseReceiveFax2 = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialOutbound"));
         int JobID = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxId");
         String FAxUSerID = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxUserId");
-        System.out.println("FaxSuerID is :" +FAxUSerID);
+        System.out.println("FaxuserID is :" +FAxUSerID);
         //Execute first query
         String database=String.format("select CallingPartyNumber from auto1.sendstatus where (JobID='%s')",JobID);
         DataBaseUtility.executeSQLQueryRecvD(database);
@@ -68,7 +68,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
         Response responseReceiveFax2 = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialOutbound"));
         int JobID = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxId");
         String FAxUSerID = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxUserId");
-        System.out.println("FaxSuerID is :" +FAxUSerID);
+        System.out.println("FaxuserID is :" +FAxUSerID);
         //Execute first query
         String database=String.format("select CallingPartyNumber from auto1.sendstatus where (JobID='%s')",JobID);
         DataBaseUtility.executeSQLQueryRecvD(database);
@@ -99,7 +99,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
         Response responseReceiveFax2 = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialOutbound"));
         int JobID = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxId");
         String FAxUSerID = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxUserId");
-        System.out.println("FaxSuerID is :" +FAxUSerID);
+        System.out.println("FaxuserID is :" +FAxUSerID);
         //Execute first query
         String database=String.format("select CallingPartyNumber from auto1.sendstatus where (JobID='%s')",JobID);
         DataBaseUtility.executeSQLQueryRecvD(database);
