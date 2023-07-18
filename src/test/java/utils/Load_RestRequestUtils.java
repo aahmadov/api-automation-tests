@@ -41,6 +41,18 @@ public class Load_RestRequestUtils {
                 .post(data.get("url").toString());
     }
 
+    public static Response make_prepending_1_to_fax_number_optional(Map<String, Object> data, String credentials) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", (File)data.get("filename"))
+                .queryParam("FaxNumber", data.get("FaxNumber").toString())
+                // .queryParam("CoverPageEnabled", Boolean.parseBoolean(data.get("coverPageEnabled").toString()))
+                .when()
+                .post(data.get("url").toString());
+    }
+
+
+
     public static Response send_more_Fax_loadTest(String url, File file, String number) {
 
     	 return createRequest(ConfigReader.getProperty("credentialOutbound"))

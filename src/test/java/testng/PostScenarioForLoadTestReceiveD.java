@@ -14,7 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import static org.junit.Assert.assertEquals;
 
-public class PostScenarioForLoadTest extends TestBase {
+public class PostScenarioForLoadTestReceiveD extends TestBase {
 
     @Test(testName = "Validation of Post call for Load test", groups = {"Regression"})
     public void validationOfPostCallForLoadTestReceiveD() throws Exception {

@@ -95,7 +95,7 @@
 
     <test name="PostScenarioForLoadTest">
         <classes>
-            <class name="testng.PostScenarioForLoadTest"/>
+            <class name="testng.PostScenarioForLoadTestReceiveD"/>
         </classes>
     </test>
 
