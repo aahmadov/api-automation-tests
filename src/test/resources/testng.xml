@@ -28,7 +28,7 @@
 
     <test name="PostScenariosForSmokeTest">
         <classes>
-            <class name="testng.PostScenariosForSmokeTest"/>
+            <class name="testng.PostScenariosForSmokeTest_Tiff"/>
         </classes>
     </test>
 

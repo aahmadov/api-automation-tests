@@ -88,7 +88,7 @@ public class Create_LOA extends TestBase {
                 .multiPart("loaFile", file)
                 .multiPart("billFile", file)
                 .queryParam("data", modifiedJsonData)
-                .when().log().all()
+                .when()
                 .post(data.get("post_call_Url"));
 
 
@@ -312,7 +312,7 @@ public class Create_LOA extends TestBase {
                  .header("Authorization ", "Bearer " + credentials)
                  .contentType("application/json")
         .body(modifiedJsonData)
-        .when().log().all()
+        .when()
         .post(data.get("post_call_Url"));
         //Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA(data.get("post_call_Url"),modifiedJsonData);
 
@@ -402,7 +402,7 @@ public class Create_LOA extends TestBase {
                 .header("Authorization ", "Bearer " + credentials)
                 .contentType("application/json")
                 .body(modifiedJsonData)
-                .when().log().all()
+                .when()
                 .post(data.get("post_call_Url1"));
         List<Integer> JobID = JsonPath.read(responseSubmitFaxLong2.asPrettyString(), "$..id");
 

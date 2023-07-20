@@ -248,7 +248,7 @@
   "inboundFaxPageValidation20": {
     "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "1222-222-2222",
     "statusCode": 201,
     "credentialOutbound": "faxsending@acme1:Softlinx1!",
     "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
@@ -258,7 +258,7 @@
   },
   "inboundFaxPageValidation20Copy": {
     "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "1222-222-2222",
     "statusCode": 201,
     "credentialOutbound": "faxsending@smoke:softlinx",
     "inboundFax_url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
@@ -288,7 +288,7 @@
   },
   "outboundFaxPageValidation50": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "1222-222-2222",
     "statusCode": 201,
     "credentialOutbound": "faxsending@acme1:Softlinx1!",
     "newOutboundParam": "?FaxUserId=faxsending",
@@ -298,7 +298,7 @@
   },
   "outboundFaxPageValidation50Copy": {
     "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "1222-222-2222",
     "statusCode": 201,
     "credentialOutbound": "faxsending@smoke:softlinx",
     "newOutboundParam": "?FaxUserId=faxsending",

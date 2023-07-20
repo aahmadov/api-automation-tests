@@ -9,13 +9,12 @@ import utils.JsonUtils;
 import utils.RestRequestUtils;
 
 import java.io.File;
-import java.sql.SQLOutput;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class PostScenariosForSmokeTest extends TestBase {
+public class PostScenariosForSmokeTest_Tiff extends TestBase {
 
     @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke"})
     public void sendFaxDataWithRecipientDetails() {
