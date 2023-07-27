@@ -571,5 +571,16 @@
     "fileType": "tiff",
     "faxNumber": "1(333)-333-3333",
     "expectedStatusCode": "201"
-  }
+  },
+  "conversion_archive_per_realm_and_per_realm_user_66": {
+    "put_call_Url1": "http://10.250.1.66:8081/api/Registry?app=faxserver&path=\\convertd&key=ArchiveRealm&value=acme2",
+    "put_call_Url2": "http://10.250.1.66:8081/api/Registry?app=faxserver&path=\\convertd&key=ArchiveUser&value=faxsending",
+    "post_call_Url": "http://10.250.1.66:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1(222)-222-2222",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@acme2:softlinx",
+    "get_call_Url": "http://10.250.1.66:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentialOutbound2": "faxsending@acme2:softlinx",
+    "filePath": "\\\\10.250.1.180\\qa\\66\\convertq\\archive\\"
+}
 }

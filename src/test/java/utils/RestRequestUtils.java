@@ -126,6 +126,18 @@ public class RestRequestUtils {
         request.header("Authorization ", "Basic " + encodedCredentialForAdmin);
         return response = request.contentType("multipart/form-data").when().get(url);
     }
+    public static Response responseRecieveFax66(String url,String credentials) {
+
+        RequestSpecification request = RestAssured.given();
+
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAdmin = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAdmin);
+        return response = request.contentType("multipart/form-data").when().get(url);
+    }
+
+
 
     public static Response responseRecieveFaxforTiff(String url,String credentials) {
 
@@ -507,6 +519,20 @@ public class RestRequestUtils {
                 .when()
                 .post(url);
     }
+
+    public static Response sendFaxWithNewTSI_66(String url, File filePage, String faxnumb, String credentials) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", filePage)
+                .queryParam("FaxNumber", faxnumb)
+                .when()
+                .post(url);
+    }
+
+
+
+
+
         public static Response PostCalltoCreateLOA(String url, String body) {
             RequestSpecification request = RestAssured.given();
             String credentials = ConfigReader.getProperty("Token");
@@ -560,6 +586,14 @@ public class RestRequestUtils {
                 .when().log().all()
                 .put(url);
     }
+
+    public static Response putScenario2(String url) {
+        return response = createRequest()
+                .when().log().all()
+                .put(url);
+    }
+
+
     public static Response resendfaxWith(String url,String credentials,String faxNumber) {
         return createRequest(credentials).contentType("multipart/form-data")
                 //.multiPart("FaxNumber", faxNumber)
