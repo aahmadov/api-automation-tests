@@ -35,7 +35,7 @@
   "retrieveFaxAndFaxDataById": {
     "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:Softlinx1!",
-    "valid_ID": "/30",
+    "valid_ID": "/3212",
     "expectedStatusCode": "200"
   },
   "retrieveAllFaxData": {
@@ -54,7 +54,7 @@
   },
   "faxStatusAndPageNumberValidationFromInbound2": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "1222-222-2222",
     "Pages": "3",
     "fileType": "pdf",
     "credentialNewOutbound": "faxsending@acme1:Softlinx1!",
@@ -67,7 +67,7 @@
   },
   "soapFaxStatusAndPageNumberValidationFromInbound": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/wsapi",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "1222-222-2222",
     "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
     "querySendFaxSoapAction": "http://www.softlinx.com/wsapi/op=QuerySendFax/ver=79",
     "queryReceiveFaxSoapAction": "http://www.softlinx.com/wsapi/op=QueryReceiveFax/ver=79",
