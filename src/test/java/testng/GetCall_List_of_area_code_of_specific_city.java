@@ -229,7 +229,7 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         System.out.println(responseGetCall.asPrettyString());
 
     }
-    @Test(testName = "Request to add FaxId with New URL", groups = {"smoke1"})
+    @Test(testName = "Request to add FaxId with New URL", groups = {"smoke"})
     void GetDetailsAboutRequest2() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

@@ -217,7 +217,7 @@
   },
   "submitFaxToManipulateInboundOutboundPages": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "222-222-2222",
+    "faxNumber": "1222-222-2222",
     "testDataFile": "dataFile/testData.xlsx",
     "faxNumFileLoc": "input/Faxnumber.txt",
     "times": 5,
