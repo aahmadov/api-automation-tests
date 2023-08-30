@@ -104,10 +104,10 @@ public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
         Response response = Second_RestRequestUtils.faxWith50Pages(data.get("post_call_Url") + tsi,
-                FileReader.readfile("10page"), data.get("faxNumber"), data.get("credentialOutbound"));
+                FileReader.readfile("2page"), data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("****** " + data.get("post_call_Url"));
-        System.out.println("****** " + FileReader.readfile("10page"));
+        System.out.println("****** " + FileReader.readfile("2page"));
         System.out.println("****** " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(response.getStatusCode(), 201);

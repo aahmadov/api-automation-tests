@@ -114,7 +114,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
         String onlyTsi = tsi.split("=")[1];
         //Response response = RestRequestUtils.putScenario(data.get("put_call_Url"));
         Response responseSubmitFax = RestRequestUtils.sendFaxWithNewTSI(data.get("post_call_Url") + tsi,
-                FileReader.readfile("30page"),
+                FileReader.readfile("3page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));

@@ -1,0 +1,33 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:rep="http://www.softlinx.com/ReplixFax">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <rep:SendFax>
+            <SendFaxInput>
+                <!--Optional:-->
+                <Authentication>
+                    <Login>{login}</Login>
+                    <Password>{password}</Password>
+                    <!--Optional:-->
+                    <PasswordSecurity>{passwordSecurity}</PasswordSecurity>
+                    <!--Optional:-->
+                    <Realm>{realm}</Realm>
+                    <ReservedWC>{reservedWC}</ReservedWC>
+                </Authentication>
+                <!--1 or more repetitions:-->
+                <FaxRecipient>
+                    <FaxNumber>{faxNumber}</FaxNumber>
+                </FaxRecipient>
+                <!--Zero or more repetitions:-->
+                <Attachment>
+                    <FileName>{fileName}</FileName>
+                    <AttachmentContent>{attachmentContent}</AttachmentContent>
+                </Attachment>
+                <!--Optional:-->
+                <FaxHeaderEnabled>{faxHeader}</FaxHeaderEnabled>
+                <TSI>{tsi}</TSI>
+                <RequestOrigin>{requestOrigin}</RequestOrigin>
+                <Reserved1>{reserved1}</Reserved1>
+            </SendFaxInput>
+        </rep:SendFax>
+    </soapenv:Body>
+</soapenv:Envelope>

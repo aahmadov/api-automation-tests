@@ -190,7 +190,7 @@
       "coverPageEnabled": true,
       "ignoreFail": true,
       "get_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-      "credentialInbound": "receiver@smoke:Softlinx1!",
+      "credentialInbound": "receiver@smoke:softlinx",
       "credentialOutbound": "faxsending@smoke:softlinx"
     },
       "PostCallForLoadTest": {
@@ -243,7 +243,7 @@
     "inboundFax_url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "newInboundParam": "?FaxUserId=receiver",
     "newOutboundParam": "?FaxUserId=faxsending",
-    "credentialInbound": "receiver@smoke:Softlinx1!"
+    "credentialInbound": "receiver@smoke:softlinx"
   },
   "inboundFaxPageValidation20": {
     "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
@@ -312,7 +312,7 @@
     "statusCode": 201,
     "credentialOutbound": "faxsending@smoke:softlinx",
     "get_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-    "credentialInbound": "receiver@smoke:Softlinx1!",
+    "credentialInbound": "receiver@smoke:softlinx",
     "username": "AAshkinazi1 ",
     "password": "M0v32H3r3#",
     "filePath": "\\\\10.250.1.39\\c$\\Users\\aashkinazi1\\"
@@ -323,7 +323,7 @@
     "statusCode": 201,
     "credentialOutbound": "faxsending@smoke:softlinx",
     "get_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-    "credentialInbound": "receiver@smoke:Softlinx1!",
+    "credentialInbound": "receiver@smoke:softlinx",
     "username": "AAshkinazi1 ",
     "password": "M0v32H3r3#",
     "filePath": "\\\\10.250.1.39\\c$\\Users\\aashkinazi1\\"
@@ -334,7 +334,7 @@
     "statusCode": 201,
     "credentialOutbound": "faxsending@smoke:softlinx",
     "get_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-    "credentialInbound": "receiver@smoke:Softlinx1!",
+    "credentialInbound": "receiver@smoke:softlinx",
     "username": "AAshkinazi1 ",
     "password": "M0v32H3r3#",
     "filePath": "\\\\10.250.1.39\\c$\\Users\\aashkinazi1\\"
@@ -591,8 +591,8 @@
 },
   "sendFaxDataWithTiff_Copy": {
     "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "get_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes?FaxUserId=faxsending",
-    "credentialInbound": "faxsending@smoke:softlinx",
+    "get_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "credentialInbound": "receiver@smoke:softlinx",
     "credentials": "faxsending@smoke:softlinx",
     "pageSize": "2",
     "fileType": "tiff",
@@ -611,43 +611,48 @@
     "filePath": "\\\\10.250.1.180\\qa\\216\\convertq\\archive\\"
 
   },
-  "addNewNumberTollFree2_Copy": {
-    "post_call_Url1": "http://10.250.1.147:8082/api/numbers/add-new-number-request/toll-free",
+  "addNewNumberNoneTollFree2_Copy": {
+    "post_call_Url2": "http://10.250.1.147:8081/api/numbers/add-new-number-request/non-toll-free",
     "statusCode": 201,
-    "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberapi\",\n  \"fax_number\":\"15557829902\",\n  \"notify_email\": [\n \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\":\"44566667102\"\n}"
+    "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"forward_from\":\"\",\n  \"assign_to_user\":\"\",\n  \"notify_email\": [\n        \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n   \"city\":\"Boston\",\n  \"region\":\"MA\",\n  \"area_code\":[\"781\"]\n}"
+  },
+  "addNewNumberTollFree2_Copy": {
+    "post_call_Url1": "http://10.250.1.147:8081/api/numbers/add-new-number-request/toll-free",
+    "statusCode": 201,
+    "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"\",\n  \"fax_number\": \"15557829902\",\n  \"notify_email\": [\n        \"auto@softlinx.com\"\n    ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"\"\n}"
 
   },
   "addNewNumberNonTollFreeWithUpdatedApp_Complete_Copy": {
-    "post_call_Url": "http://10.250.1.147:8082/api/numbers/add-new-number-request/non-toll-free",
+    "post_call_Url": "http://10.250.1.147:8081/api/numbers/add-new-number-request/non-toll-free",
     "statusCode": 201,
     "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"forward_from\":\"\",\n \"assign_to_user\":\"test1\",\n \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n  \"region\":\"MA\",\n \"area_code\":[\"\"\n  ]\n}"
 
   },
   "addNewNumberNonTollFreeWithUpdatedApp_inProgress_Copy": {
-    "post_call_Url": "http://10.250.1.147:8082/api/numbers/add-new-number-request/non-toll-free",
+    "post_call_Url": "http://10.250.1.147:8081/api/numbers/add-new-number-request/non-toll-free",
     "statusCode": 201,
     "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"forward_from\":\"\",\n \"assign_to_user\":\"\",\n  \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n  \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n \"region\":\"MA\",\n  \"area_code\":[\"781\"\n ]\n}"
 
   },
   "addNewNumberNonTollFreeWithUpdatedApp_onHold_Copy": {
-    "post_call_Url": "http://10.250.1.147:8082/api/numbers/add-new-number-request/non-toll-free",
+    "post_call_Url": "http://10.250.1.147:8081/api/numbers/add-new-number-request/non-toll-free",
     "statusCode": 201,
     "body": "{\n  \"country_code\": \"US\",\n  \"department_name\": \"\",\n  \"forward_from\":\"\",\n \"assign_to_user\":\"\",\n  \"notify_email\": [\n \"auto@softlinx.com\"\n ],\n  \"comment\": \"Process ASAP.\",\n \"city\":\"Boston\",\n \"region\":\"MA\",\n  \"area_code\":[\"781\"\n ]\n}"
 
   },
   "addNewNumberTollFreeReleasedStatus_Copy": {
-    "post_call_Url1": "http://10.250.1.147:8082/api/numbers/add-new-number-request/toll-free",
+    "post_call_Url1": "http://10.250.1.147:8081/api/numbers/add-new-number-request/toll-free",
     "statusCode": 201,
     "body": "{\n  \"country_code\": \"CA\",\n  \"department_name\": \"\",\n  \"assign_to_user\": \"numberapi\",\n  \"fax_number\": \"\",\n  \"notify_email\": [\n  \"auto@softlinx.com\"\n ],\n  \"comment\": \"Process ASAP.\",\n  \"forward_from\": \"44566667102\"\n}"
 
   },
-  "CreateLOA2_Copy": {
-    "post_call_Url": "http://10.250.1.147:8082/api/numbers/LOA/create",
+  "CreateLOA2_COPY": {
+    "post_call_Url": "http://10.250.1.147:8081/api/numbers/LOA/create",
     "statusCode": 200,
     "body": "{\"company\":\"Softlinx\",\r\n\"address\":\"3commonwealth\",\r\n\"city\":\"Boston\",\r\n\"region_code\":\"MA\",\r\n \"zip_code\":\"02703\",\r\n\"btn\":\"613\",\r\n\"carrier_name\":\"Testcompany\",\r\n\"carrier_account_number\":\"123456789\",\r\n \"desired_due_date\":\"2023-02-23\",\r\n\"number_to_port\":\"17818854198\",\r\n\"name\":\"MapleleafEnterprisesLLC\",\r\n\"title\":\"Business\"}"
 
   },
-  "soapRequestforIMG": {
+  "soapRequestForIMG": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/wsapi",
     "faxNumber": "1222-222-2222",
     "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
@@ -658,9 +663,10 @@
     "coverPageEnabled": true,
     "passwordSecurity": "none",
     "attachmentContent": "cid:171310717378",
-    "faxheader": true,
+    "faxHeader": true,
     "reserved1": "10.250.1.100",
-    "requestorigin": "WebPortal 5.0.352",
+    "reservedWC":"magic=itsybitsyfax,;magic2=open sesame",
+    "requestOrigin": "WebPortal 5.0.352",
     "credentialNewOutboundLogin": "faxsending@auto1",
     "credentialNewOutboundPassword": "softlinx",
     "inboundStatusCode": 200,

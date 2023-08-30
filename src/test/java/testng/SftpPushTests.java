@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SftpPushTests extends TestBase {
 
-    @Test(priority = 1,testName = "SFTP - Setup and Test Simple Authentication", groups = {"RegressionAnat"})
+    @Test(priority = 1,testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression1"})
     void testWithSimpleAuthentication() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -84,7 +84,7 @@ public class SftpPushTests extends TestBase {
 
 
     }
-    @Test(priority = 3,testName = "SFTP - Test With Certificate No Passphrase", groups = {"RegressionAnat"})
+    @Test(priority = 3,testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression1"})
     void testWithCertificateNoPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -130,7 +130,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 2,testName = "SFTP - Test With Certificate With Passphrase", groups = {"RegressionAnat"})
+    @Test(priority = 2,testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression1"})
     void testWithCertificateWithPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

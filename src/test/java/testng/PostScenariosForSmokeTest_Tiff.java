@@ -112,14 +112,14 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
 
     }
 
-    @Test(testName = "Send Fax Data with multiple attachment", groups = {"Regression1test"})
+    @Test(testName = "Send Fax Data with multiple attachment", groups = {"Regression1"})
     public void sendFaxDataWithTiff_Copy() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
         String tsi = FileReader.randomNumberFor_TSI();
         File file = FileReader.getFileUsingPageSize2forTiff(data.get("pageSize"), data.get("fileType"));
-        Response response = RestRequestUtils.sendFaxWithRecipent_withTiff(data.get("post_call_Url")+tsi,
+        Response response = RestRequestUtils.sendFaxWithRecipent_withTiff_216(data.get("post_call_Url")+tsi,
                 file, data.get("faxNumber"), data.get("credentials"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response.asPrettyString());
@@ -134,8 +134,8 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
         String faxId = JsonPath.read(resp, "$.FaxInfo[0].FaxId").toString();
 
         assertTrue(resp.contains(faxId));
-        Thread.sleep(1000*60);
-        Response responseReceiveFax2 = RestRequestUtils.responseRecieveFaxforTiff(data.get("get_call_Url"), data.get("credentialInbound"));
+        Thread.sleep(1000*100);
+        Response responseReceiveFax2 = RestRequestUtils.responseRecieveFaxforTiff_216(data.get("get_call_Url"), data.get("credentialInbound"));
 
         String Status= JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxStatus");
 

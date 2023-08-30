@@ -20,4 +20,18 @@ public class SoapRequestUtils {
                 .when()
                 .post(url).then().extract().response();
     }
+    public static Response soapInboundFaxWithCoverPageIMG(String url, String body, String credentials, String soapAction) {
+        RequestSpecification request = RestAssured.given();
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAcme = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAcme);
+        request.header("SOAPAction", soapAction);
+
+        return request.contentType("text/xml")
+                .body(body)
+                .when()
+                .post(url).then().extract().response();
+    }
+
 }

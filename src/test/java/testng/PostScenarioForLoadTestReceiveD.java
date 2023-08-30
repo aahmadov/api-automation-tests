@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PostScenarioForLoadTestReceiveD extends TestBase {
 
-    @Test(testName = "Validation of Post call for Load test", groups = {"Regression12"})
+    @Test(testName = "Validation of Post call for Load test", groups = {"Regression"})
     public void validationOfPostCallForLoadTestReceiveD() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -129,7 +129,7 @@ public class PostScenarioForLoadTestReceiveD extends TestBase {
             assertEquals(201, response.statusCode());
 
             Thread.sleep(1000*120);
-            Response responseReceiveFax = RestRequestUtils.responseRecieveFaxcollsionRecvD(data.get("get_call_Url"), data.get("credentialInbound"));
+            Response responseReceiveFax = RestRequestUtils.responseRecieveFaxcollsionRecvD_147(data.get("get_call_Url"), data.get("credentialInbound"));
             String metadata = responseReceiveFax.prettyPrint();
             System.out.println(metadata);
 
@@ -150,7 +150,7 @@ public class PostScenarioForLoadTestReceiveD extends TestBase {
             }
             //System.out.println("************ Inbound Fax Job id: " + jobId);
 
-            DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatus1"));
+            DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatusSmoke_147"));
         }
         Thread.sleep(1000*180);
         DataBaseUtility.executeSQLQuery(ConfigReader.getProperty("checking_receiveD"));

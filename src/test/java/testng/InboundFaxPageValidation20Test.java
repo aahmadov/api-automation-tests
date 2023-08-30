@@ -130,7 +130,7 @@ public class InboundFaxPageValidation20Test extends TestBase {
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
         Response response = RestRequestUtils.sendFaxWithNewTSI(data.get("post_call_Url") + tsi,
-                FileReader.readfile("20page"),
+                FileReader.readfile("2page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));

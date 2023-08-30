@@ -109,7 +109,7 @@ public class OutboundFaxPageValidation50Test extends TestBase {
         String onlyTsi = tsi.split("=")[1];
         //Response response = RestRequestUtils.putScenario(data.get("put_call_Url"));
         Response responseSubmitFax = Second_RestRequestUtils.faxWith50Pages(data.get("post_call_Url") + tsi,
-                FileReader.readfile("50page"),
+                FileReader.readfile("5page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));
