@@ -120,8 +120,8 @@
     "getFaxByID_url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "newOutboundParam": "?FaxUserId=faxsending",
     "inboundFax_url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-    "newInboundParam": "?FaxUserId=faxsending",
-    "credentialNewInbound": "faxsending@smoke:softlinx"
+    "newInboundParam": "?FaxUserId=receiver",
+    "credentialNewInbound": "receiver@smoke:softlinx"
 
   },
   "soapFaxStatusAndPageNumberValidationFromInbound": {
