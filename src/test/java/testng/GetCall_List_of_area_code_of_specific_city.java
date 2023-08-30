@@ -36,8 +36,45 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         System.out.println(AreaCodeArrayList);
         assertTrue(responseElement+" area code entered not exist on the mentioned city",AreaCodeArrayList.contains(responseElement));
     }
+    @Test(testName = "List of Area codes for specific city and province", groups = {"smoke1"})
+    void GetListOfAreaCodeCopy() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        String responseElement = data.get("area_code");
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        //System.out.println(responseGetCall.asPrettyString());
+        List<String> AreaCodeArrayList = JsonPath.read(responseGetCall.asPrettyString(),"$..area_code");
+        for (int i=0; i<AreaCodeArrayList.size();i++){
+            if (AreaCodeArrayList.get(i).contains(responseElement)){
+                System.out.println(":this "+responseElement+ " area code belongs to city of state that we have entered from json file");
+            }
+        }
+        System.out.println(AreaCodeArrayList);
+        assertTrue(responseElement+" area code entered not exist on the mentioned city",AreaCodeArrayList.contains(responseElement));
+    }
+
+
     @Test(testName = "List of city and province of specific State", groups = {"smoke"})
     void GetListOfAreaCodeofspecificCitywithState() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+    }
+    @Test(testName = "List of city and province of specific State", groups = {"smoke1"})
+    void GetListOfAreaCodeofspecificCitywithStateCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -62,6 +99,19 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
+    @Test(testName = "List of areaCodes of specific State", groups = {"smoke1"})
+    void GetListOfAreaCodeofspecificStateCopy() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+    }
     @Test(testName = "List of users with no FaxNumbers", groups = {"smoke"})
     void GetListOfUsersWithName() throws Exception {
         System.out.println("Test case name: " + testName);
@@ -75,8 +125,34 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
+    @Test(testName = "List of users with no FaxNumbers", groups = {"smoke1"})
+    void GetListOfUsersWithNameCopy() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+    }
     @Test(testName = "List of Departments", groups = {"smoke"})
     void GetListOfDepartments() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+    }
+    @Test(testName = "List of Departments", groups = {"smoke1"})
+    void GetListOfDepartmentsCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
@@ -102,6 +178,21 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         System.out.println(responseGetCall.asPrettyString());
 
     }
+    @Test(testName = "List of states codes or provinces ", groups = {"smoke1"})
+    void GetListOfcityCodesOrProvincesCopy() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+
+    }
+
     @Test(testName = "List of All FaxNumbers owned by Org ", groups = {"smoke"})
     void GetListOfAllFaxNumberOwnedOrg() throws Exception {
         System.out.println("Test case name: " + testName);
@@ -115,8 +206,37 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
+
+    @Test(testName = "List of All FaxNumbers owned by Org ", groups = {"smoke1"})
+    void GetListOfAllFaxNumberOwnedOrgCopy() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+    }
+
+
     @Test(testName = "Gets details about request to add a fax # ", groups = {"smoke"})
     void GetDetailsAboutRequest() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        assert data != null;
+        Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseGetCall.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 3);
+        System.out.println(responseGetCall.asPrettyString());
+    }
+    @Test(testName = "Gets details about request to add a fax # ", groups = {"smoke1"})
+    void GetDetailsAboutRequestCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
