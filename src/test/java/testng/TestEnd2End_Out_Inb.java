@@ -102,7 +102,7 @@ public class TestEnd2End_Out_Inb extends TestBase {
         }
     }
 
-    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke"})
+    @Test(testName = "Dynamic scenario for fax status and page number validation from inbound", groups = {"smoke1"})
     public void faxStatusAndPageNumberValidationFromInboundCopy() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
