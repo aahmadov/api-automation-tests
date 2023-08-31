@@ -139,22 +139,6 @@
     "credentialNewInboundLogin": "receiver@acme1",
     "credentialNewInboundPassword": "Softlinx1!"
   },
-
-  "soapFaxStatusAndPageNumberValidationFromInboundCopy": {
-      "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/wsapi",
-      "faxNumber": "17818854198",
-      "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
-      "querySendFaxSoapAction": "http://www.softlinx.com/wsapi/op=QuerySendFax/ver=79",
-      "queryReceiveFaxSoapAction": "http://www.softlinx.com/wsapi/op=QueryReceiveFax/ver=79",
-      "Pages": "2",
-      "fileType": "pdf",
-      "coverPageEnabled": true,
-      "credentialNewOutboundLogin": "faxsending@smoke",
-      "credentialNewOutboundPassword": "softlinx",
-      "inboundStatusCode": 200,
-      "credentialNewInboundLogin": "receiver@smoke",
-      "credentialNewInboundPassword": "softlinx"
-  },
   "add_1_to_the_beginning_Of_number": {
     "url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:Softlinx1!",
