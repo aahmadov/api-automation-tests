@@ -19,7 +19,7 @@ public class SendMailToFaxTests extends TestBase {
     String bodyMessage = ConfigReader.getProperty("bodyMessage");
     String from = "no-reply@rpxqa.com";
 
-    @Test(testName = "Send mail to Fax", groups = {"RegressionNotWorking"})
+    @Test(testName = "Send mail to Fax", groups = {"Regression"})
     void sendMailToFax() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -67,7 +67,7 @@ public class SendMailToFaxTests extends TestBase {
 
                 String EmailToFaxQuery = String.format("select JobStatus,FaxNumber from auto1.sendstatus where (CreateTime between '%s' and '%s') order by JobID desc limit 1;", startTimeString, endTimeString);
 
-                List<Map<String, Object>> results = DataBaseUtility.executeSQLQuery(EmailToFaxQuery);
+                List<Map<String, Object>> results = DataBaseUtility.executeSQLQueryRecvD(EmailToFaxQuery);
                 if (results.size() == 0) {
                     fail("***:No record present in the Database for the fax email sent");
                 }

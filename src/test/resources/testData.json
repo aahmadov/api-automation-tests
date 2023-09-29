@@ -89,7 +89,7 @@
     "faxUserId": "faxsending"
   },
   "sendMailToFax": {
-    "to": "13333333333@auto1.rpxqa.com",
+    "to": "1222222222@auto1.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "pageSize": "3",
@@ -779,5 +779,15 @@
     "inboundStatusCode": 200,
     "credentialNewInboundLogin": "faxsending@auto1",
     "credentialNewInboundPassword": "softlinx"
-}
+},
+
+  "add_minimum_busy_attempts": {
+    "put_call_Url": "http://10.250.1.100:8081/api/Registry?app=faxserver&path=\\sched&key=SendsPerPhoneDestination&value=100",
+    "put_call_Url_Change": "http://10.250.1.100:8081/api/Registry?app=faxserver&path=\\sched&key=SendsPerPhoneDestination&value=10",
+    "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber":"1(333)333-3333",
+    "credentialOutbound":"faxsending@auto1:softlinx",
+    "statusCode": "201"
+
+  }
 }

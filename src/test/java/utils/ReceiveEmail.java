@@ -21,9 +21,9 @@ public class ReceiveEmail {
 
 	private static String host = "imap.gmail.com";
 	private static String mailStoreType = "imap";
-	private static String username ="auto@softlinx.com"; //System.getenv("mail.username");//
+	private static String username ="auto@softlinx.com";//System.getenv("mail.username");//"auto@softlinx.com"; //System.getenv("mail.username");//
 
-	private static String password = "softlinx";//System.getenv("mail.password");//
+	private static String password ="softlinx"; //System.getenv("mail.password");//"softlinx";//System.getenv("mail.password");//
 
 
 	public static Boolean receiveEmail(String mailFrom, String subjectFilter) throws InterruptedException {
@@ -33,9 +33,13 @@ public class ReceiveEmail {
 
 			// 1) create the session
 			Properties props = new Properties();
+//			props.setProperty("mail.imap.starttls.enable", "true");
+//			props.setProperty("mail.imap.port", "143");
+			props.setProperty("mail.imap.port", "993");
+			//props.setProperty("mail.imap.connectiontimeout", "30000"); // 30 seconds
+			props.setProperty("mail.imap.timeout", "30000"); // 30 seconds
 			props.setProperty("mail.imap.ssl.enable", "true");
-			Session session = Session.getDefaultInstance(props, null);
-
+			Session session = Session.getDefaultInstance(props,null);
 
 			// connect to the email//
 			Store emailStore = session.getStore(mailStoreType);
