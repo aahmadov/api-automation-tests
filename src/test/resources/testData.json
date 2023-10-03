@@ -98,7 +98,7 @@
   },
   "faxStatusAndPageNumberValidationFromInbound2": {
     "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "faxNumber": "17818854196",
+    "faxNumber": "17818854198",
     "Pages": "3",
     "fileType": "pdf",
     "credentialNewOutbound": "faxsending@acme1:Softlinx1!",
