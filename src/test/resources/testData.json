@@ -218,13 +218,13 @@
     "updatedFaxNumber": "11111111112",
     "Pages": "3",
     "fileType": "pdf",
-    "credentialNewOutbound": "faxsending@acme1:Softlinx1!",
+    "credentialNewOutbound": "faxsending5@acme1:Softlinx1!",
     "inboundStatusCode": 201,
     "getFaxByID_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
-    "newOutboundParam": "?FaxUserId=faxsending",
+    "newOutboundParam": "?FaxUserId=faxsending5",
     "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "newInboundParam": "?FaxUserId=receiver2",
-    "credentialNewInbound": "receiver2@acme1:softlinx"
+    "credentialNewInbound": "receiver2@acme1:Softlinx1!"
   },
     "putScenarioForRegistrySettingsCopy": {
       "put_call_Url": "http://10.250.1.216:8081/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=10",

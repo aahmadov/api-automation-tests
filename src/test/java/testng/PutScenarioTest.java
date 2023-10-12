@@ -19,7 +19,7 @@ import static org.testng.Assert.assertEquals;
 
 public class PutScenarioTest extends TestBase {
 
-    @Test(testName = "Put scenario", groups = {"RegressionFail"})
+    @Test(testName = "Put scenario", groups = {"Regression"})
     public void putScenarioForRegistrySettings() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
