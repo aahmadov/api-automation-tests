@@ -550,6 +550,15 @@ public class RestRequestUtils {
                 .when()
                 .post(url);
     }
+
+        public static Response sendFaxWithForURLNotify(String url, File filePage, String faxnumb, String credentials) {
+            return createRequest(credentials)
+                    .contentType("multipart/form-data")
+                    .multiPart("filename", filePage)
+                    .queryParam("FaxNumber", faxnumb)
+                    .when()
+                    .post(url);
+    }
     public static Response sendFaxWithNewTSIAPI(String url, File filePage, String faxnumb, String credentials) {
         return createRequest(credentials)
                 .contentType("multipart/form-data")

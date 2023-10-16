@@ -253,6 +253,16 @@
     "credentialInbound": "receiver@acme1:Softlinx1!",
     "credentialOutbound": "faxsending@acme1:Softlinx1!"
   },
+    "multiple_entries_in_urlnotify_table": {
+      "post_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+      "statusCode": 201,
+      "faxNumber": "1(333)333-3333",
+      "get_call_Url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+      "inboundFax_url": "http://10.250.1.100:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+      "credentialInbound": "faxsending@auto1:softlinx",
+      "credentialOutbound": "faxsending@auto1:softlinx",
+      "newInboundParam": "?FaxUserId=faxsending"
+  },
     "validationOfPostCallForLoadTestReceiveDCopy": {
       "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
       "testDataFile": "dataFile/testData.xlsx",

@@ -93,6 +93,16 @@ public class Second_RestRequestUtils {
                 .when()
                 .get(url);
     }
+    public static Response getOutboundURLNotify(String url, String credentials) {
+        RequestSpecification request = RestAssured.given();
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAcme = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAcme);
+        return request.contentType("multipart/form-data")
+                .when()
+                .get(url);
+    }
 
     public static Response faxWith50Pages(String url, File file, String number) {
 
