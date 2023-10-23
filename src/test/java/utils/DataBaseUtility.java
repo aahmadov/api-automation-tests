@@ -22,7 +22,7 @@ public class DataBaseUtility {
     private static ResultSet resultSet;
 
     public static void openConnection() throws SQLException {
-        if (connection != null && connection.isValid(20)) {
+        if (connection2 != null && connection2.isValid(20)) {
             return;
         }
         try {
@@ -32,8 +32,8 @@ public class DataBaseUtility {
             e.printStackTrace();
         }
         connection = DriverManager.getConnection(ConfigReader.getProperty("mysql.url"),
-                ConfigReader.getProperty("replixdb.username"),
-                ConfigReader.getProperty("replixdb.password"));
+                ConfigReader.getProperty("replixdb.usernameAn"),
+                ConfigReader.getProperty("replixdb.passwordAn"));
 
         connection2 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeature"),
                 ConfigReader.getProperty("replixdb.username"),
@@ -73,6 +73,31 @@ public class DataBaseUtility {
 
         openConnection();
         statement = connection3.createStatement();
+        resultSet = statement.executeQuery(query);
+
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        int columnCount = metaData.getColumnCount();
+        List<Map<String, Object>> table = new ArrayList<>();
+        while (resultSet.next()) {
+            Map<String, Object> map = new HashMap<>();
+            for (int column = 1; column <= columnCount; column++) {
+                System.out.print(metaData.getColumnName(column) + ":");
+                map.put(metaData.getColumnName(column), resultSet.getObject(column));
+                System.out.println(map.put(metaData.getColumnName(column), resultSet.getObject(column)));
+            }
+
+            System.out.print("\n");
+
+            table.add(map);
+        }
+        closeConnection();
+        return table;
+    }
+
+    public static List<Map<String, Object>> executeSQLQueryAuto1(String query) throws SQLException {
+
+        openConnection();
+        statement = connection2.createStatement();
         resultSet = statement.executeQuery(query);
 
         ResultSetMetaData metaData = resultSet.getMetaData();

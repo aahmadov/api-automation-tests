@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class UrlNotify extends TestBase {
 
 
-    @Test(testName = "multiple entries for received faxes - they have barcode enabled", groups = {"RegressionToTest"})
+    @Test(testName = "multiple entries for received faxes - they have barcode enabled", groups = {"Regression"})
     public void multiple_entries_in_urlnotify_table() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -102,13 +102,13 @@ public class UrlNotify extends TestBase {
         if (statuses.size() > 0 && statuses.get(0).equals("recvOk")) {
             assertTrue(statuses.stream().skip(1).allMatch(status -> status.equals("recvIncomplete")));
         }
+        Thread.sleep(1000*3);
+        System.out.println("-->look at replixdb.urlnotify table message  :");
+        DataBaseUtility.executeSQLQueryAuto1("select jobid,realm ,url from replixdb.urlnotify order by JobId desc limit 2;");
+
 
         System.out.println("--->auto1.sendstatus message :");
-        DataBaseUtility.executeSQLQueryRecvD("select JobId,notifyUrl,TransmitStationID,JobStatus from auto1.sendstatus order by JobId desc limit 1;");
-
-        Thread.sleep(1000*3);
-        System.out.println("-->auto1.recvstatus message  :");
-        DataBaseUtility.executeSQLQueryRecvD("select JobId,TransmiStationID ,JobStatus,NotifyRecvMail from auto1.recvstatus order by JobId desc limit 2;");
+        DataBaseUtility.executeSQLQueryAuto1("select JobId,notifyUrl,TransmitStationID,JobStatus from auto1.sendstatus order by JobId desc limit 1;");
 
     }
 }
