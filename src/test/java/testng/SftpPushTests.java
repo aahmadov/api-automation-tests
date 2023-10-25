@@ -184,13 +184,13 @@ public class SftpPushTests extends TestBase {
         assert data != null;
 
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_realms"));
+        DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("delete_ftp_realms"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("delete_ftp_users"));
+        DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("delete_ftp_users"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_realms"));
+        DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("insert_ftp_realms"));
 
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("insert_ftp_users"));
+        DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("insert_ftp_users"));
 
         DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("truncate_recvstatus"));
 
@@ -238,7 +238,7 @@ public class SftpPushTests extends TestBase {
         assert data != null;
 
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("rsa_private_key"));
+        DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("rsa_private_key"));
 
 //        Thread.sleep(1000*60);
         String tsi = FileReader.randomNumberFor_TSI();
@@ -280,7 +280,7 @@ public class SftpPushTests extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("rsa_private_key_with_passphrase"));
+        DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("rsa_private_key_with_passphrase"));
         //Thread.sleep(60000);
 
         String tsi = FileReader.randomNumberFor_TSI();
