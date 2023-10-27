@@ -177,7 +177,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 1,testName = "SFTP - A-Test Simple Authentication", groups = {"Regression"})
+    @Test(priority = 1,testName = "SFTP - A-Test Simple Authentication", groups = {"RegressionAb"})
     void testWithSimpleAuthenticationAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -228,10 +228,10 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
-        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + "(1).pdf"));
 
     }
-    @Test(priority = 3,testName = "SFTP - C-Test With Certificate No Passphrase", groups = {"Regression"})
+    @Test(priority = 3,testName = "SFTP - C-Test With Certificate No Passphrase", groups = {"RegressionAb"})
     void testWithCertificateNoPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -272,9 +272,9 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
-        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + "(1).pdf"));
     }
-    @Test(priority = 2,testName = "SFTP - B-Test With Certificate With Passphrase", groups = {"Regression"})
+    @Test(priority = 2,testName = "SFTP - B-Test With Certificate With Passphrase", groups = {"RegressionAb"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -314,6 +314,6 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
-        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + "(1).pdf"));
     }
 }
