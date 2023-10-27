@@ -228,7 +228,7 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
-        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + "(1).pdf"));
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
 
     }
     @Test(priority = 3,testName = "SFTP - C-Test With Certificate No Passphrase", groups = {"Regression"})
@@ -272,7 +272,7 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
-        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + "(1).pdf"));
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
     @Test(priority = 2,testName = "SFTP - B-Test With Certificate With Passphrase", groups = {"Regression"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
@@ -314,6 +314,6 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
-        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + "(1).pdf"));
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 }
