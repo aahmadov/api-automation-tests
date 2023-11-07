@@ -95,7 +95,7 @@ public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
             assertTrue(statuses.stream().skip(1).allMatch(status -> status.equals("recvIncomplete")));
         }
     }
-    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression1"})
+    @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"RegressionAbb"})
     public void submitFaxToManipulateInboundOutboundPagesCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
