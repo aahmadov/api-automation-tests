@@ -85,7 +85,7 @@ public class PostScenarioForLoadTestReceiveD extends TestBase {
         Thread.sleep(1000*120);
         DataBaseUtility.executeSQLQueryRecvD(ConfigReader.getProperty("checking_receiveD"));
     }
-    @Test(testName = "Validation of Post call for Load test", groups = {"Regression"})
+    @Test(testName = "Validation of Post call for Load test", groups = {"Regression1"})
     public void validationOfPostCallForLoadTestReceiveDCopy() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
