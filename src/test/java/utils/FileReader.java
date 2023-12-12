@@ -81,7 +81,24 @@ public class FileReader {
             return null;
         }
     }
-
+    public static File getFileUsingPageSize2forHTML(final String pageSize, final String fileType) {
+        try {
+            File folder = Paths.get(ClassLoader.getSystemResource("requestBody/" + fileType).toURI()).toFile();
+            //File[] listOfFiles1 = folder.listFiles((d, name) -> name.endsWith(fileType.toLowerCase()));
+            File[] listOfFiles = folder.listFiles((d, name) -> name.toLowerCase().endsWith(".html") || name.toLowerCase().endsWith(".htm"));
+            Optional<File> fileOptional = Arrays.stream(Objects.requireNonNull(listOfFiles))
+                    .filter(file -> file.getName().matches("[^0-9]*" + pageSize + "[^0-9]*"))
+                    .findAny();
+            String filePath = fileOptional
+                    .map(File::getAbsolutePath)
+                    .orElseGet(() -> Objects.requireNonNull(listOfFiles)[(int) (Math.random() * listOfFiles.length)].getAbsolutePath());
+            String newFilePath = filePath.replace("\\target\\test-classes", "\\src\\test\\resources");
+            return new File(newFilePath);
+        } catch (URISyntaxException exception) {
+            System.out.println(exception.getMessage());
+            return null;
+        }
+    }
 
 
     public static String randomNumberFor_TSI() {
@@ -168,4 +185,38 @@ public class FileReader {
             }
         }
     }
+
+
+    public static String getContentTypeForFile_withHTML(String filePath) {
+        String extension = FilenameUtils.getExtension(getFileName(filePath));
+        switch (extension.toLowerCase()) {
+            case "txt": {
+                return "text/plain";
+            }
+            case "json": {
+                return "application/json";
+            }
+            case "doc": {
+                return "application/msword";
+            }
+            case "docx": {
+                return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            }
+            case "tif":
+            case "tiff": {
+                return "image/tiff";
+            }
+            case "pdf": {
+                return "application/pdf";
+            }
+            case "html":
+            case "htm": {
+                return "text/html";
+            }
+            default: {
+                return "application/octet-stream"; // Default to binary/octet-stream for unrecognized file types
+            }
+        }
+    }
+
 }

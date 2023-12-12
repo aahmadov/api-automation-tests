@@ -131,7 +131,7 @@
     "querySendFaxSoapAction": "http://www.softlinx.com/wsapi/op=QuerySendFax/ver=79",
     "queryReceiveFaxSoapAction": "http://www.softlinx.com/wsapi/op=QueryReceiveFax/ver=79",
     "Pages": "2",
-    "fileType": "pdf",
+    "fileType": "html",
     "coverPageEnabled": true,
     "post_call_Url81": "http://10.250.1.100:8080/softlinx/replixfax/wsapi",
     "credentialNewOutboundLogin": "faxsending@acme1",

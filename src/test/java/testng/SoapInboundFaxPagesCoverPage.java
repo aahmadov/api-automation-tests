@@ -29,13 +29,13 @@ import static org.testng.Assert.assertEquals;
 public class SoapInboundFaxPagesCoverPage extends TestBase {
 
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke"})
+            groups = {"smokefortest"})
     public void soapFaxStatusAndPageNumberValidationFromInbound() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
         assert data != null;
 
-        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+        File file = FileReader.getFileUsingPageSize2forHTML(data.get("Pages"), data.get("fileType"));
         String tsi = FileReader.randomTsi();
         String[] outboundCred = data.get("credentialNewOutboundLogin").split("@");
         //add more values to the data to replace the values from the xml file
@@ -46,7 +46,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         data.put("tsi", tsi);
         data.put("fileName", FileReader.getFileName(file.getAbsolutePath()));
         data.put("attachment", FileReader.fileToByteString(file.getAbsolutePath()));
-        data.put("contentType", FileReader.getContentTypeForFile(file.getAbsolutePath()));
+        data.put("contentType", FileReader.getContentTypeForFile_withHTML(file.getAbsolutePath()));
 
         //replace the values in the xml files from the testData (data)
         String sendFaxBody = replaceValues(data, String.format("soapRequestBody/%s_sendFax.xml", testName));

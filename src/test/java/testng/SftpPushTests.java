@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 public class SftpPushTests extends TestBase {
 
-    @Test(priority = 1,testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression1"})
+    @Test(priority = 1, testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression1"})
     void testWithSimpleAuthentication() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -49,7 +49,7 @@ public class SftpPushTests extends TestBase {
         Thread.sleep(1000 * 180);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
 
-        List<String> TSI = JsonPath.read(responseReceiveFax.asPrettyString(),"$..TSI");
+        List<String> TSI = JsonPath.read(responseReceiveFax.asPrettyString(), "$..TSI");
 
 
         String metadata = responseReceiveFax.prettyPrint();
@@ -66,7 +66,7 @@ public class SftpPushTests extends TestBase {
         for (int i = 0; i < faxInfoArray.length(); i++) {
             JSONObject faxInfo = faxInfoArray.getJSONObject(i);
 
-            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=",""))) {
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
                 jobId = faxInfo.getInt("FaxId");
             }
         }
@@ -74,10 +74,9 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
 
 
-
-
     }
-    @Test(priority = 3,testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression1"})
+
+    @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression1"})
     void testWithCertificateNoPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -97,7 +96,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*150);
+        Thread.sleep(1000 * 150);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
@@ -114,7 +113,7 @@ public class SftpPushTests extends TestBase {
         for (int i = 0; i < faxInfoArray.length(); i++) {
             JSONObject faxInfo = faxInfoArray.getJSONObject(i);
 
-            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=",""))) {
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
                 jobId = faxInfo.getInt("FaxId");
             }
         }
@@ -123,7 +122,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 2,testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression1"})
+    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression1"})
     void testWithCertificateWithPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -144,7 +143,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*180);
+        Thread.sleep(1000 * 180);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
@@ -161,7 +160,7 @@ public class SftpPushTests extends TestBase {
         for (int i = 0; i < faxInfoArray.length(); i++) {
             JSONObject faxInfo = faxInfoArray.getJSONObject(i);
 
-            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=",""))) {
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
                 jobId = faxInfo.getInt("FaxId");
             }
         }
@@ -170,7 +169,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 1,testName = "SFTP - Test Simple Authentication", groups = {"Regression"})
+    @Test(priority = 1, testName = "SFTP - Test Simple Authentication", groups = {"Regression"})
     void testWithSimpleAuthenticationAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -199,7 +198,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*180);
+        Thread.sleep(1000 * 180);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
@@ -216,7 +215,7 @@ public class SftpPushTests extends TestBase {
         for (int i = 0; i < faxInfoArray.length(); i++) {
             JSONObject faxInfo = faxInfoArray.getJSONObject(i);
 
-            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=",""))) {
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
                 jobId = faxInfo.getInt("FaxId");
             }
         }
@@ -224,7 +223,8 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
 
     }
-    @Test(priority = 3,testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
+
+    @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
     void testWithCertificateNoPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -244,7 +244,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*180);
+        Thread.sleep(1000 * 180);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
         System.out.println(metadata);
@@ -260,14 +260,15 @@ public class SftpPushTests extends TestBase {
         for (int i = 0; i < faxInfoArray.length(); i++) {
             JSONObject faxInfo = faxInfoArray.getJSONObject(i);
 
-            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=",""))) {
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
                 jobId = faxInfo.getInt("FaxId");
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
-    @Test(priority = 2,testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression"})
+
+    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -286,7 +287,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*180);
+        Thread.sleep(1000 * 180);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
         System.out.println(metadata);
@@ -302,11 +303,159 @@ public class SftpPushTests extends TestBase {
         for (int i = 0; i < faxInfoArray.length(); i++) {
             JSONObject faxInfo = faxInfoArray.getJSONObject(i);
 
-            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=",""))) {
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
                 jobId = faxInfo.getInt("FaxId");
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
+
+
+
+
+
+    @Test(priority = 1, testName = "SFTP - Test Simple Authentication", groups = {"Regression81"})
+    void testWithSimpleAuthenticationAbbas81() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
+        assert data != null;
+
+        //Execute first query - Delete
+        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("delete_ftp_realms81"));
+
+        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("delete_ftp_users81"));
+
+        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("insert_ftp_realms81"));
+
+        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("insert_ftp_users81"));
+
+        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("truncate_recvstatus81"));
+
+        //Thread.sleep(1000*30);
+
+        String tsi = FileReader.randomNumberFor_TSI();
+        Response responseSubmitFax = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
+                FileReader.readfile("3page"),
+                data.get("faxNumber"), data.get("credentialOutbound"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println("********** " + FileReader.readfile("3page"));
+        System.out.println("********* " + data.get("faxNumber"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 180);
+
+        Response responseReceiveFax = RestRequestUtils.responseRecieveFax81(data.get("get_call_Url"), data.get("credentialInbound"));
+        String metadata = responseReceiveFax.prettyPrint();
+        System.out.println(metadata);
+
+        // Parse the metadata string into a JSON object
+        JSONObject jsonObject = new JSONObject(metadata);
+
+        // Extract the FaxInfo array
+        JSONArray faxInfoArray = jsonObject.getJSONArray("FaxInfo");
+
+        // Search for the FaxInfo object with the desired TSI value
+        int jobId = -1;
+        for (int i = 0; i < faxInfoArray.length(); i++) {
+            JSONObject faxInfo = faxInfoArray.getJSONObject(i);
+
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
+                jobId = faxInfo.getInt("FaxId");
+            }
+        }
+        System.out.println("************ Inbound Fax Job id: " + jobId);
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+
+    }
+
+    @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression81"})
+    void testWithCertificateNoPassphraseAbbas81() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
+        assert data != null;
+
+        //Execute first query - Delete
+        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("rsa_private_key81"));
+
+//        Thread.sleep(1000*60);
+        String tsi = FileReader.randomNumberFor_TSI();
+        Response responseSubmitFax = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
+                FileReader.readfile("3page"),
+                data.get("faxNumber"), data.get("credentialOutbound"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println("********** " + FileReader.readfile("3page"));
+        System.out.println("********* " + data.get("faxNumber"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 180);
+        Response responseReceiveFax = RestRequestUtils.responseRecieveFax81(data.get("get_call_Url"), data.get("credentialInbound"));
+        String metadata = responseReceiveFax.prettyPrint();
+        System.out.println(metadata);
+
+        // Parse the metadata string into a JSON object
+        JSONObject jsonObject = new JSONObject(metadata);
+
+        // Extract the FaxInfo array
+        JSONArray faxInfoArray = jsonObject.getJSONArray("FaxInfo");
+
+        // Search for the FaxInfo object with the desired TSI value
+        int jobId = -1;
+        for (int i = 0; i < faxInfoArray.length(); i++) {
+            JSONObject faxInfo = faxInfoArray.getJSONObject(i);
+
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
+                jobId = faxInfo.getInt("FaxId");
+            }
+        }
+        System.out.println("************ Inbound Fax Job id: " + jobId);
+                assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+    }
+
+
+    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression81"})
+    void testWithCertificateWithPassphraseAbbas81() throws Exception {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
+        assert data != null;
+        //Execute first query - Delete
+        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("rsa_private_key_with_passphrase81"));
+        //Thread.sleep(60000);
+
+        String tsi = FileReader.randomNumberFor_TSI();
+        Response responseSubmitFax = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
+                FileReader.readfile("3page"),
+                data.get("faxNumber"), data.get("credentialOutbound"));
+        System.out.println("------------------------------------------------------------------------");
+        System.out.println("************ " + data.get("post_call_Url"));
+        System.out.println("********** " + FileReader.readfile("3page"));
+        System.out.println("********* " + data.get("faxNumber"));
+        System.out.println("------------------------------------------------------------------------");
+        assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
+        Thread.sleep(1000 * 180);
+        Response responseReceiveFax = RestRequestUtils.responseRecieveFax81(data.get("get_call_Url"), data.get("credentialInbound"));
+        String metadata = responseReceiveFax.prettyPrint();
+        System.out.println(metadata);
+
+        // Parse the metadata string into a JSON object
+        JSONObject jsonObject = new JSONObject(metadata);
+
+        // Extract the FaxInfo array
+        JSONArray faxInfoArray = jsonObject.getJSONArray("FaxInfo");
+
+        // Search for the FaxInfo object with the desired TSI value
+        int jobId = -1;
+        for (int i = 0; i < faxInfoArray.length(); i++) {
+            JSONObject faxInfo = faxInfoArray.getJSONObject(i);
+
+            if (faxInfo.getString("TSI").equals(tsi.toString().replace("?TSI=", ""))) {
+                jobId = faxInfo.getInt("FaxId");
+            }
+        }
+        System.out.println("************ Inbound Fax Job id: " + jobId);
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+    }
+
 }
