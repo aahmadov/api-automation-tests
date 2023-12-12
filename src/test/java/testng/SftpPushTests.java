@@ -46,18 +46,11 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000 * 120);
+        Thread.sleep(1000 * 180);
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
 
-//        //int jobId = JsonPath.read(responseReceiveFax.asPrettyString(), "$.FaxInfo[0].FaxId");
         List<String> TSI = JsonPath.read(responseReceiveFax.asPrettyString(),"$..TSI");
-        //int jobId = -1;
-//        for (int i=0; i<TSI.size();i++){
-//            if (TSI.get(i).contains(tsi)){
-       // jobId = faxInfo.getInt("FaxId");
-//                System.out.println(":this "+ jobId+ " area code belongs to city of state that we have entered from json file");
-//            }
-//        }
+
 
         String metadata = responseReceiveFax.prettyPrint();
         System.out.println(metadata);
@@ -104,7 +97,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*120);
+        Thread.sleep(1000*150);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();
@@ -151,7 +144,7 @@ public class SftpPushTests extends TestBase {
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax.statusCode()), data.get("statusCode"));
-        Thread.sleep(1000*120);
+        Thread.sleep(1000*180);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax(data.get("get_call_Url"), data.get("credentialInbound"));
         String metadata = responseReceiveFax.prettyPrint();

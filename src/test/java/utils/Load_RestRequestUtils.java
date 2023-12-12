@@ -21,6 +21,7 @@ public class Load_RestRequestUtils {
 
     }
 
+
     public static Response sendFax_loadTest(Map<String, Object> data) {
         return createRequest(ConfigReader.getProperty("credentialOutbound"))
         		.contentType("multipart/form-data")
@@ -32,6 +33,15 @@ public class Load_RestRequestUtils {
     }
 
     public static Response sendFax_loadTest(Map<String, Object> data, String credentials) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", (File)data.get("filename"))
+                .queryParam("FaxNumber", data.get("FaxNumber").toString())
+                .queryParam("CoverPageEnabled", Boolean.parseBoolean(data.get("coverPageEnabled").toString()))
+                .when()
+                .post(data.get("url").toString());
+    }
+    public static Response sendFax_loadTest81(Map<String, Object> data, String credentials) {
         return createRequest(credentials)
                 .contentType("multipart/form-data")
                 .multiPart("filename", (File)data.get("filename"))
@@ -110,6 +120,13 @@ public class Load_RestRequestUtils {
     }
 
     public static Response getRecentFax(String url, String credentials) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .when()
+                .get(url);
+    }
+
+    public static Response getRecentFax81(String url, String credentials) {
         return createRequest(credentials)
                 .contentType("multipart/form-data")
                 .when()

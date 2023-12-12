@@ -61,6 +61,8 @@ public class DataBaseUtility2 {
             int noOfLines = statement.executeUpdate(query);
             closeConnection();
         }
+
+
     public static void closeConnection() {
         try {
             if (resultSet != null) {

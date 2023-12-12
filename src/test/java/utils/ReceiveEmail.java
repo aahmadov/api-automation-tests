@@ -116,7 +116,6 @@ public class ReceiveEmail {
 			return 10;
 		}
 	}
-
 	public static int getNumberOfPages(Message message) throws MessagingException, IOException {
 		String body = IOUtils.toString(MimeUtility.decode(message.getInputStream(), "quoted-printable"),
 				StandardCharsets.UTF_8);
