@@ -29,7 +29,7 @@ import static org.testng.Assert.assertEquals;
 public class SoapInboundFaxPagesCoverPage extends TestBase {
 
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smokefortest"})
+            groups = {"smoke"})
     public void soapFaxStatusAndPageNumberValidationFromInbound() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -138,7 +138,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                 .replace("{contentType}", data.get("contentType"));
     }
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke81"})
+            groups = {"smoke813"})
     public void soapFaxStatusAndPageNumberValidationFromInbound81() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -158,7 +158,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         data.put("contentType", FileReader.getContentTypeForFile(file.getAbsolutePath()));
 
         //replace the values in the xml files from the testData (data)
-        String sendFaxBody = replaceValues81(data, String.format("soapRequestBody/%s_sendFax.xml", testName));
+        String sendFaxBody = replaceValues81(data, String.format("soapRequestBody/soapFaxStatusAndPageNumberValidationFromInbound_SendFax81.xml", testName));
 
         Response sendFaxWithCoverPage = SoapRequestUtils.soapInboundFaxWithCoverPage81(data.get("post_call_Url"),
                 sendFaxBody, String.format("%s:%s", data.get("login"), data.get("password")), data.get(("sendFaxSoapAction")));
@@ -178,7 +178,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         Response outboundWithCoverPage;
         boolean isNotCompleted = true;
         int times = 0;
-        String querySendFaxBody = replaceValues81(data, String.format("soapRequestBody/%s_querySendFax.xml", testName));
+        String querySendFaxBody = replaceValues81(data, String.format("soapRequestBody/soapFaxStatusAndPageNumberValidationFromInbound_querySendFax81.xml", testName));
         do {
             Thread.sleep(1000 * 30);
             outboundWithCoverPage = SoapRequestUtils.soapInboundFaxWithCoverPage81(data.get("post_call_Url"),
@@ -200,7 +200,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         data.put("password", data.get("credentialNewInboundPassword"));
         data.put("realm", inboundCred[1]);
         data.put("faxUserId", inboundCred[0]);
-        String queryReceiveFaxBody = replaceValues81(data, String.format("soapRequestBody/%s_queryReceiveFax.xml", testName));
+        String queryReceiveFaxBody = replaceValues81(data, String.format("soapRequestBody/soapFaxStatusAndPageNumberValidationFromInbound_queryReceiveFax81.xml", testName));
 
         Response inboundFaxwithCoverPage = SoapRequestUtils.soapInboundFaxWithCoverPage81(data.get("post_call_Url"),
                 queryReceiveFaxBody, String.format("%s:%s", data.get("login"), data.get("password")), data.get(("queryReceiveFaxSoapAction")));

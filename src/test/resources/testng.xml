@@ -111,6 +111,12 @@
         </classes>
     </test>
 
+    <test name="HTML_FaxPageValidation81">
+        <classes>
+            <class name="testng.PostHTML"/>
+        </classes>
+    </test>
+
     <test name="Prepend1toFaxNumber">
         <classes>
             <class name="testng.Prepend1toFaxNumber"/>

@@ -14,9 +14,9 @@ import static org.testng.Assert.assertEquals;
 
 public class GetScenariosForSmokeTest extends TestBase {
 
-    @Test(testName = "Retrieve recently created fax", groups = {"smoke"})
-    public void retrieveRecentlyCreatedFax() throws InterruptedException {
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+    @Test(testName = "Retrieve recently created fax", groups = {"smoke81"})
+    public void retrieveRecentlyCreatedFax81() throws InterruptedException {
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         Thread.sleep(1000 * 60);
@@ -79,9 +79,9 @@ public class GetScenariosForSmokeTest extends TestBase {
         //assertEquals(expectedNumber, number);
     }
 
-    @Test(testName = "Retrieve Fax and Fax Data by Id", groups = {"smoke"})
-    public void retrieveFaxAndFaxDataById() throws InterruptedException {
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+    @Test(testName = "Retrieve Fax and Fax Data by Id", groups = {"smoke81"})
+    public void retrieveFaxAndFaxDataById81() throws InterruptedException {
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         Thread.sleep(1000 * 60);
@@ -122,9 +122,9 @@ public class GetScenariosForSmokeTest extends TestBase {
         assertEquals(faxStatus, "sent");
     }
 
-    @Test(testName = "Retrieve all Fax Data", groups = {"smoke"})
-    public void retrieveAllFaxData() throws InterruptedException {
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+    @Test(testName = "Retrieve all Fax Data", groups = {"smoke81"})
+    public void retrieveAllFaxData81() throws InterruptedException {
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         Thread.sleep(1000 * 60);

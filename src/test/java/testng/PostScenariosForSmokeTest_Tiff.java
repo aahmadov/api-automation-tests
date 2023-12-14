@@ -16,10 +16,10 @@ import static org.testng.Assert.assertTrue;
 
 public class PostScenariosForSmokeTest_Tiff extends TestBase {
 
-    @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke"})
-    public void sendFaxDataWithRecipientDetails() {
+    @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke81"})
+    public void sendFaxDataWithRecipientDetails81() {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Response response = RestRequestUtils.sendFaxWithRecipent_details(data.get("post_call_Url"),
@@ -59,10 +59,10 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
         assertTrue(resp.contains(faxId));
     }
 
-    @Test(testName = "Send Fax with valid Number and Attachment", groups = {"smoke"})
-    public void sendFaxWithValidNumberAndAttachment() {
+    @Test(testName = "Send Fax with valid Number and Attachment", groups = {"smoke81"})
+    public void sendFaxWithValidNumberAndAttachment81() {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Response response = RestRequestUtils.createFaxSingleNum(data.get("post_call_Url"),
@@ -103,10 +103,10 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
         assertEquals(data.get("faxNumber"), actual);
     }
 
-    @Test(testName = "Send Fax Data without Number (negative scenario)", groups = {"smoke"})
-    public void sendFaxDataWithoutNumber() {
+    @Test(testName = "Send Fax Data without Number (negative scenario)", groups = {"smoke81"})
+    public void sendFaxDataWithoutNumber81() {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Response response = RestRequestUtils.faxWithNoNumber(data.get("post_call_Url"),

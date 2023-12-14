@@ -1,5 +1,5 @@
 {
-  "sendFaxDataWithRecipientDetails": {
+  "sendFaxDataWithRecipientDetails81": {
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
     "Pages": "1",
@@ -7,7 +7,7 @@
     "Recipent_data1": "{ \"FaxNumber\": \"1-555-1212\", \"RcptName\": \"Alice Doherty\" }",
     "expectedStatusCode": "201"
   },
-  "sendFaxWithValidNumberAndAttachment": {
+  "sendFaxWithValidNumberAndAttachment81": {
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
     "Pages": "1",
@@ -15,7 +15,7 @@
     "faxNumber": "1(781)-885-4198",
     "expectedStatusCode": "201"
   },
-  "sendFaxDataWithoutNumber": {
+  "sendFaxDataWithoutNumber81": {
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "",
     "credentials": "faxsending@acme1:softlinx",
@@ -24,20 +24,20 @@
     "expectedStatusCode": "400",
     "expectedErrorMessage": "Empty fax number"
   },
-  "retrieveRecentlyCreatedFax": {
+  "retrieveRecentlyCreatedFax81": {
     "get_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
     "FaxUserId": "?FaxUserId=faxsending",
     "expectedStatusCode": "200",
     "expectedNumber": "(781)-885-4198"
   },
-  "retrieveFaxAndFaxDataById": {
+  "retrieveFaxAndFaxDataById81": {
     "get_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
     "valid_ID": "/9",
     "expectedStatusCode": "200"
   },
-  "retrieveAllFaxData": {
+  "retrieveAllFaxData81": {
     "get_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
     "expectedStatusCode": "200",
@@ -92,8 +92,23 @@
     "pageSize": "2",
     "coverPageEnabled": "false",
     "faxNumFileLoc": "input/numberForTest.txt",
-    "ignoreFail": "true"
+    "ignoreFail": "true",
+
   },
+  "add_1_to_the_beginning_Of_number81_smoke": {
+    "url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentials": "faxsending@acme1:softlinx",
+    "faxUserId": "?FaxUserId=faxsending",
+    "faxNumber": "22222233",
+    "times": "5",
+    "fileType": "pdf",
+    "pageSize": "2",
+    "coverPageEnabled": "false",
+    "faxNumFileLoc": "input/numberForTest.txt",
+    "ignoreFail": "true"
+
+  },
+
   "prepending1_toFaxnumber_withDataBaseSet_Up81": {
     "url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
@@ -172,6 +187,18 @@
     "newInboundParam": "?FaxUserId=receiver",
     "newOutboundParam": "?FaxUserId=faxsending",
     "credentialInbound": "receiver@acme1:softlinx"
+  },
+  "HTML_FaxPageValidation81": {
+    "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1222-222-2222",
+    "Pages": "2",
+    "fileType": "html",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@acme1:softlinx",
+    "inboundFax_url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=faxsending",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "credentialInbound": "faxsending@acme1:softlinx"
   },
   "inboundFaxPageValidation20_81": {
     "put_call_Url": "http://10.250.1.81:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
@@ -267,7 +294,7 @@
     "get_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes"
 
   },
-  "GetListOfAreaCode": {
+  "GetListOfAreaCode81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers/area_codes/US/MA/Boston",
     "statusCode": 200,
     "area_code": 774
@@ -278,7 +305,7 @@
     "area_code": 774
 
   },
-  "GetListOfAreaCodeofspecificCitywithState": {
+  "GetListOfAreaCodeofspecificCitywithState81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers/cities/US/MA",
     "statusCode": 200
   },
@@ -287,7 +314,7 @@
     "get_call_Url": "https://api.rpxtest.com/api/numbers/cities/US/MA",
     "statusCode": 200
   },
-  "GetListOfAreaCodeofspecificState": {
+  "GetListOfAreaCodeofspecificState81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers/area_codes/US/Tx",
     "statusCode": 200
   },
@@ -295,7 +322,7 @@
     "get_call_Url": "https://api.rpxtest.com/api/numbers/area_codes/US/Tx",
     "statusCode": 200
   },
-  "GetListOfUsersWithName": {
+  "GetListOfUsersWithName81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers/users",
     "statusCode": 200
   },
@@ -303,7 +330,7 @@
     "get_call_Url": "https://api.rpxtest.com/api/numbers/users",
     "statusCode": 200
   },
-  "GetListOfDepartments": {
+  "GetListOfDepartments81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers/departments",
     "statusCode": 200
   },
@@ -311,7 +338,7 @@
     "get_call_Url": "https://api.rpxtest.com/api/numbers/departments",
     "statusCode": 200
   },
-  "GetListOfcityCodesOrProvinces": {
+  "GetListOfcityCodesOrProvinces81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers/regions/CA",
     "statusCode": 200
   },
@@ -319,7 +346,7 @@
     "get_call_Url": "https://api.rpxtest.com/api/numbers/regions/CA",
     "statusCode": 200
   },
-  "GetListOfAllFaxNumberOwnedOrg": {
+  "GetListOfAllFaxNumberOwnedOrg81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers",
     "statusCode": 200
   },
@@ -327,7 +354,7 @@
     "get_call_Url": "https://api.rpxtest.com/api/numbers",
     "statusCode": 200
   },
-  "GetDetailsAboutRequest": {
+  "GetDetailsAboutRequest81": {
     "get_call_Url": "https://api.rpxtest.com/api/numbers/requests/add/1236",
     "statusCode": 200
   },
@@ -336,23 +363,23 @@
     "statusCode": 200
   },
   "CreateLOA": {
-    "post_call_Url": "https://api.rpxtest.com/api/numbers/LOA/create",
+    "post_call_Url81": "https://api.rpxtest.com/api/numbers/LOA/create",
     "statusCode": 200,
     "body": "{\"company\":\"Softlinx\",\r\n\"address\":\"3commonwealth\",\r\n\"city\":\"Boston\",\r\n\"region_code\":\"MA\",\r\n\"zip_code\":\"02703\",\r\n\"btn\":\"613\",\r\n\"carrier_name\":\"Testcompany\",\r\n\"carrier_account_number\":\"123456790\",\r\n\"desired_due_date\":\"2023-02-23\",\r\n\"number_to_port\":\"17818854298\",\r\n\"name\":\"MapleleafEnterprisesLLC\",\r\n\"title\":\"Business\"}"
   },
-  "addNewNumberTollFree": {
+  "addNewNumberTollFree81": {
     "post_call_Url": "https://api.rpxtest.com/api/numbers/add-new-number-request/toll-free",
     "statusCode": 201,
     "body": "{\n \"country_code\": \"US\",\n \"department_name\":\"Engineering\",\n \"assign_to_user\": \"JDoe\",\n \"fax_number\":\"15557829913\",\n \"notify_email\": [\n\"auto@softlinx.com\"\n],\n\"comment\": \"Process ASAP.\",\n\"forward_from\":\"44566667102\"\n}"
   },
-  "addPortRequest": {
+  "addPortRequest81": {
     "post_call_Url": "https://api.rpxtest.com/api/numbers/add-port-request",
     "Pages": "3",
     "fileType": "pdf",
     "statusCode": 201,
     "data": "{\"country_code\":\"US\",\n\"department_name\":\"Engineering\",\n\"assign_to_user\":\"jdoe\",\n\"notify_email\":[\n\"admin@acme.com\"\n],\n\"comment\":\"hello\",\n\"number_to_port\":\"\",\n\"toll_free\":false}"
   },
-  "removeNumberRequest": {
+  "removeNumberRequest81": {
     "post_call_Url": "https://api.rpxtest.com/api/numbers/remove-number-request/release",
     "statusCode": 201,
     "body": "{\"fax_number\": \"15555555567\",\n  \"notify_email\": \"user@acme.com\",\n  \"notify_email2\": \"admin@acme.com\",\n  \"comment\": \"Please process ASAP.\"}"
@@ -476,11 +503,6 @@
     "get_call_Url": "http://10.250.1.66:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentialOutbound2": "faxsending@acme2:softlinx",
     "filePath": "\\\\10.250.1.180\\qa\\66\\convertq\\archive\\"
-
-
-
-
-
 
   },
   "sendFaxDataWithTiff_Copy": {
