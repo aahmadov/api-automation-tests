@@ -138,7 +138,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                 .replace("{contentType}", data.get("contentType"));
     }
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke813"})
+            groups = {"smoke81"})
     public void soapFaxStatusAndPageNumberValidationFromInbound81() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);

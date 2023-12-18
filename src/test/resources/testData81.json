@@ -45,7 +45,7 @@
 
   },
   "sendMailToFax_81": {
-    "to": "1222222222@auto1.rpxqa.com",
+    "to": "13333333333@auto3.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "pageSize": "3",
@@ -92,7 +92,7 @@
     "pageSize": "2",
     "coverPageEnabled": "false",
     "faxNumFileLoc": "input/numberForTest.txt",
-    "ignoreFail": "true",
+    "ignoreFail": "true"
 
   },
   "add_1_to_the_beginning_Of_number81_smoke": {
@@ -481,7 +481,7 @@
     "credentialOutbound": "faxsending@acme1:softlinx",
     "get_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentialOutbound2": "faxsending@acme1:softlinx",
-    "filePath": "\\\\10.250.1.180\\qa\\81\\convertq\\archive\\"
+    "filePath": "\\\\10.250.1.180\\qa\\81\\FaxServer\\convertq\\archive"
   },
   "sendFaxDataWithTiff_81": {
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
