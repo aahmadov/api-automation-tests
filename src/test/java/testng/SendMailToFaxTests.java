@@ -134,9 +134,7 @@ public class SendMailToFaxTests extends TestBase {
         }
     }
 
-
-
-    @Test(testName = "Send mail to Fax", groups = {"Regression81Fail"})
+    @Test(testName = "Send mail to Fax", groups = {"Regression81"})
     void sendMailToFax_81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -158,7 +156,7 @@ public class SendMailToFaxTests extends TestBase {
             } else {
                 //If FaxNumber is blank, get the Fax number from file randomly and generate 'to' address
                 faxNumber = faxNumbers.get(ThreadLocalRandom.current().nextInt(faxNumbers.size()));
-                toEmail = faxNumber + "@" + data.get("to"); // result: 1234567891@auto1.rpxqa.com
+                toEmail = faxNumber + "@" + data.get("to"); // result: 1234567891@auto3.rpxqa.com
             }
 
             //Read the subject string and add the FaxNumber into the string

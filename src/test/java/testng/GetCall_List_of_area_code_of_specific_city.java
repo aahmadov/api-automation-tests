@@ -14,10 +14,10 @@ import static org.junit.Assert.assertTrue;
 
 public class GetCall_List_of_area_code_of_specific_city extends TestBase {
 
-    @Test(testName = "List of Area codes for specific city and province", groups = {"smoke"})
-    void GetListOfAreaCode() throws Exception {
+    @Test(testName = "List of Area codes for specific city and province", groups = {"smokeAPIPortal"})
+    void GetListOfAreaCode81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         String responseElement = data.get("area_code");
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
@@ -60,10 +60,10 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
     }
 
 
-    @Test(testName = "List of city and province of specific State", groups = {"smoke"})
-    void GetListOfAreaCodeofspecificCitywithState() throws Exception {
+    @Test(testName = "List of city and province of specific State", groups = {"smokeAPIPortal"})
+    void GetListOfAreaCodeofspecificCitywithState81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -86,10 +86,10 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of areaCodes of specific State", groups = {"smoke"})
-    void GetListOfAreaCodeofspecificState() throws Exception {
+    @Test(testName = "List of areaCodes of specific State", groups = {"smokeAPIPortal"})
+    void GetListOfAreaCodeofspecificState81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -112,10 +112,10 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of users with no FaxNumbers", groups = {"smoke"})
-    void GetListOfUsersWithName() throws Exception {
+    @Test(testName = "List of users with no FaxNumbers", groups = {"smokeAPIPortal"})
+    void GetListOfUsersWithName81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -138,10 +138,10 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of Departments", groups = {"smoke"})
-    void GetListOfDepartments() throws Exception {
+    @Test(testName = "List of Departments", groups = {"smokeAPIPortal"})
+    void GetListOfDepartments81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -164,10 +164,10 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of states codes or provinces ", groups = {"smoke"})
-    void GetListOfcityCodesOrProvinces() throws Exception {
+    @Test(testName = "List of states codes or provinces ", groups = {"smokeAPIPortal"})
+    void GetListOfcityCodesOrProvinces81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -193,10 +193,10 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
 
     }
 
-    @Test(testName = "List of All FaxNumbers owned by Org ", groups = {"smoke"})
-    void GetListOfAllFaxNumberOwnedOrg() throws Exception {
+    @Test(testName = "List of All FaxNumbers owned by Org ", groups = {"smokeAPIPortal"})
+    void GetListOfAllFaxNumberOwnedOrg81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -222,10 +222,10 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
     }
 
 
-    @Test(testName = "Gets details about request to add a fax # ", groups = {"smoke"})
-    void GetDetailsAboutRequest() throws Exception {
+    @Test(testName = "Gets details about request to add a fax # ", groups = {"smokeAPIPortal"})
+    void GetDetailsAboutRequest81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseGetCall = RestRequestUtils.getStateCodes(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -248,12 +248,12 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of city and province of specific State with new URL", groups = {"smoke"})
-    void GetListOfAreaCodeofspecificCitywithState2() throws Exception {
+    @Test(testName = "List of city and province of specific State with new URL", groups = {"smokeAPIPortal"})
+    void GetListOfAreaCodeofspecificCitywithState2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -261,13 +261,13 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of Area codes for specific city and province with new URL", groups = {"smoke"})
-    void GetListOfAreaCode2() throws Exception {
+    @Test(testName = "List of Area codes for specific city and province with new URL", groups = {"smokeAPIPortal"})
+    void GetListOfAreaCode2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         String responseElement = data.get("area_code");
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -283,12 +283,12 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         System.out.println(AreaCodeArrayList);
         assertTrue(responseElement+" area code entered not exist on the mentioned city",AreaCodeArrayList.contains(responseElement));
     }
-    @Test(testName = "List of areaCodes of specific State with new URL", groups = {"smoke"})
-    void GetListOfAreaCodeofspecificState2() throws Exception {
+    @Test(testName = "List of areaCodes of specific State with new URL", groups = {"smokeAPIPortal"})
+    void GetListOfAreaCodeofspecificState2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -296,12 +296,12 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of users with no FaxNumbers with new URL", groups = {"smoke"})
-    void GetListOfUsersWithName2() throws Exception {
+    @Test(testName = "List of users with no FaxNumbers with new URL", groups = {"smokeAPIPortal"})
+    void GetListOfUsersWithName2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -309,12 +309,12 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of Departments with new URl", groups = {"smoke"})
-    void GetListOfDepartments2() throws Exception {
+    @Test(testName = "List of Departments with new URl", groups = {"smokeAPIPortal"})
+    void GetListOfDepartments2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -322,12 +322,12 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of All FaxNumbers owned by Org with new URL", groups = {"smoke"})
-    void GetListOfAllFaxNumberOwnedOrg2() throws Exception {
+    @Test(testName = "List of All FaxNumbers owned by Org with new URL", groups = {"smokeAPIPortal"})
+    void GetListOfAllFaxNumberOwnedOrg2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -335,12 +335,12 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of states codes or provinces with New URL", groups = {"smoke"})
-    void GetListOfcityCodesOrProvinces2() throws Exception {
+    @Test(testName = "List of states codes or provinces with New URL", groups = {"smokeAPIPortal"})
+    void GetListOfcityCodesOrProvinces2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
@@ -349,12 +349,12 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         System.out.println(responseGetCall.asPrettyString());
 
     }
-    @Test(testName = "Request to add FaxId with New URL", groups = {"smoke"})
-    void GetDetailsAboutRequest2() throws Exception {
+    @Test(testName = "Request to add FaxId with New URL", groups = {"smokeAPIPortal1"})
+    void GetDetailsAboutRequest2_81() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082(data.get("get_call_Url"));
+        Response responseGetCall = RestRequestUtils.getStateCodesNewURL8082_81(data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("get_call_Url"));
         System.out.println("------------------------------------------------------------------------");

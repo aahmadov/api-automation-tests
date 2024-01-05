@@ -76,10 +76,33 @@ public class RestRequestUtils {
         return response = request.contentType("application/json").when().get(url);
 
     }
+    public static Response getStateCodes81(String url) {
+
+        RequestSpecification request = RestAssured.given();
+        String credentilas = ConfigReader.getProperty("Token");
+        // byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
+        // String encodedCreadentialForAdmin = new String(encodedCredentials);
+
+        request.header("Authorization " ,"Bearer "+ credentilas);
+        return response = request.contentType("application/json").when().get(url);
+
+    }
+
+
+
+
     public static Response getStateCodesNewURL8082(String url) {
 
         RequestSpecification request = RestAssured.given();
         String credentilas = ConfigReader.getProperty("Token2");
+        request.header("Authorization " ,"Bearer "+ credentilas);
+        return response = request.contentType("application/json").when().get(url);
+    }
+
+    public static Response getStateCodesNewURL8082_81(String url) {
+
+        RequestSpecification request = RestAssured.given();
+        String credentilas = ConfigReader.getProperty("Token81");
         request.header("Authorization " ,"Bearer "+ credentilas);
         return response = request.contentType("application/json").when().get(url);
     }
@@ -646,10 +669,6 @@ public class RestRequestUtils {
                 .post(url);
     }
 
-
-
-
-
         public static Response PostCalltoCreateLOA(String url, String body) {
             RequestSpecification request = RestAssured.given();
             String credentials = ConfigReader.getProperty("Token");
@@ -661,9 +680,31 @@ public class RestRequestUtils {
                     .post(url).andReturn();
         }
 
+    public static Response PostCalltoCreateLOA81(String url, String body) {
+        RequestSpecification request = RestAssured.given();
+        String credentials = ConfigReader.getProperty("Token81");
+        request.header("Authorization ", "Bearer " + credentials);
+        return response = request
+                .contentType("application/json")
+                .body(body)
+                .when()
+                .post(url).andReturn();
+    }
+
     public static Response PostCalltoCreateLOAApp_complete_scenario(String url, String body) {
         RequestSpecification request = RestAssured.given();
         String credentials = ConfigReader.getProperty("Token2");
+        request.header("Authorization ", "Bearer " + credentials);
+        return response = request
+                .contentType("application/json")
+                .body(body)
+                .when()
+                .post(url).andReturn();
+    }
+
+    public static Response PostCalltoCreateLOAApp_complete_scenario_81(String url, String body) {
+        RequestSpecification request = RestAssured.given();
+        String credentials = ConfigReader.getProperty("Token81");
         request.header("Authorization ", "Bearer " + credentials);
         return response = request
                 .contentType("application/json")
@@ -692,6 +733,18 @@ public class RestRequestUtils {
                         .body(body)
                         .when()
                         .post(url).andReturn();
+
+    }
+
+    public static Response PostCalltoCreateLOA2_81(String url, String body) {
+        RequestSpecification request = RestAssured.given();
+        String credentials = ConfigReader.getProperty("Token81");
+        request.header("Authorization ", "Bearer " + credentials);
+        return response = request
+                .contentType("application/json")
+                .body(body)
+                .when()
+                .post(url).andReturn();
 
     }
     public static Response PostCalltoCreateLOA2_147(String url, String body) {

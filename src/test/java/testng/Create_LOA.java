@@ -23,10 +23,10 @@ import static org.junit.Assert.assertEquals;
 
 public class Create_LOA extends TestBase {
 
-    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"Regression"})
-    void CreateLOA() throws Exception  {
+    @Test(testName = "Creates a PDF letter of Authorization ", groups = {"RegressionAPIPortal"})
+    void CreateLOA81() throws Exception  {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA(data.get("post_call_Url"),data.get("body"));
         byte[] fileContents = responseSubmitFaxLong.getBody().asByteArray();
@@ -50,11 +50,11 @@ public class Create_LOA extends TestBase {
         System.out.println("Page count is: "+count);
     }
 
-    @Test(testName="add_new_number_request/tollFree",groups = {"Regression"})
-    void addNewNumberTollFree() throws InterruptedException {
+    @Test(testName="add_new_number_request/tollFree",groups = {"RegressionAPIPortal"})
+    void addNewNumberTollFree81() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA(data.get("post_call_Url"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
@@ -66,10 +66,10 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="Creates a request to port-in a fax number",groups = {"Regression"})
-    void addPortRequest() throws InterruptedException, JsonProcessingException {
+    @Test(testName="Creates a request to port-in a fax number",groups = {"RegressionAPIPortal"})
+    void addPortRequest81() throws InterruptedException, JsonProcessingException {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String number2  = FileReader.randomFaxNumberEmailToFax();
@@ -140,12 +140,12 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*5);
         System.out.println(responseSubmitFaxLong.asPrettyString());
 }
-    @Test(testName = "Creates a PDF letter of Authorization with new URL ", groups = {"Regression"})
-    void CreateLOA2() throws Exception  {
+    @Test(testName = "Creates a PDF letter of Authorization with new URL ", groups = {"RegressionAPIPortal"})
+    void CreateLOA2_81() throws Exception  {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url"),data.get("body"));
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2_81(data.get("post_call_Url"),data.get("body"));
         byte[] fileContents = responseSubmitFaxLong.getBody().asByteArray();
         File outputFile = new File("C:\\Users\\Administrator\\Downloads\\test.pdf");
         try (OutputStream outputStream = Files.newOutputStream(outputFile.toPath())) {
@@ -192,13 +192,13 @@ public class Create_LOA extends TestBase {
         int count = pdfUtil.getPageCount(PdfLocation);
         System.out.println("Page count is: "+count);
     }
-    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression"})
-    void addNewNumberTollFree2() throws InterruptedException {
+    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"RegressionAPIPortal"})
+    void addNewNumberTollFree2_81() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url1"),data.get("body"));
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2_81(data.get("post_call_Url1"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url1"));
         System.out.println( data.get("body"));
@@ -224,13 +224,13 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
-    void addNewNumberNoneTollFree2() throws InterruptedException {
+    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"RegressionAPIPortal"})
+    void addNewNumberNoneTollFree2_81() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2(data.get("post_call_Url2"),data.get("body"));
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2_81(data.get("post_call_Url2"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url2"));
         System.out.println( data.get("body"));
@@ -256,10 +256,10 @@ public class Create_LOA extends TestBase {
         Thread.sleep(1000*10);
         System.out.println(responseSubmitFaxLong.asPrettyString());
     }
-    @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"Regression"})
-    void addPortRequest2() throws InterruptedException, SQLException, JsonProcessingException {
+    @Test(testName="Creates a request to port-in a fax number with new URL",groups = {"RegressionAPIPortal"})
+    void addPortRequest2_81() throws InterruptedException, SQLException, JsonProcessingException {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String number2  = FileReader.randomFaxNumberEmailToFax();
@@ -270,7 +270,7 @@ public class Create_LOA extends TestBase {
 
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
 
-        String credentials = ConfigReader.getProperty("Token2");
+        String credentials = ConfigReader.getProperty("Token81");
 
         Response responseSubmitFaxLong2 = RestAssured.given()
                 .header("Authorization ", "Bearer " + credentials)
@@ -317,13 +317,13 @@ public class Create_LOA extends TestBase {
         System.out.println(responseSubmitFaxLong.asPrettyString());
 
     }
-    @Test(priority = 1,testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
-    void addNewNumberNonTollFreeWithUpdatedApp_Complete() throws InterruptedException, SQLException {
+    @Test(priority = 1,testName="add_new_number_request/None_tollFree with new URL",groups = {"RegressionAPIPortal"})
+    void addNewNumberNonTollFreeWithUpdatedApp_Complete81() throws InterruptedException, SQLException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario(data.get("post_call_Url"),data.get("body"));
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario_81(data.get("post_call_Url"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));
         System.out.println( data.get("body"));
@@ -385,11 +385,11 @@ public class Create_LOA extends TestBase {
 
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
-    void addNewNumberNonTollFreeWithUpdatedApp_inProgress() throws InterruptedException, SQLException, JsonProcessingException {
+    @Test(testName="add_new_number_request/None_tollFree with new URL",groups = {"RegressionAPIPortal"})
+    void addNewNumberNonTollFreeWithUpdatedApp_inProgress81() throws InterruptedException, SQLException, JsonProcessingException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String number2  = FileReader.randomFaxNumberEmailToFax();
@@ -398,7 +398,7 @@ public class Create_LOA extends TestBase {
         ((ObjectNode) jsonNode).put("forward_from", number2);
         String modifiedJsonData = objectMapper.writeValueAsString(jsonNode);
 
-        String credentials = ConfigReader.getProperty("Token2");
+        String credentials = ConfigReader.getProperty("Token81");
 
          Response responseSubmitFaxLong = RestAssured.given()
                  .header("Authorization ", "Bearer " + credentials)
@@ -487,13 +487,13 @@ public class Create_LOA extends TestBase {
     }
 
 
-    @Test(priority = 1,testName="add_new_number_request/None_tollFree with new URL",groups = {"Regression"})
-    void addNewNumberNonTollFreeWithUpdatedApp_onHold() throws InterruptedException, SQLException {
+    @Test(priority = 1,testName="add_new_number_request/None_tollFree with new URL",groups = {"RegressionAPIPortal"})
+    void addNewNumberNonTollFreeWithUpdatedApp_onHold81() throws InterruptedException, SQLException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario(data.get("post_call_Url"), data.get("body"));
+        Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario_81(data.get("post_call_Url"), data.get("body"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));
         System.out.println(data.get("body"));
@@ -570,11 +570,11 @@ public class Create_LOA extends TestBase {
 
 
 
-    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"Regression"})
-    void addNewNumberTollFreeReleasedStatus() throws InterruptedException, JsonProcessingException, SQLException {
+    @Test(testName="add_new_number_request/tollFree with new URL",groups = {"RegressionAPIPortal"})
+    void addNewNumberTollFreeReleasedStatus81() throws InterruptedException, JsonProcessingException, SQLException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String number2  = FileReader.randomFaxNumberEmailToFax();
@@ -583,7 +583,7 @@ public class Create_LOA extends TestBase {
         ((ObjectNode) jsonNode).put("fax_number", number2);
         String modifiedJsonData = objectMapper.writeValueAsString(jsonNode);
 
-        String credentials = ConfigReader.getProperty("Token2");
+        String credentials = ConfigReader.getProperty("Token81");
 
         Response responseSubmitFaxLong2 = RestAssured.given()
                 .header("Authorization ", "Bearer " + credentials)
