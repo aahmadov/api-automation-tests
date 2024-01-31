@@ -110,7 +110,7 @@ public class Conversion_archive extends TestBase {
     }
 
 
-    @Test(priority = 1, testName = "Conversion archive per realm and per realm/user", groups = {"Regression81"})
+    @Test(priority = 1, testName = "Conversion archive per realm and per realm/user", groups = {"Regression8114"})
     void conversion_archive_per_realm_and_per_realm_user_66() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);

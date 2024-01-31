@@ -42,15 +42,17 @@
     "credentials": "faxsending@acme1:softlinx",
     "expectedStatusCode": "200",
     "faxUserId": "faxsending"
-
   },
   "sendMailToFax_81": {
-    "to": "13333333333@auto3.rpxqa.com",
+    "to": "12223434545@auto3.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
-    "pageSize": "3",
-    "subject": "receivedSuccesSubject",
-    "sendBody": "true"
+    "Pages": "2",
+    "fileType": "docx",
+    "withSubject":true,
+    "withAttachment":true,
+    "withBody":true,
+    "withHtmlHeader":false
   },
   "faxStatusAndPageNumberValidationFromInbound2": {
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
@@ -127,7 +129,7 @@
 
   },
   "putScenarioForRegistrySettings_81": {
-    "put_call_Url": "http://10.250.1.81:8081/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=10",
+    "put_call_Url": "http://10.250.1.81:8585/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=10",
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "11111111111",
     "updatedFaxNumber": "11111111112",
@@ -201,7 +203,7 @@
     "credentialInbound": "faxsending@acme1:softlinx"
   },
   "inboundFaxPageValidation20_81": {
-    "put_call_Url": "http://10.250.1.81:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
+    "put_call_Url": "http://10.250.1.81:8585/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "1222-222-2222",
     "statusCode": 201,
@@ -473,8 +475,8 @@
 
   },
   "conversion_archive_per_realm_and_per_realm_user_81": {
-    "put_call_Url1": "http://10.250.1.81:8081/api/Registry?app=faxserver&path=\\convertd&key=ArchiveRealm&value=acme1",
-    "put_call_Url2": "http://10.250.1.81:8081/api/Registry?app=faxserver&path=\\convertd&key=ArchiveUser&value=faxsending",
+    "put_call_Url1": "http://10.250.1.81:8585/api/Registry?app=faxserver&path=\\convertd&key=ArchiveRealm&value=acme1",
+    "put_call_Url2": "http://10.250.1.81:8585/api/Registry?app=faxserver&path=\\convertd&key=ArchiveUser&value=faxsending",
     "post_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "1(222)222-2222",
     "statusCode": 201,

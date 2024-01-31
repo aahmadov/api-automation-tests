@@ -170,11 +170,12 @@ public class DataBaseUtility {
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
     }
-    public static void executeSQLUpdateRecvD81(final String query) throws SQLException {
+    public static String executeSQLUpdateRecvD81(final String query) throws SQLException {
         openConnection();
         statement = connection81.createStatement();
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
+        return query;
     }
 
     public static void closeConnection() {

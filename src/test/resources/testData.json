@@ -89,7 +89,7 @@
     "faxUserId": "faxsending"
   },
   "sendMailToFax": {
-    "to": "1222222222@auto1.rpxqa.com",
+    "to": "13333333333@auto1.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "pageSize": "3",

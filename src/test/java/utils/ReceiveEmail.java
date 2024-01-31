@@ -53,7 +53,7 @@ public class ReceiveEmail {
 			SearchTerm from = new FromTerm(new InternetAddress(mailFrom)); // from email filter (no-reply@rpxqa.com)
 			
 			SearchTerm unreadEmails = new FlagTerm(new Flags(Flags.Flag.SEEN), false); // only unread emails filter
-			SearchTerm subject = new SubjectTerm(subjectFilter); //filter by subject string
+			//SearchTerm subject = new SubjectTerm(subjectFilter); //filter by subject string
 			SearchTerm todayDate = new ReceivedDateTerm(ComparisonTerm.EQ,
 					DateUtils.truncate(new java.util.Date(), java.util.Calendar.DATE)); // filter the email received email
 			SearchTerm condition = new AndTerm(new SearchTerm[] { from,todayDate,unreadEmails});
