@@ -54,7 +54,7 @@ public class EmailToFaxSteps {
 
             Date startTime = Calendar.getInstance().getTime();
 
-            SendEmail.sendFromGMail(to, bodyMessage, file, Boolean.parseBoolean(data.get("sendBody")));
+          SendEmail.sendFromGMail(to, bodyMessage, file, Boolean.parseBoolean(data.get("sendBody")));
             Boolean result = ReceiveEmail.receiveEmail(from, subject);
             //Boolean result = true;
           

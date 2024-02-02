@@ -76,14 +76,13 @@
     "queryReceiveFaxSoapAction": "http://www.softlinx.com/wsapi/op=QueryReceiveFax/ver=79",
     "Pages": "2",
     "fileType": "pdf",
-    "coverPageEnabled": true,
+    "coverPageEnabled":true,
     "credentialNewOutboundLogin": "faxsending@acme1",
     "credentialNewOutboundPassword": "softlinx",
     "inboundStatusCode": 200,
     "credentialNewInboundLogin": "faxsending@acme1",
     "credentialNewInboundPassword": "softlinx"
   },
-
   "add_1_to_the_beginning_Of_number81": {
     "url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
@@ -95,7 +94,6 @@
     "coverPageEnabled": "true",
     "faxNumFileLoc": "input/numberForTest.txt",
     "ignoreFail": "true"
-
   },
   "add_1_to_the_beginning_Of_number81_smoke": {
     "url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
@@ -110,7 +108,6 @@
     "ignoreFail": "true"
 
   },
-
   "prepending1_toFaxnumber_withDataBaseSet_Up81": {
     "url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
@@ -149,8 +146,8 @@
     "faxNumFileLoc": "input/Faxnumber.txt",
     "times": 5,
     "pageSize": 2,
-    "coverPageEnabled": true,
-    "ignoreFail": true,
+    "coverPageEnabled":true,
+    "ignoreFail":true,
     "get_call_Url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "credentialInbound": "faxsending@acme1:softlinx",
     "credentialOutbound": "faxsending@acme1:softlinx"
@@ -171,8 +168,8 @@
     "faxNumFileLoc": "input/Faxnumber.txt",
     "times": 5,
     "pageSize": 2,
-    "coverPageEnabled": true,
-    "ignoreFail": true,
+    "coverPageEnabled":true,
+    "ignoreFail":true,
     "credentialOutbound": "faxsending@acme1:softlinx"
   },
   "submitFaxToManipulateInboundOutboundPages_81": {
@@ -182,8 +179,8 @@
     "faxNumFileLoc": "input/Faxnumber.txt",
     "times": 5,
     "pageSize": 2,
-    "coverPageEnabled": true,
-    "ignoreFail": true,
+    "coverPageEnabled":true,
+    "ignoreFail":true,
     "credentialOutbound": "faxsending@acme1:softlinx",
     "inboundFax_url": "http://10.250.1.81:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "newInboundParam": "?FaxUserId=receiver",

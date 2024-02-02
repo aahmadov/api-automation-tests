@@ -60,7 +60,7 @@ public class Tests {
 
             Date startTime = Calendar.getInstance().getTime();
 
-            SendEmail.sendFromGMail(toEmail, bodyMessage, file, sendBody);
+//            SendEmail.sendFromGMail(toEmail, bodyMessage, file, sendBody);
             Boolean result = ReceiveEmail.receiveEmail(from, emailSubject);
 //            Boolean result = true;
 

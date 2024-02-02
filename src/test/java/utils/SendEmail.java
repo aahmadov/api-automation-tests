@@ -69,11 +69,16 @@ public class SendEmail {
 			e.printStackTrace();
 		}
 	}
-	public static void sendFromGMail_81(String to, String body, File attachment,boolean withSubject, boolean withAttachment,boolean withBody, boolean withHtmlHeader) {
+	public static void sendFromGMail_81(String to81, String body81, File attachment81,
+										boolean withHtmlHeader,
+										boolean withBody,
+										boolean withSubject,
+										boolean withAttachment
+										) {
 		Properties prop = new Properties();
 		prop.put("mail.smtp.host", "10.250.1.87");
 		prop.put("mail.smtp.port", "25");
-		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.auth",true);
 		prop.put("mail.smtp.socketFactory.port", "25");
 		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 
@@ -87,26 +92,32 @@ public class SendEmail {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(USER_NAME));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to81));
 
              //Subjects
-			if (withSubject) {
-				message.setSubject(SUBJECT);
-			}
+//			if (withSubject ) {
+//				message.setSubject(SUBJECT);
+//			}
 
 			Multipart multipart = new MimeMultipart();
 
              //Attachments
-			if (withAttachment && attachment != null) {
+			if (withAttachment && attachment81 != null) {
 				MimeBodyPart attachmentPart = new MimeBodyPart();
-				attachmentPart.attachFile(attachment);
+				attachmentPart.attachFile(attachment81);
 				multipart.addBodyPart(attachmentPart);
 			}
              //Text Body
 			if (withBody) {
 				MimeBodyPart bodyPart = new MimeBodyPart();
-				bodyPart.setText(body);
+				bodyPart.setText(body81);
 				multipart.addBodyPart(bodyPart);
+			}
+
+			if (withSubject) {
+				MimeBodyPart subjectPart = new MimeBodyPart();
+				subjectPart.setText(SUBJECT);
+				multipart.addBodyPart(subjectPart);
 			}
 
 			MimeBodyPart htmlBody = new MimeBodyPart();
