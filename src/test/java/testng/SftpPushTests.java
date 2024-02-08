@@ -311,10 +311,6 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-
-
-
-
     @Test(priority = 1, testName = "SFTP - Test Simple Authentication", groups = {"Regression81"})
     void testWithSimpleAuthenticationAbbas81() throws Exception {
         System.out.println("Test case name: " + testName);

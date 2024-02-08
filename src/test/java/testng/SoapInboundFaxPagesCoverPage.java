@@ -138,7 +138,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                 .replace("{contentType}", data.get("contentType"));
     }
     @Test(testName = "SOAP - Dynamic scenario for fax status and page number validation from inbound",
-            groups = {"smoke81"})
+            groups = {"Regression81"})
     public void soapFaxStatusAndPageNumberValidationFromInbound81() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -310,7 +310,76 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                 .replace("{faxHeader}", data.get("faxHeader"))
                 .replace("{reserved1}", data.get("reserved1"))
                 .replace("{requestOrigin}", data.get("requestOrigin"));
-               //.replace("{coverPageEnabled}", data.get("coverPageEnabled"))
+                //.replace("{coverPageEnabled}", data.get("coverPageEnabled"));
                // .replace("{contentType}", data.get("contentType"));
     }
+
+    @Test(testName = "SOAP_Have multiple IMGs configured for the scheduler ", groups = {"Regression81"})
+    public void soapRequestForIMG81() throws InterruptedException, IOException, SQLException {
+        System.out.println("Test case name: " + testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
+        assert data != null;
+
+        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+        String tsi = FileReader.randomTsi();
+        String[] outboundCred = data.get("credentialNewOutboundLogin").split("@");
+        //add more values to the data to replace the values from the xml file
+        data.put("login", outboundCred[0]);
+        data.put("password", data.get("credentialNewOutboundPassword"));
+        data.put("realm", outboundCred[1]);
+        data.put("tsi", tsi);
+        data.put("fileName", FileReader.getFileName(file.getAbsolutePath()));
+        data.put("attachment", FileReader.fileToByteString(file.getAbsolutePath()));
+        data.put("contentType", FileReader.getContentTypeForFile(file.getAbsolutePath()));
+
+        //replace the values in the xml files from the testData (data)
+        String sendFaxBody = replaceValues2_81(data, String.format("soapRequestBody/soapFaxStatusAndPageNumberValidationFromInbound_SendFax2.xml", testName));
+
+        Response sendFaxWithCoverPage = SoapRequestUtils.soapInboundFaxWithCoverPage81(data.get("post_call_Url_81"),
+                sendFaxBody, String.format("%s:%s", data.get("login"), data.get("password")), data.get(("sendFaxSoapAction")));
+
+        int code = sendFaxWithCoverPage.getStatusCode();
+        System.out.println("***** the expected status code " + "***" + data.get("inboundStatusCode") + "***"
+                + " send Fax statusCode lineUp with actual " + "***" + code + "***");
+        assertEquals(code, Integer.parseInt(data.get("inboundStatusCode")));
+        String jsonData = XML.toJSONObject(sendFaxWithCoverPage.asPrettyString()).toString();
+
+        String faxId = ((JSONArray) JsonPath.read(jsonData, "$..FaxInfo.FaxId")).get(0).toString();
+        //data.put("faxId", faxId);
+        System.out.println("******** faxId of post call  " + "**" + faxId + "**");
+        System.out.println("******** " + (data.get("post_call_Url")));
+        System.out.println("******** " + data.get("faxNumber"));
+        System.out.println("******** " + file);
+
+        Thread.sleep(1000*60);
+        String queryReserved1_3 =String.format("select JobId,HostName ,reserved1,Reserved3 from auto1.sendstatus order by JobId desc limit 1;");
+
+        DataBaseUtility.executeSQLQueryAuto181(queryReserved1_3);
+        // System.out.println(queryReserved1_3);
+
+
+    }
+
+    private String replaceValues2_81(Map<String, String> data, String filePath) throws IOException {
+        String content = IOUtils.toString(Files.newInputStream(Paths.get(ResourceUtils.getResourceFilePathAbsPath(filePath))),
+                StandardCharsets.UTF_8);
+        return content.replace("{faxNumber}", data.get("faxNumber"))
+                .replace("{tsi}", data.get("tsi"))
+                .replace("{login}", data.get("login"))
+                .replace("{password}", data.get("password"))
+                .replace("{realm}", data.get("realm"))
+                .replace("{fileName}", data.get("fileName"))
+                .replace("{reservedWC}", data.get("reservedWC"))
+                //.replace("{attachment}", data.get("attachment"))
+                .replace("{passwordSecurity}", data.get("passwordSecurity"))
+                .replace("{attachmentContent}", data.get("attachment"))
+                .replace("{faxHeader}", data.get("faxHeader"))
+                .replace("{reserved1}", data.get("reserved1"))
+                .replace("{requestOrigin}", data.get("requestOrigin"));
+        //.replace("{coverPageEnabled}", data.get("coverPageEnabled"))
+        // .replace("{contentType}", data.get("contentType"));
+    }
+
+
+
 }
