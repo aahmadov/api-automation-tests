@@ -203,7 +203,7 @@ public class InboundFaxPageValidation20Test extends TestBase {
 
     }
 
-    @Test(testName = "validates the number of inbound Fax pages with registry setting (\"20 pages\")", groups = {"Regression81-12"})
+    @Test(testName = "validates the number of inbound Fax pages with registry setting (\"20 pages\")", groups = {"Regression81"})
     public void inboundFaxPageValidation20_81() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
