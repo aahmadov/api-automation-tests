@@ -29,6 +29,25 @@ public class Second_RestRequestUtils {
 
     }
 
+    public static Response inbound_FaxwithCoverPageImage(String url, File file, String number) {
+
+        RequestSpecification request = RestAssured.given();
+        String credentilas = ConfigReader.getProperty("credentialNewOutbound");
+        byte[] encodedCredentials = Base64.encodeBase64(credentilas.getBytes());
+        String encodedCreadentialForAcme = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCreadentialForAcme);
+        return response = request.contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxNumber", number)
+                .queryParam("CoverPageEnabled", true)
+                .when()
+                .post(url);
+
+    }
+
+
+
     public static Response inbound_FaxwithCoverPage(String url, File file, String number, String credentials) {
 
         RequestSpecification request = RestAssured.given();
@@ -80,9 +99,24 @@ public class Second_RestRequestUtils {
 
         request.header("Authorization ", "Basic " + encodedCredentialForAcme);
         return request.contentType("multipart/form-data")
+                .when().log().all()
+                .get(url);
+    }
+
+    public static Response getInboundWithCoverPage2image(String url, String credentials) {
+
+        RequestSpecification request = RestAssured.given();
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAcme = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAcme);
+        return request.contentType("multipart/form-data")
                 .when()
                 .get(url);
     }
+
+
+
     public static Response getInboundWithCoverPage1_81(String url, String credentials) {
 
         RequestSpecification request = RestAssured.given();
