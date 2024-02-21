@@ -169,7 +169,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 1, testName = "SFTP - Test Simple Authentication", groups = {"Regression15"})
+    @Test(priority = 1, testName = "SFTP - Test Simple Authentication", groups = {"Regression"})
     void testWithSimpleAuthenticationAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -184,10 +184,9 @@ public class SftpPushTests extends TestBase {
 
         DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("insert_ftp_users"));
 
-        DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("truncate_recvstatus"));
+       // DataBaseUtility.executeSQLUpdate2(ConfigReader.getProperty("truncate_recvstatus"));
 
         //Thread.sleep(1000*30);
-
         String tsi = FileReader.randomNumberFor_TSI();
         Response responseSubmitFax = RestRequestUtils.sendFaxWithNewTSI(data.get("post_call_Url") + tsi,
                 FileReader.readfile("3page"),
@@ -224,7 +223,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression15"})
+    @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression"})
     void testWithCertificateNoPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
@@ -268,7 +267,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression15"})
+    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression"})
     void testWithCertificateWithPassphraseAbbas() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
