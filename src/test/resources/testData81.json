@@ -126,7 +126,7 @@
 
   },
   "putScenarioForRegistrySettings_81": {
-    "put_call_Url": "http://10.250.1.84:8081/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=10",
+    "put_call_Url": "http://10.250.1.84:8585/api/Registry?app=img&path=\\&key=ReloadDIDMapSec&value=10",
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "11111111111",
     "updatedFaxNumber": "11111111112",
@@ -196,7 +196,7 @@
     "credentialInbound": "faxsending@acme1:softlinx"
   },
   "inboundFaxPageValidation20_81": {
-    "put_call_Url": "http://10.250.1.84:8081/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
+    "put_call_Url": "http://10.250.1.84:8585/api/Registry?app=img&path=\\&key=DebugAbortSendAtPage&value=0",
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "1222-222-2222",
     "statusCode": 201,
