@@ -314,7 +314,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
                // .replace("{contentType}", data.get("contentType"));
     }
 
-    @Test(testName = "SOAP_Have multiple IMGs configured for the scheduler ", groups = {"Regression81"})
+    @Test(testName = "SOAP_Have multiple IMGs configured for the scheduler ", groups = {"Regression81test"})
     public void soapRequestForIMG81() throws InterruptedException, IOException, SQLException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
