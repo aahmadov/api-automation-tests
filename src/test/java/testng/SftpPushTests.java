@@ -406,11 +406,12 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
-                assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
+
+        assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
 
-    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression81test"})
+    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression81test9"})
     void testWithCertificateWithPassphraseAbbas81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -450,6 +451,8 @@ public class SftpPushTests extends TestBase {
             }
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
+
+        Thread.sleep(1000*10);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
