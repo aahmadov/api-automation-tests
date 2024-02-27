@@ -1,10 +1,10 @@
 package testng;
 
 import com.jayway.jsonpath.JsonPath;
-import io.restassured.RestAssured;
+
 import io.restassured.response.Response;
 import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
+
 import org.apache.commons.io.IOUtils;
 import org.json.XML;
 import org.testng.annotations.Test;
