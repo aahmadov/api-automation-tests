@@ -153,7 +153,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.0</version>
                 <configuration>
-                    <reuseForks>false</reuseForks>
+                    <forkMode>never</forkMode>
                     <argLine>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</argLine>
                 </configuration>
                 <executions>
