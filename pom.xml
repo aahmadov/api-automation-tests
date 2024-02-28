@@ -143,6 +143,8 @@
                 <configuration>
                     <source>9</source>
                     <target>9</target>
+                    <debug>true</debug>
+                    <debuglevel>lines,vars,source</debuglevel>
                 </configuration>
 
             </plugin>
@@ -152,6 +154,7 @@
                 <version>2.22.0</version>
                 <configuration>
                     <reuseForks>false</reuseForks>
+                    <argLine>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</argLine>
                 </configuration>
                 <executions>
                     <execution>
