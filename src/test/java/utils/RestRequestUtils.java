@@ -632,6 +632,16 @@ public class RestRequestUtils {
                 .post(url);
     }
 
+    public static Response sendFaxWithFileType(String url, File filePage,File filePage2, String faxnumb, String credentials) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", filePage)
+                .multiPart("filename", filePage2)
+                .queryParam("FaxNumber", faxnumb)
+                .when()
+                .post(url);
+    }
+
         public static Response sendFaxWithForURLNotify(String url, File filePage, String faxnumb, String credentials) {
             return createRequest(credentials)
                     .contentType("multipart/form-data")
