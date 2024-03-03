@@ -111,7 +111,7 @@ public class PostHTML extends TestBase {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        File fileHTML = FileReader.getFileUsingPageSize2forHTML(data.get("Pages1"), data.get("fileType1"));
+        File fileHTML = FileReader.getFileUsingPageSize(data.get("Pages1"), data.get("fileType1"));
         File fileTIF = FileReader.getFileUsingPageSize(data.get("Pages2"), data.get("fileType2"));
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];

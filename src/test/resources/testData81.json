@@ -198,10 +198,10 @@
     "FaxPageValidationHTML_PDF_TIFF": {
       "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
       "faxNumber": "1222-222-2222",
-      "Pages1": "2",
+      "Pages1": "4",
       "fileType1": "html",
-      "Pages2": "2",
-      "fileType2": "docx",
+      "Pages2": "4",
+      "fileType2": "pdf",
       "statusCode": 201,
       "credentialOutbound": "faxsending@acme1:softlinx",
       "inboundFax_url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
