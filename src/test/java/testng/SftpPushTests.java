@@ -310,7 +310,7 @@ public class SftpPushTests extends TestBase {
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
 
-    @Test(priority = 1, testName = "SFTP - Test Simple Authentication", groups = {"Regression81test"})
+    @Test(priority = 1, testName = "SFTP - Test Simple Authentication", groups = {"Regression81"})
     void testWithSimpleAuthenticationAbbas81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -365,7 +365,7 @@ public class SftpPushTests extends TestBase {
 
     }
 
-    @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression81test"})
+    @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression81"})
     void testWithCertificateNoPassphraseAbbas81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -411,7 +411,7 @@ public class SftpPushTests extends TestBase {
     }
 
 
-    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression81test9"})
+    @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression81"})
     void testWithCertificateWithPassphraseAbbas81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
