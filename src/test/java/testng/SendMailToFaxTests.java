@@ -164,6 +164,8 @@ public class SendMailToFaxTests extends TestBase {
             //String emailSubject = String.format(ConfigReader.getProperty(data.get("subject")), faxNumber); // result: Inbound Fax to 11111111111, Unassigned Faxes (Received)
            // File file = FileReader.getFileUsingPageSize(data.get("pageSize"));
             File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+
+            System.out.println("the file type on attachment :" + file);
             System.out.println("to: " + toEmail);
             System.out.println("file: " + file.getAbsolutePath());
 

@@ -68,7 +68,7 @@ public class PostHTML extends TestBase {
                 System.out.println("Error message: " + "**" + errorMessage + "**");
             }
             times++;
-        } while (isNotCompleted && times < 15);
+        } while (isNotCompleted && times < 20);
 
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
@@ -106,7 +106,7 @@ public class PostHTML extends TestBase {
 
     }
 
-    @Test(testName = "validate Fax Page HTML is received  ", groups = {"Regression81"})
+    @Test(testName = "validate Fax Page HTML&PDF is received  ", groups = {"Regression81"})
     public void FaxPageValidationHTML_PDF_TIFF() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);

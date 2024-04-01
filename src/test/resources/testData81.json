@@ -48,7 +48,7 @@
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "Pages": "2",
-    "fileType": "docx",
+    "fileType": "jpeg",
     "withSubject":true,
     "withAttachment":true,
     "withBody":true,
