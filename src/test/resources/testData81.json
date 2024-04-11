@@ -172,6 +172,24 @@
     "ignoreFail":true,
     "credentialOutbound": "faxsending@acme1:softlinx"
   },
+  "PurgeAfterDownloadSFTP84": {
+    "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "times": 2,
+    "faxNumber": "1(333)333-3333",
+    "fileType": "pdf",
+    "Pages": 2,
+    "coverPageEnabled":false,
+    "credentialOutbound": "faxsending@auto1:softlinx"
+  },
+  "PurgeAfterDownloadDM84": {
+    "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "times": 2,
+    "faxNumber": "1(333)333-3333",
+    "fileType": "pdf",
+    "Pages": 2,
+    "coverPageEnabled":false,
+    "credentialOutbound": "faxsending@auto1:softlinx"
+  },
   "submitFaxToManipulateInboundOutboundPages_81": {
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "1222-222-2222",

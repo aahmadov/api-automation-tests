@@ -32,6 +32,12 @@
         </classes>
     </test>
 
+    <test name="PurgeAfterDownload84">
+        <classes>
+            <class name="testng.Purge_after_faxSend"/>
+        </classes>
+    </test>
+
     <test name="GetScenariosForSmokeTest">
         <classes>
             <class name="testng.GetScenariosForSmokeTest"/>
