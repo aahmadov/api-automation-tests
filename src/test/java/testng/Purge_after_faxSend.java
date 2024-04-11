@@ -91,7 +91,7 @@ public class Purge_after_faxSend extends TestBase {
         DataBaseUtility.executeSQLQueryAuto181("SELECT * FROM auto1.recvstatus;");
     }
 
-    @Test(testName = "PurgeAfterDownloadedBy to DM", groups = {"Regression81newtest"})
+    @Test(testName = "PurgeAfterDownloadedBy to DM", groups = {"Regression81"})
     public void PurgeAfterDownloadDM84() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
