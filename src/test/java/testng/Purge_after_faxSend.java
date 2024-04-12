@@ -23,13 +23,13 @@ import static org.junit.Assert.assertEquals;
 public class Purge_after_faxSend extends TestBase {
 
 
-    @Test(testName = "PurgeAfterDownloadedBy to SFTP", groups = {"Regression81"})
+    @Test(testName = "PurgeAfterDownloadedBy to SFTP", groups = {"Regression81Test"})
     public void PurgeAfterDownloadSFTP84() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
-        DataBaseUtility.executeSQLUpdateRecvD81("DELETE FROM auto1.recvstatus order by  JobID  DESC LIMIT 1");
+        DataBaseUtility.executeSQLUpdateRecvD81("DELETE FROM auto1.recvstatus order by  JobID  DESC LIMIT 10");
 
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Thread.sleep(1000 * 3);
@@ -97,7 +97,7 @@ public class Purge_after_faxSend extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
-        DataBaseUtility.executeSQLUpdateRecvD81("DELETE FROM auto1.recvstatus order by  JobID  DESC LIMIT 1");
+        DataBaseUtility.executeSQLUpdateRecvD81("DELETE FROM auto1.recvstatus order by  JobID  DESC LIMIT 10");
 
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Thread.sleep(1000 * 3);
@@ -127,7 +127,7 @@ public class Purge_after_faxSend extends TestBase {
             System.out.println(":query to inbound fax");
         }
         Thread.sleep(1000 * 120);
-        System.out.println("message: Set one of the demo.recvstatus SftpPushMark to 0 or 1");
+        System.out.println("message: Set one of the demo.recvstatus DeliveryMgrMark to 1");
         DataBaseUtility.executeSQLUpdateRecvD81("UPDATE auto1.recvstatus SET DeliveryMgrMark = 1 ORDER BY ModifyTime DESC LIMIT 1;");
 
         Thread.sleep(1000 * 20);
