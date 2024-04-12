@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class Purge_after_faxSend extends TestBase {
 
 
-    @Test(testName = "PurgeAfterDownloadedBy to SFTP", groups = {"Regression81Test"})
+    @Test(priority = 1,testName = "PurgeAfterDownloadedBy to SFTP", groups = {"Regression81"})
     public void PurgeAfterDownloadSFTP84() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -91,7 +91,7 @@ public class Purge_after_faxSend extends TestBase {
         DataBaseUtility.executeSQLQueryAuto181("SELECT * FROM auto1.recvstatus;");
     }
 
-    @Test(testName = "PurgeAfterDownloadedBy to DM", groups = {"Regression81"})
+    @Test(priority = 2,testName = "PurgeAfterDownloadedBy to DM", groups = {"Regression81Test"})
     public void PurgeAfterDownloadDM84() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
