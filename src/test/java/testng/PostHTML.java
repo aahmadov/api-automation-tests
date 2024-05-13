@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 public class PostHTML extends TestBase {
 
-    @Test(testName = "validate Fax Page HTML is received  ", groups = {"Regression81"})
+    @Test(testName = "validate Fax Page HTML is received  ", groups = {"Regression8112"})
     public void HTML_FaxPageValidation81() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);

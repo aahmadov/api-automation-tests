@@ -158,7 +158,8 @@
     "faxNumber": "1(333)333-3333",
     "get_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "inboundFax_url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
-    "credentialInbound": "faxsending@auto1:softlinx",
+    "credentialInbound": "faxsending@:softlinx",
+
     "credentialOutbound": "faxsending@auto1:softlinx",
     "newInboundParam": "?FaxUserId=faxsending"
   },
@@ -204,7 +205,7 @@
   "HTML_FaxPageValidation81": {
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "1222-222-2222",
-    "Pages": "2",
+    "Pages": "4",
     "fileType": "html",
     "statusCode": 201,
     "credentialOutbound": "faxsending@acme1:softlinx",
