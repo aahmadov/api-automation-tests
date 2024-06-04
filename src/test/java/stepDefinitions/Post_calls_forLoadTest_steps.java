@@ -90,7 +90,7 @@ public class Post_calls_forLoadTest_steps {
             String faxNumber = faxNumbers.get(ThreadLocalRandom.current().nextInt(faxNumbers.size()));
 
             Map<String, Object> requestData = new ConcurrentHashMap<>();
-            requestData.put("filename", FileReader.getFileUsingPageSize(data.get("pageSize")));
+            requestData.put("filename", FileReader.getFileUsingPageSizepdfforemail2fax(data.get("pageSize")));
             requestData.put("FaxNumber", faxNumber);
             requestData.put("url", ConfigReader.getProperty(data.get("url")) + firstLoadTest_TSI);
             requestData.put("coverPageEnabled", data.get("coverPageEnabled"));

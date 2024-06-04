@@ -54,7 +54,7 @@ public class Tests {
 
             //Read the subject string and add the FaxNumber into the string
             String emailSubject = String.format(ConfigReader.getProperty(subject), faxNumber); // result: Inbound Fax to 11111111111, Unassigned Faxes (Received)
-            File file = FileReader.getFileUsingPageSize(pageSize);
+            File file = FileReader.getFileUsingPageSizepdfforemail2fax(pageSize);
             System.out.println("to: " + toEmail);
             System.out.println("file: " + file.getAbsolutePath());
 

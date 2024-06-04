@@ -28,7 +28,7 @@ public class FileReader {
         return new File(filePath);
     }
 
-    public static File getFileUsingPageSize(final String pageSize) {
+    public static File getFileUsingPageSizepdfforemail2fax(final String pageSize) {
         try {
             File folder = Paths.get(ClassLoader.getSystemResource("requestBody/pdf").toURI()).toFile();
             File[] listOfFiles = folder.listFiles((d, name) -> name.endsWith(".pdf"));
