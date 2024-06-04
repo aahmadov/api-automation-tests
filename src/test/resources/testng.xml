@@ -31,6 +31,16 @@
             <class name="testng.PostScenariosForSmokeTest_Tiff"/>
         </classes>
     </test>
+    <test name="MultipleFiles_FaxPageValidation81">
+        <classes>
+            <class name="testng.MultipleFileValidation"/>
+        </classes>
+    </test>
+    <test name="sendFaxDataWithTiff_81">
+        <classes>
+            <class name="testng.Test_tifff_file_from_Regression"/>
+        </classes>
+    </test>
 
     <test name="PurgeAfterDownload84">
         <classes>

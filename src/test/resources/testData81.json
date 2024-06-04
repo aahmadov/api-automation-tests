@@ -214,6 +214,19 @@
     "newOutboundParam": "?FaxUserId=faxsending",
     "credentialInbound": "faxsending@acme1:softlinx"
   },
+  "MultipleFiles_FaxPageValidation81": {
+    "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1222-222-2222",
+    "Pages": "2",
+    "fileType": "jpg",
+    "statusCode": 201,
+    "credentialOutbound": "faxsending@acme1:softlinx",
+    "inboundFax_url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
+    "newInboundParam": "?FaxUserId=faxsending",
+    "newOutboundParam": "?FaxUserId=faxsending",
+    "credentialInbound": "faxsending@acme1:softlinx"
+  },
+
     "FaxPageValidationHTML_PDF_TIFF": {
       "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
       "faxNumber": "1222-222-2222",

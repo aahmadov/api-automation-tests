@@ -5,7 +5,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
 
-public class remoteSSH {
+public class remoteSSHCommandPrompt {
     public static void main(String[] args) throws JSchException {
     String host = "10.250.1.84";
     String user = "Administrator";
