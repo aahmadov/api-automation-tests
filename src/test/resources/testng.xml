@@ -31,7 +31,7 @@
             <class name="testng.PostScenariosForSmokeTest_Tiff"/>
         </classes>
     </test>
-    <test name="MultipleFiles_FaxPageValidation81">
+    <test name="ScanMultipleFiles_FaxPageValidation81">
         <classes>
             <class name="testng.MultipleFileValidation"/>
         </classes>

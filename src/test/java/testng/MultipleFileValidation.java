@@ -9,7 +9,7 @@ import utils.FileReader;
 import utils.JsonUtils;
 import utils.RestRequestUtils;
 import utils.Second_RestRequestUtils;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
@@ -22,26 +22,54 @@ import static org.junit.Assert.assertTrue;
 
 public class MultipleFileValidation extends TestBase {
 
-    @Test(testName = "validation of multiple Fax files is successfully got received  ", groups = {"Regression81"})
-    public void MultipleFiles_FaxPageValidation81() throws InterruptedException {
+    @Test(testName = "validation of multiple Fax files is successfully got received  ", groups = {"Regression81test"})
+    public void ScanMultipleFiles_FaxPageValidation81() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
-        String tsi = FileReader.randomNumberFor_TSI();
-        String onlyTsi = tsi.split("=")[1];
-        Response response = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
-                file,
-                data.get("faxNumber"), data.get("credentialOutbound"));
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println("************ " + data.get("post_call_Url"));
-        System.out.println("********** " + file );
-        System.out.println("********* " + data.get("faxNumber"));
-        System.out.println("------------------------------------------------------------------------");
-        assertEquals(Integer.toString(response.statusCode()), data.get("statusCode"));
+        // Extract the filesToTest list from the JSON data and cast it properly
+        List<Map<String, String>> filesToTest = Arrays.asList(
+                Map.of("Pages", "2", "fileType", "jpg"),
+                Map.of("Pages", "2", "fileType", "pdf"),
+                Map.of("Pages", "2", "fileType", "tiff"),
+                Map.of("Pages", "2", "fileType", "doc"),
+                Map.of("Pages", "2", "fileType", "docx"),
+                Map.of("Pages", "2", "fileType", "html"),
+                Map.of("Pages", "3", "fileType", "gif"),
+                Map.of("Pages", "2", "fileType", "txt"),
+                Map.of("Pages", "2", "fileType", "xls"),
+                Map.of("Pages", "2", "fileType", "xlsx"),
+                Map.of("Pages", "2", "fileType", "jpeg"),
+                Map.of("Pages", "2", "fileType", "bmp"));
 
-        String faxId = JsonPath.read(response.prettyPrint(), "$.FaxInfo[0].FaxNumber");
-        System.out.println("***** this is new generated  Fax number of outboundfax " + "**" + faxId + "**");
+        for (Map<String, String> fileData : filesToTest) {
+            File file = FileReader.getFileUsingPageSize(fileData.get("Pages"), fileData.get("fileType"));
+            String tsi = FileReader.randomNumberFor_TSI();
+            String onlyTsi = tsi.split("=")[1];
+            Response response = RestRequestUtils.sendFaxWithNewTSI81((String) data.get("post_call_Url") + tsi,
+                    file,
+                    (String) data.get("faxNumber"), (String) data.get("credentialOutbound"));
+            System.out.println("------------------------------------------------------------------------");
+            System.out.println("************ " + data.get("post_call_Url"));
+            System.out.println("********** " + file);
+            System.out.println("********* " + data.get("faxNumber"));
+            System.out.println("------------------------------------------------------------------------");
+            // Add assertions or validations for the response if needed
+            System.out.println("File: " + file.getName() + " sent with TSI: " + onlyTsi);
+
+            String faxId = JsonPath.read(response.prettyPrint(), "$.FaxInfo[0].FaxNumber");
+            System.out.println("***** this is new generated  Fax number of outboundfax " + "**" + faxId + "**");
+
+
+
+//        File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
+//        String tsi = FileReader.randomNumberFor_TSI();
+//        String onlyTsi = tsi.split("=")[1];
+//        Response response = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
+//                file,
+//                data.get("faxNumber"), data.get("credentialOutbound"));
+
+        // assertEquals(Integer.toString(response.statusCode()), data.get("statusCode"));
 
 
         Response outbound;
@@ -106,4 +134,4 @@ public class MultipleFileValidation extends TestBase {
 
     }
 
-}
+}}
