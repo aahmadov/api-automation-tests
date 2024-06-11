@@ -18,7 +18,7 @@ public class DataBaseUtility {
     private static Connection connection;
     private static Connection connection2;
     private static Connection connection3;
-    private static Connection connection81;
+    private static Connection connection84;
     private static Statement statement;
     private static ResultSet resultSet;
 
@@ -46,7 +46,7 @@ public class DataBaseUtility {
                 ConfigReader.getProperty("replixdb.password"));
 
 
-        connection81 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeatureNEw81"),
+        connection84 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeatureNEw84"),
                 ConfigReader.getProperty("replixdb.username"),
                 ConfigReader.getProperty("replixdb.password"));
     }
@@ -126,10 +126,10 @@ public class DataBaseUtility {
     }
 
 
-    public static List<Map<String, Object>> executeSQLQueryAuto181(String query) throws SQLException {
+    public static List<Map<String, Object>> executeSQLQueryAuto184(String query) throws SQLException {
 
         openConnection();
-        statement = connection81.createStatement();
+        statement = connection84.createStatement();
         resultSet = statement.executeQuery(query);
 
         ResultSetMetaData metaData = resultSet.getMetaData();
@@ -170,9 +170,9 @@ public class DataBaseUtility {
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
     }
-    public static String executeSQLUpdateRecvD81(final String query) throws SQLException {
+    public static String executeSQLUpdateRecvD84(final String query) throws SQLException {
         openConnection();
-        statement = connection81.createStatement();
+        statement = connection84.createStatement();
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
         return query;

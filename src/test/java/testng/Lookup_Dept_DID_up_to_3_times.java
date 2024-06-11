@@ -39,7 +39,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
         System.out.println("FaxuserID is :" +FAxUSerID);
         //Execute first query
         String database=String.format("select CallingPartyNumber from auto1.sendstatus where (JobID='%s')",JobID);
-        DataBaseUtility.executeSQLQueryAuto181(database);
+        DataBaseUtility.executeSQLQueryAuto184(database);
         System.out.println(database);
 
     }
@@ -69,7 +69,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
         System.out.println("FaxuserID is :" +FAxUSerID);
         //Execute first query
         String database=String.format("select CallingPartyNumber from auto1.sendstatus where (JobID='%s')",JobID);
-        DataBaseUtility.executeSQLQueryAuto181(database);
+        DataBaseUtility.executeSQLQueryAuto184(database);
         System.out.println(database);
 
     }
@@ -99,7 +99,7 @@ public class Lookup_Dept_DID_up_to_3_times extends TestBase {
         System.out.println("FaxuserID is :" +FAxUSerID);
         //Execute first query
         String database=String.format("select CallingPartyNumber from auto1.sendstatus where (JobID='%s')",JobID);
-        DataBaseUtility.executeSQLQueryAuto181(database);
+        DataBaseUtility.executeSQLQueryAuto184(database);
         System.out.println(database);
 
     }

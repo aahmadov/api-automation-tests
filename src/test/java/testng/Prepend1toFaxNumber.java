@@ -101,11 +101,11 @@ public class Prepend1toFaxNumber extends TestBase {
 
 
         String database2 = "DELETE FROM acme1.settings WHERE sname = 'sendfax.prepend1todestNumber';" ;
-        DataBaseUtility.executeSQLUpdateRecvD81(database2);
+        DataBaseUtility.executeSQLUpdateRecvD84(database2);
         System.out.println("dataBaseQuery: "+database2);
 
         String database1 = "INSERT INTO acme1.settings (sname, svalue) VALUES ('sendfax.prepend1toDestNumber', '0');" ;
-        DataBaseUtility.executeSQLUpdateRecvD81(database1);
+        DataBaseUtility.executeSQLUpdateRecvD84(database1);
         System.out.println("dataBaseQuery: "+database1);
 
         URL url = getClass().getClassLoader().getResource("dataFile/testData.xlsx");

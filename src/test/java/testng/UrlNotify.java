@@ -102,11 +102,11 @@ public class UrlNotify extends TestBase {
         }
         Thread.sleep(1000*3);
         System.out.println("-->look at replixdb.urlnotify table message  :");
-        DataBaseUtility.executeSQLQueryAuto181("select jobid,realm ,url from replixdb.urlnotify order by JobId desc limit 2;");
+        DataBaseUtility.executeSQLQueryAuto184("select jobid,realm ,url from replixdb.urlnotify order by JobId desc limit 2;");
 
 
         System.out.println("--->auto1.sendstatus message :");
-        DataBaseUtility.executeSQLQueryAuto181("select JobId,notifyUrl,TransmitStationID,JobStatus from auto1.sendstatus order by JobId desc limit 1;");
+        DataBaseUtility.executeSQLQueryAuto184("select JobId,notifyUrl,TransmitStationID,JobStatus from auto1.sendstatus order by JobId desc limit 1;");
 
     }
 

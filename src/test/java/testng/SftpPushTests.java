@@ -24,15 +24,15 @@ public class SftpPushTests extends TestBase {
         assert data != null;
 
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("delete_ftp_realms81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("delete_ftp_realms81"));
 
-        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("delete_ftp_users81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("delete_ftp_users81"));
 
-        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("insert_ftp_realms81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("insert_ftp_realms81"));
 
-        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("insert_ftp_users81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("insert_ftp_users81"));
 
-        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("truncate_recvstatus81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("truncate_recvstatus81"));
 
         //Thread.sleep(1000*30);
 
@@ -77,7 +77,7 @@ public class SftpPushTests extends TestBase {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("rsa_private_key_with_passphrase81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("rsa_private_key_with_passphrase81"));
         //Thread.sleep(60000);
 
         String tsi = FileReader.randomNumberFor_TSI();
@@ -122,7 +122,7 @@ public class SftpPushTests extends TestBase {
         assert data != null;
 
         //Execute first query - Delete
-        DataBaseUtility.executeSQLUpdateRecvD81(ConfigReader.getProperty("rsa_private_key81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("rsa_private_key81"));
 
 //        Thread.sleep(1000*60);
         String tsi = FileReader.randomNumberFor_TSI();

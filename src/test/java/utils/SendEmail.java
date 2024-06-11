@@ -25,50 +25,6 @@ public class SendEmail {
 
 	private static String SUBJECT = "Java send Email_To_Fax with HTMLHeader example";
 
-
-	public static void sendFromGMail(String to, String body, File attachment, boolean sendBody) {
-		Properties prop = new Properties();
-		prop.put("mail.smtp.host", "10.250.1.87");
-		prop.put("mail.smtp.port", "25");
-		prop.put("mail.smtp.auth", "true");
-		prop.put("mail.smtp.socketFactory.port", "25");
-		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
-		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(USER_NAME, PASSWORD);
-			}
-		});
-
-		try {
-
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(USER_NAME));
-			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-			message.setSubject(SUBJECT);
-
-            MimeBodyPart attachmentPart = new MimeBodyPart();
-            attachmentPart.attachFile(attachment);
-
-			Multipart multipart = new MimeMultipart();
-			multipart.addBodyPart(attachmentPart);
-
-			if(sendBody) {
-				MimeBodyPart bodyPart = new MimeBodyPart();
-				bodyPart.setText(body);
-	            multipart.addBodyPart(bodyPart);
-			}
-
-            message.setContent(multipart);
-
-			Transport.send(message);
-
-			System.out.println("message:  message sent successfully!");
-
-		} catch (MessagingException | IOException e) {
-			e.printStackTrace();
-		}
-	}
 	public static void sendFromGMail_81(String to81, String body81, File attachment81,
 										boolean withHtmlHeader,
 										boolean withBody,
@@ -125,16 +81,16 @@ public class SendEmail {
 				// If recvUseHtmlHeader is true, insert the HTML header content into the database
 
 				String deleteHTML = "DELETE FROM `auto3`.`settings` WHERE `sname` = 'Smtpd.EmailHeader';";
-				DataBaseUtility.executeSQLUpdateRecvD81(deleteHTML);
+				DataBaseUtility.executeSQLUpdateRecvD84(deleteHTML);
 				Thread.sleep(1000*3);
 				String insertHTML = String.format("INSERT INTO `auto3`.`settings` (`sname`, `svalue`) VALUES ('Smtpd.EmailHeader', 'emailheader.html');");
-				DataBaseUtility.executeSQLUpdateRecvD81(insertHTML);
+				DataBaseUtility.executeSQLUpdateRecvD84(insertHTML);
 				String defaultContent = "HTML header included.";
 				htmlBody.setContent(defaultContent, "text/html");
 			} else {
 				// If recvUseHtmlHeader is false, delete the HTML header from the database
 				String deleteQuery = "DELETE FROM `auto3`.`settings` WHERE `sname` = 'Smtpd.EmailHeader';";
-				DataBaseUtility.executeSQLUpdateRecvD81(deleteQuery);
+				DataBaseUtility.executeSQLUpdateRecvD84(deleteQuery);
 				// You can also set some default content if needed
 				String defaultContent = "No HTML header included.";
 				htmlBody.setContent(defaultContent, "text/html");
@@ -157,5 +113,57 @@ public class SendEmail {
 		}
 	}
 
+
+
+
+
+
+
+
+
+
+	public static void sendFromGMail(String to, String body, File attachment, boolean sendBody) {
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "10.250.1.87");
+		prop.put("mail.smtp.port", "25");
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.socketFactory.port", "25");
+		prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(USER_NAME, PASSWORD);
+			}
+		});
+
+		try {
+
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(USER_NAME));
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+			message.setSubject(SUBJECT);
+
+			MimeBodyPart attachmentPart = new MimeBodyPart();
+			attachmentPart.attachFile(attachment);
+
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(attachmentPart);
+
+			if(sendBody) {
+				MimeBodyPart bodyPart = new MimeBodyPart();
+				bodyPart.setText(body);
+				multipart.addBodyPart(bodyPart);
+			}
+
+			message.setContent(multipart);
+
+			Transport.send(message);
+
+			System.out.println("message:  message sent successfully!");
+
+		} catch (MessagingException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

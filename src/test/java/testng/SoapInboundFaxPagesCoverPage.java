@@ -68,7 +68,7 @@ public class SoapInboundFaxPagesCoverPage extends TestBase {
         Thread.sleep(1000*60);
         String queryReserved1_3 =String.format("select JobId,HostName ,reserved1,Reserved3 from auto1.sendstatus order by JobId desc limit 1;");
 
-        DataBaseUtility.executeSQLQueryAuto181(queryReserved1_3);
+        DataBaseUtility.executeSQLQueryAuto184(queryReserved1_3);
         // System.out.println(queryReserved1_3);
 
 
