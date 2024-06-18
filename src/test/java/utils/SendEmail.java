@@ -79,7 +79,6 @@ public class SendEmail {
 			MimeBodyPart htmlBody = new MimeBodyPart();
 			if (withHtmlHeader) {
 				// If recvUseHtmlHeader is true, insert the HTML header content into the database
-
 				String deleteHTML = "DELETE FROM `auto3`.`settings` WHERE `sname` = 'Smtpd.EmailHeader';";
 				DataBaseUtility.executeSQLUpdateRecvD84(deleteHTML);
 				Thread.sleep(1000*3);
@@ -91,7 +90,7 @@ public class SendEmail {
 				// If recvUseHtmlHeader is false, delete the HTML header from the database
 				String deleteQuery = "DELETE FROM `auto3`.`settings` WHERE `sname` = 'Smtpd.EmailHeader';";
 				DataBaseUtility.executeSQLUpdateRecvD84(deleteQuery);
-				// You can also set some default content if needed
+				// can also set some default content if needed
 				String defaultContent = "No HTML header included.";
 				htmlBody.setContent(defaultContent, "text/html");
 			}

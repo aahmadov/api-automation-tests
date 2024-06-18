@@ -23,7 +23,7 @@ public class DataBaseUtility {
     private static ResultSet resultSet;
 
     public static void openConnection() throws SQLException {
-        if (connection != null && connection.isValid(20)) {
+        if (connection84 != null && connection84.isValid(20)) {
             return;
         }
         try {
@@ -32,9 +32,9 @@ public class DataBaseUtility {
             System.out.println("Ooops error!");
             e.printStackTrace();
         }
-        connection = DriverManager.getConnection(ConfigReader.getProperty("mysql.url"),
-                ConfigReader.getProperty("replixdb.username"),
-                ConfigReader.getProperty("replixdb.password"));
+//        connection = DriverManager.getConnection(ConfigReader.getProperty("mysql.url"),
+//                ConfigReader.getProperty("replixdb.username"),
+//                ConfigReader.getProperty("replixdb.password"));
 
         connection2 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeature"),
                 ConfigReader.getProperty("replixdb.username"),
@@ -45,10 +45,11 @@ public class DataBaseUtility {
                 ConfigReader.getProperty("replixdb.username"),
                 ConfigReader.getProperty("replixdb.password"));
 
+        String jdbcUrl = "jdbc:mysql://10.250.1.84:3306/replixdb?useSSL=false&serverTimezone=UTC&autoReconnect=true";
+        String username = "root";
+        String password = "softlinx";
+        connection84 = DriverManager.getConnection(jdbcUrl,username,password);
 
-        connection84 = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeatureNEw84"),
-                ConfigReader.getProperty("replixdb.username"),
-                ConfigReader.getProperty("replixdb.password"));
     }
 
     public static List<Map<String, Object>> executeSQLQuery(String query) throws SQLException {
@@ -170,12 +171,12 @@ public class DataBaseUtility {
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
     }
-    public static String executeSQLUpdateRecvD84(final String query) throws SQLException {
+    public static void executeSQLUpdateRecvD84(final String query) throws SQLException {
         openConnection();
         statement = connection84.createStatement();
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
-        return query;
+//        return query;
     }
 
     public static void closeConnection() {
