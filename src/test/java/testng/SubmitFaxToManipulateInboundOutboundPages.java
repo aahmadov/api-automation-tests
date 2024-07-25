@@ -174,7 +174,7 @@ public class SubmitFaxToManipulateInboundOutboundPages extends TestBase {
     @Test(testName = "Submit Fax to manipulate outbound&inbound Data", groups = {"Regression1"})
     public void submitFaxToManipulateInboundOutboundPagesCopy() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String tsi = FileReader.randomNumberFor_TSI();

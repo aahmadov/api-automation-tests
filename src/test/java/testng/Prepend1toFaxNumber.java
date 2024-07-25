@@ -323,7 +323,7 @@ public class Prepend1toFaxNumber extends TestBase {
     @Test(testName = "Prepend 1 to fax number if it starts with [2-9]", groups = {"smoke1"})
     public void add_1_to_the_beginning_Of_number_Copy() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
 

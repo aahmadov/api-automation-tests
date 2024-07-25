@@ -48,7 +48,7 @@ public class GetScenariosForSmokeTest extends TestBase {
     }
     @Test(testName = "Retrieve recently created fax", groups = {"smoke1"})
     public void retrieveRecentlyCreatedFaxCopy() throws InterruptedException {
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         Thread.sleep(1000 * 60);
@@ -102,7 +102,7 @@ public class GetScenariosForSmokeTest extends TestBase {
     }
     @Test(testName = "Retrieve Fax and Fax Data by Id", groups = {"smoke1"})
     public void retrieveFaxAndFaxDataByIdCopy() throws InterruptedException {
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         Thread.sleep(1000 * 60);
@@ -141,7 +141,7 @@ public class GetScenariosForSmokeTest extends TestBase {
     }
     @Test(testName = "Retrieve all Fax Data", groups = {"smoke1"})
     public void retrieveAllFaxDataCopy() throws InterruptedException {
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         Thread.sleep(1000 * 60);

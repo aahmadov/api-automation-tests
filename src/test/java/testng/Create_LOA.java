@@ -169,7 +169,7 @@ public class Create_LOA extends TestBase {
     @Test(testName = "Creates a PDF letter of Authorization with new URL ", groups = {"Regression1"})
     void CreateLOA2_COPY() throws Exception  {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2_147(data.get("post_call_Url"),data.get("body"));
         byte[] fileContents = responseSubmitFaxLong.getBody().asByteArray();
@@ -212,7 +212,7 @@ public class Create_LOA extends TestBase {
     void addNewNumberTollFree2_Copy() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2_147(data.get("post_call_Url1"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
@@ -244,7 +244,7 @@ public class Create_LOA extends TestBase {
     void addNewNumberNoneTollFree2_Copy() throws InterruptedException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOA2_147(data.get("post_call_Url2"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
@@ -355,7 +355,7 @@ public class Create_LOA extends TestBase {
     void addNewNumberNonTollFreeWithUpdatedApp_Complete_Copy() throws InterruptedException, SQLException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario_147(data.get("post_call_Url"),data.get("body"));
         System.out.println("------------------------------------------------------------------------");
@@ -439,7 +439,7 @@ public class Create_LOA extends TestBase {
     void addNewNumberNonTollFreeWithUpdatedApp_inProgress_Copy() throws InterruptedException, SQLException, JsonProcessingException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String number2  = FileReader.randomFaxNumberEmailToFax();
@@ -531,7 +531,7 @@ public class Create_LOA extends TestBase {
     void addNewNumberNonTollFreeWithUpdatedApp_onHold_Copy() throws InterruptedException, SQLException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         Response responseSubmitFaxLong = RestRequestUtils.PostCalltoCreateLOAApp_complete_scenario_147(data.get("post_call_Url"), data.get("body"));
         System.out.println("------------------------------------------------------------------------");
@@ -625,7 +625,7 @@ public class Create_LOA extends TestBase {
     void addNewNumberTollFreeReleasedStatus_Copy() throws InterruptedException, JsonProcessingException, SQLException {
 
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String number2  = FileReader.randomFaxNumberEmailToFax();

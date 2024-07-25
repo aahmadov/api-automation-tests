@@ -40,7 +40,7 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
     @Test(testName = "Send Fax Data with recipient Details", groups = {"smoke1"})
     public void sendFaxDataWithRecipientDetailsCopy() {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Response response = RestRequestUtils.sendFaxWithRecipent_details(data.get("post_call_Url"),
@@ -84,7 +84,7 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
     @Test(testName = "Send Fax with valid Number and Attachment", groups = {"smoke1"})
     public void sendFaxWithValidNumberAndAttachmentCopy() {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Response response = RestRequestUtils.createFaxSingleNum(data.get("post_call_Url"),
@@ -126,7 +126,7 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
     @Test(testName = "Send Fax Data without Number (negative scenario)", groups = {"smoke1"})
     public void sendFaxDataWithoutNumberCopy() {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
         Response response = RestRequestUtils.faxWithNoNumber(data.get("post_call_Url"),
@@ -143,10 +143,6 @@ public class PostScenariosForSmokeTest_Tiff extends TestBase {
         String actual = JsonPath.read(response.asPrettyString(), "$.RequestStatus.StatusText");
         Assert.assertEquals(data.get("expectedErrorMessage"), actual);
     }
-
-
-
-
 
 }
 

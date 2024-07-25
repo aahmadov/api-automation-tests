@@ -384,7 +384,7 @@ public class InboundFaxPageValidation20Test extends TestBase {
     @Test(testName = "validates the number of inbound Fax pages with registry setting (\"20 pages\")", groups = {"Regression1"})
     public void inboundFaxPageValidation20Copy() throws InterruptedException {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
 //        Response response2 = RestRequestUtils.putScenario(data.get("put_call_Url"));

@@ -222,6 +222,40 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>exec-jenkins-cli</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-jar</argument>
+                                <argument>/path/to/extracted/jenkins-cli.jar</argument>
+                                <argument>-s</argument>
+                                <argument>http://10.250.1.67:8080/</argument>
+                                <argument>build</argument>
+                                <argument>'Smoke_Test_TestNG'</argument>
+                                <argument>--token</argument>
+                                <argument>a1s2d3f4g5</argument>
+                                <argument>--version</argument>
+                                <argument>1.0.0</argument>
+                                <argument>--uploadedTestData</argument>
+                                <argument>src/test/resources/uploadedTestData.json</argument>
+                                <argument>--groups</argument>
+                                <argument>smoke81</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 </project>

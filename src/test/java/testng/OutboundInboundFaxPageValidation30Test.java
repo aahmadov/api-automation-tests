@@ -191,7 +191,7 @@ public class OutboundInboundFaxPageValidation30Test extends TestBase {
     @Test(testName = "Validates the number of outbound pages with some registry setting (\"30 pages\")", groups = {"Regression1"})
     public void outboundFaxPageValidation30Copy() throws InterruptedException {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String tsi = FileReader.randomNumberFor_TSI();

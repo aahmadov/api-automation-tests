@@ -82,7 +82,7 @@ public class Test_tifff_file_from_Regression extends TestBase{
     @Test(testName = "Send Fax Data with multiple attachment", groups = {"Regression1"})
     public void sendFaxDataWithTiff_Copy() throws InterruptedException {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         String tsi = FileReader.randomNumberFor_TSI();
         File file = FileReader.getFileUsingPageSize2forTiff(data.get("pageSize"), data.get("fileType"));

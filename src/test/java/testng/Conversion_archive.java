@@ -290,9 +290,9 @@ public class Conversion_archive extends TestBase {
     }
 
     @Test(priority = 1, testName = "Conversion archive per realm and per realm/user", groups = {"Regression1"})
-    void conversion_archive_per_realm_and_per_realm_user_216_Copy() throws Exception {
+    void conversion_archive_per_realm_and_per_realm_user_217_Copy() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         //Execute first registry query

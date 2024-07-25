@@ -159,12 +159,10 @@ public class SftpPushTests extends TestBase {
 
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
     }
-
-
     @Test(priority = 1, testName = "SFTP - Setup and Test Simple Authentication", groups = {"Regression1"})
     void testWithSimpleAuthentication() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         //Execute first query - Delete
@@ -216,14 +214,11 @@ public class SftpPushTests extends TestBase {
         }
         System.out.println("************ Inbound Fax Job id: " + jobId);
         assertTrue(SftpUtils.checkFileExist(data.get("username"), data.get("password"), data.get("filePath"), jobId + ".pdf"));
-
-
     }
-
     @Test(priority = 3, testName = "SFTP - Test With Certificate No Passphrase", groups = {"Regression1"})
     void testWithCertificateNoPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         //Execute first query - Delete
@@ -269,7 +264,7 @@ public class SftpPushTests extends TestBase {
     @Test(priority = 2, testName = "SFTP - Test With Certificate With Passphrase", groups = {"Regression1"})
     void testWithCertificateWithPassphrase() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         //Execute first query - Delete

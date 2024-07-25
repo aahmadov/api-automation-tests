@@ -158,7 +158,7 @@ public class PostScenarioForLoadTestReceiveD extends TestBase {
     @Test(testName = "Validation of Post call for Load test", groups = {"Regression1"})
     public void validationOfPostCallForLoadTestReceiveDCopy() throws Exception {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
 
         String ExcelPath = ResourceUtils.getResourceFilePathAbsPath(data.get("testDataFile"));

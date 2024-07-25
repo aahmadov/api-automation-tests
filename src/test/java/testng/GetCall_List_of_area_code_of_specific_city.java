@@ -221,7 +221,6 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         System.out.println(responseGetCall.asPrettyString());
     }
 
-
     @Test(testName = "Gets details about request to add a fax # ", groups = {"smokeAPIPortal"})
     void GetDetailsAboutRequest81() throws Exception {
         System.out.println("Test case name: " + testName);

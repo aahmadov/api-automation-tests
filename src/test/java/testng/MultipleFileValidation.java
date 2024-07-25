@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 public class MultipleFileValidation extends TestBase {
 
-    @Test(testName = "validation of multiple Fax files is successfully got received  ", groups = {"Regression81test"})
+    @Test(testName = "validation of multiple Fax files is successfully got received  ", groups = {"Regression81"})
     public void ScanMultipleFiles_FaxPageValidation81() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -40,6 +40,7 @@ public class MultipleFileValidation extends TestBase {
                 Map.of("Pages", "2", "fileType", "xls"),
                 Map.of("Pages", "2", "fileType", "xlsx"),
                 Map.of("Pages", "2", "fileType", "jpeg"),
+                Map.of("Pages", "2", "fileType", "htm"),
                 Map.of("Pages", "2", "fileType", "bmp"));
 
         for (Map<String, String> fileData : filesToTest) {

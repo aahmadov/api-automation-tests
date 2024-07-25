@@ -62,7 +62,7 @@ public class ResendFax extends TestBase{
     @Test(testName = "Resend a fax to a different fax number", groups = {"Regression1"})
     public void resendFailedFaxDataWithNumberCopy() {
         System.out.println("Test case name: " + testName);
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         // File file = FileReader.getFileUsingPageSize(data.get("Pages"), data.get("fileType"));
 
