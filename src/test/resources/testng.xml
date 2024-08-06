@@ -177,6 +177,11 @@
             <class name="testng.UrlNotify"/>
         </classes>
     </test>
+    <test name="add_1_to_the_beginning_Of_number81_smoke">
+        <classes>
+            <class name="testng.Prepend1toFaxforSmokeTest"/>
+        </classes>
+    </test>
     <!--    <test name="Test-method test2">-->
     <!--        <parameter name="to" value="auto1.rpxqa.com" />-->
     <!--        <parameter name="times" value="2" />-->
