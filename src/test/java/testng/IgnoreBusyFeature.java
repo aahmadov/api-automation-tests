@@ -50,7 +50,7 @@ public class IgnoreBusyFeature extends TestBase {
                 FileReader.readfile("1page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
 
-        Thread.sleep(1000*240);
+        Thread.sleep(1000*360);
 
         DataBaseUtility.executeSQLQueryAuto184("select ignoredattempts,JobID from auto1.sendstatus order by JobID desc limit 1;");
         /*second short call
