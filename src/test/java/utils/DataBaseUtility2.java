@@ -25,7 +25,7 @@ public class DataBaseUtility2 {
             System.out.println("Ooops error!");
             e.printStackTrace();
         }
-        connection = DriverManager.getConnection(ConfigReader.getProperty("mysql.url"),
+        connection = DriverManager.getConnection(ConfigReader.getProperty("mysql.url_IgnoreBusyFeature"),
                 ConfigReader.getProperty("replixdb.username"),
                 ConfigReader.getProperty("replixdb.password"));
     }

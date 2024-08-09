@@ -11,6 +11,7 @@ public class SftpUtils {
 
     public static boolean checkFileExist(String username, String password, String path, String fileName) {
         try {
+            Thread.sleep(1000*30);
             String filePath = path + fileName;
             UserAuthenticator auth = new StaticUserAuthenticator("", username, password);
             FileSystemOptions opts = new FileSystemOptions();
@@ -23,6 +24,8 @@ public class SftpUtils {
         } catch (IOException exception) {
             System.out.println("Exception occurred while checking file exist on the remote server. Exception: " + exception.getMessage());
             return false;
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
     public static boolean checkFileExistarchive(String path, String fileName) {

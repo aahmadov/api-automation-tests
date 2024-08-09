@@ -52,7 +52,7 @@ public class IgnoreBusyFeature extends TestBase {
 
         Thread.sleep(1000*360);
 
-        DataBaseUtility.executeSQLQueryAuto184("select ignoredattempts,JobID from auto1.sendstatus order by JobID desc limit 1;");
+        DataBaseUtility.executeSQLQueryAuto184("select ignoredattempts,JobID from auto1.sendstatus order by JobID desc limit 2;");
         /*second short call
          * */
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax81(data.get("get_call_Url"), data.get("credentialOutbound"));
@@ -68,6 +68,16 @@ public class IgnoreBusyFeature extends TestBase {
             fail("***:Not verified that the delay stats has only one entry for this job.");
         }
         System.out.println("verified that there is delay stats has only one entry for this job is "+results);
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxRetryIntervalMinDelete81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxRetryIntervalMaxDelete81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxMaxAttemptsMinDelete81"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxMaxAttemptsMaxDelete81"));
+
+
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxRetryIntervalMin84"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxRetryIntervalMax84"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxMaxAttemptsMin84"));
+        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxMaxAttemptsMax84"));
 
     }
 
