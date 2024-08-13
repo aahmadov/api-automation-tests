@@ -13,19 +13,18 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class Test_tifff_file_from_Regression extends TestBase{
+public class Test_any_file_from_Regression extends TestBase{
 
-    @Test(testName = "Send Fax Data with multiple attachment", groups = {"Regression81"})
-    public void sendFaxDataWithTiff_81() throws InterruptedException {
+    @Test(testName = "Send Fax Data with multiple attachment", groups = {"Regression81_12"})
+    public void sendFaxDataWithanyFileTYPE_81() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         String tsi = FileReader.randomNumberFor_TSI();
-        File file = FileReader.getFileUsingPageSize2forTiff(data.get("pageSize"), data.get("fileType"));
+        File file = FileReader.getFileUsingPageSize(data.get("pageSize"), data.get("fileType"));
         Response response = RestRequestUtils.sendFaxWithRecipent_withTiff_81(data.get("post_call_Url")+tsi,
                 file, data.get("faxNumber"), data.get("credentials"));
         System.out.println("------------------------------------------------------------------------");
-        System.out.println(response.asPrettyString());
         System.out.println("TSI ID "+tsi);
         System.out.println("**" + (data.get("post_call_Url")));
         System.out.println("**" + (data.get("faxNumber")));

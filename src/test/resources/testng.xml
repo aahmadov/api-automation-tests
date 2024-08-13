@@ -36,9 +36,9 @@
             <class name="testng.MultipleFileValidation"/>
         </classes>
     </test>
-    <test name="sendFaxDataWithTiff_81">
+    <test name="sendFaxDataWithanyFileTYPE_81">
         <classes>
-            <class name="testng.Test_tifff_file_from_Regression"/>
+            <class name="testng.Test_any_file_from_Regression"/>
         </classes>
     </test>
 
@@ -175,6 +175,11 @@
     <test name="multiple_entries_in_urlnotify_table">
         <classes>
             <class name="testng.UrlNotify"/>
+        </classes>
+    </test>
+    <test name="FaxPageValidationHTML_PDF_TIFF">
+        <classes>
+            <class name="testng.ValidationHTML_PDF_TIFF"/>
         </classes>
     </test>
     <test name="add_1_to_the_beginning_Of_number81_smoke">

@@ -20,22 +20,23 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
-public class PostHTML extends TestBase {
-
-    @Test(testName = "validate Fax Page HTML is received  ", groups = {"Regression81"})
-    public void HTML_FaxPageValidation81() throws InterruptedException {
+public class ValidationHTML_PDF_TIFF extends TestBase{
+    @Test(testName = "validate Fax Page HTML&PDF is received  ", groups = {"Regression81"})
+    public void FaxPageValidationHTML_PDF_TIFF() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
-        File file = FileReader.getFileUsingPageSize2forHTML(data.get("Pages"), data.get("fileType"));
+        File fileHTML = FileReader.getFileUsingPageSize(data.get("Pages1"), data.get("fileType1"));
+        File fileTIF = FileReader.getFileUsingPageSize(data.get("Pages2"), data.get("fileType2"));
         String tsi = FileReader.randomNumberFor_TSI();
         String onlyTsi = tsi.split("=")[1];
-        Response response = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
-                file,
+        Response response = RestRequestUtils.sendFaxWithFileType(data.get("post_call_Url") + tsi,
+                fileHTML, fileTIF,
                 data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));
-        System.out.println("********** " + file );
+        System.out.println("********** " + fileHTML);
+        System.out.println("********** " + fileTIF);
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(response.statusCode()), data.get("statusCode"));
@@ -68,7 +69,7 @@ public class PostHTML extends TestBase {
                 System.out.println("Error message: " + "**" + errorMessage + "**");
             }
             times++;
-        } while (isNotCompleted && times < 20);
+        } while (isNotCompleted && times < 15);
 
         if (isFailed) {
             fail("Send failed for TSI id:" + onlyTsi);
@@ -105,10 +106,4 @@ public class PostHTML extends TestBase {
         }
 
     }
-
-
-
 }
-
-
-

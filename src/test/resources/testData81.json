@@ -718,13 +718,13 @@
     "credentialOutbound2": "faxsending@acme1:softlinx",
     "filePath": "\\\\10.250.1.180\\qa\\84\\FaxServer\\convertq\\archive"
   },
-  "sendFaxDataWithTiff_81": {
+  "sendFaxDataWithanyFileTYPE_81": {
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "get_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/inboundfaxes?FaxUserId=faxsending",
     "credentialInbound": "faxsending@auto1:softlinx",
     "credentials": "faxsending@auto1:softlinx",
     "pageSize": "2",
-    "fileType": "tiff",
+    "fileType": "jpg",
     "faxNumber": "1(333)-333-3333",
     "expectedStatusCode": "201"
   },

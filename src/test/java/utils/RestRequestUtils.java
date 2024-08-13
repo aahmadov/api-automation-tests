@@ -534,7 +534,7 @@ public class RestRequestUtils {
                 .multiPart("filename", file)
                 .multiPart("filename", file)
                 .queryParam("FaxNumber", faxRecipientD)
-                .when().log().all()
+                .when()
                 .post(url);
     }
 
