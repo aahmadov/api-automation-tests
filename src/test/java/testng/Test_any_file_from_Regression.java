@@ -15,7 +15,7 @@ import static org.testng.Assert.assertTrue;
 
 public class Test_any_file_from_Regression extends TestBase{
 
-    @Test(testName = "Send Fax Data with multiple attachment", groups = {"Regression81_12"})
+    @Test(testName = "Send Fax Data with multiple attachment", groups = {"Regression81"})
     public void sendFaxDataWithanyFileTYPE_81() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
