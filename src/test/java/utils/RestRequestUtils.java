@@ -24,7 +24,6 @@ public class RestRequestUtils {
         request.header("Authorization ", "Basic " + encodedCreadentialForAdmin);
         return request.contentType("multipart/form-data").when().get(url);
     }
-
     /*
      *@getWithValidFaxID
      * */
@@ -194,11 +193,9 @@ public class RestRequestUtils {
         String encodedCredentialForAdmin = new String(encodedCredentials);
 
         request.header("Authorization ", "Basic " + encodedCredentialForAdmin);
-        return response = request.contentType("multipart/form-data").when().log().all()
+        return response = request.contentType("multipart/form-data").when()
                 .get(url);
     }
-
-
     public static Response responseRecieveFaxforTiff_216(String url,String credentials) {
 
         RequestSpecification request = RestAssured.given();
@@ -822,11 +819,11 @@ public class RestRequestUtils {
                 .when().log().all()
                 .post(url);
     }
-
-    public static Response resendfaxWith81(String url,String credentials,String faxNumber) {
+    public static Response resendfaxWith81(String url,File filePage,String credentials,String faxNumber) {
         return createRequest(credentials).contentType("multipart/form-data")
                 //.multiPart("FaxNumber", faxNumber)
-                //.queryParam("FaxNumber", FaxNumber)
+//                .queryParam("FaxNumber", faxNumber)
+                .multiPart("filename", filePage)
                 .multiPart("FaxNumber",faxNumber)
                 .when().log().all()
                 .post(url);

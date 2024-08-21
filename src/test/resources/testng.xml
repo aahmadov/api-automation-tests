@@ -41,6 +41,11 @@
             <class name="testng.Test_any_file_from_Regression"/>
         </classes>
     </test>
+    <test name="sendFaxReverseImage">
+        <classes>
+            <class name="testng.ReverseImage"/>
+        </classes>
+    </test>
 
     <test name="PurgeAfterDownload84">
         <classes>
