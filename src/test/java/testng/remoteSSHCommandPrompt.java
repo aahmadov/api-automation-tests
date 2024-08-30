@@ -7,9 +7,9 @@ import com.jcraft.jsch.Session;
 
 public class remoteSSHCommandPrompt {
     public static void main(String[] args) throws JSchException {
-    String host = "10.250.1.84";
+    String host = "10.250.1.100";
     String user = "Administrator";
-    String password = "5yeDJH4el!#hW";
+    String password = "WS7AuGaD*!";
 
 
     String commandExe = "C:\\Softlinx\\ReplixServer\\bin\\rpxcleanupd";
@@ -20,7 +20,7 @@ public class remoteSSHCommandPrompt {
         session.setPassword(password);
         session.setConfig("StrictHostKeyChecking", "no");
         session.connect();
-
+        System.out.println("hello world there is connection ");
         ChannelExec channel = (ChannelExec) session.openChannel("exec");
         channel.setCommand(commandExe);
         System.out.println();

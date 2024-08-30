@@ -46,6 +46,16 @@
             <class name="testng.ReverseImage"/>
         </classes>
     </test>
+    <test name="sendFaxAndScanPdf">
+        <classes>
+            <class name="testng.PdfPageSize"/>
+        </classes>
+    </test>
+    <test name="DeleteFaxAfterSend81">
+        <classes>
+            <class name="testng.DeleteOutgoingFax"/>
+        </classes>
+    </test>
 
     <test name="PurgeAfterDownload84">
         <classes>

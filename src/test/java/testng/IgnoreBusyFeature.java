@@ -30,16 +30,15 @@ public class IgnoreBusyFeature extends TestBase {
         DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxMaxAttemptsMin81"));
         DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("SendFaxMaxAttemptsMax81"));
 
-
         String tsi = FileReader.randomNumberFor_TSI();
         /*first long call
          * */
         Response responseSubmitFaxLong = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
-                FileReader.readfile("100page"),
+                FileReader.readfile("200page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));
-        System.out.println("********** " + FileReader.readfile("100page"));
+        System.out.println("********** " + FileReader.readfile("200page"));
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFaxLong.statusCode()), data.get("statusCode"));
@@ -50,9 +49,9 @@ public class IgnoreBusyFeature extends TestBase {
                 FileReader.readfile("1page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
 
-        Thread.sleep(1000*360);
+        Thread.sleep(1000*300);
 
-        DataBaseUtility.executeSQLQueryAuto184("select ignoredattempts,JobID from auto1.sendstatus order by JobID desc limit 2;");
+        DataBaseUtility.executeSQLQueryAuto184("select ignoredattempts,JobID from auto1.sendstatus order by JobID desc limit 1;");
         /*second short call
          * */
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax81(data.get("get_call_Url"), data.get("credentialOutbound"));

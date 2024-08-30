@@ -331,9 +331,11 @@ public class RestRequestUtils {
     }
 
     public static Response getRecentCreatedFax(String url, String credentials) {
-        return createRequest(credentials).contentType("multipart/form-data").when().get(url);
+        return createRequest(credentials).contentType("multipart/form-data").when().log().all().get(url);
     }
-
+    public static Response DeleteAfterSent(String url, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data").when().log().all().delete(url);
+    }
     /*
      *@sendFaxwithNum+attach
      * */
@@ -626,6 +628,17 @@ public class RestRequestUtils {
                 .multiPart("filename", filePage)
                 .queryParam("FaxNumber", faxnumb)
                 .when()
+                .post(url);
+    }
+    public static Response DeletAfterSend1(String url, File filePage, String faxnumb,
+                                           String credentials,String coverPageEnabled, String deleteAfterSend) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", filePage)
+                .queryParam("FaxNumber", faxnumb)
+                .queryParam("CoverPageEnabled", String.valueOf(Boolean.parseBoolean(coverPageEnabled)))
+                .queryParam("DeleteAfterSend", String.valueOf(Boolean.parseBoolean(deleteAfterSend)))
+                .when().log().all()
                 .post(url);
     }
 

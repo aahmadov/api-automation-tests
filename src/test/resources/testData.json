@@ -715,11 +715,6 @@
     "credentialOutbound2": "faxsending@acme2:softlinx",
     "filePath": "\\\\10.250.1.180\\qa\\66\\convertq\\archive\\"
 
-
-
-
-
-
 },
   "sendFaxDataWithTiff_Copy": {
     "post_call_Url": "http://10.250.1.216:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
