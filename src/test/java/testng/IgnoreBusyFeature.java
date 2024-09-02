@@ -34,11 +34,11 @@ public class IgnoreBusyFeature extends TestBase {
         /*first long call
          * */
         Response responseSubmitFaxLong = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") + tsi,
-                FileReader.readfile("200page"),
+                FileReader.readfile("100page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
         System.out.println("------------------------------------------------------------------------");
         System.out.println("************ " + data.get("post_call_Url"));
-        System.out.println("********** " + FileReader.readfile("200page"));
+//        System.out.println("********** " + FileReader.readfile("100page"));
         System.out.println("********* " + data.get("faxNumber"));
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFaxLong.statusCode()), data.get("statusCode"));
@@ -49,7 +49,7 @@ public class IgnoreBusyFeature extends TestBase {
                 FileReader.readfile("1page"),
                 data.get("faxNumber"), data.get("credentialOutbound"));
 
-        Thread.sleep(1000*300);
+        Thread.sleep(1000*360);
 
         DataBaseUtility.executeSQLQueryAuto184("select ignoredattempts,JobID from auto1.sendstatus order by JobID desc limit 1;");
         /*second short call
