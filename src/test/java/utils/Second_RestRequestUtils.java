@@ -125,7 +125,7 @@ public class Second_RestRequestUtils {
 
         request.header("Authorization ", "Basic " + encodedCredentialForAcme);
         return request.contentType("multipart/form-data")
-                .when()
+                .when().log().all()
                 .get(url);
     }
 

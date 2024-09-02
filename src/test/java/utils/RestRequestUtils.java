@@ -531,7 +531,7 @@ public class RestRequestUtils {
     public static Response sendFaxWithRecipent_withTiff_81(String url, File file, String faxRecipientD, String credentials) {
         return createRequest(credentials).contentType("multipart/form-data")
                 .multiPart("filename", file)
-                .multiPart("filename", file)
+//                .multiPart("filename", file)
                 .queryParam("FaxNumber", faxRecipientD)
                 .when()
                 .post(url);

@@ -335,7 +335,7 @@ public class InboundFaxPageValidation20Test extends TestBase {
     }
 //            try {
 //                // Load the PDF document
-//                PDDocument document = PDDocument.load(new File("C:\\Users\\Administrator\\workspace\\fs_test\\src\\test\\resources\\requestBody\\pdf\\8-5by5-5.pdf"));
+//                PDDocument document = PDDocument.load(new File("C:\\Users\\Administrator\\workspace\\fs_test\\src\\test\\resources\\requestBody\\pdf\\8pages.pdf"));
 //
 //                // Get the number of pages
 //                int pageCount = document.getNumberOfPages();
