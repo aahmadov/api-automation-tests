@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 public class IgnoreBusyFeature extends TestBase {
-    @Test(testName = "IBF - IgnoreBusy feature results in wrong first send delay", groups = {"Regression81"})
+    @Test(testName = "IBF - IgnoreBusy feature results in wrong first send delay", groups = {"Regression81needsfix"})
     void IgnoreBusyFeature81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
