@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 public class UrlNotify extends TestBase {
-    @Test(testName = "multiple entries for received faxes - they have barcode enabled", groups = {"Regression8112"})
+    @Test(testName = "multiple entries for received faxes - they have barcode enabled", groups = {"Regression81"})
     public void multiple_entries_in_urlnotify_table_81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
