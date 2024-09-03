@@ -205,6 +205,17 @@
     "faxNumber": "1(333)-333-3333",
     "expectedStatusCode": "201"
   } ,
+  "sendFaxAndScanPdf2": {
+    "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "get_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "credentialOutbound": "faxsending@acme1:softlinx",
+    "credentials": "faxsending@acme1:softlinx",
+    "pageSize": "2",
+    "fileType": "pdf",
+    "faxNumber": "1(333)-333-3333",
+    "StatusCode": "201",
+    "statusCodeOfGetCall": "200"
+  } ,
   "resendFailedFaxDataWithNumber81": {
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "post_call_Url1": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",

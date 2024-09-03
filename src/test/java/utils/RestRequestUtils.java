@@ -196,6 +196,17 @@ public class RestRequestUtils {
         return response = request.contentType("multipart/form-data").when()
                 .get(url);
     }
+    public static Response responseRecieveFaxforTiff_81_new(String url,String credentialOutbound) {
+
+        RequestSpecification request = RestAssured.given();
+
+        byte[] encodedCredentials = Base64.encodeBase64(credentialOutbound.getBytes());
+        String encodedCredentialForAdmin = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAdmin);
+        return response = request.when().log().all()
+                .get(url);
+    }
     public static Response responseRecieveFaxforTiff_216(String url,String credentials) {
 
         RequestSpecification request = RestAssured.given();
@@ -533,7 +544,7 @@ public class RestRequestUtils {
                 .multiPart("filename", file)
 //                .multiPart("filename", file)
                 .queryParam("FaxNumber", faxRecipientD)
-                .when()
+                .when().log().all()
                 .post(url);
     }
 
