@@ -32,7 +32,7 @@ import static org.testng.Assert.assertTrue;
 public class PdfPageSize extends TestBase {
 
     @Test(testName = "Scan PDF of new fax", groups = {"Regression81"})
-    public void sendFaxAndScanPdf2() throws InterruptedException, IOException {
+    public void sendFaxAndScalePdf2() throws InterruptedException, IOException {
         System.out.println("Test case name: " + testName);
 
         // Step 1: Send the fax and receive metadata
