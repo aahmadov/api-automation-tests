@@ -19,6 +19,7 @@ public class DataBaseUtility {
     private static Connection connection2;
     private static Connection connection3;
     private static Connection connection84;
+    private static Connection connection46;
     private static Statement statement;
     private static ResultSet resultSet;
 
@@ -49,6 +50,11 @@ public class DataBaseUtility {
         String username = "root";
         String password = "softlinx";
         connection84 = DriverManager.getConnection(jdbcUrl,username,password);
+
+        String jdbcUrl46 = "jdbc:mysql://10.250.1.46:3306/replixdb?useSSL=false&serverTimezone=UTC&autoReconnect=true";
+        String username46 = "root";
+        String password46 = "softlinx";
+        connection46 = DriverManager.getConnection(jdbcUrl46,username46,password46);
 
     }
 
@@ -151,6 +157,30 @@ public class DataBaseUtility {
         closeConnection();
         return table;
     }
+    public static List<Map<String, Object>> executeSQLQueryAuto46(String query) throws SQLException {
+
+        openConnection();
+        statement = connection46.createStatement();
+        resultSet = statement.executeQuery(query);
+
+        ResultSetMetaData metaData = resultSet.getMetaData();
+        int columnCount = metaData.getColumnCount();
+        List<Map<String, Object>> table = new ArrayList<>();
+        while (resultSet.next()) {
+            Map<String, Object> map = new HashMap<>();
+            for (int column = 1; column <= columnCount; column++) {
+                System.out.print(metaData.getColumnName(column) + ":");
+                map.put(metaData.getColumnName(column), resultSet.getObject(column));
+                System.out.println(map.put(metaData.getColumnName(column), resultSet.getObject(column)));
+            }
+
+            System.out.print("\n");
+
+            table.add(map);
+        }
+        closeConnection();
+        return table;
+    }
 
     public static void executeSQLUpdate(final String query) throws SQLException {
         openConnection();
@@ -174,6 +204,13 @@ public class DataBaseUtility {
     public static void executeSQLUpdateRecvD84(final String query) throws SQLException {
         openConnection();
         statement = connection84.createStatement();
+        int noOfLines = statement.executeUpdate(query);
+        closeConnection();
+//        return query;
+    }
+    public static void executeSQLUpdateRecvD46(final String query) throws SQLException {
+        openConnection();
+        statement = connection46.createStatement();
         int noOfLines = statement.executeUpdate(query);
         closeConnection();
 //        return query;

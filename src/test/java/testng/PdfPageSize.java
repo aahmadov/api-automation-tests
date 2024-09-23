@@ -88,7 +88,75 @@ public class PdfPageSize extends TestBase {
 
     }
 
-        @Test(testName = "Scan PDF of new fax", groups = {"Regression81forTest"})
+
+
+
+
+    @Test(testName = "Scan PDF of new fax", groups = {"Regression46"})
+    public void sendFaxAndScalePdf2_46() throws InterruptedException, IOException {
+        System.out.println("Test case name: " + testName);
+
+        // Step 1: Send the fax and receive metadata
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName46(testName);
+        assert data != null;
+
+        String tsi = FileReader.randomNumberFor_TSI();
+        File file = FileReader.getFileUsingPageSize(data.get("pageSize"), data.get("fileType"));
+        System.out.println(file);
+        Response response = RestRequestUtils.sendFaxWithRecipent_withTiff_81(
+                data.get("post_call_Url"), file, data.get("faxNumber"), data.get("credentials"));
+
+        assertEquals(Integer.parseInt(data.get("StatusCode")), response.getStatusCode());
+        String resp = response.prettyPrint();
+
+        String faxId = JsonPath.read(resp, "$.FaxInfo[0].FaxId").toString();
+        assertTrue(resp.contains(faxId));
+        // Wait for the fax to be processed
+        Thread.sleep(1000 * 30);
+
+        // Step 2: Receive the fax and save it as a PDF file
+        Response responseReceiveFax2 = RestRequestUtils.responseRecieveFaxforTiff_81_new(data.get("get_call_Url") + "/" + faxId + "/image?FaxContentType=pdf",
+                data.get("credentialOutbound"));
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("************ " + data.get("get_call_Url") + "/" + faxId + "/image?FaxContentType=pdf");
+        System.out.println("------------------------------------------------------------------------");
+        Assert.assertEquals(data.get("statusCodeOfGetCall"), Integer.toString(responseReceiveFax2.statusCode()));
+        // Get the PDF content as a byte array
+        byte[] pdfContent = responseReceiveFax2.asByteArray();
+        // Measure the size of the PDF file
+        int pdfSize = pdfContent.length;
+        System.out.println("PDF File Size: " + pdfSize + " bytes");
+        // Load the PDF content using PDFBox
+        PDDocument document = PDDocument.load(pdfContent);
+        // Get the page count
+        int pageCount = document.getNumberOfPages();
+        System.out.println("Page count is: " + pageCount);
+
+        // Iterate over all pages to get their dimensions
+        for (PDPage page : document.getPages()) {
+            PDRectangle mediaBox = page.getMediaBox();
+            float widthPoints = mediaBox.getWidth();
+            float heightPoints = mediaBox.getHeight();
+
+            // Convert points to inches (1 inch = 72 points)
+            float widthInches = widthPoints / 72;
+            float heightInches = heightPoints / 72;
+
+            System.out.println("Page size: " + widthInches + " x " + heightInches + " inches");
+        }
+        // Close the document
+        document.close();
+
+    }
+
+
+
+
+
+
+
+
+    @Test(testName = "Scan PDF of new fax", groups = {"Regression81forTest"})
         public void sendFaxAndScanPdf() throws InterruptedException {
             System.out.println("Test case name: " + testName);
 

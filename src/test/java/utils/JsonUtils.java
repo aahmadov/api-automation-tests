@@ -40,4 +40,16 @@ public class JsonUtils {
         }
         return null;
     }
+    public static Map<String, String> getDataBasedOnTestCaseName46(final String testcaseName) {
+        try {
+            File file = readJsonFile("uploadedTestData.json");
+            File finalFile = file.exists() ? file : readJsonFile("testData46.json");
+            Map<String, HashMap<String, String>> testCases = mapper.readValue(finalFile, new TypeReference<>() {
+            });
+            return testCases.get(testcaseName);
+        } catch (Exception exception) {
+            System.out.println("Exception while reading data from json file. Exception: " + exception.getMessage());
+        }
+        return null;
+    }
 }

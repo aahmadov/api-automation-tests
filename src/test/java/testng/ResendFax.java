@@ -3,10 +3,9 @@ package testng;
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import utils.FileReader;
-import utils.JsonUtils;
-import utils.RestRequestUtils;
+import utils.*;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
@@ -14,39 +13,33 @@ import static org.testng.Assert.assertEquals;
 public class ResendFax extends TestBase{
 
     @Test(testName = "Resend a fax to a different fax number", groups = {"Regression81_12"})
-    public void resendFailedFaxDataWithNumber81() throws InterruptedException {
+    public void resendFailedFaxDataWithNumber81() throws InterruptedException, SQLException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
+        String query = "SELECT JobID FROM acme1.sendstatus where JobStatus ='Send Failed' and Error ='Cover page: Cover page (cover.pdf) not found' order by JobID desc limit 1;";
+        String jobId = DataBaseUtility.executeSQLQueryAuto184(query).toString();
+        String JobIdTrimed = jobId.replace("JobID=", "").replace("[{", "").replace("}]","");
+        System.out.println(JobIdTrimed);
 
-        Response response1 = RestRequestUtils.sendFaxWithNewTSI81(data.get("post_call_Url") ,
-                FileReader.readfile("2page"),
-                data.get("faxNumber"), data.get("credentials"));
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println("************ " + data.get("post_call_Url"));
-        System.out.println("********** " + FileReader.readfile("2page"));
-        System.out.println("********* " + data.get("faxNumber"));
-        System.out.println("------------------------------------------------------------------------");
-        System.out.println("File: " + FileReader.readfile("2page"));
+        Response response = RestRequestUtils.resendfaxWith84(data.get("post_call_Url1")+"/"+JobIdTrimed+"/resend",
+                data.get("credentials"),data.get("faxNumber"));
 
-        int faxId = JsonPath.read(response1.prettyPrint(), "$.FaxInfo[0].FaxId");
-        int nextFaxId =faxId-1;
-        System.out.println("***** this is new generated  Fax ID of outboundfax " + "**" + faxId + "**");
-        Thread.sleep(1000*10);
-//        Response getResponse = RestRequestUtils.getRecentCreatedFax(data.get("get_call_Url"), data.get("credentials"));
-//        int FaxId = JsonPath.read(getResponse.asString(),"$.FaxInfo[0].FaxId");
-//        Thread.sleep(1000*3);
-        Response response = RestRequestUtils.resendfaxWith81(data.get("post_call_Url1"+faxId+"/resend"),
-                FileReader.readfile("2page") ,data.get("credentials"),data.get("faxNumber"));
-        System.out.println("******* " + data.get(("post_call_Url1"+"/"+faxId+"/"+"resend")));
+        System.out.println("******* " + data.get("post_call_Url1")+"/"+JobIdTrimed+"/resend");
         System.out.println("------------------------------------------------------------------------");
-        System.out.println(response.asPrettyString());
-        System.out.println("******* " + data.get(("post_call_Url1"+"/"+faxId+"/"+"resend")));
+        System.out.println(response.prettyPrint());
         System.out.println("******* " + data.get("faxNumber"));
         System.out.println("******* " + data.get("credentials"));
         System.out.println("------------------------------------------------------------------------");
 
-//        assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
+        assertEquals(Integer.parseInt(data.get("expectedStatusCode")), response.getStatusCode());
+        Thread.sleep(1000*5);
+        Response response1 = RestRequestUtils.responseRecieveFaxforResend84(data.get("get_call_Url")+"/"+JobIdTrimed ,
+        data.get("credentials"));
+
+        System.out.println(response1.asPrettyString());
+        assertEquals(Integer.parseInt(data.get("Job not found:StatusCode")), response1.getStatusCode());
+
     }
 
     @Test(testName = "Resend a fax to a different fax number", groups = {"Regression"})
