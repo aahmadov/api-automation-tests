@@ -88,7 +88,7 @@
     "faxUserId": "test1b"
   },
   "sendMailToFax_46": {
-    "to": "12223434545@auto3.rpxqa.com",
+    "to": "12223434545@auto4.rpxqa.com",
     "times": "1",
     "faxNumFileLoc": "input/FaxNumberMail2fax.txt",
     "Pages": "2",

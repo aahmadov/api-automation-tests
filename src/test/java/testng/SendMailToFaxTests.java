@@ -145,8 +145,8 @@ public class SendMailToFaxTests extends TestBase {
 //                String endTimeString = formatter.format(endTime);
 
             //String EmailToFaxQuery = String.format("select JobStatus,FaxNumber from auto3.sendstatus where (CreateTime between '%s' and '%s') order by JobID desc limit 1;", startTimeString, endTimeString);
-            String EmailToFaxQuerySimple= String.format("select FaxNumber,JobID,JobStatus from auto3.sendstatus where EmailAddress ='auto@softlinx.com' order by JobID desc limit 1;");
-            List<Map<String, Object>> results = DataBaseUtility.executeSQLQueryAuto184(EmailToFaxQuerySimple);
+            String EmailToFaxQuerySimple= String.format("select FaxNumber,JobID,JobStatus from auto4.sendstatus where EmailAddress ='auto@softlinx.com' order by JobID desc limit 1;");
+            List<Map<String, Object>> results = DataBaseUtility.executeSQLQueryAuto46(EmailToFaxQuerySimple);
             if (results.size() == 0) {
                 fail("***:No record present in the Database for the fax email sent");
             }
