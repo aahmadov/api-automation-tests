@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 public class ValidationHTML_PDF_TIFF extends TestBase{
-    @Test(testName = "validate Fax Page HTML&PDF is received  ", groups = {"Regression81"})
+    @Test(testName = "validate Fax Page HTML&PDF is received  ", groups = {"Regression8113"})
     public void FaxPageValidationHTML_PDF_TIFF() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
