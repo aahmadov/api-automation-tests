@@ -292,7 +292,7 @@ public class PostScenarioForLoadTestReceiveD extends TestBase {
 //            DataBaseUtility.executeSQLUpdate(ConfigReader.getProperty("truncate_recvstatusSmoke"));
         }
         Thread.sleep(1000*180);
-        DataBaseUtility.executeSQLQuery(ConfigReader.getProperty("checking_receiveD"));
+       DataBaseUtility.executeSQLQuery(ConfigReader.getProperty("checking_receiveD"));
     }
 
 }
