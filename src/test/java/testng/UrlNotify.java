@@ -45,7 +45,7 @@ public class UrlNotify extends TestBase {
         int times = 0;
         do {
             System.out.println("*** waiting 30 secs to get the fax sending status ***");
-            Thread.sleep(1000 * 30);
+            Thread.sleep(1000 * 60);
             outbound = Second_RestRequestUtils.getOutboundURLNotify81(
                     data.get("get_call_Url") , data.get("credentialOutbound"));
             Assert.assertEquals(200, outbound.getStatusCode());
