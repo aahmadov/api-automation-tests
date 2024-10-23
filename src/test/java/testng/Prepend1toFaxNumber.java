@@ -61,7 +61,7 @@ public class Prepend1toFaxNumber extends TestBase {
             }
         }
 
-        Thread.sleep(1000 * 30);
+        Thread.sleep(1000 * 120);
         Response recentFaxResponse = Load_RestRequestUtils
                 .getRecentFax81(data.get("url") + data.get("faxUserId"), data.get("credentials"));
 
@@ -295,7 +295,7 @@ public class Prepend1toFaxNumber extends TestBase {
             }
         }
 
-        Thread.sleep(1000 * 30);
+        Thread.sleep(1000 * 120);
         Response recentFaxResponse = Load_RestRequestUtils
                 .getRecentFax81(data.get("url") + data.get("faxUserId"), data.get("credentials"));
 

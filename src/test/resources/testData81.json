@@ -144,7 +144,7 @@
     "credentials": "faxsending@acme1:softlinx",
     "faxUserId": "?FaxUserId=faxsending",
     "faxNumber": "22222233",
-    "times": "5",
+    "times": "3",
     "fileType": "pdf",
     "pageSize": "2",
     "coverPageEnabled": "true",
