@@ -192,6 +192,11 @@
             <class name="testng.UrlNotify"/>
         </classes>
     </test>
+    <test name="SchedID_gets_bogus_values81">
+        <classes>
+            <class name="testng.SchedIDbogusvalues"/>
+        </classes>
+    </test>
     <test name="FaxPageValidationHTML_PDF_TIFF">
         <classes>
             <class name="testng.ValidationHTML_PDF_TIFF"/>

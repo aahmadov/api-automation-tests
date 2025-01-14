@@ -315,6 +315,16 @@
     "ignoreFail":true,
     "credentialOutbound": "faxsending@acme1:softlinx"
   },
+    "SchedID_gets_bogus_values81": {
+      "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+      "get_call_Url":  "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+      "faxNumber": "1(333)333-3333",
+      "times": 5,
+      "pageSize": 2,
+      "coverPageEnabled": false,
+      "ignoreFail": true,
+      "credentialOutbound": "faxsending@auto1:softlinx"
+  },
   "PostCallForLoadTestCopy": {
     "post_call_Url": "http://10.250.1.217:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "testDataFile": "dataFile/testData.xlsx",
