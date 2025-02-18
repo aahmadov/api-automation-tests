@@ -7,13 +7,13 @@ import java.sql.SQLException;
 public class TEstJDBC {
 
     public static void main(String[] args) {
-        String jdbcUrl = "jdbc:mysql://10.250.1.147:3306/test1b?autoReconnect=true&useSSL=false";
+        String jdbcUrl = "jdbc:mysql://10.250.1.46:3306/test1b?autoReconnect=true&useSSL=false";
         String username = "root";
         String password = "softlinx";
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
-            System.out.println("Connected to the 10.250.1.147 new message !");
-            System.out.println("jdbc:mysql://10.250.1.147:3306/replixdb?useSSL=false&serverTimezone=UTC&autoReconnect=true!99999");
+            System.out.println("Connected to the 10.250.46 new message !");
+            System.out.println("jdbc:mysql://10.250.1.46:3306/replixdb?useSSL=false&serverTimezone=UTC&autoReconnect=true!99999");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -96,8 +96,8 @@ public class PostScenarioForLoadTestReceiveD extends TestBase {
                 CsvUtils.readAllLines(
                         ResourceUtils.getResourceFilePathAbsPath(data.get("faxNumFileLoc"))));
 
-        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("truncate_recvstatusAcme1_81"));
-        DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("truncate_billing_table_81"));
+        DataBaseUtility.executeSQLUpdateRecvD46(ConfigReader.getProperty("truncate_recvstatusAcme1_81"));
+        DataBaseUtility.executeSQLUpdateRecvD46(ConfigReader.getProperty("truncate_billing_table_81"));
 
         for (int i = 1; i <= Integer.parseInt(data.get("times")); i++) {
             System.out.println("**" + "it is iteration time in the loop :" + i);
@@ -149,10 +149,10 @@ public class PostScenarioForLoadTestReceiveD extends TestBase {
                 }
             }
             //System.out.println("************ Inbound Fax Job id: " + jobId);
-            DataBaseUtility.executeSQLUpdateRecvD84(ConfigReader.getProperty("truncate_recvstatusAcme1_81"));
+            DataBaseUtility.executeSQLUpdateRecvD46(ConfigReader.getProperty("truncate_recvstatusAcme1_81"));
         }
         Thread.sleep(1000*120);
-        DataBaseUtility.executeSQLQueryAuto184(ConfigReader.getProperty("checking_receiveD_81"));
+        DataBaseUtility.executeSQLQueryAuto46(ConfigReader.getProperty("checking_receiveD_81"));
     }
 
     @Test(testName = "Validation of Post call for Load test", groups = {"Regression"})

@@ -90,7 +90,7 @@ public class Purge_after_faxSend extends TestBase {
         Thread.sleep(1000 * 10);
         DataBaseUtility.executeSQLQueryAuto184("SELECT * FROM auto1.recvstatus;");
     }
-    @Test(priority = 1,testName = "PurgeAfterDownloadedBy to SFTP", groups = {"Regression46"})
+    @Test(priority = 1,testName = "PurgeAfterDownloadedBy to SFTP_46", groups = {"Regression46"})
     public void PurgeAfterDownloadSFTP46() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName46(testName);
