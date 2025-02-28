@@ -1,5 +1,5 @@
 {
-  "sendFaxDataWithRecipientDetails81": {
+  "sendFaxDataWithRecipientDetails46": {
     "post_call_Url": "http://10.250.1.46:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
     "Pages": "1",
@@ -15,7 +15,7 @@
       "Recipent_data1": "{ \"FaxNumber\": \"1-555-1212\", \"RcptName\": \"Alice Doherty\" }",
       "expectedStatusCode": "201"
   },
-  "sendFaxWithValidNumberAndAttachment81": {
+  "sendFaxWithValidNumberAndAttachment46": {
     "post_call_Url": "http://10.250.1.46:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentials": "faxsending@acme1:softlinx",
     "Pages": "1",
@@ -31,7 +31,7 @@
     "faxNumber": "1(781)-885-4198",
     "expectedStatusCode": "201"
   },
-  "sendFaxDataWithoutNumber81": {
+  "sendFaxDataWithoutNumber46": {
     "post_call_Url": "http://10.250.1.46:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "faxNumber": "",
     "credentials": "faxsending@acme1:softlinx",
@@ -124,7 +124,7 @@
     "newInboundParam": "?FaxUserId=receiver",
     "credentialNewInbound": "admin@test1b:softlinx"
   },
-  "soapFaxStatusAndPageNumberValidationFromInbound81": {
+  "soapFaxStatusAndPageNumberValidationFromInbound46": {
     "post_call_Url": "http://10.250.1.46:8080/softlinx/replixfax/wsapi",
     "faxNumber": "12222222222",
     "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",

@@ -397,7 +397,13 @@ public class RestRequestUtils {
                 .post(url);
 
     }
-
+    public static Response createFaxSingleNum46(String url, File file, String faxNumber, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxNumber", faxNumber)
+                .when()
+                .post(url);
+    }
     /*
      *@createFaxwithMultipleElements
      * */
@@ -495,7 +501,12 @@ public class RestRequestUtils {
                 .queryParam("FaxNumber", emptyFaxNumber)
                 .when().post(url);
     }
-
+    public static Response faxWithNoNumber46(String url, File file, String emptyFaxNumber, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxNumber", emptyFaxNumber)
+                .when().post(url);
+    }
 
     public static Response createFaxSingleNum3(String url, File file, String faxNumber, String credentials) {
         return createRequest(credentials).contentType("multipart/form-data")
@@ -549,6 +560,13 @@ public class RestRequestUtils {
     }
 
     public static Response sendFaxWithRecipent_details(String url, File file, String faxRecipientD, String credentials) {
+        return createRequest(credentials).contentType("multipart/form-data")
+                .multiPart("filename", file)
+                .queryParam("FaxRecipient", faxRecipientD)
+                .when()
+                .post(url);
+    }
+    public static Response sendFaxWithRecipent_details46(String url, File file, String faxRecipientD, String credentials) {
         return createRequest(credentials).contentType("multipart/form-data")
                 .multiPart("filename", file)
                 .queryParam("FaxRecipient", faxRecipientD)

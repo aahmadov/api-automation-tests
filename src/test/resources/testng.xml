@@ -171,6 +171,13 @@
             <class name="testng.IgnoreBusyFeature"/>
         </classes>
     </test>
+
+    <test name="soapFaxStatusAndPageNumberValidationFromInbound46">
+        <classes>
+            <class name="testng.SOAPrequestforSmokeTest"/>
+        </classes>
+    </test>
+
     <test name="List_of_area_code_of_specific_city">
         <classes>
             <class name="testng.GetCall_List_of_area_code_of_specific_city"/>
