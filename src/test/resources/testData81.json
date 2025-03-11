@@ -507,8 +507,8 @@
     "credentialOutbound": "faxsending@auto1:softlinx",
     "get_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/inboundfaxes",
     "credentialInbound": "faxsending@auto1:softlinx",
-    "username": "Abbas1sftp ",
-    "password": "H3r34Tr6ns!",
+    "username": "Administrator",
+    "password": "W3d#Pr0t3ct!",
     "filePath": "\\\\10.250.1.39\\c$\\Users\\Abbas1sftp\\"
   },
   "testWithSimpleAuthentication": {
