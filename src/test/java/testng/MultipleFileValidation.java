@@ -120,7 +120,7 @@ public class MultipleFileValidation extends TestBase {
 
 
 }
-    @Test(testName = "validation of multiple Fax files is successfully got received  ", groups = {"Regression46"})
+    @Test(testName = "validation of multiple Fax files is successfully got received  ", groups = {"Regression463"})
     public void ScanMultipleFiles_FaxPageValidation46() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName46(testName);
