@@ -767,7 +767,7 @@
     "credentialOutbound": "faxsending@acme1:softlinx",
     "get_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "credentialOutbound2": "faxsending@acme1:softlinx",
-    "filePath": "\\\\10.250.1.180\\qa\\84\\FaxServer\\convertq\\archive"
+    "filePath": "////10.250.1.110/qa/84/FaxServer/convertq/archive"
   },
   "sendFaxDataWithanyFileTYPE_81": {
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
