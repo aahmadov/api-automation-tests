@@ -17,7 +17,7 @@ import static org.testng.Assert.assertTrue;
 
 public class CoverPageSavedIssue extends TestBase {
 
-    @Test(testName = "Cover Page not saved when faxing fails in scheduler.", groups = {"Regression4612"})
+    @Test(testName = "Cover Page not saved when faxing fails in scheduler.", groups = {"Regression46"})
     public void coverPageSavedIssueTest46() throws InterruptedException, IOException, SQLException {
         System.out.println("Test case name: " + testName);
 
