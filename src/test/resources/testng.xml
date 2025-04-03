@@ -183,6 +183,13 @@
             <class name="testng.GetCall_List_of_area_code_of_specific_city"/>
         </classes>
     </test>
+
+    <test name="coverPageSavedIssueTest46">
+        <classes>
+            <class name="testng.CoverPageSavedIssue"/>
+        </classes>
+    </test>
+
     <test name="Create_LOA">
         <classes>
             <class name="testng.Create_LOA"/>

@@ -200,6 +200,17 @@ public class RestRequestUtils {
         return response = request.contentType("multipart/form-data").when()
                 .get(url);
     }
+    public static Response responseCoverPageSaveIssue46(String url, String credentials) {
+
+        RequestSpecification request = RestAssured.given();
+
+        byte[] encodedCredentials = Base64.encodeBase64(credentials.getBytes());
+        String encodedCredentialForAdmin = new String(encodedCredentials);
+
+        request.header("Authorization ", "Basic " + encodedCredentialForAdmin);
+        return response = request.contentType("multipart/form-data").when()
+                .get(url);
+    }
 
     public static Response responseRecieveFaxforResend84(String url, String credentials) {
 
@@ -696,6 +707,17 @@ public class RestRequestUtils {
                 .queryParam("CoverPageEnabled", String.valueOf(Boolean.parseBoolean(coverPageEnabled)))
                 .queryParam("DeleteAfterSend", String.valueOf(Boolean.parseBoolean(deleteAfterSend)))
                 .when().log().all()
+                .post(url);
+    }
+    public static Response CoverPagesavedISsue46(String url, File filePage, String faxnumb,
+                                           String coverPageEnabled ,String credentials,String retryount) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", filePage)
+                .queryParam("FaxNumber", faxnumb)
+                .queryParam("RetryCount", retryount)
+                .queryParam("CoverPageEnabled", String.valueOf(coverPageEnabled))
+                .when()
                 .post(url);
     }
 

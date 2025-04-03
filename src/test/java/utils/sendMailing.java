@@ -30,7 +30,12 @@ public class sendMailing {
 //	    private static String PASSWORD = "devcxtbghskekjkc"; // GMail password
 //	    private static String RECIPIENT = "abbas@softlinx.com";
 
-	static String key, data, from, to, password,host;
+	static String key;
+    public static String data;
+    static String from;
+    static String to;
+    static String password;
+    static String host;
 	static String[] AllToAddress;
 
 	public void getData() throws IOException {
@@ -95,10 +100,10 @@ public class sendMailing {
              BodyPart messageBodyPart =new MimeBodyPart();
              messageBodyPart.setText("Hello ,Good Day! \n"
              +"\n"
-             +"All scenarios have been excuted.Please find the attached report of the execution .\n"
+             +"All scenarios have been executed.Please find the attached report of the execution .\n"
              +"\n"
              +"Thanks,\n"
-             +"Abbas Ahmadov");
+             +"Abbas Aydinoglu");
              Multipart multipart = new MimeMultipart();
              multipart.addBodyPart(messageBodyPart);
              
