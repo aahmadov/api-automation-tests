@@ -790,6 +790,18 @@
     "credentialOutbound2": "faxsending@acme2:softlinx",
     "filePath": "\\\\10.250.1.180\\qa\\66\\convertq\\archive\\"
   },
+  "Specify_data_format_for_cover_page": {
+    "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "get_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
+    "faxNumber": "1-333-333-3333",
+    "RetryCount": "1",
+    "pageSize": "2",
+    "fileType": "pdf",
+    "coverPageEnabled": "true",
+    "credentials": "faxsending@auto1:softlinx",
+    "expectedStatusCode": "200",
+    "StatusCode": "201"
+  },
   "sendFaxDataWithTiff_Copy": {
     "post_call_Url": "http://10.250.1.217:8080/softlinx/replixfax/restapi/v1/outboundfaxes",
     "get_call_Url": "http://10.250.1.217:8080/softlinx/replixfax/restapi/v1/inboundfaxes",

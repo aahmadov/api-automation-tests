@@ -720,6 +720,17 @@ public class RestRequestUtils {
                 .when()
                 .post(url);
     }
+    public static Response DataSpecifyforCoverPage(String url, File filePage, String faxnumb,
+                                                 String coverPageEnabled ,String credentials,String retryount) {
+        return createRequest(credentials)
+                .contentType("multipart/form-data")
+                .multiPart("filename", filePage)
+                .queryParam("FaxNumber", faxnumb)
+                .queryParam("RetryCount", retryount)
+                .queryParam("CoverPageEnabled", String.valueOf(coverPageEnabled))
+                .when()
+                .post(url);
+    }
 
     public static Response sendFaxWithFileType(String url, File filePage, File filePage2, String faxnumb, String credentials) {
         return createRequest(credentials)

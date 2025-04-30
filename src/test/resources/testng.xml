@@ -190,6 +190,12 @@
         </classes>
     </test>
 
+    <test name="Specify_data_format_for_cover_page">
+        <classes>
+            <class name="testng.Specify_fax_phone_number_date_format_for_coverpage"/>
+        </classes>
+    </test>
+
     <test name="Create_LOA">
         <classes>
             <class name="testng.Create_LOA"/>

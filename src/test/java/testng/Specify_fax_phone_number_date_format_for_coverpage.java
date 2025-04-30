@@ -1,11 +1,13 @@
 package testng;
 
-
 import com.jayway.jsonpath.JsonPath;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.testng.annotations.Test;
-import utils.*;
+import utils.DataBaseUtility;
+import utils.FileReader;
+import utils.JsonUtils;
+import utils.RestRequestUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,21 +17,22 @@ import java.util.Map;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
-public class CoverPageSavedIssue extends TestBase {
+public class Specify_fax_phone_number_date_format_for_coverpage extends TestBase {
 
-    @Test(testName = "Cover Page not saved when faxing fails in scheduler.", groups = {"Regression46"})
-    public void coverPageSavedIssueTest46() throws InterruptedException, IOException, SQLException {
+
+    @Test(testName = "Allow admin to specify fax/phone number format and date format for cover page.", groups = {"Regression84"})
+    public void Specify_data_format_for_cover_page() throws InterruptedException, IOException, SQLException {
         System.out.println("Test case name: " + testName);
 
         // Step 1: Send the fax and receive metadata
-        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName46(testName);
+        Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;
         String tsi = FileReader.randomNumberFor_TSI();
         File file = FileReader.getFileUsingPageSize(data.get("pageSize"), data.get("fileType"));
         System.out.println("File in the attachment is :" +file);
         System.out.println("CoverPageEnabled passed in: " + data.get("coverPageEnabled"));
 
-        Response response = RestRequestUtils.CoverPagesavedISsue46(
+        Response response = RestRequestUtils.DataSpecifyforCoverPage(
                 data.get("post_call_Url"), file,data.get("faxNumber"),data.get("coverPageEnabled"), data.get("credentials"), data.get("RetryCount"));
 
         assertEquals(Integer.parseInt(data.get("StatusCode")), response.getStatusCode());
@@ -40,7 +43,7 @@ public class CoverPageSavedIssue extends TestBase {
         Thread.sleep(1000 * 5);
 
         // Step 2: Receive the fax and save it as a PDF file
-        Response responseReceiveFax2 = RestRequestUtils.responseCoverPageSaveIssue46(data.get("get_call_Url") , data.get("credentials"));
+        Response responseReceiveFax2 = RestRequestUtils.responseRecieveFaxforResend84(data.get("get_call_Url") , data.get("credentials"));
         String metadata = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0]").toString();
         System.out.println(metadata);
         String metadata2 = JsonPath.read(responseReceiveFax2.asPrettyString(),"$.FaxInfo[0].FaxStatus").toString();
@@ -58,7 +61,7 @@ public class CoverPageSavedIssue extends TestBase {
             // Debugging: Show the current status
             System.out.println("Attempt " + attemptCount + ": Current status is '" + metadata2 + "'");
 
-            if (metadata2.contains("scheduled") || metadata2.contains("awaitingConversion")) {
+            if (metadata2.contains("scheduled") || metadata2.contains("awaitingConversion")||metadata2.contains("sending")) {
                 System.out.println("Conversion needs more time. Waiting and checking again...");
 
                 try {
@@ -77,8 +80,8 @@ public class CoverPageSavedIssue extends TestBase {
                 metadata2 = JsonPath.read(responseReceiveFax2.asPrettyString(), "$.FaxInfo[0].FaxStatus").toString();
 
             } else {
-                System.out.println("Status is not 'scheduled' or 'awaitingConversion'. It is: " + metadata2);
-                break; // Exit if the status is neither of the two expected statuses
+                System.out.println("Status is not 'scheduled' or 'awaitingConversion','sending'. It is: " + metadata2);
+                break; // Exit if the status is neither of the three expected statuses
             }
         }
         // Once the status is "sendFailed", continue with the rest of the code
@@ -90,8 +93,8 @@ public class CoverPageSavedIssue extends TestBase {
         System.out.println("------------------------------------------------------------------------");
         Assert.assertEquals(data.get("expectedStatusCode"), Integer.toString(responseReceiveFax2.statusCode()));
         Thread.sleep(1000*5);
-        String coverpageJobId = String.format("SELECT * FROM auto4.coverpage WHERE JobId = '%s'", faxId); ;
-        DataBaseUtility.executeSQLQueryAuto46(coverpageJobId);
+        String coverpageJobId = String.format("SELECT * FROM auto1.coverpage WHERE JobId = '%s'", faxId); ;
+        DataBaseUtility.executeSQLQueryAuto184(coverpageJobId);
 
 
     }
