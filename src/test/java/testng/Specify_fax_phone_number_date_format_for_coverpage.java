@@ -20,7 +20,7 @@ import static org.testng.Assert.assertTrue;
 public class Specify_fax_phone_number_date_format_for_coverpage extends TestBase {
 
 
-    @Test(testName = "Allow admin to specify fax/phone number format and date format for cover page.", groups = {"Regression84"})
+    @Test(testName = "Allow admin to specify fax/phone number format and date format for cover page.", groups = {"Regression81"})
     public void Specify_data_format_for_cover_page() throws InterruptedException, IOException, SQLException {
         System.out.println("Test case name: " + testName);
 
