@@ -198,6 +198,8 @@
             <class name="testng.Create_LOA"/>
         </classes>
     </test>
+
+
     <test name="add_minimum_busy_attempts">
         <classes>
             <class name="testng.Busy_attempts"/>
@@ -217,6 +219,12 @@
     <test name="FaxPageValidationHTML_PDF_TIFF">
         <classes>
             <class name="testng.ValidationHTML_PDF_TIFF"/>
+        </classes>
+    </test>
+
+    <test name="EncyrptFaxFilesRegistrySettingsValueshould_be_1">
+        <classes>
+            <class name="testng.EncyrptFaxFilesRegistrySettingsValueshould_be_1"/>
         </classes>
     </test>
     <test name="add_1_to_the_beginning_Of_number81_smoke">

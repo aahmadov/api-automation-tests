@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class SchedIDbogusvalues extends TestBase {
 
 
-    @Test(testName = "Validation SchedID test", groups = {"Regression8113"})
+    @Test(testName = "Validation SchedID test", groups = {"Regression81"})
     public void SchedID_gets_bogus_values81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
