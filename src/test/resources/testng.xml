@@ -227,6 +227,12 @@
             <class name="testng.EncyrptFaxFilesRegistrySettingsValueshould_be_1"/>
         </classes>
     </test>
+    <test name="Space_in_username_causes_conversion_to_fail">
+        <classes>
+            <class name="testng.SpaceInUsernameCausesConversion_to_fail"/>
+        </classes>
+    </test>
+
     <test name="add_1_to_the_beginning_Of_number81_smoke">
         <classes>
             <class name="testng.Prepend1toFaxforSmokeTest"/>

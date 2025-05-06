@@ -905,6 +905,11 @@
     "credentialNewInboundLogin": "faxsending@auto1",
     "credentialNewInboundPassword": "softlinx"
   },
+  "Space_in_username_causes_conversion_to_fail": {
+      "faxNumber": "1222-222-2222",
+      "sendFaxSoapAction": "http://www.softlinx.com/wsapi/op=SendFax/ver=79",
+      "soapEndpoint": "http://10.250.1.84:8080/softlinx/replixfax/wsapi"
+  },
   "soapRequestForIMG81": {
     "post_call_Url": "http://10.250.1.84:8080/softlinx/replixfax/wsapi",
     "post_call_Url_81": "http://10.250.1.84:8080/softlinx/replixfax/wsapi",
