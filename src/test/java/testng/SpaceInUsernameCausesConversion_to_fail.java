@@ -21,10 +21,7 @@ public class SpaceInUsernameCausesConversion_to_fail extends TestBase {
         assert data != null;
 //            public static void main(String[] args) {
 
-//            String soapEndpoint = "http://10.250.1.84:8080/softlinx/replixfax/wsapi";
-//            String soapAction = "http://www.softlinx.com/wsapi/op=SendFax/ver=79";
-//             Add trailing space to the username
-//            String usernameWithTrailingSpace = "testuser ";  // <-- note the space at the end
+
 
             String soapBody =
                     "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
