@@ -69,7 +69,7 @@ public class SendMailToFaxTests extends TestBase {
             //if (!result) {
                  Thread.sleep(1000*120);
                 System.out.println("*** after 5 min iteration, there is not a expected notification");
-
+            System.out.println("Hello World");
 //                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //                String startTimeString = formatter.format(startTime);
 //                Date endTime = Calendar.getInstance().getTime();
