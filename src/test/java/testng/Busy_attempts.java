@@ -52,6 +52,7 @@ public class Busy_attempts extends TestBase {
 
 
         String tsi2 = FileReader.randomNumberFor_TSI();
+        System.out.println("hold the execution before submitting.");
         Thread.sleep(1000*30);
         Response responseSubmitFax2 = RestRequestUtils.sendFaxWithNewTSIAPI(data.get("post_call_Url") + tsi2,
                 FileReader.readfile("100page"),
@@ -63,7 +64,7 @@ public class Busy_attempts extends TestBase {
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.toString(responseSubmitFax2.statusCode()), data.get("statusCode"));
 
-
+        System.out.println("hold the execution before submitting..");
         Thread.sleep(1000*30);
 
         DataBaseUtility.executeSQLQueryRecvD(ConfigReader.getProperty("select_sendstatus_by_JObId_last2"));
