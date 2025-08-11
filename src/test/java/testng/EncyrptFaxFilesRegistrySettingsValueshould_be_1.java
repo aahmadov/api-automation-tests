@@ -53,7 +53,7 @@ public class EncyrptFaxFilesRegistrySettingsValueshould_be_1 extends TestBase {
         Thread.sleep(1000 * 80);
 
         Response responseReceiveFax = RestRequestUtils.responseRecieveFax81(data.get("get_call_Url"), data.get("credentialOutbound2"));
-        // String metadata = responseReceiveFax.prettyPrint();
+
 
 
         // Parse the metadata string into a JSON object

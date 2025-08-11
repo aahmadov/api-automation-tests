@@ -14,7 +14,7 @@ import static org.testng.Assert.assertEquals;
 
 public class GetScenariosForSmokeTest extends TestBase {
 
-    @Test(testName = "Retrieve recently created fax", groups = {"smoke81"})
+    @Test(testName = "Retrieve recently created fax", groups = {"smoke84"})
     public void retrieveRecentlyCreatedFax81() throws InterruptedException {
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
         assert data != null;

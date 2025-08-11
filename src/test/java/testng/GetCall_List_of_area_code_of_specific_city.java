@@ -49,7 +49,7 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of areaCodes of specific State", groups = {"smokeAPIPortal"})
+    @Test(testName = "List of areaCodes of specific State", groups = {"smokeAPIPortal1"})
     void GetListOfAreaCodeofspecificState81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
@@ -62,7 +62,7 @@ public class GetCall_List_of_area_code_of_specific_city extends TestBase {
         Thread.sleep(1000 * 3);
         System.out.println(responseGetCall.asPrettyString());
     }
-    @Test(testName = "List of users with no FaxNumbers", groups = {"smokeAPIPortal"})
+    @Test(testName = "List of users with no FaxNumbers", groups = {"smokeAPIPortal1"})
     void GetListOfUsersWithName81() throws Exception {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName81(testName);
