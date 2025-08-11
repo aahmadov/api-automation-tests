@@ -39,7 +39,7 @@ public class DeleteOutgoingFax extends TestBase {
         System.out.println("------------------------------------------------------------------------");
         assertEquals(Integer.parseInt(data.get("expectedStatusCode")), 200);
     }
-    @Test(testName = "Delete a fax after a sent", groups = {"Regression46"})
+    @Test(testName = "Delete a fax after a sent", groups = {"Regression46new"})
     public void DeleteFaxAfterSend46() throws InterruptedException {
         System.out.println("Test case name: " + testName);
         Map<String, String> data = JsonUtils.getDataBasedOnTestCaseName46(testName);

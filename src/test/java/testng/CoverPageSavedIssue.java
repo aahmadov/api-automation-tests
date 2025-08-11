@@ -81,7 +81,7 @@ public class CoverPageSavedIssue extends TestBase {
                 break; // Exit if the status is neither of the two expected statuses
             }
         }
-        // Once the status is "sendFailed", continue with the rest of the code
+        // Once the status is "sendFailed", continue
         System.out.println("-FaxStatus of Received Fax is: " + metadata2);
 
         System.out.println("-----------------------------------------------------------------------");

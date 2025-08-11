@@ -33,11 +33,11 @@ public class Conversion_archive extends TestBase {
         System.out.println("------------------------------------------------------------------------");
         System.out.println(response1.asPrettyString());
         System.out.println("**" + (data.get("put_call_Url1")));
-        System.out.println("------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
         Thread.sleep(1000 * 5);
         Response response2 = RestRequestUtils.putScenario81(data.get("put_call_Url2"));
         Assert.assertEquals(response2.getStatusCode(), 200);
-        System.out.println("------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------");
         System.out.println(response2.asPrettyString());
         System.out.println("**" + (data.get("put_call_Url2")));
         System.out.println("------------------------------------------------------------------------");
